@@ -40,10 +40,6 @@ const App: React.FC = () => {
         <Route path='/admin/login' element={<AdminLoginPage/>}/>
 
 
-
-
-
-
       </Routes>
     </Router>
   );
