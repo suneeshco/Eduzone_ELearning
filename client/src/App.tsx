@@ -1,44 +1,52 @@
-// // App.tsx
-
-// import React from 'react';
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
-// import StudentPage from './Pages/studentPage.tsx';
-
-
-// const App: React.FC = () => {
-//   return (
-//     <Router>
-//       <div>
-//         <h1>My App</h1>
-//           <Route path="/" element={<StudentPage/>} />
-//       </div>
-//     </Router>
-//   );
-// };
-
-// export default App;
-
 // App.tsx
 
 import React from 'react';
-import {createBrowserRouter,createRoutesFromElements,Route,RouterProvider,Routes} from 'react-router-dom'
-import StudentPage from './Pages/StudentPage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './Pages/Student/HomePage';
+import LoginPage from './Pages/Student/LoginPage';
+import SignUpPage from './Pages/Student/SignUp';
 
-const appRouter=createBrowserRouter(
- 
-  createRoutesFromElements(
-    <>
-    <Routes>
-       <Route path='/' element={<StudentPage/>}/>
-    </Routes>
-    
-      
-    
-    
-    </>
+import InstructorHomePage from './Pages/Instructor/HomePage'
+import InstructorLoginPage from './Pages/Instructor/LoginPage';
+import InstructorSignUpPage from './Pages/Instructor/SignUpPage';
 
-  )
-)
+import AdminHomePage from './Pages/Admin/HomePage'
+import AdminLoginPage from './Pages/Admin/LoginPage';
 
-export default appRouter
 
+
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Routes>
+
+        {/* student route */}
+
+        <Route path='/' element={<HomePage/>} />
+        <Route path='/student/login' element={<LoginPage/>}/>
+        <Route path='/student/signup' element={<SignUpPage/>}/>
+
+
+        {/* Tutor route */}
+
+        <Route path='/instructor' element={<InstructorHomePage/>} />
+        <Route path='/instructor/login' element={<InstructorLoginPage/>}/>
+        <Route path='/instructor/signup' element={<InstructorSignUpPage/>}/>
+
+
+        {/* Admin route */}
+
+        <Route path='/admin' element={<AdminHomePage/>} />
+        <Route path='/admin/login' element={<AdminLoginPage/>}/>
+
+
+
+
+
+
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;

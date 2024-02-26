@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { signup , login} from '../services/auth.service';
+import { signup , login} from '../../services/auth.service';
 
 export const authController = {
   async studentSignup(req: Request, res: Response): Promise<void> {
@@ -21,10 +21,12 @@ export const authController = {
         res.header('auth-token',token).send({token});
     } catch (error) {
         console.log(error);
-        res.status(500).json({message:"Server Error"})
-        
+        res.status(500).json({message:"Server Error"})  
     }
-  }
+  },
+
+
+  
 
   
 };
