@@ -18,8 +18,8 @@ export const authController = {
   async studentLogin(req:Request , res: Response): Promise <void> {
     try {
         const {email,password} = req.body;
-        const token = await login(email,password);
-        res.header('auth-token',token).send({token});
+        const user = await login(email,password);
+        res.send({user});
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"Server Error"})  

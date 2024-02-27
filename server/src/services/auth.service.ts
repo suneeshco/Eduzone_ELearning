@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { createUser, findUserByEmail } from '../repositories/user.repository';
 import {createInstructor,findInstructorByEmail} from '../repositories/instructor.repository';
 import { findAdminByEmail } from '../repositories/admin.repository';
+import { UserDocument } from '../models/user.model';
 
 export const signup = async (firstname: string,lastname:string, email: string, mobile:number, password: string): Promise<string> => {
   try {
@@ -24,7 +25,7 @@ export const signup = async (firstname: string,lastname:string, email: string, m
 };
 
 
-export const login = async (email:string , password : string): Promise<string> =>{
+export const login = async (email:string , password : string): Promise<UserDocument | string> =>{
     try {
         const existingUser = await findUserByEmail(email);
         if (!existingUser) {
@@ -39,7 +40,7 @@ export const login = async (email:string , password : string): Promise<string> =
 
         // If the password matches, generate and return a JWT token
         const token = jwt.sign({ _id: existingUser._id }, process.env.TOKEN_SECRET!);
-        return token;
+        return existingUser;
       } catch (error) {
         throw error;
       }

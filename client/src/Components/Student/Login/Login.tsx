@@ -4,24 +4,53 @@ import LoginImage from '../../../assets/images/Logos/Login.png'
 import React,{ useState } from 'react';
 import { studentLogin } from '../../../api/axiosPost'; 
 import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { studentLoginSchema } from '../../../Schemas/studentLogin';
+import { useDispatch } from 'react-redux';
+import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth';
+
 
 
 const Login = () => {
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("")
-
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  
 
-  const handleSubmit = async (e :React.FormEvent<HTMLFormElement>)=>{
-    e.preventDefault()
-    const response:any = await studentLogin(email,password)
-    if(response?.data?.token){
-      console.log(response.data.token);
-      navigate("/")
+  const {values , errors , touched , handleBlur, handleChange , handleSubmit } = useFormik({
+    initialValues : {
+      email : "",
+      password : ""
+    },
+    validationSchema : studentLoginSchema,
+    onSubmit : async (values) => {
+      console.log(values.email);
       
+      const response:any = await studentLogin(values.email,values.password)
+      if(response?.data?.user){
+        console.log(response.data.user);
+        dispatch(setStudentCredentials(response.data.user))
+        navigate("/") 
+      }
     }
+  })
 
-  }
+  console.log(errors);
+  
+  // const [email,setEmail] = useState("");
+  // const [password,setPassword] = useState("")
+
+  
+
+  // const handleSubmit = async (e :React.FormEvent<HTMLFormElement>)=>{
+  //   e.preventDefault()
+  //   const response:any = await studentLogin(email,password)
+  //   if(response?.data?.token){
+  //     console.log(response.data.token);
+  //     navigate("/")
+      
+  //   }
+
+  // }
   return (
     <div className=" bg-gray-100 flex flex-col justify-center py-14 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-4xl sm:flex">
@@ -41,16 +70,18 @@ const Login = () => {
               </label>
               <div className="mt-1">
                 <input
-                value={email}
-                onChange={(e)=>{setEmail(e.target.value)}}
+                value={values.email}
+                onChange={handleChange}
                   id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
+                  onBlur={handleBlur}
                   required
-                  className="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email && touched.email ? 'border-red-500' : ''}`}
                 />
               </div>
+              {errors.email && touched.email && <p className='text-red-500'>{errors.email}</p>}
             </div>
 
             <div>
@@ -59,12 +90,13 @@ const Login = () => {
               </label>
               <div className="mt-1">
                 <input
-                value={password}
-                onChange={(e)=>{setPassword(e.target.value)}}
+                value={values.password}
+                onChange={handleChange}
                   id="password"
                   name="password"
                   type="password"
                   autoComplete="current-password"
+                  onBlur={handleBlur}
                   required
                   className="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />

@@ -13,12 +13,16 @@ import InstructorSignUpPage from './Pages/Instructor/SignUpPage';
 import AdminHomePage from './Pages/Admin/HomePage'
 import AdminLoginPage from './Pages/Admin/LoginPage';
 
+import { Toaster } from "react-hot-toast";
+
 
 
 const App: React.FC = () => {
   return (
     <Router>
+      <Toaster position ='top-right'/>
       <Routes>
+      
 
         {/* student route */}
 
