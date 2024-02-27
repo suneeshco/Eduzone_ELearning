@@ -1,9 +1,27 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import LoginImage from '../../../assets/images/Logos/Login.png'
+import React,{ useState } from 'react';
+import { studentLogin } from '../../../api/axiosPost'; 
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("")
+
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e :React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault()
+    const response:any = await studentLogin(email,password)
+    if(response?.data?.token){
+      console.log(response.data.token);
+      navigate("/")
+      
+    }
+
+  }
   return (
     <div className=" bg-gray-100 flex flex-col justify-center py-14 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-4xl sm:flex">
@@ -16,13 +34,15 @@ const Login = () => {
         <div className="sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-6">Sign in to your account</h2>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
               </label>
               <div className="mt-1">
                 <input
+                value={email}
+                onChange={(e)=>{setEmail(e.target.value)}}
                   id="email"
                   name="email"
                   type="email"
@@ -39,6 +59,8 @@ const Login = () => {
               </label>
               <div className="mt-1">
                 <input
+                value={password}
+                onChange={(e)=>{setPassword(e.target.value)}}
                   id="password"
                   name="password"
                   type="password"
