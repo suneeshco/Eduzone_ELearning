@@ -1,9 +1,40 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import LoginImage from '../../../assets/images/Logos/Login.png'
+
+import LoginImage from '../../../assets/images/Logos/Login.png';
+import { adminLogin } from '../../../api/axiosPost'; 
+import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { adminLoginSchema } from '../../../Schemas/adminValidation';
+import { useDispatch } from 'react-redux';
+import { setAdminCredentials } from '../../../Redux/Slices/AdminAuth';
 
 
-const Login = () => {
+
+const AdminLogin = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  
+
+  const {values , errors , touched , handleBlur, handleChange , handleSubmit } = useFormik({
+    initialValues : {
+      email : "",
+      password : ""
+    },
+    validationSchema : adminLoginSchema,
+    onSubmit : async (values) => {
+      console.log(values.email);
+      
+      const response:any = await adminLogin(values.email,values.password)
+      if(response?.data?.admin){
+        console.log(response.data.admin);
+        dispatch(setAdminCredentials(response.data.admin))
+        navigate("/admin") 
+      }
+    }
+  })
+
+  console.log(errors);
+  
+
   return (
     <div className=" bg-gray-100 flex flex-col justify-center py-14 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-4xl sm:flex">
@@ -16,21 +47,25 @@ const Login = () => {
         <div className="sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-6">Admin Login</h2>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
               </label>
               <div className="mt-1">
                 <input
+                value={values.email}
+                onChange={handleChange}
                   id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
+                  onBlur={handleBlur}
                   required
-                  className="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email && touched.email ? 'border-red-500' : ''}`}
                 />
               </div>
+              {errors.email && touched.email && <p className='text-red-500'>{errors.email}</p>}
             </div>
 
             <div>
@@ -39,10 +74,13 @@ const Login = () => {
               </label>
               <div className="mt-1">
                 <input
+                value={values.password}
+                onChange={handleChange}
                   id="password"
                   name="password"
                   type="password"
                   autoComplete="current-password"
+                  onBlur={handleBlur}
                   required
                   className="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
@@ -58,7 +96,6 @@ const Login = () => {
               </button>
             </div>
             </form>
-            
           </div>
         </div>
       </div>
@@ -66,4 +103,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

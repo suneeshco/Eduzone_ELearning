@@ -1,12 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { UserData } from "../../utils/apiTypes/ApiTypes";
 
-export interface UserData{
-  firstname: string;
-  lastname: string;
-  email: string;
-  mobile: number;
-  password: string;
-}
 
 export interface UserState{
     userInfo : UserData | null;

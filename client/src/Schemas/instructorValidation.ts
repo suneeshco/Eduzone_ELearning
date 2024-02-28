@@ -1,10 +1,10 @@
 import * as yup from 'yup';
 
-export const studentLoginSchema = yup.object().shape({
+export const instructorLoginSchema = yup.object().shape({
     email : yup.string().email("Please enter a valid email").required("Required")    
 })
 
-export const studentSignUpSchema = yup.object().shape({
+export const instructorSignUpSchema = yup.object().shape({
     firstname: yup.string().required('First name is required'),
     lastname: yup.string().required('Last name is required'),
     email: yup.string().email('Please enter a valid email').required('Email is required'),

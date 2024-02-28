@@ -6,7 +6,7 @@ export interface User {
   firstname: string;
   lastname: string;
   email: string;
-  mobile: number;
+  mobile: string;
   password: string;
 }
 
@@ -16,7 +16,7 @@ const UserSchema: Schema = new Schema({
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   email: { type: String, required: true },
-  mobile: {type: Number,required : true},
+  mobile: {type: String,required : true},
   password: { type: String, required: true },
 
 });

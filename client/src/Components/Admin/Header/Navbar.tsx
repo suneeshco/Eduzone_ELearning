@@ -1,8 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogoImage from '../../../assets/images/Logos/Eduzone_logo1.png';
+import { useDispatch , useSelector } from 'react-redux';
+import { RootState } from '../../../Redux/RootState/RootState';
+import { adminLogout } from '../../../Redux/Slices/AdminAuth';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const {adminInfo} = useSelector((state:RootState)=>state.adminAuth)
+
+  const handleLogout = () => {
+    // Assuming you have a logout action defined in your auth slice
+    dispatch(adminLogout({}));
+    toast.success('Logged Out Successfully')
+    navigate("/admin")
+  };
 
   return (
     <nav className="bg-white-800">
@@ -10,7 +27,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/admin" className="flex items-center">
+            <Link to="/instructor" className="flex items-center">
               {/* Insert your logo here */}
               <img src={LogoImage} alt="Logo" className="h-10"/> {/* Increase height here */}
             </Link>
@@ -18,7 +35,7 @@ const Navbar: React.FC = () => {
           {/* Navigation links */}
           <div className="hidden sm:block ml-16"> {/* Adjusted ml to ml-4 */}
             <div className="flex space-x-4">
-              <Link to="/admin" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Home</Link>
+              <Link to="/instructor" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Home</Link>
               <Link to="/about" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Courses</Link>
               <Link to="/services" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Tutors</Link>
               <Link to="/contact" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">About</Link>
@@ -26,7 +43,11 @@ const Navbar: React.FC = () => {
           </div>
           {/* Login button */}
           <div className="hidden sm:block ml-auto">
-            <Link to="/admin/login" className="text-black-300 bg-green-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-medium">Login</Link>
+            {adminInfo ? (
+              <button onClick={handleLogout} className="text-black-300 bg-red-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Logout</button>
+            ) : (
+              <Link to="/admin/login" className="text-black-300 bg-green-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Login</Link>
+            )}
           </div>
           {/* Mobile menu button */}
           <div className="flex md:hidden">

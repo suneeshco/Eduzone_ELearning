@@ -1,8 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogoImage from '../../../assets/images/Logos/Eduzone_logo1.png';
+import { useDispatch , useSelector } from 'react-redux';
+import { RootState } from '../../../Redux/RootState/RootState';
+import { instructorLogout } from '../../../Redux/Slices/InstructorAuth';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const {instructorInfo} = useSelector((state:RootState)=>state.instructorAuth)
+
+  const handleLogout = () => {
+    // Assuming you have a logout action defined in your auth slice
+    dispatch(instructorLogout({}));
+    toast.success('Logged Out Successfully')
+    navigate("/instructor")
+  };
 
   return (
     <nav className="bg-white-800">
@@ -26,7 +43,11 @@ const Navbar: React.FC = () => {
           </div>
           {/* Login button */}
           <div className="hidden sm:block ml-auto">
-            <Link to="/instructor/login" className="text-black-300 bg-green-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-medium">Login</Link>
+            {instructorInfo ? (
+              <button onClick={handleLogout} className="text-black-300 bg-red-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Logout</button>
+            ) : (
+              <Link to="/instructor/login" className="text-black-300 bg-green-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Login</Link>
+            )}
           </div>
           {/* Mobile menu button */}
           <div className="flex md:hidden">

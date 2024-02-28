@@ -1,7 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import LoginImage from '../../../assets/images/Logos/Login.png'
-import React,{ useState } from 'react';
+import LoginImage from '../../../assets/images/Logos/Login.png';
 import { studentLogin } from '../../../api/axiosPost'; 
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -36,21 +35,7 @@ const Login = () => {
 
   console.log(errors);
   
-  // const [email,setEmail] = useState("");
-  // const [password,setPassword] = useState("")
 
-  
-
-  // const handleSubmit = async (e :React.FormEvent<HTMLFormElement>)=>{
-  //   e.preventDefault()
-  //   const response:any = await studentLogin(email,password)
-  //   if(response?.data?.token){
-  //     console.log(response.data.token);
-  //     navigate("/")
-      
-  //   }
-
-  // }
   return (
     <div className=" bg-gray-100 flex flex-col justify-center py-14 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-4xl sm:flex">
