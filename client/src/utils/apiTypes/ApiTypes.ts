@@ -20,3 +20,11 @@ export interface UserData{
     email: string;
     password: string;
   }
+
+
+  export interface Category {
+    categoryName: string;
+    status: boolean;
+    _id:string;
+   }
+   

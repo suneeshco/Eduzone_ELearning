@@ -48,3 +48,12 @@ export const adminLogin = async (email:any,password:any) => {
   }
 };
 
+
+export const addCategory = async (categoryName:string) => {
+  try {
+      return await apiInstance.post("/admin/addCategory",{categoryName})
+  } catch (error) {
+    throw error;
+  }
+};
+

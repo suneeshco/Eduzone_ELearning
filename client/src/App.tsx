@@ -12,6 +12,7 @@ import InstructorSignUpPage from './Pages/Instructor/SignUpPage';
 
 import AdminHomePage from './Pages/Admin/HomePage'
 import AdminLoginPage from './Pages/Admin/LoginPage';
+import CategoryPage from './Pages/Admin/CategoryPage';
 
 import { Toaster } from "react-hot-toast";
 
@@ -42,6 +43,7 @@ const App: React.FC = () => {
 
         <Route path='/admin' element={<AdminHomePage/>} />
         <Route path='/admin/login' element={<AdminLoginPage/>}/>
+        <Route path='/admin/category' element={<CategoryPage/>}/>
 
 
       </Routes>

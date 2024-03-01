@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import authRoutes from './routes/auth.routes';
+import adminRoutes from './routes/admin.routes';
 import cors from 'cors';
 require('dotenv').config();
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/eduz').then(() => {
