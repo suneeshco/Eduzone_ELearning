@@ -8,6 +8,7 @@ export interface UserData{
   }
 
   export interface InstructorData{
+    _id :string;
     firstname: string;
     lastname: string;
     email: string;

@@ -1,24 +1,449 @@
 import React from 'react';
+import landImage from '../../../assets/images/HomePage/LandingImage.png';
+import courseThumb from '../../../assets/images/courseThumb/courseThumb.png';
 
 const HomeComponent = () => {
- return (
-    <div className="flex items-center h-screen bg-gray-200">
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-        <div className="md:flex">
-          
-          <div className="p-8">
-            {/* Text content goes here */}
-            <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Your Title Here</div>
-            <p className="mt-2 text-gray-500">Your detailed text goes here. It can be a description or any other relevant information you want to display.</p>
+  return (
+    <div className='bg-white-300	'>
+    <div className=" mx-auto px-14 py-8 bg-slate-500	 rounded">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div>
+          <div className="font-bold text-3xl mb-4">Welcome to Our E-Learning Platform</div>
+          <p className="text-gray-700 text-lg mb-6">
+            Enhance your skills, expand your knowledge, and achieve your goals with our comprehensive
+            online courses. Whether you're a beginner or an expert, there's something for everyone.
+            Start your learning journey today!
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+              #Education
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+              #OnlineLearning
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+              #SkillsDevelopment
+            </span>
           </div>
-          <div className="md:flex-shrink-0">
-            {/* This is the oval-shaped image */}
-            <img className="h-48 w-full object-cover md:w-48" src="your-image-url-here" alt="An oval-shaped image" />
+        </div>
+        <div className="flex justify-end">
+          <div className="rounded-full overflow-hidden">
+            <img
+              className="max-w-full h-auto"
+              src={landImage}
+              alt="placeholder"
+            />
           </div>
         </div>
       </div>
     </div>
- );
+
+
+    <div className=" mx-10 px-20 py-8 bg-slate-300	 rounded m-20">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div>
+      <div className="font-bold text-3xl mb-4">About Us</div>
+      <p className="text-gray-700 text-lg mb-6">
+      Eduzone is one of the leading platform for aquiring the knowledge through online . We provides quality content with the assistance of 25+ years experienced faculties. We have transformed....  
+      </p>
+      <div className="flex flex-wrap gap-2">
+        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+          read more ...
+        </span>
+        
+      </div>
+    </div>
+    <div className="flex justify-center md:justify-end">
+      <div className="border border-gray-200 rounded-md overflow-hidden">
+        <img
+          className="w-64 h-auto"
+          src={landImage}
+          alt="placeholder"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div className="mx-auto px-8 py-8">
+  <h2 className="text-3xl font-bold mb-8">Course Categories</h2>
+  <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
+    <div className="bg-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+      <div className="w-16 h-16 rounded-full overflow-hidden mb-4">
+        <img src={landImage} alt="" className="w-full h-full object-cover" />
+      </div>
+      <h2 className="text-xl font-semibold mb-2">Technical</h2>
+      <p className="text-gray-600 text-center">Dive into the world of technical. Web development, Cyber security.</p>
+    </div>
+
+    <div className="bg-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+      <div className="w-16 h-16 rounded-full overflow-hidden mb-4">
+        <img src={landImage} alt="" className="w-full h-full object-cover" />
+      </div>
+      <h2 className="text-xl font-semibold mb-2">Technical</h2>
+      <p className="text-gray-600 text-center">Dive into the world of technical. Web development, Cyber security.</p>
+    </div>
+
+
+    <div className="bg-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+      <div className="w-16 h-16 rounded-full overflow-hidden mb-4">
+        <img src={landImage} alt="" className="w-full h-full object-cover" />
+      </div>
+      <h2 className="text-xl font-semibold mb-2">Technical</h2>
+      <p className="text-gray-600 text-center">Dive into the world of technical. Web development, Cyber security.</p>
+    </div>
+
+
+
+    <div className="bg-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+      <div className="w-16 h-16 rounded-full overflow-hidden mb-4">
+        <img src={landImage} alt="" className="w-full h-full object-cover" />
+      </div>
+      <h2 className="text-xl font-semibold mb-2">Technical</h2>
+      <p className="text-gray-600 text-center">Dive into the world of technical. Web development, Cyber security.</p>
+    </div>
+
+
+    <div className="bg-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+      <div className="w-16 h-16 rounded-full overflow-hidden mb-4">
+        <img src={landImage} alt="" className="w-full h-full object-cover" />
+      </div>
+      <h2 className="text-xl font-semibold mb-2">Technical</h2>
+      <p className="text-gray-600 text-center">Dive into the world of technical. Web development, Cyber security.</p>
+    </div>
+
+    {/* Repeat the above structure for other course categories */}
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div className="mx-auto px-4 py-4"> {/* Decreased padding */}
+  <h2 className="text-3xl font-bold mb-8">Best Seller Courses</h2>
+  <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+      <div className="w-full mb-2 relative">
+        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
+      </div>
+      <div className='relative w-full'>
+        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
+        <div className="flex items-center mb-1"> {/* Decreased margin */}
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
+          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        </div>
+        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <div className="flex justify-center w-full">
+          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
+        </div>
+      </div>
+    </div>
+
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+      <div className="w-full mb-2 relative">
+        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
+      </div>
+      <div className='relative w-full'>
+        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
+        <div className="flex items-center mb-1"> {/* Decreased margin */}
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
+          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        </div>
+        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <div className="flex justify-center w-full">
+          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
+        </div>
+      </div>
+    </div>
+
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+      <div className="w-full mb-2 relative">
+        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
+      </div>
+      <div className='relative w-full'>
+        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
+        <div className="flex items-center mb-1"> {/* Decreased margin */}
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
+          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        </div>
+        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <div className="flex justify-center w-full">
+          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
+        </div>
+      </div>
+    </div>
+
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+      <div className="w-full mb-2 relative">
+        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
+      </div>
+      <div className='relative w-full'>
+        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
+        <div className="flex items-center mb-1"> {/* Decreased margin */}
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
+          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        </div>
+        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <div className="flex justify-center w-full">
+          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
+        </div>
+      </div>
+    </div>
+
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+      <div className="w-full mb-2 relative">
+        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
+      </div>
+      <div className='relative w-full'>
+        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
+        <div className="flex items-center mb-1"> {/* Decreased margin */}
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
+          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        </div>
+        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <div className="flex justify-center w-full">
+          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
+        </div>
+      </div>
+    </div>
+
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+      <div className="w-full mb-2 relative">
+        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
+      </div>
+      <div className='relative w-full'>
+        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
+        <div className="flex items-center mb-1"> {/* Decreased margin */}
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
+          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        </div>
+        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <div className="flex justify-center w-full">
+          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
+        </div>
+      </div>
+    </div>
+
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+      <div className="w-full mb-2 relative">
+        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
+      </div>
+      <div className='relative w-full'>
+        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
+        <div className="flex items-center mb-1"> {/* Decreased margin */}
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
+          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        </div>
+        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <div className="flex justify-center w-full">
+          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
+        </div>
+      </div>
+    </div>
+
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+      <div className="w-full mb-2 relative">
+        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
+      </div>
+      <div className='relative w-full'>
+        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
+        <div className="flex items-center mb-1"> {/* Decreased margin */}
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
+          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        </div>
+        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <div className="flex justify-center w-full">
+          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+      <div className="w-full mb-2 relative">
+        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
+      </div>
+      <div className='relative w-full'>
+        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
+        <div className="flex items-center mb-1"> {/* Decreased margin */}
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
+          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        </div>
+        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <div className="flex justify-center w-full">
+          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+      <div className="w-full mb-2 relative">
+        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
+      </div>
+      <div className='relative w-full'>
+        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
+        <div className="flex items-center mb-1"> {/* Decreased margin */}
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
+          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        </div>
+        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <div className="flex justify-center w-full">
+          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
+        </div>
+      </div>
+    </div>
+    {/* Repeat the above structure for other best seller courses */}
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div className="mx-10 px-20 py-8 bg-slate-300 rounded m-20">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
+    
+    <div className="flex justify-center md:justify-end">
+      <div className="border border-gray-200 rounded-md overflow-hidden flex justify-center items-center">
+        <img
+          src={landImage}
+          alt="placeholder"
+        />
+      </div>
+    </div>
+    <div>
+      <h1>One To One Sessions</h1><br />
+      <p className="text-gray-700 text-lg mb-6">
+      Experts are available with one to one session and 24*7 community support
+      </p>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div className="mx-10 px-20 py-8 bg-red-300 rounded m-20">
+  <h2 className="text-3xl font-bold mb-6">Expert Tutors</h2>
+  <div className="grid grid-cols-2 md:grid-cols-6 gap-6">
+    <div className="flex flex-col items-center">
+      <div className="rounded-full overflow-hidden border-4 border-white">
+        <img
+          className="w-32 h-32 object-cover"
+          src={landImage}
+          alt="Tutor 1"
+        />
+      </div>
+      <p className="mt-2 text-lg font-semibold">Tutor</p>
+    </div>
+
+    <div className="flex flex-col items-center">
+      <div className="rounded-full overflow-hidden border-4 border-white">
+        <img
+          className="w-32 h-32 object-cover"
+          src={landImage}
+          alt="Tutor 1"
+        />
+      </div>
+      <p className="mt-2 text-lg font-semibold">Tutor</p>
+    </div>
+
+    <div className="flex flex-col items-center">
+      <div className="rounded-full overflow-hidden border-4 border-white">
+        <img
+          className="w-32 h-32 object-cover"
+          src={landImage}
+          alt="Tutor 1"
+        />
+      </div>
+      <p className="mt-2 text-lg font-semibold">Tutor</p>
+    </div>
+
+    <div className="flex flex-col items-center">
+      <div className="rounded-full overflow-hidden border-4 border-white">
+        <img
+          className="w-32 h-32 object-cover"
+          src={landImage}
+          alt="Tutor 1"
+        />
+      </div>
+      <p className="mt-2 text-lg font-semibold">Tutor</p>
+    </div>
+
+    <div className="flex flex-col items-center">
+      <div className="rounded-full overflow-hidden border-4 border-white">
+        <img
+          className="w-32 h-32 object-cover"
+          src={landImage}
+          alt="Tutor 1"
+        />
+      </div>
+      <p className="mt-2 text-lg font-semibold">Tutor</p>
+    </div>
+
+    <div className="flex flex-col items-center">
+      <div className="rounded-full overflow-hidden border-4 border-white">
+        <img
+          className="w-32 h-32 object-cover"
+          src={landImage}
+          alt="Tutor 1"
+        />
+      </div>
+      <p className="mt-2 text-lg font-semibold">Tutor</p>
+    </div>
+    {/* Repeat the above structure for other tutors */}
+  </div>
+</div>
+
+
+
+
+
+
+
+<footer className="bg-blue-900 py-4 px-8">
+  <div className="max-w-7xl mx-auto flex flex-col items-center">
+    <h1 className="text-white">EDUZONE</h1>
+    <div>
+      <h3 className="text-white">eduzone@gmail.com</h3>
+      <p className="text-white">Contact : +91 9876543210</p>
+    </div>
+  </div>
+</footer>
+
+
+
+    </div>
+  );
 };
 
 export default HomeComponent;

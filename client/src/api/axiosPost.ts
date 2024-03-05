@@ -57,3 +57,22 @@ export const addCategory = async (categoryName:string) => {
   }
 };
 
+export const addCourse = async (data:any) => {
+  try {
+      return await apiInstance.post("/instructor/addCourse",{data})
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+export const addLesson = async (data:any) => {
+  try {
+      return await apiInstance.post("/instructor/addLesson",{data})
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
