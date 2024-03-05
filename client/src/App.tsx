@@ -2,6 +2,11 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {PrivateRoute , NotPrivateRoute} from './Components/Instructor/PrivateRoute/PrivateRoute';
+import { StudentPrivateRoute , StudentNotPrivateRoute } from './Components/Student/PrivateRoute/PrivateRoute';
+import { AdminPrivateRoute , AdminNotPrivateRoute } from './Components/Admin/PrivateRoute/PrivateRoute';
+
+
 import HomePage from './Pages/Student/HomePage';
 import LoginPage from './Pages/Student/LoginPage';
 import SignUpPage from './Pages/Student/SignUp';
@@ -31,26 +36,39 @@ const App: React.FC = () => {
         {/* student route */}
 
         <Route path='/' element={<HomePage/>} />
-        <Route path='/student/login' element={<LoginPage/>}/>
-        <Route path='/student/signup' element={<SignUpPage/>}/>
+        <Route path='' element={<StudentNotPrivateRoute/>}>
+          <Route path='/student/login' element={<LoginPage/>}/>
+          <Route path='/student/signup' element={<SignUpPage/>}/>
+        </Route>
 
 
         {/* Tutor route */}
 
-        <Route path='/instructor' element={<InstructorHomePage/>} />
-        <Route path='/instructor/login' element={<InstructorLoginPage/>}/>
-        <Route path='/instructor/signup' element={<InstructorSignUpPage/>}/>
+        
 
-        <Route path='/instructor/addCourse' element={<InstructorAddCoursePage/>}/>
-        <Route path='/instructor/myCourses' element={<InstructorMyCoursesPage/>}/>
-        <Route path='/instructor/courseView/:id' element={<InstructorCourseViewPage/>}/>
+        <Route path='' element={<NotPrivateRoute/>}>
+          <Route path='/instructor/login' element={<InstructorLoginPage/>}/>
+          <Route path='/instructor/signup' element={<InstructorSignUpPage/>}/>
+        </Route>
+
+
+        <Route path='' element={<PrivateRoute/>}>
+          <Route path='/instructor' element={<InstructorHomePage/>} />
+          <Route path='/instructor/addCourse' element={<InstructorAddCoursePage/>}/>
+          <Route path='/instructor/myCourses' element={<InstructorMyCoursesPage/>}/>
+          <Route path='/instructor/courseView/:id' element={<InstructorCourseViewPage/>}/>
+        </Route>
 
 
         {/* Admin route */}
 
-        <Route path='/admin' element={<AdminHomePage/>} />
-        <Route path='/admin/login' element={<AdminLoginPage/>}/>
-        <Route path='/admin/category' element={<CategoryPage/>}/>
+        <Route path='' element={<AdminNotPrivateRoute/>}>
+          <Route path='/admin/login' element={<AdminLoginPage/>}/>
+        </Route>
+        <Route path='' element={<AdminPrivateRoute/>}>
+          <Route path='/admin' element={<AdminHomePage/>} />
+          <Route path='/admin/category' element={<CategoryPage/>}/>
+        </Route>
 
 
       </Routes>
