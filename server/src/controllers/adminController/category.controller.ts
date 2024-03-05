@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { addCategory, getCategory, deleteCategory } from '../../services/category.service';
+import { addCategory, getCategory, deleteCategory ,updateCategory } from '../../services/category.service';
 
 
 export const addCategories = async(req : Request,res : Response) :  Promise<void> => {
@@ -43,3 +43,18 @@ export const deleteCategories = async(req : Request,res : Response) :  Promise<v
         res.status(500).json({ message: 'Server Error' });
     }
 } 
+
+
+
+export const updateCategories = async(req : Request,res : Response) :  Promise<void> => {
+    try {
+        const {value,id} = req.body;
+        const categories:any = await updateCategory(value,id) 
+        res.send(categories)
+        
+    } catch (error) {
+        console.log(error);
+        
+        res.status(500).json({ message: 'Server Error' });
+    }
+}

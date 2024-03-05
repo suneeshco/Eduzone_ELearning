@@ -6,12 +6,15 @@ import { useFormik } from 'formik';
 import { adminLoginSchema } from '../../../Schemas/adminValidation';
 import { useDispatch } from 'react-redux';
 import { setAdminCredentials } from '../../../Redux/Slices/AdminAuth';
+import toast from 'react-hot-toast';
+import { useState } from 'react';
 
 
 
 const AdminLogin = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [errorMessage, setErrorMessage] = useState('');
   
 
   const {values , errors , touched , handleBlur, handleChange , handleSubmit } = useFormik({
@@ -22,13 +25,23 @@ const AdminLogin = () => {
     validationSchema : adminLoginSchema,
     onSubmit : async (values) => {
       console.log(values.email);
+      try {
+        const response:any = await adminLogin(values.email,values.password)
+        console.log("asasas",response.data);
+        
+          if(response?.data?.admin){
+            console.log(response.data.admin);
+            dispatch(setAdminCredentials(response.data.admin))
+            navigate("/admin") 
+          }
+        } catch (err) {
+          toast.error("Invalid Login Credentials");
+        }
+        
       
-      const response:any = await adminLogin(values.email,values.password)
-      if(response?.data?.admin){
-        console.log(response.data.admin);
-        dispatch(setAdminCredentials(response.data.admin))
-        navigate("/admin") 
-      }
+      
+      
+      
     }
   })
 

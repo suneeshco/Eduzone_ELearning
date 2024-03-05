@@ -11,7 +11,7 @@ export interface CategoryDocument extends Category, Document {}
 
 const CategorySchema: Schema = new Schema({
   categoryName: {type : String, required : true},
-  status : {type : String}
+  status : {type : Boolean}
 
 });
 

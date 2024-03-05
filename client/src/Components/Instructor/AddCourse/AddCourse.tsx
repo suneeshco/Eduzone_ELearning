@@ -146,15 +146,24 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { addCourse } from "../../../api/axiosPost";
+import { getInstructorCategories } from "../../../api/axiosGet";
 import { RootState } from "../../../Redux/RootState/RootState";
 import { useSelector } from "react-redux";
 
 
 function Addcourse() {
 
+  interface Category {
+    _id: string;
+    categoryName: string;
+    status: boolean;
+  }
+
   const {instructorInfo} = useSelector((state:RootState)=>state.instructorAuth)
 
   const navigate = useNavigate();
+const [categories,setCategories] = useState<Category[]>([])
+
   const [courseName, setCoursename] = useState<string>("");
   const [courseDuration, setCourseduration] = useState<string>("");
   const [courseFee, setCoursefee] = useState<number | string>(0);
@@ -162,6 +171,26 @@ function Addcourse() {
   const [selectcategory, setSelectcategory] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [cloudanaryURL, setCloudanaryURL] = useState("");
+
+
+
+  useEffect( ()=>{
+    const fetchCategories = async () => {
+            try {
+                const resp = await getInstructorCategories();
+                
+                console.log(resp.data);
+                
+                setCategories(resp.data); // Assuming resp is an array of Course objects
+            } catch (error) {
+                console.error("Failed to fetch lessons:", error);
+                // Handle error appropriately
+            }
+        
+    };
+    fetchCategories();
+   
+  },[])
 
   
 
@@ -307,14 +336,18 @@ const datas = {
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Category
             </label>
-            <textarea
-              className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
-              placeholder="Description"
+            <select
               value={selectcategory}
-              onChange={(e) => {
-                setSelectcategory(e.target.value);
-              }}
-            />
+              onChange={(e) => setSelectcategory(e.target.value)}
+              className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
+            >
+              <option>Select Category</option>
+              {categories?.map((category: any) => (
+                <option key={category?._id} value={category?._id}>
+                  {category?.categoryName}
+                </option>
+              ))}
+            </select>
           </div>
 
           

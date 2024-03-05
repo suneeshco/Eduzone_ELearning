@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import { instructorLoginSchema } from '../../../Schemas/instructorValidation';
 import { useDispatch } from 'react-redux';
 import { setInstructorCredentials } from '../../../Redux/Slices/InstructorAuth';
+import toast from 'react-hot-toast';
 
 
 
@@ -23,13 +24,17 @@ const InstructorLogin = () => {
     validationSchema : instructorLoginSchema,
     onSubmit : async (values) => {
       console.log(values.email);
-      
-      const response:any = await instructorLogin(values.email,values.password)
+      try {
+        const response:any = await instructorLogin(values.email,values.password)
       if(response?.data?.instructor){
         console.log(response.data.instructor);
         dispatch(setInstructorCredentials(response.data.instructor))
         navigate("/instructor") 
       }
+      } catch (error) {
+        toast.error("Invalid Login Credentials");
+      }
+      
     }
   })
 

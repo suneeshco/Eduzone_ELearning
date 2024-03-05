@@ -35,3 +35,12 @@ export const getLessons = async (id:string | undefined) => {
         throw error
     }
 }
+
+export const getInstructorCategories = async () =>{
+    try {
+        return await apiInstance.get('/instructor/categories')
+    } catch (error) {
+        throw error
+    }
+}
+
