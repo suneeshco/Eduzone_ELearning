@@ -1,92 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-
-// const CategoryPage = () => {
-//  const [categories, setCategories] = useState([]);
-//  const [newCategory, setNewCategory] = useState('');
-
-//  // Simulate fetching categories from a backend service
-//  useEffect(() => {
-//     // Replace this with your actual API call
-//     const fetchCategories = async () => {
-//       // Example API call
-//       const response = await fetch('/api/categories');
-//       const data = await response.json();
-//       setCategories(data);
-//     };
-
-//     fetchCategories();
-//  }, []);
-
-//  const addCategory = async () => {
-//     // Example API call to add a new category
-//     const response = await fetch('/api/categories', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({ name: newCategory }),
-//     });
-
-//     const data = await response.json();
-//     setCategories([...categories, data]);
-//     setNewCategory('');
-//  };
-
-//  const deleteCategory = async (id) => {
-//     // Example API call to delete a category
-//     await fetch(`/api/categories/${id}`, {
-//       method: 'DELETE',
-//     });
-
-//     setCategories(categories.filter((category) => category.id !== id));
-//  };
-
-//  return (
-//     <div>
-//       <div className="flex justify-between items-center mb-4">
-//         <input
-//           type="text"
-//           value={newCategory}
-//           onChange={(e) => setNewCategory(e.target.value)}
-//           placeholder="Add new category"
-//           className="border p-2 rounded"
-//         />
-//         <button onClick={addCategory} className="bg-blue-500 text-white p-2 rounded">
-//           Add Category
-//         </button>
-//       </div>
-
-//       <table className="table-auto">
-//         <thead>
-//           <tr>
-//             <th className="px-4 py-2">Category Name</th>
-//             <th className="px-4 py-2">Actions</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {categories.map((category) => (
-//             <tr key={category.id}>
-//               <td className="border px-4 py-2">{category.name}</td>
-//               <td className="border px-4 py-2">
-//                 <button className="bg-green-500 text-white p-2 rounded mr-2">
-//                  Edit
-//                 </button>
-//                 <button
-//                  onClick={() => deleteCategory(category.id)}
-//                  className="bg-red-500 text-white p-2 rounded"
-//                 >
-//                  Delete
-//                 </button>
-//               </td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//  );
-// };
-
-// export default CategoryPage;
 
 
 
@@ -97,6 +8,7 @@ import { getCategories } from '../../../api/axiosGet';
 import { Category } from '../../../utils/apiTypes/ApiTypes';
 import { addCategory } from '../../../api/axiosPost';
 import { deleteCategories , updateCategories } from '../../../api/axiosPatch';
+import toast from 'react-hot-toast';
 
 const CategoryPage = () => {
 
@@ -115,21 +27,24 @@ const CategoryPage = () => {
 
 
   const addCategories = async () => {
-    // Example API call to add a new category
+    if(newCategory.trim().length<1){
+      return toast.error("field should not be empty")
+    }
     const response = await addCategory(newCategory)
     setCategories([...categories, response.data]);
     setNewCategory('');
  };
 
  const updateCategory = async () => {
-  // Example API call to add a new category
+  if(newCategory.trim().length<1){
+    return toast.error("field should not be empty")
+  }
   const response = await updateCategories(newCategory,editMode.id)
   setNewCategory('');
   setEditMode({active: false, id: null})
 };
 
   const toggleStatus = async (id:string) => {
-    // Example API call to delete a category
     await deleteCategories(id)
  };
  
@@ -155,9 +70,9 @@ const CategoryPage = () => {
           </div>
         </div>
 
-        {/* Heading for listing categories */}
+
         <h2 className="text-2xl font-bold mb-4">List of Categories</h2>
-        {/* Card for listing categories */}
+
         <div className="bg-white shadow rounded-lg p-6">
         <table className="table-auto w-full">
           <thead>

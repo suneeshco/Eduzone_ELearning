@@ -5,6 +5,7 @@ import { studentSignUp } from '../../../api/axiosPost';
 import { Link } from 'react-router-dom';
 import LoginImage from '../../../assets/images/Logos/Login.png';
 import { studentSignUpSchema } from '../../../Schemas/studentLogin';
+import toast from 'react-hot-toast';
 
 
 const SignUp = () => {
@@ -25,8 +26,11 @@ const SignUp = () => {
       console.log(values.mobile);
       
        const response: any = await studentSignUp(values.firstname,values.lastname,values.email,values.mobile,values.password,values.confirmPassword);
+       console.log("res",response);
+       
        if (response?.data?.user) {
          console.log(response.data.user);
+        toast.success("Successfully Registered")
          navigate("/student/login");
        } 
     }

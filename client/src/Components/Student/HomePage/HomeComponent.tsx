@@ -116,7 +116,7 @@ const HomeComponent = () => {
       <p className="text-gray-600 text-center">Dive into the world of technical. Web development, Cyber security.</p>
     </div>
 
-    {/* Repeat the above structure for other course categories */}
+   
   </div>
 </div>
 
@@ -127,166 +127,147 @@ const HomeComponent = () => {
 
 
 
-<div className="mx-auto px-4 py-4"> {/* Decreased padding */}
+<div className="mx-auto px-4 py-4"> 
   <h2 className="text-3xl font-bold mb-8">Best Seller Courses</h2>
   <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
-    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> 
       <div className="w-full mb-2 relative">
         <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
       </div>
       <div className='relative w-full'>
         <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
-        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
-        <div className="flex items-center mb-1"> {/* Decreased margin */}
-          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
-          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> 
+        <div className="flex items-center mb-1"> 
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> 
+          <p className="text-gray-600 text-xs">Tutor Name</p> 
         </div>
-        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <p className="text-gray-600 mb-1">Price</p> 
         <div className="flex justify-center w-full">
           <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
         </div>
       </div>
     </div>
 
-    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> 
       <div className="w-full mb-2 relative">
         <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
       </div>
       <div className='relative w-full'>
         <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
-        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
-        <div className="flex items-center mb-1"> {/* Decreased margin */}
-          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
-          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> 
+        <div className="flex items-center mb-1"> 
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> 
+          <p className="text-gray-600 text-xs">Tutor Name</p> 
         </div>
-        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <p className="text-gray-600 mb-1">Price</p> 
         <div className="flex justify-center w-full">
           <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
         </div>
       </div>
     </div>
 
-    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> 
       <div className="w-full mb-2 relative">
         <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
       </div>
       <div className='relative w-full'>
         <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
-        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
-        <div className="flex items-center mb-1"> {/* Decreased margin */}
-          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
-          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> 
+        <div className="flex items-center mb-1"> 
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> 
+          <p className="text-gray-600 text-xs">Tutor Name</p> 
         </div>
-        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <p className="text-gray-600 mb-1">Price</p> 
         <div className="flex justify-center w-full">
           <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
         </div>
       </div>
     </div>
 
-    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> 
       <div className="w-full mb-2 relative">
         <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
       </div>
       <div className='relative w-full'>
         <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
-        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
-        <div className="flex items-center mb-1"> {/* Decreased margin */}
-          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
-          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> 
+        <div className="flex items-center mb-1"> 
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> 
+          <p className="text-gray-600 text-xs">Tutor Name</p> 
         </div>
-        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <p className="text-gray-600 mb-1">Price</p> 
         <div className="flex justify-center w-full">
           <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
         </div>
       </div>
     </div>
 
-    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> 
       <div className="w-full mb-2 relative">
         <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
       </div>
       <div className='relative w-full'>
         <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
-        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
-        <div className="flex items-center mb-1"> {/* Decreased margin */}
-          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
-          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> 
+        <div className="flex items-center mb-1"> 
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> 
+          <p className="text-gray-600 text-xs">Tutor Name</p> 
         </div>
-        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <p className="text-gray-600 mb-1">Price</p> 
         <div className="flex justify-center w-full">
           <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
         </div>
       </div>
     </div>
 
-    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> 
       <div className="w-full mb-2 relative">
         <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
       </div>
       <div className='relative w-full'>
         <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
-        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
-        <div className="flex items-center mb-1"> {/* Decreased margin */}
-          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
-          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> 
+        <div className="flex items-center mb-1"> 
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> 
+          <p className="text-gray-600 text-xs">Tutor Name</p> 
         </div>
-        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <p className="text-gray-600 mb-1">Price</p> 
         <div className="flex justify-center w-full">
           <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
         </div>
       </div>
     </div>
 
-    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> 
       <div className="w-full mb-2 relative">
         <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
       </div>
       <div className='relative w-full'>
         <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
-        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
-        <div className="flex items-center mb-1"> {/* Decreased margin */}
-          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
-          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> 
+        <div className="flex items-center mb-1"> 
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> 
+          <p className="text-gray-600 text-xs">Tutor Name</p>
         </div>
-        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <p className="text-gray-600 mb-1">Price</p>
         <div className="flex justify-center w-full">
           <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
         </div>
       </div>
     </div>
 
-    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> 
       <div className="w-full mb-2 relative">
         <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
       </div>
       <div className='relative w-full'>
         <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
-        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
-        <div className="flex items-center mb-1"> {/* Decreased margin */}
-          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
-          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> 
+        <div className="flex items-center mb-1"> 
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> 
+          <p className="text-gray-600 text-xs">Tutor Name</p> 
         </div>
-        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
-        <div className="flex justify-center w-full">
-          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
-        </div>
-      </div>
-    </div>
-
-
-    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
-      <div className="w-full mb-2 relative">
-        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
-      </div>
-      <div className='relative w-full'>
-        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
-        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
-        <div className="flex items-center mb-1"> {/* Decreased margin */}
-          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
-          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
-        </div>
-        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <p className="text-gray-600 mb-1">Price</p> 
         <div className="flex justify-center w-full">
           <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
         </div>
@@ -294,24 +275,43 @@ const HomeComponent = () => {
     </div>
 
 
-    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> {/* Decreased padding */}
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> 
       <div className="w-full mb-2 relative">
         <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
       </div>
       <div className='relative w-full'>
         <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
-        <h2 className="text-lg font-semibold mb-1">Course Title</h2> {/* Decreased margin */}
-        <div className="flex items-center mb-1"> {/* Decreased margin */}
-          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> {/* Decreased size */}
-          <p className="text-gray-600 text-xs">Tutor Name</p> {/* Decreased font size */}
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> 
+        <div className="flex items-center mb-1"> 
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> 
+          <p className="text-gray-600 text-xs">Tutor Name</p>
         </div>
-        <p className="text-gray-600 mb-1">Price</p> {/* Decreased margin */}
+        <p className="text-gray-600 mb-1">Price</p> 
         <div className="flex justify-center w-full">
           <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
         </div>
       </div>
     </div>
-    {/* Repeat the above structure for other best seller courses */}
+
+
+    <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col items-center justify-center p-4"> 
+      <div className="w-full mb-2 relative">
+        <img src={courseThumb} alt="" className="w-full h-auto rounded-lg" />
+      </div>
+      <div className='relative w-full'>
+        <span className="absolute top-2 right-2 text-gray-600 text-xl">&hearts;</span>
+        <h2 className="text-lg font-semibold mb-1">Course Title</h2> 
+        <div className="flex items-center mb-1"> 
+          <img src={landImage} alt="Tutor" className="w-6 h-6 rounded-full mr-1" /> 
+          <p className="text-gray-600 text-xs">Tutor Name</p> 
+        </div>
+        <p className="text-gray-600 mb-1">Price</p> 
+        <div className="flex justify-center w-full">
+          <button className="bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Buy Course</button>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </div>
 

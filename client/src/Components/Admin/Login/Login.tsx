@@ -51,12 +51,9 @@ const AdminLogin = () => {
   return (
     <div className=" bg-gray-100 flex flex-col justify-center py-14 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-4xl sm:flex">
-        {/* Picture */}
         <div className="sm:w-1/2">
-          {/* Replace 'your-image.jpg' with your actual image URL */}
           <img src={LoginImage} alt="Your Image" className="h-full w-full object-cover" />
         </div>
-        {/* Login Form */}
         <div className="sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-6">Admin Login</h2>

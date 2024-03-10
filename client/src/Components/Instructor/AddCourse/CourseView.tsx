@@ -43,10 +43,9 @@ const [cloudanaryURL, setCloudanaryURL] = useState("");
                 const resp = await getSingleCourse(id);
                 
                 
-                setCourseDetails(resp.data); // Assuming resp is an array of Course objects
+                setCourseDetails(resp.data); 
             } catch (error) {
                 console.error("Failed to fetch courses:", error);
-                // Handle error appropriately
             }
         }
     };
@@ -61,16 +60,15 @@ useEffect( ()=>{
               
               console.log(resp.data);
               
-              setLessonDetails(resp.data); // Assuming resp is an array of Course objects
+              setLessonDetails(resp.data); 
           } catch (error) {
               console.error("Failed to fetch lessons:", error);
-              // Handle error appropriately
           }
       
   };
   fetchLessons();
  
-},[])
+},[cloudanaryURL])
 
 
 
@@ -81,7 +79,7 @@ const handleSubmitChange = (e: React.FormEvent<HTMLInputElement>) => {
     const files = inputElement.files;
     if (files && files.length > 0) {
       const file = files[0];
-      console.log(file,"IVDE UNdU")
+      console.log(file)
       setVideo(file)
     } else {
       setVideo(null)
@@ -104,16 +102,17 @@ const submitVideo = async () => {
       data.append("file", video);
       data.append("upload_preset", "videos_preset");
       data.append("cloud_name", "dwuy04s3s");
-      console.log(video, "video UNDO?");
+      console.log(video);
       const response = await axios.post(
          "https://api.cloudinary.com/v1_1/dwuy04s3s/video/upload",
         data
       )
-      console.log(response,"ivide vaada");
+      console.log(response,"Video Uploaded ");
       if (response.data && response.data.url) {
         console.log("Video uploaded successfully. URL:", response.data.url);
         setCloudanaryURL(response.data.url);
-        console.log(response.data.url, "url ivide anutto")
+        console.log(response.data.url, "url of video")
+        return response.data.url
       } else {
         console.error("Invalid response from Cloudinary", response.data);
         toast.error(
@@ -133,11 +132,13 @@ const submitVideo = async () => {
 
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
-  await submitVideo();
+  let url  = await submitVideo();
+  console.log("my url ", url);
+  
 
-
+if(url){
   const datas = {
-    lessonTitle:title,lessonDescription : description,lessonVideo : cloudanaryURL,courseId : courseDetails?._id
+    lessonTitle:title,lessonDescription : description,lessonVideo : url,courseId : courseDetails?._id
   }
   let res = await addLesson(datas)
   if(res.status === 200){
@@ -148,6 +149,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setCloudanaryURL("")
   }
   console.log(res);
+}
+  
   
 }
 
@@ -160,10 +163,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     </div>
 
     <div className="mx-auto px-4 py-8 grid grid-cols-2 gap-8">
-      {/* Left Column */}
       <div className="bg-white shadow-md rounded-lg p-6">
         <h2 className="text-2xl font-bold mb-4">Lesson List</h2>
-        {/* Display your lesson list here */}
         {lessonDetails.map((lesson) => (
  <div key={lesson._id} style={{borderRadius: '10px', padding: '10px', backgroundColor: '#f0f0f0', marginBottom: '10px'}}>
     <h2>{lesson.lessonTitle}</h2>
@@ -171,16 +172,14 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 ))}
 
       </div>
-
-      {/* Right Column */}
       <div className="bg-white shadow-md rounded-lg p-6">
         <h2 className="text-2xl font-bold mb-4">Course Details</h2>
         
         <img className="w-full h-auto mb-4 object-cover rounded-t-xl" src={courseDetails?.imageUrl} alt="Course Thumbnail" />
         <h2 className="text-2xl font-bold mb-4">{courseDetails?.courseName}</h2>
         <p className="text-gray-800 dark:text-white">{courseDetails?.courseDescription}</p>
-        <p className="mt-2 text-gray-800 dark:text-white">Duration: {courseDetails?.courseDuration} hours</p>
-        {/* Add any other course details you want to display */}
+        <p className="mt-2 text-gray-800 dark:text-white">Duration: {courseDetails?.courseDuration} days</p>
+
       </div>
     </div>
 

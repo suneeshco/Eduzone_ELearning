@@ -21,3 +21,13 @@ export const updateCategories = async (value:string,id:string|null) =>{
         throw error
     }
 }
+
+export const resetPassword = async (userId :string | undefined , token : string | undefined , password : string) =>{
+    try {
+        
+        
+        return await apiInstance.patch('/auth/studentResetPassword',{userId,token,password})
+    } catch (error) {
+        throw error
+    }
+}

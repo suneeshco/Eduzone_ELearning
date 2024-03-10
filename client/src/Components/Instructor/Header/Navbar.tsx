@@ -35,10 +35,10 @@ const Navbar: React.FC = () => {
           {/* Navigation links */}
           <div className="hidden sm:block ml-16"> {/* Adjusted ml to ml-4 */}
             <div className="flex space-x-4">
-              <Link to="/instructor" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Home</Link>
-              <Link to="/about" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Courses</Link>
-              <Link to="/services" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Tutors</Link>
-              <Link to="/contact" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">About</Link>
+              <Link to="/instructor" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Dashboard</Link>
+              <Link to="/instructor/myCourses" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">My Courses</Link>
+              <Link to="/instructor/addCourse" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Add Course</Link>
+              
             </div>
           </div>
           {/* Login button */}

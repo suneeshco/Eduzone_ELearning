@@ -1,5 +1,5 @@
 
-import Navbar from "../../Components/Student/Header/Navbar";
+import Navbar from "../../Components/Admin/Header/Navbar";
 import { AdminSidebar } from "../../Components/Admin/Sidebar/AdminSidebar";
 import CategoryPages from "../../Components/Admin/Category/CategoryShow";
 

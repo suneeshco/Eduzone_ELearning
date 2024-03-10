@@ -10,6 +10,9 @@ import { AdminPrivateRoute , AdminNotPrivateRoute } from './Components/Admin/Pri
 import HomePage from './Pages/Student/HomePage';
 import LoginPage from './Pages/Student/LoginPage';
 import SignUpPage from './Pages/Student/SignUp';
+import ForgotPasswordPage from './Pages/Student/ForgotPasswordPage';
+import PasswordResetPage from './Pages/Student/PasswordResetPage';
+
 
 import InstructorHomePage from './Pages/Instructor/HomePage'
 import InstructorLoginPage from './Pages/Instructor/LoginPage';
@@ -39,6 +42,8 @@ const App: React.FC = () => {
         <Route path='' element={<StudentNotPrivateRoute/>}>
           <Route path='/student/login' element={<LoginPage/>}/>
           <Route path='/student/signup' element={<SignUpPage/>}/>
+          <Route path='/student/forgotPassword' element={<ForgotPasswordPage/>}/>
+          <Route path='/student/password-reset/:userId/:token' element={<PasswordResetPage/>}/>
         </Route>
 
 

@@ -5,6 +5,7 @@ import { instructorSignUp } from '../../../api/axiosPost';
 import { Link } from 'react-router-dom';
 import LoginImage from '../../../assets/images/Logos/Login.png';
 import { instructorSignUpSchema } from '../../../Schemas/instructorValidation';
+import toast from 'react-hot-toast';
 
 
 const InstructorSignUp = () => {
@@ -27,6 +28,7 @@ const InstructorSignUp = () => {
        const response: any = await instructorSignUp(values.firstname,values.lastname,values.email,values.mobile,values.password,values.confirmPassword);
        if (response?.data?.instructor) {
          console.log(response.data.instructor);
+         toast.success("Successfully Registered")
          navigate("/instructor/login");
        } 
     }

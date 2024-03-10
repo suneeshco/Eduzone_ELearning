@@ -14,6 +14,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);

@@ -21,6 +21,18 @@ export const studentSignUp = async (firstname:any,lastname:any,email:any,mobile:
 };
 
 
+export const studentForgot = async (email:string) =>{
+  try {
+   const a=  await apiInstance.post("/auth/studentForgot",{email})
+   return a
+   
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+
 export const instructorLogin = async (email:any,password:any) => {
   try {
       return await apiInstance.post("/auth/instructorLogin",{email,password})

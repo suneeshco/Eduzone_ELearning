@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { signup , login , instructorSignup , instructorLogin , adminLogin} from '../../services/auth.service';
+import { signup , login , instructorSignup , instructorLogin , adminLogin , sendForgotRequest , studentResetPass} from '../../services/auth.service';
+import nodemailer from 'nodemailer';
 
 
 export const authController = {
@@ -9,8 +10,8 @@ export const authController = {
       const user = await signup(firstname, lastname, email, mobile, password);
       res.send({user})
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Server Error' });
+      console.log("error",error);
+      res.status(500).send({ message: 'Server Error' });
     }
   },
 
@@ -20,6 +21,36 @@ export const authController = {
         const {email,password} = req.body;
         const user = await login(email,password);
         res.send({user});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:"Server Error"})  
+    }
+  },
+
+
+
+  async studentForgot(req:Request , res: Response): Promise <void> {
+    try {
+        const {email} = req.body;
+
+        
+        const message = sendForgotRequest(email)
+
+        res.status(200).json({ message: message });
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:"Server Error"})  
+    }
+  },
+
+
+  async studentResetPassword(req:Request , res: Response): Promise <void> {
+    try {
+        const {userId , token , password } = req.body;
+
+       const reset = studentResetPass(userId,token,password)
+       res.status(200).json({ message: "Password reset successful" });
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"Server Error"})  

@@ -16,3 +16,11 @@ export const findUserByEmail = async (email: string): Promise<UserDocument | nul
     throw error;
   }
 };
+
+export const findUserById = async (id: string): Promise<UserDocument | null> => {
+  try {
+    return await User.findOne({ _id : id });
+  } catch (error) {
+    throw error;
+  }
+};

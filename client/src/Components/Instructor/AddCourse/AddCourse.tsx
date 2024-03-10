@@ -1,143 +1,3 @@
-// import React, { useState } from 'react';
-// import { useFormik } from 'formik';
-// import { addCourseValidationSchema } from '../../../Schemas/addCourseValidation';
-// import { useNavigate } from 'react-router-dom';
-// import { apiInstance } from '../../../api/config/axiosConfig';
-// import axios from 'axios';
-
-// const AddCourse = () => {
-
-//   const navigate = useNavigate();
-
-//   // const uploadFile = async ()=>{
-//   //   const data = new FormData();
-//   //   data.append('file', values.thumbnailImage);
-//   //   data.append('upload_preset','images_preset')
-
-
-//   //   try {
-//   //     let cloudName = 'dwuy04s3s';
-//   //     let resourceType = 'image';
-//   //     let api = `https://api.cloudinary.com/v1_1/dwuy04s3s/image/upload`;
-
-//   //     const res = await axios.post(api,data);
-//   //     const {secure_url} = res.data;
-//   //     console.log(secure_url);
-//   //     return secure_url
-      
-//   //   } catch (error) {
-//   //     console.error(error);
-      
-//   //   }
-
-//   // }
-
-
-
-//   const handlePhotoUpload = async () => {
-//     if (!values.thumbnailImage) {
-//       console.log("No file selected for upload.");
-//       return;
-//     }
-
-//     try {
-//       const formData = new FormData();
-//       formData.append("file", values.thumbnailImage);
-//       formData.append("upload_preset", "images_preset");
-//       formData.append("cloud_name", "dwuy04s3s");
-//       const response = await axios.post(
-//         "https://api.cloudinary.com/v1_1/dwuy04s3s/image/upload",
-//         formData
-//       );
-
-//       console.log(response.data);
-//     } catch (error) {
-//       console.error("Error uploading photo:", error.response.data);
-//     }
-//  };
-
-
-//   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-//     initialValues: {
-//       courseTitle: "",
-//       courseCategory: "",
-//       regularPrice: "",
-//       offerPercentage: "",
-//       features: "",
-//       thumbnailImage: null
-//     },
-//     validationSchema: addCourseValidationSchema,
-//     onSubmit: async (values) => {
-
-
-//       const imgUrl = await handlePhotoUpload()
-      
-       
-//     }
-//    });
-
-
-
-
-//   return (
-//     <div className="w-full">
-//       <h2 className="text-2xl font-bold mb-4 mx-auto max-w-xl">Add New Course</h2>
-//       <div className="max-w-xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-//         <div className="px-6 py-4">
-//           <form onSubmit={handleSubmit}>
-//             <div className="mb-4">
-//               <label htmlFor="courseTitle" className="block mb-2 font-bold">Course Title</label>
-//               <input type="text" id="courseTitle" value={values.courseTitle}
-//                   onChange={handleChange}
-//                   onBlur={handleBlur} className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.courseTitle && touched.courseTitle ? 'border-red-500' : ''}`} required />
-//                   {errors.courseTitle && touched.courseTitle && <p className='text-red-500'>{errors.courseTitle}</p>}
-//             </div>
-//             <div className="mb-4">
-//               <label htmlFor="courseCategory" className="block mb-2 font-bold">Course Category</label>
-//               <input type="text" id="courseCategory" value={values.courseCategory}
-//                   onChange={handleChange}
-//                   onBlur={handleBlur} className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.courseCategory && touched.courseCategory ? 'border-red-500' : ''}`} required />
-//                   {errors.courseCategory && touched.courseCategory && <p className='text-red-500'>{errors.courseCategory}</p>}
-//             </div>
-//             <div className="mb-4">
-//               <label htmlFor="regularPrice" className="block mb-2 font-bold">Regular Price</label>
-//               <input type="number" id="regularPrice" value={values.regularPrice}
-//                   onChange={handleChange}
-//                   onBlur={handleBlur} className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.regularPrice && touched.regularPrice ? 'border-red-500' : ''}`} required />
-//                   {errors.regularPrice && touched.regularPrice && <p className='text-red-500'>{errors.regularPrice}</p>}
-//             </div>
-//             <div className="mb-4">
-//               <label htmlFor="offerPercentage" className="block mb-2 font-bold">Offer Percentage</label>
-//               <input type="number" id="offerPercentage" value={values.offerPercentage}
-//                   onChange={handleChange}
-//                   onBlur={handleBlur} className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.offerPercentage && touched.offerPercentage ? 'border-red-500' : ''}`} required />
-//                   {errors.offerPercentage && touched.offerPercentage && <p className='text-red-500'>{errors.offerPercentage}</p>}
-//             </div>
-//             <div className="mb-4">
-//               <label htmlFor="features" className="block mb-2 font-bold">Features</label>
-//               <textarea id="features" value={values.features}
-//                   onChange={handleChange}
-//                   onBlur={handleBlur}className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.features && touched.features ? 'border-red-500' : ''}`} required />
-//                   {errors.features && touched.features && <p className='text-red-500'>{errors.features}</p>}
-
-//             </div>
-//             <div className="mb-4">
-//               <label htmlFor="thumbnailImage" className="block mb-2 font-bold">Thumbnail Image</label>
-//               <input type="file" id="thumbnailImage" 
-//                   onChange={handleChange}
-//                   onBlur={handleBlur} accept='image/*' className="w-full border border-gray-300 rounded px-3 py-2" required />
-//             </div>
-//             <button type="submit" className="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600">Add Course</button>
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AddCourse;
-
-
 
 
 
@@ -166,7 +26,7 @@ const [categories,setCategories] = useState<Category[]>([])
 
   const [courseName, setCoursename] = useState<string>("");
   const [courseDuration, setCourseduration] = useState<string>("");
-  const [courseFee, setCoursefee] = useState<number | string>(0);
+  const [courseFee, setCoursefee] = useState<string>('');
   const [courseDescription, setCoursedescription] = useState<string>("");
   const [selectcategory, setSelectcategory] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -181,10 +41,10 @@ const [categories,setCategories] = useState<Category[]>([])
                 
                 console.log(resp.data);
                 
-                setCategories(resp.data); // Assuming resp is an array of Course objects
+                setCategories(resp.data); 
             } catch (error) {
                 console.error("Failed to fetch lessons:", error);
-                // Handle error appropriately
+            
             }
         
     };
@@ -203,7 +63,7 @@ const [categories,setCategories] = useState<Category[]>([])
         const file = files[0];
         setImage(file);
       } else {
-        // No file selected
+       
         setImage(null);
       }
     } catch (error) {
@@ -211,7 +71,7 @@ const [categories,setCategories] = useState<Category[]>([])
     }
   };
 
-  //As per the video//cloudinary Setup//For getting the cloudinary URL from the cloudinary.com
+  
 
   const submitImage = async () => {
     try {
@@ -228,11 +88,12 @@ const [categories,setCategories] = useState<Category[]>([])
           data
         );
 
-        //console.log("response",response)
+        console.log("response",response)
         if (response.data && response.data.url) {
           console.log("Image uploaded successfully. URL:", response.data.url);
           setCloudanaryURL(response.data.url);
           console.log(response.data.url,"url")
+          return response.data.url
         } else {
           console.error("Invalid response from Cloudinary", response.data);
           toast.error(
@@ -251,29 +112,45 @@ const [categories,setCategories] = useState<Category[]>([])
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await submitImage()
-
-    if (!cloudanaryURL) {
-      toast.error("Error while Uploading Image");
-      return;
-    }
     if (!courseName.trim() || !courseDuration.trim() || !courseFee || !courseDescription.trim() || !selectcategory) {
       return toast.error("All fields are required");
       }
+    if(parseInt(courseFee)<=0){
+      return toast.error("All fields are required");
+    }
+
+    let imUrl = await submitImage()
+
+    if (!imUrl) {
+      toast.error("Error while Uploading Image");
+      return;
+    }
+    
 const datas = {
-  courseName,courseDuration,courseFee,courseDescription,category :selectcategory,imageUrl:cloudanaryURL, instructorId : instructorInfo?._id
+  courseName,courseDuration,courseFee,courseDescription,category :selectcategory,imageUrl:imUrl, instructorId : instructorInfo?._id
 }
 
   let res = await addCourse(datas)
-  if(res.data.course){
+  
+  
+  if(res){
     toast.success("Course Added Successfully")
+    navigate("/instructor/myCourses")
   }
     
   };
 
+
+
+
+
+
+
+
+
   return (
-    <div className="flex items-center justify-center h-screen mt-10">
-      <div className="mt-8  shadow-md p-8 w-full max-w-md rounded-lg border border-gray-400">
+    <div className="flex items-center justify-center h-screen">
+      <div className="shadow-md p-8 w-full max-w-md rounded-lg border border-gray-400">
         <form onSubmit={handleSubmit} className="bg-white rounded p-4 sm:p-8">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -289,6 +166,7 @@ const datas = {
               placeholder="Course Name"
             />
           </div>
+
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Course Duration
@@ -369,9 +247,9 @@ const datas = {
   />
 )}
           </div>
+          
           <div className="flex items-center justify-center">
             <button
-              
               className="w-full py-2 px-4 text-white font-bold bg-blue-500 rounded-full focus:outline-none focus:shadow-outline hover:bg-blue-700"
               type="submit"
             >
@@ -384,3 +262,5 @@ const datas = {
   );
 }
 export default Addcourse;
+
+

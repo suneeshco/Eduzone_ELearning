@@ -6,7 +6,7 @@ export const AdminSidebar = () => {
     <div className="w-64 bg-gray-800 text-white h-screen">
       <div className="p-6">
         <h2 className="text-2xl mb-4">Admin Dashboard</h2>
-        {/* Links */}
+        
         <ul>
           <li className="mb-3 bg-gray-700 rounded-lg p-2 mx-2">
             <Link to="/admin" className="flex items-center space-x-2">
