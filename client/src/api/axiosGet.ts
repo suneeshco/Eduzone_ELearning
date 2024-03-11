@@ -44,3 +44,21 @@ export const getInstructorCategories = async () =>{
     }
 }
 
+
+
+export const getCategoriesForStudent = async () =>{
+    try {
+        return await apiInstance.get('/admin/activeCategories')
+    } catch (error) {
+        throw error
+    }
+}
+
+
+export const getAllCourses = async () => {
+    try {
+        return await apiInstance.get(`/student/getAllCourses`)
+    } catch (error) {
+        throw error
+    }
+}

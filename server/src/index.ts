@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import authRoutes from './routes/auth.routes';
 import adminRoutes from './routes/admin.routes';
 import instructorRoutes from './routes/instructor.routes';
+import studentRoutes from './routes/student.routes'
 import cors from 'cors';
 require('dotenv').config();
 
@@ -20,6 +21,7 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/instructor',instructorRoutes);
+app.use('/api/student',studentRoutes);
 
 // Connect to MongoDB
 mongoose.connect('mongodb://127.0.0.1:27017/eduz').then(() => {
