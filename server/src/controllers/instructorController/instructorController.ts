@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getActiveCategory } from '../../services/category.service';
-import { addCourses ,getCoursess , getSingleCoursess , addLessons , getLessonss } from '../../services/instructor.service';
+import { addCourses ,getCoursess , getSingleCoursess , addLessons , getLessonss , editCourses } from '../../services/instructor.service';
 
 // export const addCourse = async (req : Request,res : Response) :  Promise<void>  => {
 //     try {
@@ -107,3 +107,17 @@ export const getActiveCategories = async(req : Request,res : Response) :  Promis
     }
 }
 
+
+export const editCourse = async (req : Request,res : Response) : Promise<void> => {
+    try {
+        // Directly use req.body instead of req.body.data
+        const courseData = req.body.data;
+        console.log(req.body.data);
+        
+        const course = await editCourses(courseData);
+        res.send(course);
+    } catch (error) {
+        console.error(error); 
+        res.status(500).send({ message: "Error editing course" });
+    }
+}

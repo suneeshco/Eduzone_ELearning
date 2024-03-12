@@ -5,6 +5,7 @@ import { getSingleCourse , getLessons } from '../../../api/axiosGet';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { addLesson } from '../../../api/axiosPost';
+import { Link } from 'react-router-dom'
 
 interface Course {
   _id: string;
@@ -28,6 +29,8 @@ const CourseView = () => {
   const { id } = useParams<{ id: string }>();
   const [courseDetails, setCourseDetails] = useState<Course | null>(null);
   const [lessonDetails, setLessonDetails] = useState<Lesson[]>([])
+
+  const [loading, setLoading] = useState(false);
 
 
 const navigate = useNavigate()
@@ -132,6 +135,15 @@ const submitVideo = async () => {
 
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
+
+
+  if (!title || !description || !video) {
+    toast.error("Please fill in all fields.");
+    return;
+  }
+
+  setLoading(true);
+  
   let url  = await submitVideo();
   console.log("my url ", url);
   
@@ -140,15 +152,32 @@ if(url){
   const datas = {
     lessonTitle:title,lessonDescription : description,lessonVideo : url,courseId : courseDetails?._id
   }
-  let res = await addLesson(datas)
-  if(res.status === 200){
-    toast.success("lesson added")
-    setTitle("")
-    setDescription("")
-    setVideo(null)
-    setCloudanaryURL("")
+
+  
+
+
+
+  try {
+    const res = await addLesson(datas);
+    if (res.status === 200) {
+      toast.success("Lesson added");
+      setTitle("");
+      setDescription("");
+      setVideo(null);
+      setCloudanaryURL("");
+    } else {
+      toast.error("Failed to add lesson");
+    }
+  } catch (error) {
+    console.error("Error adding lesson:", error);
+    toast.error("Error adding lesson: Please try again later");
+  } finally {
+    setLoading(false); 
   }
-  console.log(res);
+
+
+
+
 }
   
   
@@ -157,90 +186,90 @@ if(url){
   return (
     <>
     
-    <div className=" mx-auto px-4 py-8">
-    <div className="bg-blue-200 h-32 flex items-center justify-center">
-        <h1 className="text-3xl font-bold">Course Details</h1>
+    <div className="mx-auto px-4 py-8">
+  <div className="bg-blue-200 h-32 flex items-center justify-center">
+    <h1 className="text-3xl font-bold">Course Details</h1>
+  </div>
+
+  <div className="mx-auto px-4 py-8 grid grid-cols-2 gap-8">
+    <div className="bg-white shadow-md rounded-lg p-6">
+      <h2 className="text-2xl font-bold mb-4">Lesson List</h2>
+      {lessonDetails.map((lesson) => (
+        <div key={lesson._id} style={{ borderRadius: '10px', padding: '10px', backgroundColor: '#f0f0f0', marginBottom: '10px' }}>
+          <h2>{lesson.lessonTitle}</h2>
+        </div>
+      ))}
     </div>
 
-    <div className="mx-auto px-4 py-8 grid grid-cols-2 gap-8">
-      <div className="bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-4">Lesson List</h2>
-        {lessonDetails.map((lesson) => (
- <div key={lesson._id} style={{borderRadius: '10px', padding: '10px', backgroundColor: '#f0f0f0', marginBottom: '10px'}}>
-    <h2>{lesson.lessonTitle}</h2>
- </div>
-))}
-
-      </div>
-      <div className="bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-4">Course Details</h2>
-        
-        <img className="w-full h-auto mb-4 object-cover rounded-t-xl" src={courseDetails?.imageUrl} alt="Course Thumbnail" />
-        <h2 className="text-2xl font-bold mb-4">{courseDetails?.courseName}</h2>
-        <p className="text-gray-800 dark:text-white">{courseDetails?.courseDescription}</p>
-        <p className="mt-2 text-gray-800 dark:text-white">Duration: {courseDetails?.courseDuration} days</p>
-
-      </div>
+    <div className="bg-white shadow-md rounded-lg p-6">
+      <h2 className="text-2xl font-bold mb-4">Course Details</h2>
+      <Link to={`/instructor/editCourse/${courseDetails?._id}`}>
+        <button className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4">Edit Course</button>
+      </Link>
+      <img className="w-full h-auto mb-4 object-cover rounded-t-xl" src={courseDetails?.imageUrl} alt="Course Thumbnail" />
+      <h2 className="text-2xl font-bold mb-4">{courseDetails?.courseName}</h2>
+      <p className="text-gray-800 dark:text-white">{courseDetails?.courseDescription}</p>
+      <p className="mt-2 text-gray-800 dark:text-white">Duration: {courseDetails?.courseDuration} days</p>
     </div>
+  </div>
 
-    <div className="p-4">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="bg-white shadow rounded-lg p-4">
+  <div className="p-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="bg-white shadow rounded-lg p-4">
         <h2 className="text-2xl font-bold mb-4">Add New Lesson</h2>
-          <div className="mb-4">
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-              Lesson Title
-            </label>
-            <input
-              type="text"
-              name="title"
-              id="title"value={title}
-              onChange={(e) => { setTitle(e.target.value) }}
-
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-              Lesson Description
-            </label>
-            <textarea
-              name="description"
-              id="description"
-              value={description}
-              onChange={(e) => { setDescription(e.target.value) }}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-              rows={3}
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="video" className="block text-sm font-medium text-gray-700">
-              Lesson Video
-            </label>
-            <input
-              type="file"
-              name="video"
-              id="video"
-              accept="video/*"
-              onChange={handleSubmitChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-            />
-            {video && (
+        <div className="mb-4">
+          <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            Lesson Title
+          </label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            value={title}
+            onChange={(e) => { setTitle(e.target.value) }}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            Lesson Description
+          </label>
+          <textarea
+            name="description"
+            id="description"
+            value={description}
+            onChange={(e) => { setDescription(e.target.value) }}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+            rows={3}
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="video" className="block text-sm font-medium text-gray-700">
+            Lesson Video
+          </label>
+          <input
+            type="file"
+            name="video"
+            id="video"
+            accept="video/*"
+            onChange={handleSubmitChange}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+          />
+          {video && (
             <video
               controls
               src={URL.createObjectURL(video)}
               style={{ width: "100%" }}
             />
           )}
-          </div>
-          <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-            Add Lesson
-          </button>
         </div>
-      </form>
-    </div>
-
-    </div>
+        <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+        {loading ? "Adding Lesson..." : "Add Lesson"}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
     </>
   );
 };

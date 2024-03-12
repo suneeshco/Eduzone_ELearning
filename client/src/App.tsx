@@ -20,6 +20,7 @@ import InstructorSignUpPage from './Pages/Instructor/SignUpPage';
 import InstructorAddCoursePage from './Pages/Instructor/AddCoursePage';
 import InstructorMyCoursesPage from './Pages/Instructor/InstructorMyCoursesPage';
 import InstructorCourseViewPage from './Pages/Instructor/CourseViewPage';
+import InstructorEditCoursePage from './Pages/Instructor/EditCoursePage'
 
 import AdminHomePage from './Pages/Admin/HomePage'
 import AdminLoginPage from './Pages/Admin/LoginPage';
@@ -62,6 +63,7 @@ const App: React.FC = () => {
           <Route path='/instructor/addCourse' element={<InstructorAddCoursePage/>}/>
           <Route path='/instructor/myCourses' element={<InstructorMyCoursesPage/>}/>
           <Route path='/instructor/courseView/:id' element={<InstructorCourseViewPage/>}/>
+          <Route path='/instructor/editCourse/:courseId' element={<InstructorEditCoursePage/>}/>
         </Route>
 
 

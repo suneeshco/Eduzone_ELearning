@@ -1,4 +1,4 @@
-import { addCourse , getCourse , getSingleCourse , addLesson , getLesson} from "../repositories/instructor.repository";
+import { addCourse , getCourse , getSingleCourse , addLesson , getLesson, editCourse} from "../repositories/instructor.repository";
 
 export const addCourses = async (data:any)=>{
     try {
@@ -48,6 +48,22 @@ export const getLessonss = async (id:any)=>{
     try {
         let lessons = await getLesson(id)
         return lessons
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
+export const editCourses = async (data:any)=>{
+    try {
+        let courseId = data.courseId
+        let courseData = await getSingleCourse(courseId)
+        if(!courseData){
+            throw new Error("No Course Found")
+        }
+        let updated = await editCourse(data)
+        return updated
     } catch (error) {
         console.log(error);
         

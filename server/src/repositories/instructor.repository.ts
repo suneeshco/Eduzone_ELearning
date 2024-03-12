@@ -63,3 +63,22 @@ export const getLesson = async (id: Partial<LessonDocument>): Promise<LessonDocu
     throw error;
   }
 }
+
+
+
+export const editCourse = async ({ courseId, courseName, courseDuration, courseFee, courseDescription, category, imageUrl }:any) => {
+  try {
+    const updatedCourse = await Course.findByIdAndUpdate(courseId, {
+      courseName,
+      courseDuration,
+      courseFee,
+      courseDescription,
+      category,
+      imageUrl
+    }, { new: true });
+
+    return updatedCourse
+  } catch (error) {
+    throw error;
+  }
+}

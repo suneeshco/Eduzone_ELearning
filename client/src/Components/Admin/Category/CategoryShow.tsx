@@ -9,12 +9,27 @@ import { Category } from '../../../utils/apiTypes/ApiTypes';
 import { addCategory } from '../../../api/axiosPost';
 import { deleteCategories , updateCategories } from '../../../api/axiosPatch';
 import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
+
 
 const CategoryPage = () => {
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [newCategory, setNewCategory] = useState('');
   const [editMode, setEditMode] = useState<{ active: boolean; id: string | null }>({ active: false, id: null });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = categories.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(categories.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -45,7 +60,29 @@ const CategoryPage = () => {
 };
 
   const toggleStatus = async (id:string) => {
-    await deleteCategories(id)
+
+
+    const confirmation = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to change the status of this category!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, change status!'
+    });
+
+    if (confirmation.isConfirmed) {
+      await deleteCategories(id)
+      Swal.fire(
+        'Changed!',
+        'Category status has been updated.',
+        'success'
+      );
+    }
+
+
+    
  };
  
 
@@ -84,7 +121,7 @@ const CategoryPage = () => {
           </thead>
           <tbody>
 
-            {categories.map((category) => (
+            {currentItems.map((category) => (
               <tr key={category._id}>
                <td className="border px-4 py-2">{category.categoryName}</td>
                 
@@ -107,6 +144,19 @@ const CategoryPage = () => {
           </tbody>
         </table>
       </div>
+
+
+      <div>
+        
+        {pageNumbers.map((number) => (
+        <button key={number} onClick={() => paginate(number)} className="rounded-md bg-green-400 text-white m-2 px-4 py-2 hover:bg-green-600">
+          {number}
+        </button>
+        ))}
+
+      </div>
+
+
       </div>
       </div>
  );
