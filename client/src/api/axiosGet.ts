@@ -71,3 +71,11 @@ export const getStudentList = async () => {
         throw error
     }
 }
+
+export const getInstructorList = async () => {
+    try {
+        return await apiInstance.get(`/admin/getInstructorList`)
+    } catch (error) {
+        throw error
+    }
+}

@@ -106,3 +106,29 @@ export const updateProfile = async (firstname:any,lastname:any,email:any,mobile 
     throw error;
   }
 };
+
+
+
+export const getInstructorList = async () =>{
+  try {
+    const instructors = await Instructor.find({})
+    return instructors
+  } catch (error) {
+    throw error
+  }
+}
+
+
+export const changeInstructorStatus = async (id: string) => {
+  try {
+     const instructor = await Instructor.findOne({ _id: id });
+     if (!instructor) {
+       throw new Error('Student not found'); 
+     }
+     instructor.status = !instructor.status
+     await instructor.save();
+     return instructor;
+  } catch (error) {
+     throw error; 
+  }
+ };

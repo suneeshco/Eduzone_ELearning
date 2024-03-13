@@ -31,3 +31,26 @@ export const resetPassword = async (userId :string | undefined , token : string 
         throw error
     }
 }
+
+
+export const changeStudentStatus = async (id:string) =>{
+    try {
+        console.log(id);
+        
+        return await apiInstance.patch('/admin/changeStudentStatus',{id})
+    } catch (error) {
+        throw error
+    }
+}
+
+
+
+export const changeInstructorStatus = async (id:string) =>{
+    try {
+        console.log(id);
+        
+        return await apiInstance.patch('/admin/changeInstructorStatus',{id})
+    } catch (error) {
+        throw error
+    }
+}

@@ -33,6 +33,7 @@ import { Toaster } from "react-hot-toast";
 import InstructorProfilePage from './Pages/Instructor/InstructorProfilePage';
 import EditInstructorProfilePage from './Pages/Instructor/EditInstructorProfilePage';
 import StudentListPage from './Pages/Admin/StudentListPage';
+import InstructorListPage from './Pages/Admin/InstructorListPage';
 
 
 
@@ -88,6 +89,7 @@ const App: React.FC = () => {
           <Route path='/admin' element={<AdminHomePage/>} />
           <Route path='/admin/category' element={<CategoryPage/>}/>
           <Route path='/admin/studentList' element={<StudentListPage/>}/>
+          <Route path='/admin/instructorList' element={<InstructorListPage/>}/>
         </Route>
 
 

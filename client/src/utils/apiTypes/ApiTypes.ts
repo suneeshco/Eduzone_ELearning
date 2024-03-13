@@ -6,6 +6,7 @@ export interface UserData{
     mobile: number;
     password: string;
     confirmPassword: string;
+    status:boolean;
   }
 
   export interface InstructorData{
@@ -16,6 +17,7 @@ export interface UserData{
     mobile: number;
     password: string;
     confirmPassword: string;
+    status: boolean;
   }
 
   export interface AdminData{

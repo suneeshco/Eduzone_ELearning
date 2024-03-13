@@ -42,3 +42,29 @@ export const updateProfile = async (firstname:any,lastname:any,email:any,mobile 
 
 
 
+export const getStudentList = async () =>{
+  try {
+    const students = await User.find({})
+    return students
+  } catch (error) {
+    throw error
+  }
+}
+
+
+export const changeStudentStatus = async (id: string) => {
+  try {
+     const student = await User.findOne({ _id: id });
+     if (!student) {
+       throw new Error('Student not found'); 
+     }
+     student.status = !student.status
+     await student.save();
+     return student;
+  } catch (error) {
+     throw error; 
+  }
+ };
+
+
+

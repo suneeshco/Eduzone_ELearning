@@ -1,32 +1,32 @@
 import React , {useEffect, useState} from 'react'
-import { UserData } from '../../../utils/apiTypes/ApiTypes'
-import { getStudentList } from '../../../api/axiosGet'
+import {  InstructorData } from '../../../utils/apiTypes/ApiTypes'
+import { getInstructorList } from '../../../api/axiosGet'
 import Swal from 'sweetalert2'
-import { changeStudentStatus } from '../../../api/axiosPatch'
+import { changeInstructorStatus } from '../../../api/axiosPatch'
 
-const StudentList = () => {
+const InstructorList = () => {
 
-    const [studentDetails , setStudentDetails] = useState<UserData[]>([])
+    const [InstructorDetails , setInstructorDetails] = useState<InstructorData[]>([])
 
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(10);
   
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = studentDetails.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = InstructorDetails.slice(indexOfFirstItem, indexOfLastItem);
   
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
   
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(studentDetails.length / itemsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(InstructorDetails.length / itemsPerPage); i++) {
       pageNumbers.push(i);
     }
     
 
     const fetchStudents = () => {
-        const resp = getStudentList()
+        const resp = getInstructorList()
         resp.then((respo)=>{
-            setStudentDetails(respo.data)
+            setInstructorDetails(respo.data)
         }) 
     }
 
@@ -45,10 +45,10 @@ const StudentList = () => {
         });
     
         if (confirmation.isConfirmed) {
-          await changeStudentStatus(id)
+          await changeInstructorStatus(id)
           Swal.fire(
             'Changed!',
-            'Student status has been updated.',
+            'Instructor status has been updated.',
             'success'
           );
         }
@@ -59,13 +59,13 @@ const StudentList = () => {
 
     useEffect(()=>{
         fetchStudents()
-    },[studentDetails])
+    },[InstructorDetails])
 
 
   return (
     <div className='flex-1'>
     <div className="w-full p-10 space-y-10 bg-gray-100 rounded shadow">
-    <h2 className="text-2xl font-bold mb-4">List of Students</h2>
+    <h2 className="text-2xl font-bold mb-4">List of Instructors</h2>
 
 <div className="bg-white shadow rounded-lg p-6">
 <table className="table-auto w-full">
@@ -113,4 +113,4 @@ const StudentList = () => {
   )
 }
 
-export default StudentList
+export default InstructorList

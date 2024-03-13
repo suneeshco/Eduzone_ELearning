@@ -8,6 +8,7 @@ export interface Instructor {
   email: string;
   mobile: number;
   password: string;
+  status: boolean;
 }
 
 export interface InstructorDocument extends Instructor, Document {}
@@ -18,7 +19,7 @@ const InstructorSchema: Schema = new Schema({
   email: { type: String, required: true },
   mobile: {type: Number,required : true},
   password: { type: String, required: true },
-
+  status: {type: Boolean, default:true}
 });
 
 export default mongoose.model<InstructorDocument>('Instructor', InstructorSchema);
