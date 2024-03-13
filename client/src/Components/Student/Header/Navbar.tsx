@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogoImage from '../../../assets/images/Logos/Eduzone_logo1.png';
+import ProfilePhoto from '../../../assets/images/DefaultImages/profileDefault.png'
 import { useDispatch , useSelector } from 'react-redux';
 import { RootState } from '../../../Redux/RootState/RootState';
 import { studentLogout } from '../../../Redux/Slices/StudentAuth';
@@ -25,26 +26,33 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              {/* Insert your logo here */}
-              <img src={LogoImage} alt="Logo" className="h-10"/> {/* Increase height here */}
+              <img src={LogoImage} alt="Logo" className="h-10"/> 
             </Link>
           </div>
           {/* Navigation links */}
-          <div className="hidden sm:block ml-16"> {/* Adjusted ml to ml-4 */}
-            <div className="flex space-x-4">
-              <Link to="/" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Home</Link>
-              <Link to="/about" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Courses</Link>
-              <Link to="/services" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Tutors</Link>
-              <Link to="/contact" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">About</Link>
+          <div className="hidden sm:block "> 
+            <div className="flex space-x-16 ">
+              <Link to="/" className="text-black-300 hover:bg-gray-700 px-5 py-2 rounded-md  font-bold">Home</Link>
+              <Link to="/about" className="text-black-300 hover:bg-gray-700 px-5 py-2 rounded-md  font-bold">Courses</Link>
+              <Link to="/services" className="text-black-300 hover:bg-gray-700 px-5 py-2 rounded-md  font-bold">Tutors</Link>
+              <Link to="/contact" className="text-black-300 hover:bg-gray-700 px-5 py-2 rounded-md  font-bold">About</Link>
             </div>
           </div>
-          {/* Login button */}
-          <div className="hidden sm:block ml-auto">
-            {userInfo ? (
-              <button onClick={handleLogout} className="text-black-300 bg-red-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Logout</button>
-            ) : (
-              <Link to="/student/login" className="text-black-300 bg-green-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Login</Link>
+          
+
+          <div className="hidden sm:flex items-center space-x-4">
+            {userInfo && (
+              <div>
+                <Link to="/student/profile"><img src={ProfilePhoto} alt="Profile" className="h-8 w-8 rounded-full" /> </Link>
+              </div>
             )}
+            <div>
+              {userInfo ? (
+                <button onClick={handleLogout} className="text-black-300 bg-red-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Logout</button>
+              ) : (
+                <Link to="/student/login" className="text-black-300 bg-green-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Login</Link>
+              )}
+            </div>
           </div>
           
           {/* Mobile menu button */}

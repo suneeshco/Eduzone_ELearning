@@ -12,6 +12,8 @@ import LoginPage from './Pages/Student/LoginPage';
 import SignUpPage from './Pages/Student/SignUp';
 import ForgotPasswordPage from './Pages/Student/ForgotPasswordPage';
 import PasswordResetPage from './Pages/Student/PasswordResetPage';
+import StudentProfilePage from './Pages/Student/StudentProfilePage';
+import StudentEditProfilePage from './Pages/Student/studentEditProfilePage';
 
 
 import InstructorHomePage from './Pages/Instructor/HomePage'
@@ -40,6 +42,10 @@ const App: React.FC = () => {
         {/* student route */}
 
         <Route path='/' element={<HomePage/>} />
+        <Route path='' element={<StudentPrivateRoute/>}>
+          <Route path='/student/profile' element={<StudentProfilePage/>} />
+          <Route path='/student/editProfile' element={<StudentEditProfilePage/>} />
+        </Route>
         <Route path='' element={<StudentNotPrivateRoute/>}>
           <Route path='/student/login' element={<LoginPage/>}/>
           <Route path='/student/signup' element={<SignUpPage/>}/>

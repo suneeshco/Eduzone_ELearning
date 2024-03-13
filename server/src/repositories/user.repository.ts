@@ -24,3 +24,21 @@ export const findUserById = async (id: string): Promise<UserDocument | null> => 
     throw error;
   }
 };
+
+
+export const updateProfile = async (firstname:any,lastname:any,email:any,mobile :any,id: string) => {
+  try {
+    const updatedProfile = await User.findByIdAndUpdate(id, {
+      firstname,
+      lastname,
+      email,
+      mobile
+    }, { new: true });
+    return updatedProfile
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
