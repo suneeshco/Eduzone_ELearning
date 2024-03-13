@@ -62,3 +62,12 @@ export const getAllCourses = async () => {
         throw error
     }
 }
+
+
+export const getStudentList = async () => {
+    try {
+        return await apiInstance.get(`/admin/getStudentList`)
+    } catch (error) {
+        throw error
+    }
+}

@@ -6,6 +6,7 @@ import { RootState } from '../../../Redux/RootState/RootState';
 import { instructorLogout } from '../../../Redux/Slices/InstructorAuth';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import ProfilePhoto from '../../../assets/images/DefaultImages/profileDefault.png'
 
 const Navbar: React.FC = () => {
 
@@ -23,45 +24,52 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="bg-white-800">
-      <div className="max-w-7.5xl mx-auto px-2 py-2 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link to="/instructor" className="flex items-center">
-              {/* Insert your logo here */}
-              <img src={LogoImage} alt="Logo" className="h-10"/> {/* Increase height here */}
-            </Link>
-          </div>
-          {/* Navigation links */}
-          <div className="hidden sm:block ml-16"> {/* Adjusted ml to ml-4 */}
-            <div className="flex space-x-4">
-              <Link to="/instructor" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Dashboard</Link>
+    <div className="max-w-7.5xl mx-auto px-2 py-2 sm:px-6 lg:px-8">
+      <div className="flex items-center justify-between h-16">
+        {/* Logo */}
+        <div className="flex-shrink-0">
+          <Link to="/" className="flex items-center">
+            <img src={LogoImage} alt="Logo" className="h-10"/> 
+          </Link>
+        </div>
+        {/* Navigation links */}
+        <div className="hidden sm:block "> 
+          <div className="flex space-x-16 ">
+          <Link to="/instructor" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Dashboard</Link>
               <Link to="/instructor/myCourses" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">My Courses</Link>
               <Link to="/instructor/addCourse" className="text-black-300 hover:bg-gray-700 px-3 py-2 rounded-md  font-bold">Add Course</Link>
-              
-            </div>
           </div>
-          {/* Login button */}
-          <div className="hidden sm:block ml-auto">
+        </div>
+        
+
+        <div className="hidden sm:flex items-center space-x-4">
+          {instructorInfo && (
+            <div>
+              <Link to="/instructor/profile"><img src={ProfilePhoto} alt="Profile" className="h-8 w-8 rounded-full" /> </Link>
+            </div>
+          )}
+          <div>
             {instructorInfo ? (
               <button onClick={handleLogout} className="text-black-300 bg-red-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Logout</button>
             ) : (
-              <Link to="/instructor/login" className="text-black-300 bg-green-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Login</Link>
+              <Link to="/student/login" className="text-black-300 bg-green-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Login</Link>
             )}
           </div>
-          {/* Mobile menu button */}
-          <div className="flex md:hidden">
-            <button className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring">
-              {/* Mobile menu icon */}
-              <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"/>
-              </svg>
-            </button>
-          </div>
+        </div>
+        
+        {/* Mobile menu button */}
+        <div className="flex md:hidden">
+          <button className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring">
+            {/* Mobile menu icon */}
+            <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+          </button>
         </div>
       </div>
-      
-    </nav>
+    </div>
+    
+  </nav>
   );
 };
 

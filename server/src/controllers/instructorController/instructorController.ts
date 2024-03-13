@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getActiveCategory } from '../../services/category.service';
-import { addCourses ,getCoursess , getSingleCoursess , addLessons , getLessonss , editCourses } from '../../services/instructor.service';
+import { addCourses ,getCoursess , getSingleCoursess , addLessons , getLessonss , editCourses, updateProfiles} from '../../services/instructor.service';
 
 // export const addCourse = async (req : Request,res : Response) :  Promise<void>  => {
 //     try {
@@ -120,4 +120,16 @@ export const editCourse = async (req : Request,res : Response) : Promise<void> =
         console.error(error); 
         res.status(500).send({ message: "Error editing course" });
     }
+}
+
+
+export const updateProfile = async (req : Request,res : Response) : Promise<void> => {
+    try {
+        const { firstname, lastname, email, mobile ,id } = req.body;
+        const instructor = await updateProfiles(firstname, lastname, email, mobile, id);
+        res.send({instructor})
+      } catch (error) {
+        console.log("error",error);
+        res.status(500).send({ message: 'Server Error' });
+      }
 }

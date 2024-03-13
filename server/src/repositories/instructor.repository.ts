@@ -82,3 +82,27 @@ export const editCourse = async ({ courseId, courseName, courseDuration, courseF
     throw error;
   }
 }
+
+
+export const findInstructorById = async (id: string): Promise<InstructorDocument | null> => {
+  try {
+    return await Instructor.findOne({ _id : id });
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+export const updateProfile = async (firstname:any,lastname:any,email:any,mobile :any,id: string) => {
+  try {
+    const updatedProfile = await Instructor.findByIdAndUpdate(id, {
+      firstname,
+      lastname,
+      email,
+      mobile
+    }, { new: true });
+    return updatedProfile
+  } catch (error) {
+    throw error;
+  }
+};

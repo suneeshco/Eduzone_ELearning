@@ -19,7 +19,7 @@ export const AdminSidebar = () => {
             </Link>
           </li>
           <li className="mb-3 bg-gray-700 rounded-lg p-2 mx-2">
-            <Link to="/student-list" className="flex items-center space-x-2">
+            <Link to="/admin/studentList" className="flex items-center space-x-2">
               <span>Student List</span>
             </Link>
           </li>

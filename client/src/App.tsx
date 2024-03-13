@@ -22,13 +22,17 @@ import InstructorSignUpPage from './Pages/Instructor/SignUpPage';
 import InstructorAddCoursePage from './Pages/Instructor/AddCoursePage';
 import InstructorMyCoursesPage from './Pages/Instructor/InstructorMyCoursesPage';
 import InstructorCourseViewPage from './Pages/Instructor/CourseViewPage';
-import InstructorEditCoursePage from './Pages/Instructor/EditCoursePage'
+import InstructorEditCoursePage from './Pages/Instructor/EditCoursePage';
+
 
 import AdminHomePage from './Pages/Admin/HomePage'
 import AdminLoginPage from './Pages/Admin/LoginPage';
 import CategoryPage from './Pages/Admin/CategoryPage';
 
 import { Toaster } from "react-hot-toast";
+import InstructorProfilePage from './Pages/Instructor/InstructorProfilePage';
+import EditInstructorProfilePage from './Pages/Instructor/EditInstructorProfilePage';
+import StudentListPage from './Pages/Admin/StudentListPage';
 
 
 
@@ -70,6 +74,8 @@ const App: React.FC = () => {
           <Route path='/instructor/myCourses' element={<InstructorMyCoursesPage/>}/>
           <Route path='/instructor/courseView/:id' element={<InstructorCourseViewPage/>}/>
           <Route path='/instructor/editCourse/:courseId' element={<InstructorEditCoursePage/>}/>
+          <Route path='/instructor/profile' element={<InstructorProfilePage/>} />
+          <Route path='/instructor/editProfile' element={<EditInstructorProfilePage/>} />
         </Route>
 
 
@@ -81,6 +87,7 @@ const App: React.FC = () => {
         <Route path='' element={<AdminPrivateRoute/>}>
           <Route path='/admin' element={<AdminHomePage/>} />
           <Route path='/admin/category' element={<CategoryPage/>}/>
+          <Route path='/admin/studentList' element={<StudentListPage/>}/>
         </Route>
 
 

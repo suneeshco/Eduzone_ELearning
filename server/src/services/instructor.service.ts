@@ -1,4 +1,4 @@
-import { addCourse , getCourse , getSingleCourse , addLesson , getLesson, editCourse} from "../repositories/instructor.repository";
+import { addCourse , getCourse , getSingleCourse , addLesson , getLesson, editCourse , findInstructorById , updateProfile} from "../repositories/instructor.repository";
 
 export const addCourses = async (data:any)=>{
     try {
@@ -69,3 +69,18 @@ export const editCourses = async (data:any)=>{
         
     }
 }
+
+
+export const updateProfiles = async (firstname: string,lastname:string, email: string, mobile:string, id: string)=> {
+    try {
+      const user = await findInstructorById(id);
+      if (!user) {
+        throw new Error('User not exists');
+      }
+  
+     const updatedUser = updateProfile(firstname,lastname,email,mobile,id)
+      return updatedUser;
+    } catch (error) {
+      throw error;
+    }
+  };

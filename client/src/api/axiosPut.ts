@@ -19,3 +19,14 @@ export const editCourse = async (data:any) => {
       throw error;
     }
   };
+
+
+  export const instructorProfileUpdate = async (firstname:any,lastname:any,email:any,mobile:any,id:any) => {
+    try {
+        return await apiInstance.put("/instructor/updateProfile",{firstname,lastname,email,mobile,id})
+    } catch (error) {
+      console.log(error);
+      
+      throw error;
+    }
+  };

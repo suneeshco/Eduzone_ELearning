@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addCourse , getCourses , getSingleCourse ,addLesson , getLessons ,getActiveCategories , editCourse} from '../controllers/instructorController/instructorController';
+import { addCourse , getCourses , getSingleCourse ,addLesson , getLessons ,getActiveCategories , editCourse , updateProfile} from '../controllers/instructorController/instructorController';
 
 const router = Router();
 
@@ -10,6 +10,7 @@ router.post('/addLesson',addLesson)
 router.get('/getLessons/:id',getLessons)
 router.get('/categories',getActiveCategories)
 router.put('/editCourse',editCourse)
+router.put('/updateProfile',updateProfile)
 
 
 export default router
