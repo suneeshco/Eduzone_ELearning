@@ -7,6 +7,7 @@ export const addCategory = async(categoryName : string)=>{
     try {
         let status = true
         let existCategory = await findCategoryByName(categoryName);
+        
         if(existCategory){
             return "Category exists"
         }

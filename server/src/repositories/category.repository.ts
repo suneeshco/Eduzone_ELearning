@@ -10,7 +10,7 @@ export const createCategory = async (categoryData: Partial<CategoryDocument>): P
 
 export const findCategoryByName = async (categoryName : string) : Promise<CategoryDocument | null> => {
   try {
-    const category = await Category.findOne({categoryName:categoryName});
+    const category = await Category.findOne({ categoryName: { $regex: new RegExp('^' + categoryName + '$', 'i') } });
     return category || null;
   } catch (error) {
     throw error

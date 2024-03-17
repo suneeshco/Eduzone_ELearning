@@ -53,8 +53,16 @@ const CategoryPage = () => {
       url: '/addCategory',
       data: { categoryName: newCategory },
     });
-    setCategories([...categories, response]);
-    setNewCategory('');
+    console.log("HI",response);
+    
+    if(response?._id){
+      setCategories([...categories, response]);
+      setNewCategory('');
+    }else{
+      toast.error("Category Already Exists")
+    }
+    
+    
  };
 
 
@@ -103,14 +111,11 @@ const toggleStatus = async (id:string) => {
 
 
 
-//useEffect
-
-
   useEffect(() => {
 
     fetchCategories();
 
- }, []);
+ }, [categories]);
 
 
 
