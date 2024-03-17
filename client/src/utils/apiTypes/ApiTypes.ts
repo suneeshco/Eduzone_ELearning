@@ -31,4 +31,17 @@ export interface UserData{
     status: boolean;
     _id:string;
    }
+
+
+export interface Course {
+    _id : string;
+    courseName : string;
+    courseDuration : string;
+    courseFee : number;
+    courseDescription : string;
+    category : string;
+    imageUrl : string;
+    instructorId : any;
+    createdAt:Date;
+  }
    

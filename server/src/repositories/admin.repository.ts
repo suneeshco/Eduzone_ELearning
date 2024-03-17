@@ -12,5 +12,13 @@ export const findAdminByEmail = async (email: string): Promise<AdminDocument | n
   }
 };
 
+export const findAdminById = async (id: string): Promise<AdminDocument | null> => {
+  try {
+    return await Admin.findOne({ _id : id });
+  } catch (error) {
+    throw error;
+  }
+};
+
 
 

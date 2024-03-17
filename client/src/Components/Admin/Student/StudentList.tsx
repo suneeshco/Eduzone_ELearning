@@ -3,8 +3,13 @@ import { UserData } from '../../../utils/apiTypes/ApiTypes'
 import { getStudentList } from '../../../api/axiosGet'
 import Swal from 'sweetalert2'
 import { changeStudentStatus } from '../../../api/axiosPatch'
+import { adminApiRequest } from '../../../api/axios'
+import { studentLogout , setStudentCredentials } from '../../../Redux/Slices/StudentAuth'
+import { useDispatch } from 'react-redux'
 
 const StudentList = () => {
+
+  const dispatch = useDispatch()
 
     const [studentDetails , setStudentDetails] = useState<UserData[]>([])
 
@@ -23,16 +28,16 @@ const StudentList = () => {
     }
     
 
-    const fetchStudents = () => {
-        const resp = getStudentList()
-        resp.then((respo)=>{
-            setStudentDetails(respo.data)
-        }) 
+    const fetchStudents = async () => {
+      const response = await adminApiRequest({
+        method: 'get',
+        url: '/getStudentList',
+    });
+    setStudentDetails(response)  
     }
 
 
     const toggleStatus = async (id:string) => {
-
 
         const confirmation = await Swal.fire({
           title: 'Are you sure?',
@@ -45,7 +50,12 @@ const StudentList = () => {
         });
     
         if (confirmation.isConfirmed) {
-          await changeStudentStatus(id)
+          const response = await adminApiRequest({
+            method: 'patch',
+            url: '/changeStudentStatus',
+            data: { id },
+        });
+        console.log("hello",response);
           Swal.fire(
             'Changed!',
             'Student status has been updated.',

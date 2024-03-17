@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { addLesson } from '../../../api/axiosPost';
 import { Link } from 'react-router-dom'
+import { instructorApiRequest } from '../../../api/axios';
 
 interface Course {
   _id: string;
@@ -43,10 +44,13 @@ const [cloudanaryURL, setCloudanaryURL] = useState("");
     const fetchCourses = async () => {
         if (id) {
             try {
-                const resp = await getSingleCourse(id);
+              const response = await instructorApiRequest({
+                method: 'get',
+                url: `/getSingleCourse/${id}`,
+            });
                 
                 
-                setCourseDetails(resp.data); 
+                setCourseDetails(response); 
             } catch (error) {
                 console.error("Failed to fetch courses:", error);
             }
@@ -59,11 +63,14 @@ const [cloudanaryURL, setCloudanaryURL] = useState("");
 useEffect( ()=>{
   const fetchLessons = async () => {
           try {
-              const resp = await getLessons(id);
+            const response = await instructorApiRequest({
+              method: 'get',
+              url: `/getLessons/${id}`,
+          });
               
-              console.log(resp.data);
+              console.log(response);
               
-              setLessonDetails(resp.data); 
+              setLessonDetails(response); 
           } catch (error) {
               console.error("Failed to fetch lessons:", error);
           }
@@ -158,8 +165,12 @@ if(url){
 
 
   try {
-    const res = await addLesson(datas);
-    if (res.status === 200) {
+    const response = await instructorApiRequest({
+      method: 'post',
+      url: '/addLesson',
+      data: datas,
+  });
+    if (response.status === 200) {
       toast.success("Lesson added");
       setTitle("");
       setDescription("");

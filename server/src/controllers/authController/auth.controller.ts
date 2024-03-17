@@ -19,8 +19,13 @@ export const authController = {
   async studentLogin(req:Request , res: Response): Promise <void> {
     try {
         const {email,password} = req.body;
-        const user = await login(email,password);
-        res.send({user});
+        const response = await login(email,password);
+        if ('error' in response) {
+          res.send({ error: response.error });
+      } else {
+          console.log(response.token);
+          res.send({ user: response.user, token: response.token });
+      }
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"Server Error"})  
@@ -73,8 +78,15 @@ export const authController = {
   async instructorLogin(req:Request , res: Response): Promise <void> {
     try {
         const {email,password} = req.body;
-        const instructor = await instructorLogin(email,password);
-        res.send({instructor});
+        const response = await instructorLogin(email,password);
+
+        if ('error' in response) {
+          res.send({ error: response.error });
+      } else {
+          console.log(response.token);
+          res.send({ instructor: response.user, token: response.token });
+      }
+        
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"Server Error"})  
@@ -86,8 +98,9 @@ export const authController = {
   async adminLogin(req:Request , res: Response): Promise <void> {
     try {
         const {email,password} = req.body;
-        const admin = await adminLogin(email,password);
-        res.send({admin});
+        
+        const {user,token} = await adminLogin(email,password);
+        res.send({admin:user,token});
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"Server Error"})  

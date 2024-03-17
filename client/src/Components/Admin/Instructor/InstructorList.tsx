@@ -3,6 +3,7 @@ import {  InstructorData } from '../../../utils/apiTypes/ApiTypes'
 import { getInstructorList } from '../../../api/axiosGet'
 import Swal from 'sweetalert2'
 import { changeInstructorStatus } from '../../../api/axiosPatch'
+import { adminApiRequest } from '../../../api/axios'
 
 const InstructorList = () => {
 
@@ -23,11 +24,12 @@ const InstructorList = () => {
     }
     
 
-    const fetchStudents = () => {
-        const resp = getInstructorList()
-        resp.then((respo)=>{
-            setInstructorDetails(respo.data)
-        }) 
+    const fetchStudents = async () => {
+      const response = await adminApiRequest({
+        method: 'get',
+        url: '/getInstructorList',
+    });
+      setInstructorDetails(response)  
     }
 
 
@@ -45,7 +47,11 @@ const InstructorList = () => {
         });
     
         if (confirmation.isConfirmed) {
-          await changeInstructorStatus(id)
+          const response = await adminApiRequest({
+            method: 'patch',
+            url: '/changeInstructorStatus',
+            data: { id },
+        });
           Swal.fire(
             'Changed!',
             'Instructor status has been updated.',

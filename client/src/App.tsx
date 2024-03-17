@@ -1,4 +1,4 @@
-// App.tsx
+
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -29,11 +29,15 @@ import AdminHomePage from './Pages/Admin/HomePage'
 import AdminLoginPage from './Pages/Admin/LoginPage';
 import CategoryPage from './Pages/Admin/CategoryPage';
 
+
 import { Toaster } from "react-hot-toast";
 import InstructorProfilePage from './Pages/Instructor/InstructorProfilePage';
 import EditInstructorProfilePage from './Pages/Instructor/EditInstructorProfilePage';
 import StudentListPage from './Pages/Admin/StudentListPage';
 import InstructorListPage from './Pages/Admin/InstructorListPage';
+import InstructorForgotPasswordPage from './Pages/Instructor/InstructorForgotPasswordPage';
+import CourseListPage from './Pages/Admin/CourseListPage';
+import AdminCourseViewPage from './Pages/Admin/CourseViewPage'
 
 
 
@@ -45,11 +49,12 @@ const App: React.FC = () => {
       
 
         {/* student route */}
-
         <Route path='/' element={<HomePage/>} />
+        
         <Route path='' element={<StudentPrivateRoute/>}>
           <Route path='/student/profile' element={<StudentProfilePage/>} />
           <Route path='/student/editProfile' element={<StudentEditProfilePage/>} />
+          
         </Route>
         <Route path='' element={<StudentNotPrivateRoute/>}>
           <Route path='/student/login' element={<LoginPage/>}/>
@@ -66,6 +71,7 @@ const App: React.FC = () => {
         <Route path='' element={<NotPrivateRoute/>}>
           <Route path='/instructor/login' element={<InstructorLoginPage/>}/>
           <Route path='/instructor/signup' element={<InstructorSignUpPage/>}/>
+          <Route path='/instructor/forgotPassword' element={<InstructorForgotPasswordPage/>}/>
         </Route>
 
 
@@ -77,6 +83,7 @@ const App: React.FC = () => {
           <Route path='/instructor/editCourse/:courseId' element={<InstructorEditCoursePage/>}/>
           <Route path='/instructor/profile' element={<InstructorProfilePage/>} />
           <Route path='/instructor/editProfile' element={<EditInstructorProfilePage/>} />
+          
         </Route>
 
 
@@ -90,6 +97,8 @@ const App: React.FC = () => {
           <Route path='/admin/category' element={<CategoryPage/>}/>
           <Route path='/admin/studentList' element={<StudentListPage/>}/>
           <Route path='/admin/instructorList' element={<InstructorListPage/>}/>
+          <Route path='/admin/courseList' element={<CourseListPage/>}/>
+          <Route path='/admin/courseView/:id' element={<AdminCourseViewPage/>}/>
         </Route>
 
 

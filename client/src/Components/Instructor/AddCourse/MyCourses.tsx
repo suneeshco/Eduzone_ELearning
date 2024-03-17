@@ -5,6 +5,7 @@ import { RootState } from "../../../Redux/RootState/RootState";
 import { useSelector } from "react-redux";
 
 import { getCourses } from '../../../api/axiosGet';
+import { instructorApiRequest } from '../../../api/axios';
 
 interface Course {
     _id: string;
@@ -27,10 +28,13 @@ const MyCourses = () => {
         const fetchCourses = async () => {
             if (instructorInfo?._id) {
                 try {
-                    const resp = await getCourses(instructorInfo._id);
+                  const response = await instructorApiRequest({
+                    method: 'get',
+                    url: `/getCourses/${instructorInfo?._id}`,
+                });
                     
                     
-                    setCourseDetails(resp.data); 
+                    setCourseDetails(response); 
                 } catch (error) {
                     console.error("Failed to fetch courses:", error);
                 }
@@ -42,13 +46,6 @@ const MyCourses = () => {
 
     console.log(courseDetails);
 
-
-
-
-
-    
-
-    
 
 
   return (

@@ -3,6 +3,7 @@ import { resetPassword } from '../../../api/axiosPatch';
 import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { apiRequest } from '../../../api/axios';
 
 
 
@@ -23,8 +24,17 @@ const PasswordReset: React.FC = () => {
     setConfirmPassword(event.target.value);
   };
 
-  const handleReset = () => {
-    const response = resetPassword(userId,token,newPassword)
+  const handleReset = async () => {
+
+    const response = await apiRequest({
+      method: 'patch',
+      url: '/studentResetPassword',
+      data: {
+          userId: userId,
+          token: token,
+          password: newPassword
+      }
+  });
     toast.success("Password Changed Successfully. Please Login !")
     navigate('/student/login')
   };

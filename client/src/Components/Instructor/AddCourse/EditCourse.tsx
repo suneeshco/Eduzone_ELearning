@@ -6,6 +6,7 @@ import { editCourse } from "../../../api/axiosPut";
 import { getInstructorCategories,getSingleCourse } from "../../../api/axiosGet";
 import { RootState } from "../../../Redux/RootState/RootState";
 import { useSelector } from "react-redux";
+import { instructorApiRequest } from "../../../api/axios";
 
 function EditCourse() {
   interface Category {
@@ -28,9 +29,12 @@ function EditCourse() {
 
   const fetchCategories = async () => {
     try {
-      const resp = await getInstructorCategories();
-      console.log(resp.data);
-      setCategories(resp.data);
+      const response = await instructorApiRequest({
+        method: 'get',
+        url: '/categories',
+    });
+      console.log(response);
+      setCategories(response);
     } catch (error) {
       console.error("Failed to fetch categories:", error);
     }
@@ -38,14 +42,17 @@ function EditCourse() {
 
   const fetchCourseDetails = async () => {
     try {
-      const courseDetails = await getSingleCourse(courseId);
+      const courseDetails = await instructorApiRequest({
+        method: 'get',
+        url: `/getSingleCourse/${courseId}`,
+    });
       console.log("Course details:", courseDetails);
-      setCourseName(courseDetails.data.courseName);
-      setCourseDuration(courseDetails.data.courseDuration);
-      setCourseFee(courseDetails.data.courseFee);
-      setCourseDescription(courseDetails.data.courseDescription);
-      setSelectedCategory(courseDetails.data.category);
-      setCloudinaryURL(courseDetails.data.imageUrl);
+      setCourseName(courseDetails.courseName);
+      setCourseDuration(courseDetails.courseDuration);
+      setCourseFee(courseDetails.courseFee);
+      setCourseDescription(courseDetails.courseDescription);
+      setSelectedCategory(courseDetails.category);
+      setCloudinaryURL(courseDetails.imageUrl);
       
     } catch (error) {
       console.error("Failed to fetch course details:", error);
@@ -129,7 +136,11 @@ function EditCourse() {
   courseName,courseDuration,courseFee,courseDescription,category :selectedCategory,imageUrl:imUrl, courseId
   }
   
-  let res = await editCourse(datas)
+  const res = await instructorApiRequest({
+    method: 'put',
+    url: '/editCourse',
+    data: datas,
+});
   
   
   if(res){
@@ -144,7 +155,7 @@ function EditCourse() {
         <div className="bg-white shadow-md rounded-lg p-8 border border-gray-400 items-center flex flex-col">
           <h2 className="text-2xl font-bold mb-4 text-center">Edit Course</h2>
           <form onSubmit={handleSubmit} className="w-full">
-            {/* Course Name */}
+           
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-semibold mb-2">Course Name</label>
               <input
@@ -170,7 +181,7 @@ function EditCourse() {
           />
         </div>
 
-        {/* Course Price */}
+       
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-semibold mb-2">
             Course Price
@@ -184,7 +195,6 @@ function EditCourse() {
           />
         </div>
 
-        {/* Description */}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-semibold mb-2">
             Description
@@ -197,7 +207,7 @@ function EditCourse() {
           />
         </div>
 
-        {/* Category */}
+      
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-semibold mb-2">
             Category
@@ -216,7 +226,7 @@ function EditCourse() {
           </select>
         </div>
 
-        {/* Image */}
+       
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-semibold mb-2">
             Image
@@ -247,8 +257,7 @@ function EditCourse() {
                 />
               )}
             </div>
-            {/* Other form fields (Course Duration, Course Price, Description, Category, Image) */}
-            {/* Submit Button */}
+            
             <div className="flex items-center justify-center">
               <button
                 className="w-full py-2 px-4 text-white font-semibold bg-blue-500 rounded-full focus:outline-none focus:shadow-outline hover:bg-blue-700"

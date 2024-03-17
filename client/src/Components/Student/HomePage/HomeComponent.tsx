@@ -1,48 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import landImage from '../../../assets/images/HomePage/LandingImage.png';
-import courseThumb from '../../../assets/images/courseThumb/courseThumb.png';
 import categoryImage from '../../../assets/images/Logos/category.png'
-import { getCategoriesForStudent , getAllCourses } from '../../../api/axiosGet';
+import { adminApiRequest, studentApiRequest } from '../../../api/axios';
+import { Course } from '../../../utils/apiTypes/ApiTypes';
 
-interface Course {
-  _id : string;
-  courseName : string;
-  courseDuration : string;
-  courseFee : number;
-  courseDescription : string;
-  category : string;
-  imageUrl : string;
-  instructorId : any;
-  createdAt:Date;
-}
+
+interface Category {
+  _id: string;
+  categoryName: string;
+ }
 
 const HomeComponent = () => {
 
-  const [category, setCategory] = useState([])
+  const [category, setCategory] = useState<Category[]>([])
   const [courseDetails, setCourseDetails] = useState<Course[]>([])
 
 
   const fetchCourses = async () => {
     try {
-        const resp = await getAllCourses();
-        setCourseDetails(resp.data);
-        console.log(resp.data);
-        
-         
+      const response = await studentApiRequest({
+        method: 'get',
+        url: '/getAllCourses',
+    });
+        setCourseDetails(response);
+        console.log(response);  
     } catch (error) {
         console.error("Failed to fetch courses:", error);
     }
 
 };
 
-  useEffect(()=>{
-    const response = getCategoriesForStudent()
-    response.then((respo)=>{
-      console.log(respo.data);
-      setCategory(respo.data)
-    })
-    
-  },[])
+useEffect(() => {
+  const fetchData = async () => {
+     try {
+       const response = await adminApiRequest({
+         method: 'get',
+         url: '/activeCategories',
+       });
+       
+       setCategory(response);
+     } catch (error) {
+       console.error("Failed to fetch categories:", error);
+     }
+  };
+ 
+  fetchData();
+ }, []);
 
 
 
@@ -123,14 +126,21 @@ const HomeComponent = () => {
   <h2 className="text-3xl font-bold mb-8">Course Categories</h2>
   <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
 
-    {category.map((categ:any)=>(
-      <div className="bg-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center" key={categ._id}>
+
+  {category ? (
+      category.map(categ => (
+        // Render your item here
+        <div className="bg-gray-200 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center" key={categ._id}>
       <div className="w-16 h-16 rounded-full overflow-hidden mb-4">
         <img src={categoryImage} alt="" className="w-full h-full object-cover" />
       </div>
       <h2 className="text-xl font-semibold mb-2">{categ?.categoryName}</h2>
     </div>
-    ))}
+      ))
+    ) : (
+      <p>Loading categories...</p>
+    )}
+    
 
     
 
@@ -284,7 +294,7 @@ const HomeComponent = () => {
       </div>
       <p className="mt-2 text-lg font-semibold">Tutor</p>
     </div>
-    {/* Repeat the above structure for other tutors */}
+   
   </div>
 </div>
 

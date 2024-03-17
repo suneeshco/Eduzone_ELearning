@@ -84,3 +84,19 @@ export const updateProfiles = async (firstname: string,lastname:string, email: s
       throw error;
     }
   };
+
+
+
+  export const getInstructorDetailss = async ( id: string)=> {
+    try {
+      const user = await findInstructorById(id);
+      if (!user) {
+        throw new Error('User not exists');
+      }
+  
+    
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  };

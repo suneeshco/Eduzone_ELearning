@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getAllCoursess } from '../../services/course.service';
-import { updateProfiles } from '../../services/student.services';
+import { updateProfiles , getStudentDetailss} from '../../services/student.services';
 
 export const getAllCourses = async (req : Request,res : Response) : Promise<void> => {
     try {
@@ -23,4 +23,16 @@ export const updateProfile = async (req : Request,res : Response) : Promise<void
         console.log("error",error);
         res.status(500).send({ message: 'Server Error' });
       }
+}
+
+
+export const getStudentDetails = async (req : Request,res : Response) : Promise<void> => {
+    try {
+        const id = req.params.id
+        const details = await getStudentDetailss(id);
+        res.send(details);
+    } catch (error) {
+        console.error(error); 
+        res.status(500).send({ message: "Error adding course" });
+    }
 }

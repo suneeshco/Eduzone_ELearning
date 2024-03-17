@@ -3,18 +3,19 @@ import { addCategories, deleteCategories, getCategories, updateCategories , getA
 import { getStudentList , changeStudentStatus } from '../controllers/adminController/student.controller';
 import { getInstructorList } from '../controllers/adminController/instructor.controller';
 import { changeInstructorStatus } from '../controllers/adminController/instructor.controller';
+import { adminAuth, studentAuth } from '../middlewares/auth.middleware';
 
 const router = Router();
 
-router.post('/addCategory',addCategories);
-router.get('/categories',getCategories);
+router.post('/addCategory',adminAuth,addCategories);
+router.get('/categories',adminAuth,getCategories);
 router.get('/activeCategories',getActiveCategories);
-router.patch('/deleteCategory',deleteCategories)
-router.patch('/updateCategory',updateCategories)
-router.get('/getStudentList',getStudentList);
-router.patch('/changeStudentStatus', changeStudentStatus)
-router.get('/getInstructorList',getInstructorList)
-router.patch('/changeInstructorStatus', changeInstructorStatus)
+router.patch('/deleteCategory',adminAuth,deleteCategories)
+router.patch('/updateCategory',adminAuth,updateCategories)
+router.get('/getStudentList',adminAuth,getStudentList);
+router.patch('/changeStudentStatus',adminAuth, changeStudentStatus)
+router.get('/getInstructorList',adminAuth,getInstructorList)
+router.patch('/changeInstructorStatus',adminAuth, changeInstructorStatus)
 
 
 

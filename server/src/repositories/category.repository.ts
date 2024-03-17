@@ -30,13 +30,13 @@ export const findCategoryById = async (id: string) => {
   try {
      const category = await Category.findOne({ _id: id });
      if (!category) {
-       throw new Error('Category not found'); // Or handle it as you see fit
+       throw new Error('Category not found'); 
      }
      category.status = !category.status
      await category.save();
      return category;
   } catch (error) {
-     throw error; // Or handle the error as needed
+     throw error; 
   }
  };
 
@@ -54,13 +54,13 @@ export const findCategoryByIdAndUpdate = async (value:string,id: string) => {
   try {
      const category = await Category.findOne({ _id: id });
      if (!category) {
-       throw new Error('Category not found'); // Or handle it as you see fit
+       throw new Error('Category not found'); 
      }
      category.categoryName = value
      await category.save();
      return category;
   } catch (error) {
-     throw error; // Or handle the error as needed
+     throw error; 
   }
  };
  

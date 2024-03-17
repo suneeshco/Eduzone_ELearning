@@ -11,6 +11,17 @@ import { createToken, findToken } from '../repositories/token.repository';
 import nodemailer from 'nodemailer';
 
 
+export interface LoginResponse {
+  user: UserDocument|InstructorDocument|AdminDocument;
+  token: string;
+}
+
+interface ErrorResponse {
+  error: string;
+ }
+ 
+
+
 const randomToken = () => {
   return crypto.randomBytes(48).toString('hex');
  }
@@ -35,22 +46,34 @@ export const signup = async (firstname: string,lastname:string, email: string, m
 };
 
 
-export const login = async (email:string , password : string): Promise<UserDocument | string> =>{
+export const login = async (email:string , password : string): Promise<LoginResponse | ErrorResponse> =>{
     try {
         const existingUser = await findUserByEmail(email);
+
+        
         if (!existingUser) {
-          throw new Error('User not exists');
+          return { error: 'User Not Exists' };
         }
     
         const passwordMatch = await bcrypt.compare( password, existingUser.password);
 
         if (!passwordMatch) {
-        throw new Error('Incorrect password');
+          return { error: 'Incorrect Password' };
         }
 
-        // If the password matches, generate and return a JWT token
+        
+
+
+        if(!existingUser?.status){
+          console.log(existingUser?.status);
+          
+          return { error: 'User Blocked' };
+        }
+
+       
         const token = jwt.sign({ _id: existingUser._id }, process.env.TOKEN_SECRET!);
-        return existingUser;
+        
+        return {user:existingUser,token:token};
       } catch (error) {
         throw error;
       }
@@ -83,22 +106,28 @@ export const instructorSignup = async (firstname: string,lastname:string, email:
 };
 
 
-export const instructorLogin = async (email:string , password : string): Promise<InstructorDocument|string> =>{
+export const instructorLogin = async (email:string , password : string): Promise<LoginResponse | ErrorResponse> =>{
     try {
         const existingUser = await findInstructorByEmail(email);
         if (!existingUser) {
-          throw new Error('Instructor not exists'); 
+          return { error: 'Instructor Not Exists' };
         }
     
         const passwordMatch = await bcrypt.compare( password, existingUser.password);
 
         if (!passwordMatch) {
-        throw new Error('Incorrect password');
+          return { error: 'Incorrect Password' };
         }
 
-        // If the password matches, generate and return a JWT token
+        if(!existingUser?.status){
+          console.log(existingUser?.status);
+          
+          return { error: 'Instructor Blocked' };
+        }
+
+       
         const token = jwt.sign({ _id: existingUser._id }, process.env.INSTRUCTOR_SECRET!);
-        return existingUser;
+        return {user:existingUser,token:token};
       } catch (error) {
         throw error;
       }
@@ -106,7 +135,7 @@ export const instructorLogin = async (email:string , password : string): Promise
 
 
 
-export const adminLogin = async (email:string , password : string): Promise< AdminDocument | string> =>{
+export const adminLogin = async (email:string , password : string): Promise< LoginResponse> =>{
   try {
       const existingUser = await findAdminByEmail(email);
       
@@ -120,9 +149,9 @@ export const adminLogin = async (email:string , password : string): Promise< Adm
       throw new Error('Incorrect password');
       }
 
-      // If the password matches, generate and return a JWT token
+     
       const token = jwt.sign({ _id: existingUser._id }, process.env.ADMIN_SECRET!);
-      return existingUser;
+      return {user:existingUser,token:token};
     } catch (error) {
       throw error;
     }

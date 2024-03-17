@@ -19,6 +19,7 @@ export const addCategories = async(req : Request,res : Response) :  Promise<void
 
 export const getCategories = async(req : Request,res : Response) :  Promise<void> => {
     try {
+        
         const categories = await getCategory() 
         res.send(categories)
         

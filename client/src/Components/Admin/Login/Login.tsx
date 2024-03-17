@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { setAdminCredentials } from '../../../Redux/Slices/AdminAuth';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
+import { apiRequest } from '../../../api/axios';
 
 
 
@@ -26,22 +27,23 @@ const AdminLogin = () => {
     onSubmit : async (values) => {
       console.log(values.email);
       try {
-        const response:any = await adminLogin(values.email,values.password)
-        console.log("asasas",response.data);
+        const response = await apiRequest({
+          method: 'post',
+          url: '/adminLogin',
+          data: { email:values.email, password:values.password },
+      });
+        console.log(response);
         
-          if(response?.data?.admin){
-            console.log(response.data.admin);
-            dispatch(setAdminCredentials(response.data.admin))
+          if(response?.admin){
+            console.log(response.admin);
+            localStorage.setItem("adminToken", response.token);
+            dispatch(setAdminCredentials(response.admin))
             navigate("/admin") 
           }
         } catch (err) {
           toast.error("Invalid Login Credentials");
         }
-        
-      
-      
-      
-      
+       
     }
   })
 

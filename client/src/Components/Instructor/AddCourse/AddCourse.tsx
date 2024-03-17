@@ -7,6 +7,7 @@ import { addCourse } from "../../../api/axiosPost";
 import { getInstructorCategories } from "../../../api/axiosGet";
 import { RootState } from "../../../Redux/RootState/RootState";
 import { useSelector } from "react-redux";
+import { instructorApiRequest } from "../../../api/axios";
 
 
 function Addcourse() {
@@ -37,11 +38,14 @@ function Addcourse() {
 
   const fetchCategories = async () => {
     try {
-        const resp = await getInstructorCategories();
-        console.log(resp.data);
-        setCategories(resp.data); 
+      const response = await instructorApiRequest({
+        method: 'get',
+        url: '/categories',
+    });
+        console.log(response);
+        setCategories(response); 
     } catch (error) {
-        console.error("Failed to fetch lessons:", error);
+        console.error("Failed to fetch categories:", error);
     }    
   };
 
@@ -129,10 +133,14 @@ courseName,courseDuration,courseFee,courseDescription,category :selectcategory,i
 
 
 try {
-  let res = await addCourse(datas)
+  const response = await instructorApiRequest({
+    method: 'post',
+    url: '/instructor/addCourse',
+    data: datas,
+});
 
 
-if(res){
+if(response){
   toast.success("Course Added Successfully")
   navigate("/instructor/myCourses")
 }
@@ -160,7 +168,7 @@ if(res){
       <h2 className="text-2xl font-bold mb-4 text-center">Add New Course</h2>
       <form onSubmit={handleSubmit} className="w-full">
 
-        {/* Course Name */}
+      
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-semibold mb-2">
             Course Name
@@ -174,7 +182,7 @@ if(res){
           />
         </div>
 
-        {/* Course Duration */}
+      
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-semibold mb-2">
             Course Duration
@@ -188,7 +196,7 @@ if(res){
           />
         </div>
 
-        {/* Course Price */}
+       
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-semibold mb-2">
             Course Price
@@ -202,7 +210,7 @@ if(res){
           />
         </div>
 
-        {/* Description */}
+      
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-semibold mb-2">
             Description
@@ -215,7 +223,7 @@ if(res){
           />
         </div>
 
-        {/* Category */}
+   
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-semibold mb-2">
             Category
@@ -234,7 +242,7 @@ if(res){
           </select>
         </div>
 
-        {/* Image */}
+     
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-semibold mb-2">
             Image
@@ -253,7 +261,7 @@ if(res){
           )}
         </div>
 
-        {/* Submit Button */}
+ 
         <div className="flex items-center justify-center">
           <button
             className="w-full py-2 px-4 text-white font-semibold bg-blue-500 rounded-full focus:outline-none focus:shadow-outline hover:bg-blue-700"

@@ -10,6 +10,7 @@ import toast from 'react-hot-toast'
 import { instructorProfileUpdate } from '../../../api/axiosPut'
 import { useDispatch } from 'react-redux';
 import { setInstructorCredentials } from '../../../Redux/Slices/InstructorAuth';
+import { instructorApiRequest } from '../../../api/axios';
 
 const EditInstructorProfile = () => {
 
@@ -37,11 +38,20 @@ const EditInstructorProfile = () => {
           });
 
           if(confirmation.isConfirmed){
-            const response: any = await instructorProfileUpdate(values.firstname,values.lastname,values.email,values.mobile, instructorInfo?._id);
-
-            if (response?.data?.instructor) {
-                console.log(response.data.instructor);
-                dispatch(setInstructorCredentials(response.data.instructor))
+            const response = await instructorApiRequest({
+              method: 'put',
+              url: '/updateProfile',
+              data: {
+                  firstname: values.firstname,
+                  lastname: values.lastname,
+                  email: values.email,
+                  mobile: values.mobile,
+                  id: instructorInfo?._id
+              }
+          });
+            if (response?.instructor) {
+                console.log(response.instructor);
+                dispatch(setInstructorCredentials(response.instructor))
                toast.success("Successfully Updated")
                 navigate("/instructor/profile");
               }

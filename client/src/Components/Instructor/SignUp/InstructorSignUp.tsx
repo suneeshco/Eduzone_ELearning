@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import LoginImage from '../../../assets/images/Logos/Login.png';
 import { instructorSignUpSchema } from '../../../Schemas/instructorValidation';
 import toast from 'react-hot-toast';
+import { apiRequest } from '../../../api/axios';
 
 
 const InstructorSignUp = () => {
@@ -25,9 +26,20 @@ const InstructorSignUp = () => {
     onSubmit: async (values) => {
       console.log(values.mobile);
       
-       const response: any = await instructorSignUp(values.firstname,values.lastname,values.email,values.mobile,values.password,values.confirmPassword);
-       if (response?.data?.instructor) {
-         console.log(response.data.instructor);
+       const response = await apiRequest({
+        method: 'post',
+        url: '/instructorSignUp',
+        data: {
+            firstname: values.firstname,
+            lastname: values.lastname,
+            email: values.email,
+            mobile: values.mobile,
+            password: values.password,
+            confirmPassword: values.confirmPassword
+        }
+    });
+       if (response?.instructor) {
+         console.log(response.instructor);
          toast.success("Successfully Registered")
          navigate("/instructor/login");
        } 
@@ -41,12 +53,11 @@ const InstructorSignUp = () => {
   return (
     <div className=" bg-gray-100 flex flex-col justify-center py-14 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-4xl sm:flex">
-        {/* Picture */}
+    
         <div className="sm:w-1/2">
-          {/* Replace 'your-image.jpg' with your actual image URL */}
           <img src={LoginImage} alt="Your Image" className="h-full w-full object-cover" />
         </div>
-        {/* Login Form */}
+    
         <div className="sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-6">Sign in to your account</h2>
@@ -178,7 +189,7 @@ const InstructorSignUp = () => {
               </button>
             </div>
           </form>
-          {/* Signup button */}
+     
           <div className="mt-6">
             <Link to={'/instructor/login'}
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-600 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" >

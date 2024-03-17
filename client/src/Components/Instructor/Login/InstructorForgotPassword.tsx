@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { studentForgot } from '../../../api/axiosPost';
 import { apiRequest } from '../../../api/axios';
 
-const ForgotPassword = () => {
+const InstructorForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
@@ -15,7 +15,7 @@ const ForgotPassword = () => {
             email: email
         }
     });
-      console.log(response.data);
+      console.log(response);
       
       setMessage('mail sent');
     } catch (err) {
@@ -47,4 +47,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default InstructorForgotPassword;

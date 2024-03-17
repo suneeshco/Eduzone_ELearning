@@ -25,6 +25,7 @@ const instructorAuthSlice= createSlice({
         instructorLogout: (state,action)=>{
             state.instructorInfo=null;
             localStorage.removeItem('instructorInfo')
+            localStorage.removeItem('instructorToken')
         }
     }
 })

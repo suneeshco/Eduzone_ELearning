@@ -16,3 +16,18 @@ export const updateProfiles = async (firstname: string,lastname:string, email: s
       throw error;
     }
   };
+
+
+  export const getStudentDetailss = async ( id: string)=> {
+    try {
+      const user = await findUserById(id);
+      if (!user) {
+        throw new Error('User not exists');
+      }
+  
+    
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  };

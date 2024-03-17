@@ -8,6 +8,7 @@ import { studentLoginSchema } from '../../../Schemas/studentLogin';
 import { useDispatch } from 'react-redux';
 import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth';
 import toast from 'react-hot-toast';
+import { apiRequest } from '../../../api/axios';
 
 
 
@@ -25,11 +26,34 @@ const Login = () => {
     onSubmit : async (values) => {
       console.log(values.email);
       try {
-        const response:any = await studentLogin(values.email,values.password)
-      if(response?.data?.user){
-        console.log(response.data.user);
-        dispatch(setStudentCredentials(response.data.user))
+        const response = await apiRequest({
+          method: 'post',
+          url: '/login',
+          data: {
+              email: values.email,
+              password: values.password
+          }
+      });
+      
+      if(response?.user && response?.token){
+        console.log(response.user);
+        localStorage.setItem("studentToken", response.token);
+        dispatch(setStudentCredentials(response.user))
         navigate("/") 
+      }else if (response?.error) {
+        switch (response.error) {
+          case 'User Blocked':
+            toast.error("Your account has been blocked.");
+            break;
+          case 'User Not Exists':
+            toast.error("User does not exist.");
+            break;
+          case 'Incorrect Password':
+            toast.error("Incorrect password.");
+            break;
+          default:
+            toast.error("An error occurred.");
+        }
       }
       } catch (error) {
         toast.error("Invalid Login Credentials");

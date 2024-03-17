@@ -25,6 +25,7 @@ const authSlice= createSlice({
         studentLogout: (state,action)=>{
             state.userInfo=null;
             localStorage.removeItem('userInfo')
+            localStorage.removeItem('studentToken')
         }
     }
 })

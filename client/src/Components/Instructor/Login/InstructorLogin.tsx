@@ -8,6 +8,7 @@ import { instructorLoginSchema } from '../../../Schemas/instructorValidation';
 import { useDispatch } from 'react-redux';
 import { setInstructorCredentials } from '../../../Redux/Slices/InstructorAuth';
 import toast from 'react-hot-toast';
+import { apiRequest } from '../../../api/axios';
 
 
 
@@ -25,11 +26,33 @@ const InstructorLogin = () => {
     onSubmit : async (values) => {
       console.log(values.email);
       try {
-        const response:any = await instructorLogin(values.email,values.password)
-      if(response?.data?.instructor){
-        console.log(response.data.instructor);
-        dispatch(setInstructorCredentials(response.data.instructor))
+        const response = await apiRequest({
+          method: 'post',
+          url: '/instructorLogin',
+          data: {
+              email: values.email,
+              password: values.password
+          }
+      });
+      if(response?.instructor){
+        console.log(response.instructor);
+        localStorage.setItem("instructorToken", response.token);
+        dispatch(setInstructorCredentials(response.instructor))
         navigate("/instructor") 
+      }else if (response?.error) {
+        switch (response.error) {
+          case 'Instructor Blocked':
+            toast.error("Your account has been blocked.");
+            break;
+          case 'Instructor Not Exists':
+            toast.error("Instructor does not exist.");
+            break;
+          case 'Incorrect Password':
+            toast.error("Incorrect password.");
+            break;
+          default:
+            toast.error("An error occurred.");
+        }
       }
       } catch (error) {
         toast.error("Invalid Login Credentials");
@@ -90,6 +113,11 @@ const InstructorLogin = () => {
                   required
                   className="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
+              </div>
+              <div className='text-right'>
+              <Link to={'/instructor/forgotPassword'}>
+                <h3>Forgot Password</h3>
+              </Link>
               </div>
             </div>
 

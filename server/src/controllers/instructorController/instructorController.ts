@@ -1,23 +1,13 @@
 import { Request, Response } from 'express';
 import { getActiveCategory } from '../../services/category.service';
-import { addCourses ,getCoursess , getSingleCoursess , addLessons , getLessonss , editCourses, updateProfiles} from '../../services/instructor.service';
+import { addCourses ,getCoursess , getSingleCoursess , addLessons , getLessonss , editCourses, updateProfiles , getInstructorDetailss} from '../../services/instructor.service';
 
-// export const addCourse = async (req : Request,res : Response) :  Promise<void>  => {
-//     try {
-//         let {data} = req.body;
-//         const course = addCourses(data)
-//         res.send(course)
-//     } catch (error) {
-//         console.log(error); 
-//     }
-    
-// }
 
 
 
 export const addCourse = async (req : Request,res : Response) : Promise<void> => {
     try {
-        // Directly use req.body instead of req.body.data
+        
         const courseData = req.body.data;
         console.log(req.body.data);
         
@@ -33,7 +23,7 @@ export const addCourse = async (req : Request,res : Response) : Promise<void> =>
 
 export const getCourses = async (req : Request,res : Response) : Promise<void> => {
     try {
-        // Directly use req.body instead of req.body.data
+        
         const id = req.params.id;
         console.log(id);
         
@@ -48,7 +38,7 @@ export const getCourses = async (req : Request,res : Response) : Promise<void> =
 
 export const getSingleCourse = async (req : Request,res : Response) : Promise<void> => {
     try {
-        // Directly use req.body instead of req.body.data
+       
         const id = req.params.id;
         console.log(id);
         
@@ -65,7 +55,7 @@ export const getSingleCourse = async (req : Request,res : Response) : Promise<vo
 
 export const addLesson = async (req : Request,res : Response) : Promise<void> => {
     try {
-        // Directly use req.body instead of req.body.data
+      
         const lessonData = req.body.data;
         console.log(req.body.data);
         
@@ -81,7 +71,7 @@ export const addLesson = async (req : Request,res : Response) : Promise<void> =>
 
 export const getLessons = async (req : Request,res : Response) : Promise<void> => {
     try {
-        // Directly use req.body instead of req.body.data
+       
         const id = req.params.id;
         console.log(id);
         
@@ -110,7 +100,7 @@ export const getActiveCategories = async(req : Request,res : Response) :  Promis
 
 export const editCourse = async (req : Request,res : Response) : Promise<void> => {
     try {
-        // Directly use req.body instead of req.body.data
+       
         const courseData = req.body.data;
         console.log(req.body.data);
         
@@ -132,4 +122,16 @@ export const updateProfile = async (req : Request,res : Response) : Promise<void
         console.log("error",error);
         res.status(500).send({ message: 'Server Error' });
       }
+}
+
+
+export const getInstructorDetails = async (req : Request,res : Response) : Promise<void> => {
+    try {
+        const id = req.params.id
+        const details = await getInstructorDetailss(id);
+        res.send(details);
+    } catch (error) {
+        console.error(error); 
+        res.status(500).send({ message: "Error adding course" });
+    }
 }
