@@ -1,4 +1,4 @@
-import { addCourse , getCourse , getSingleCourse , addLesson , getLesson, editCourse , findInstructorById , updateProfile} from "../repositories/instructor.repository";
+import { addCourse , getCourse , getSingleCourse , addLesson , getLesson, editCourse , findInstructorById , updateProfile , getLessonDetails , editLesson , deleteLessonByIds} from "../repositories/instructor.repository";
 
 export const addCourses = async (data:any)=>{
     try {
@@ -100,3 +100,46 @@ export const updateProfiles = async (firstname: string,lastname:string, email: s
       throw error;
     }
   };
+
+
+  export const getLessonDetail = async (id:any)=>{
+    try {
+        let lesson = await getLessonDetails(id)
+        return lesson
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
+export const editLessons = async (data:any)=>{
+    try {
+        let courseId = data.courseId
+        
+        
+        let courseData = await getSingleCourse(courseId)
+        console.log(data);
+        if(!courseData){
+            throw new Error("No Course Found")
+        }
+        let updated = await editLesson(data)
+        return updated
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
+
+export const deleteLessonById = async (id:any)=>{
+    try {
+        
+        let deleted = await deleteLessonByIds(id)
+        return deleted
+    } catch (error) {
+        console.log(error);
+        
+    }
+}

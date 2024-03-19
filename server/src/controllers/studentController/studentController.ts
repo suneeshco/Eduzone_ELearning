@@ -4,8 +4,13 @@ import { updateProfiles , getStudentDetailss} from '../../services/student.servi
 
 export const getAllCourses = async (req : Request,res : Response) : Promise<void> => {
     try {
+        let search = req.query.search
+        let sort =req.query.sort
+        let categories = req.query.categories
+        console.log(sort);
         
-        const courses = await getAllCoursess();
+        
+        const courses = await getAllCoursess(search,sort,categories);
         res.send(courses);
     } catch (error) {
         console.error(error); 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 import LogoImage from '../../../assets/images/Logos/Eduzone_logo1.png';
 import ProfilePhoto from '../../../assets/images/DefaultImages/profileDefault.png'
 import { useDispatch , useSelector } from 'react-redux';
@@ -10,11 +10,25 @@ import { studentApiRequest } from '../../../api/axios';
 
 const Navbar: React.FC = () => {
 
-  
+  const navigate = useNavigate()
 
   let {userInfo} = useSelector((state:RootState)=>state.studentAuth)
   const [isBlocked, setIsBlocked] = useState(false);
+  const [searchQuery,setSearchQuery] = useState("")
   const dispatch = useDispatch()
+
+
+
+  
+
+  const submitSearch = () => {
+   
+      navigate(`/courses?s=${searchQuery}`)
+    
+  };
+
+
+
   useEffect(() => {
     const checkUserStatus = async () => {
       if (userInfo) {
@@ -37,25 +51,61 @@ const Navbar: React.FC = () => {
   const handleLogout = () => {
     dispatch(studentLogout({}));
     toast.success('Logged Out Successfully')
+    navigate("/student/login")
   };
 
   return (
-    <nav className="bg-white-800">
+    <>
+    <div className='h-8 bg-violet-600'>
+
+    </div>
+    <nav className="shadow-md">
       <div className="max-w-7.5xl mx-auto px-2 py-2 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
+        <div className="flex items-center justify-between h-16 ">
+          <div className="flex-shrink-0 ">
             <Link to="/" className="flex items-center">
-              <img src={LogoImage} alt="Logo" className="h-10"/> 
+              <img src={LogoImage} alt="Logo" className="h-9 rounded "/> 
             </Link>
           </div>
           <div className="hidden sm:block "> 
             <div className="flex space-x-16 ">
-              <Link to="/" className="text-black-300 hover:bg-gray-700 px-5 py-2 rounded-md  font-bold">Home</Link>
-              <Link to="/about" className="text-black-300 hover:bg-gray-700 px-5 py-2 rounded-md  font-bold">Courses</Link>
-              <Link to="/services" className="text-black-300 hover:bg-gray-700 px-5 py-2 rounded-md  font-bold">Tutors</Link>
-              <Link to="/contact" className="text-black-300 hover:bg-gray-700 px-5 py-2 rounded-md  font-bold">About</Link>
+              <Link to="/" className="text-slate-600 hover:bg-violet-600 hover:text-slate-50 px-5 py-2 rounded-md  font-bold">Home</Link>
+              <Link to="/courses" className="text-slate-600 hover:bg-gray-700 px-5 py-2 rounded-md  font-bold">Courses</Link>
+              <Link to="/services" className="text-slate-600 hover:bg-gray-700 px-5 py-2 rounded-md  font-bold">Tutors</Link>
+              <Link to="/contact" className="text-slate-600 hover:bg-gray-700 px-5 py-2 rounded-md  font-bold">About</Link>
             </div>
-          </div>
+            </div>
+            <div className=" flex">
+  <input
+    type="text"
+    placeholder="Search..."
+    value={searchQuery}
+    onChange={(e)=>setSearchQuery(e.target.value)}
+    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400"
+  />
+  <button className="ml-2 bg-violet-400 hover:bg-violet-600 px-3 py-2 rounded-md" onClick={submitSearch}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="h-6 w-6 text-gray-600"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15 11a4 4 0 11-8 0 4 4 0 018 0z"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M17.5 17.5l4.5 4.5"
+      />
+    </svg>
+  </button>
+</div>
+          
           
 
           <div className="hidden sm:flex items-center space-x-4">
@@ -85,6 +135,7 @@ const Navbar: React.FC = () => {
       </div>
       
     </nav>
+    </>
   );
 };
 

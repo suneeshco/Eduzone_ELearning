@@ -132,3 +132,42 @@ export const changeInstructorStatus = async (id: string) => {
      throw error; 
   }
  };
+
+
+ export const getLessonDetails = async (id: Partial<LessonDocument>): Promise<LessonDocument | null> => {
+  try {
+    return await Lesson.findOne({_id : id});
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+export const editLesson = async ({  lessonTitle, lessonDescription, lessonVideo, courseId, lessonId }:any) => {
+  try {
+    
+    
+    const updatedCourse = await Lesson.findByIdAndUpdate(lessonId, {
+      lessonTitle,
+      lessonDescription,
+      lessonVideo,
+      courseId
+    }, { new: true });
+console.log(updatedCourse);
+
+    return updatedCourse
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+export const deleteLessonByIds = async (id: string) => {
+  try {
+    const result = await Lesson.deleteOne({ _id: id });
+    
+     return result;
+  } catch (error) {
+     throw error; 
+  }
+ };

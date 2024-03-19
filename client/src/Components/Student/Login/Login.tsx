@@ -9,8 +9,9 @@ import { useDispatch } from 'react-redux';
 import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth';
 import toast from 'react-hot-toast';
 import { apiRequest } from '../../../api/axios';
+import {GoogleLogin , GoogleOAuthProvider} from '@react-oauth/google';
 
-
+const client_id = import.meta.env.VITE_CLIENT_ID || '';
 
 const Login = () => {
   const navigate = useNavigate()
@@ -66,10 +67,11 @@ const Login = () => {
   
 
   return (
-    <div className=" bg-gray-100 flex flex-col justify-center py-14 sm:px-6 lg:px-8">
+    <GoogleOAuthProvider clientId={client_id}>
+    <div className="  flex flex-col justify-center py-14 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-4xl sm:flex">
         <div className="sm:w-1/2">
-          <img src={LoginImage} alt="Your Image" className="h-full w-full object-cover" />
+          <img src={LoginImage} alt="Your Image" className=" w-full object-cover-full" />
         </div>
         <div className="sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -134,10 +136,45 @@ const Login = () => {
                 Sign up
               </Link>
             </div>
+            <div id="signInButton" className="pl-20">
+        <GoogleLogin
+        type='standard'
+        theme='filled_black'
+        size='large'
+        onSuccess={async (response) => {
+          const respo = await apiRequest({
+            method: 'post',
+            url: '/google/login',
+            data: response
+        });
+        if(respo?.user && respo?.token){
+          console.log(respo.user);
+          localStorage.setItem("studentToken", respo.token);
+          dispatch(setStudentCredentials(respo.user))
+          navigate("/") 
+        }else if (respo?.error) {
+          switch (respo.error) {
+            case 'User Blocked':
+              toast.error("Your account has been blocked.");
+              break;
+            case 'User Not Exists':
+              toast.error("User does not exist.");
+              break;
+            case 'Incorrect Password':
+              toast.error("Incorrect password.");
+              break;
+            default:
+              toast.error("An error occurred.");
+          }
+        }
+        }}
+        />
+    </div>
           </div>
         </div>
       </div>
     </div>
+    </GoogleOAuthProvider>
   );
 };
 

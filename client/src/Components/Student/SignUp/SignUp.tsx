@@ -6,10 +6,13 @@ import { Link } from 'react-router-dom';
 import LoginImage from '../../../assets/images/Logos/Login.png';
 import { studentSignUpSchema } from '../../../Schemas/studentLogin';
 import toast from 'react-hot-toast';
-import { apiRequest } from '../../../api/axios';
+import { apiRequest, studentApiRequest } from '../../../api/axios';
+import { GoogleOAuthProvider , GoogleLogin } from "@react-oauth/google";
 
 
 const SignUp = () => {
+
+  const client_id = import.meta.env.VITE_CLIENT_ID || '';
 
   const navigate = useNavigate()
 
@@ -54,12 +57,14 @@ const SignUp = () => {
 
 
   return (
-    <div className=" bg-gray-100 flex flex-col justify-center py-14 sm:px-6 lg:px-8">
+    <>
+    <GoogleOAuthProvider clientId={client_id}>
+    <div className="  flex flex-col justify-center py-14 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-4xl sm:flex">
   
         <div className="sm:w-1/2">
           
-          <img src={LoginImage} alt="Your Image" className="h-full w-full object-cover" />
+          <img src={LoginImage} alt="Your Image" className=" w-full object-cover-full" />
         </div>
        
         <div className="sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
@@ -201,10 +206,39 @@ const SignUp = () => {
               Login</Link>
             
           </div>
+           {/* //GOOGLE Authentication */}
+      <div id="signUpButton" className="pl-20">
+              <GoogleLogin
+              type='standard'
+              theme='filled_black'
+              size='large'
+              ux_mode="popup"
+              onSuccess={async(response) => {
+                const respo = await apiRequest({
+                  method: 'post',
+                  url: '/google/register',
+                  data: response
+              });
+              
+              console.log(respo);
+              
+              if (respo.message) {
+                  toast.success(respo.message);
+                  navigate('/student/login');
+              }
+                }}
+                
+              />
+            </div>
           </div>
+          
         </div>
+
+        
       </div>
     </div>
+    </GoogleOAuthProvider>
+    </>
   );
 };
 

@@ -170,7 +170,9 @@ if(url){
       url: '/addLesson',
       data: datas,
   });
-    if (response.status === 200) {
+  console.log("response",response);
+  
+    if (response) {
       toast.success("Lesson added");
       setTitle("");
       setDescription("");
@@ -194,6 +196,18 @@ if(url){
   
 }
 
+
+
+const handleLessonClick = (lessonVideo: string) => {
+  
+  window.open(lessonVideo);
+};
+
+const handleEditLesson = (lessonId: string) => {
+  
+  navigate(`/instructor/editLesson/${lessonId}`)
+};
+
   return (
     <>
     
@@ -203,14 +217,29 @@ if(url){
   </div>
 
   <div className="mx-auto px-4 py-8 grid grid-cols-2 gap-8">
-    <div className="bg-white shadow-md rounded-lg p-6">
-      <h2 className="text-2xl font-bold mb-4">Lesson List</h2>
-      {lessonDetails.map((lesson) => (
-        <div key={lesson._id} style={{ borderRadius: '10px', padding: '10px', backgroundColor: '#f0f0f0', marginBottom: '10px' }}>
-          <h2>{lesson.lessonTitle}</h2>
-        </div>
-      ))}
+  <div className="bg-white shadow-md rounded-lg p-6">
+  <h2 className="text-2xl font-bold mb-4">Lesson List</h2>
+  {lessonDetails.map((lesson) => (
+    <div className="flex items-center justify-between bg-violet-300 rounded p-2 mb-2" key={lesson._id}>
+      <h2 className="flex-grow p-2">{lesson.lessonTitle}</h2>
+      <div className="flex items-center space-x-2">
+        <button
+          onClick={() => handleLessonClick(lesson.lessonVideo)}
+          className="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600"
+        >
+          Play
+        </button>
+        <button
+          onClick={() => handleEditLesson(lesson._id)} 
+          className="bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600"
+        >
+          Edit
+        </button>
+      </div>
     </div>
+  ))}
+</div>
+
 
     <div className="bg-white shadow-md rounded-lg p-6">
       <h2 className="text-2xl font-bold mb-4">Course Details</h2>

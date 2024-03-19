@@ -7,6 +7,9 @@ router.post('/signup', authController.studentSignup);
 router.post('/login',authController.studentLogin);
 router.post('/studentForgot',authController.studentForgot);
 router.patch('/studentResetPassword', authController.studentResetPassword)
+router.post('/google/register', authController.googleRegister);
+router.post('/google/login', authController.googleLogin);
+
 
 router.post('/instructorSignUp', authController.instructorSignup);
 router.post('/instructorLogin',authController.instructorLogin);

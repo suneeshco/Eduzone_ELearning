@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getActiveCategory } from '../../services/category.service';
-import { addCourses ,getCoursess , getSingleCoursess , addLessons , getLessonss , editCourses, updateProfiles , getInstructorDetailss} from '../../services/instructor.service';
+import { addCourses ,getCoursess , getSingleCoursess , addLessons , getLessonss , editCourses, updateProfiles , getInstructorDetailss , getLessonDetail , editLessons , deleteLessonById} from '../../services/instructor.service';
 
 
 
@@ -8,7 +8,7 @@ import { addCourses ,getCoursess , getSingleCoursess , addLessons , getLessonss 
 export const addCourse = async (req : Request,res : Response) : Promise<void> => {
     try {
         
-        const courseData = req.body.data;
+        const courseData = req.body;
         console.log(req.body.data);
         
         const course = await addCourses(courseData);
@@ -56,8 +56,8 @@ export const getSingleCourse = async (req : Request,res : Response) : Promise<vo
 export const addLesson = async (req : Request,res : Response) : Promise<void> => {
     try {
       
-        const lessonData = req.body.data;
-        console.log(req.body.data);
+        const lessonData = req.body;
+        console.log("req",req.body);
         
         const lesson = await addLessons(lessonData);
         res.send(lesson);
@@ -101,8 +101,8 @@ export const getActiveCategories = async(req : Request,res : Response) :  Promis
 export const editCourse = async (req : Request,res : Response) : Promise<void> => {
     try {
        
-        const courseData = req.body.data;
-        console.log(req.body.data);
+        const courseData = req.body;
+        console.log(req.body);
         
         const course = await editCourses(courseData);
         res.send(course);
@@ -133,5 +133,48 @@ export const getInstructorDetails = async (req : Request,res : Response) : Promi
     } catch (error) {
         console.error(error); 
         res.status(500).send({ message: "Error adding course" });
+    }
+}
+
+
+export const getLessonDetails = async (req : Request,res : Response) : Promise<void> => {
+    try {
+       
+        const id = req.params.id;
+        console.log(id);
+        
+        const lesson = await getLessonDetail(id);
+        res.send(lesson);
+    } catch (error) {
+        console.error(error); 
+        res.status(500).send({ message: "Error adding course" });
+    }
+}
+
+
+
+export const editLesson = async (req : Request,res : Response) : Promise<void> => {
+    try {
+       
+        const lessonData = req.body;
+        console.log(req.body);
+        
+        const course = await editLessons(lessonData);
+        res.send(course);
+    } catch (error) {
+        console.error(error); 
+        res.status(500).send({ message: "Error editing course" });
+    }
+}
+
+
+export const deleteLesson = async (req : Request,res : Response) : Promise<void> => {
+    try {
+        const lessonId = req.params.id;
+        await deleteLessonById(lessonId);
+        res.status(200).json({ message: "Lesson deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting lesson:", error);
+        res.status(500).json({ message: "Error deleting lesson" });
     }
 }

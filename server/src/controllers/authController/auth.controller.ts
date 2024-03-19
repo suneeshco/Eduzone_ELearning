@@ -1,8 +1,17 @@
 import { Request, Response } from 'express';
-import { signup , login , instructorSignup , instructorLogin , adminLogin , sendForgotRequest , studentResetPass} from '../../services/auth.service';
+import { signup , login , instructorSignup , instructorLogin , adminLogin , sendForgotRequest , studentResetPass , googleSignup , googleLogin} from '../../services/auth.service';
 import nodemailer from 'nodemailer';
+import Jwt from "jsonwebtoken";
 
 
+
+
+interface DecodedData {
+  name: string;
+  email: string;
+  picture: string;
+  jti: string;
+}
 export const authController = {
   async studentSignup(req: Request, res: Response): Promise<void> {
     try {
@@ -108,8 +117,63 @@ export const authController = {
   },
 
 
+  async googleRegister (req: Request, res: Response){
+    try {
+      console.log("This is credential in body: ", req.body.credential);
+      const token = req.body.credential;
+      console.log(token)
+      const decodedData = Jwt.decode(req.body.credential);
   
+      console.log("Decoded data: ", decodedData);
+      const {
+        name,
+        email,
+        jti,
+      }: DecodedData = decodedData as DecodedData;
+      
+      
+      const user=await googleSignup(email,jti,name)
+      if(user){
+        res.status(200).json({ message: "user saved successfully" });
+      }
+      
+    } catch (error) {
+      res.status(400).json({ error: "User already exists" });
+    }
+  },
+
+
+
+
+
+  async googleLogin(req: Request, res: Response){
+    try {
+      const decodedData = Jwt.decode(req.body.credential) as DecodedData | null;
+      console.log(decodedData)
+  
+      if (!decodedData) {
+        return res.status(400).json({ error: "Invalid credentials" });
+      }
+  
+      const {email,jti} = decodedData;
+      const password=jti;
+      const response = await googleLogin(email,password);
+        if ('error' in response) {
+          res.send({ error: response.error });
+      } else {
+          console.log(response.token);
+          res.send({ user: response.user, token: response.token });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({message:"Server Error"})  
+    }
+  }
 
   
 };
+
+
+
+
 

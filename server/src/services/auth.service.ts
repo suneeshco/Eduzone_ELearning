@@ -239,3 +239,53 @@ export const studentResetPass = async (userId:string , token : string , password
       throw error;
     }
 }
+
+
+
+
+export const googleSignup=async(email:string ,password:string, name:string): Promise<object> => {
+  try {
+    
+    
+    const existingUser = await findUserByEmail(email);
+    console.log(existingUser);
+    if (existingUser) {
+      throw new Error('User already exists');
+    }
+    const isActive:boolean = true;
+    const newUser = await createUser({ firstname :name, lastname:"", email:email, mobile:"", password: password });
+
+   
+    const token = jwt.sign({ _id: newUser._id }, process.env.TOKEN_SECRET!);
+    return {token:token,user:newUser};
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+
+export const googleLogin = async (email:string , password : string): Promise<LoginResponse | ErrorResponse> =>{
+  try {
+      const existingUser = await findUserByEmail(email);
+
+      
+      if (!existingUser) {
+        return { error: 'User Not Exists' };
+      }
+
+      if(!existingUser?.status){
+        console.log(existingUser?.status);
+        
+        return { error: 'User Blocked' };
+      }
+
+     
+      const token = jwt.sign({ _id: existingUser._id }, process.env.TOKEN_SECRET!);
+      
+      return {user:existingUser,token:token};
+    } catch (error) {
+      throw error;
+    }
+}
