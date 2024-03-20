@@ -1,8 +1,6 @@
 import React , {useEffect, useState} from 'react'
 import { UserData } from '../../../utils/apiTypes/ApiTypes'
-import { getStudentList } from '../../../api/axiosGet'
 import Swal from 'sweetalert2'
-import { changeStudentStatus } from '../../../api/axiosPatch'
 import { adminApiRequest } from '../../../api/axios'
 import { studentLogout , setStudentCredentials } from '../../../Redux/Slices/StudentAuth'
 import { useDispatch } from 'react-redux'

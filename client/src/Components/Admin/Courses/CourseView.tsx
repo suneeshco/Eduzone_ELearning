@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
-import { getSingleCourse , getLessons } from '../../../api/axiosGet';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { addLesson } from '../../../api/axiosPost';
 import { Link } from 'react-router-dom'
 import { instructorApiRequest } from '../../../api/axios';
 

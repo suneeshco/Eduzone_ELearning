@@ -7,6 +7,7 @@ export interface UserData{
     password: string;
     confirmPassword: string;
     status:boolean;
+    photo : string;
   }
 
   export interface InstructorData{
@@ -18,6 +19,7 @@ export interface UserData{
     password: string;
     confirmPassword: string;
     status: boolean;
+    photo: string;
   }
 
   export interface AdminData{

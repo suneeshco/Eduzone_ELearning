@@ -120,7 +120,7 @@ const CourseList = () => {
           </select>
         </div>
       </div>
-      {/* Course Listings */}
+      
 
       <div className='flex'>
         <div className=' w-1/6 ml-4'>
@@ -146,7 +146,6 @@ const CourseList = () => {
         </div>
         <div className=' w-5/6'>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5  gap-5 m-10">
-            {/* Map through courses and render course cards */}
             {currentItems.map((course) => (
               <div key={course._id} className="border border-gray-200 overflow-hidden shadow-md">
                 <img src={course.imageUrl} alt={course.courseName} className="w-full shadow-xl h-35 object-cover" />
@@ -155,13 +154,12 @@ const CourseList = () => {
                   <p className="text-gray-600">${course.courseFee}</p>
                   <p className="text-gray-600">Instructor: {course.instructorId?.firstname}</p>
                   <button className="mt-4 block w-full rounded bg-yellow-400 p-2 text-sm font-medium transition hover:scale-105">
-                    Add to Cart
+                    Buy Now
                   </button>
                 </div>
               </div>
             ))}
           </div>
-          {/* Pagination Section */}
           <div className="flex  mt-4 ml-10">
             {pageNumbers.map((number) => (
               <button key={number} onClick={() => paginate(number)} className="rounded-md bg-green-400 text-white m-2 px-4 py-2 hover:bg-green-600">

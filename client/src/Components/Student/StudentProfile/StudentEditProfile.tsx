@@ -7,10 +7,10 @@ import { useFormik } from 'formik';
 import { updateProfileSchema } from '../../../Schemas/studentLogin'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import { studentProfileUpdate } from '../../../api/axiosPut'
 import { useDispatch } from 'react-redux';
 import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth'
 import { studentApiRequest } from '../../../api/axios';
+import { Link } from 'react-router-dom';
 
 const StudentEditProfile = () => {
 
@@ -76,8 +76,8 @@ const StudentEditProfile = () => {
     </div>
     <h2 className="text-lg font-semibold text-center mt-4">{userInfo?.firstname}</h2>
     <div className="mt-8">
-      <button className="block w-full bg-sky-900 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">Profile</button>
-      <button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">Photo</button>
+    <Link to={'/student/profile'}> <button className="block w-full bg-sky-900 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">Profile</button></Link>
+      <Link to={'/student/profileImage'}><button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">Photo</button></Link>
       <button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">My Courses</button>
       <button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">Certificates</button>
       <button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 hover:bg-blue-600">Logout</button>
@@ -124,6 +124,7 @@ const StudentEditProfile = () => {
                                         value={values.email}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        readOnly 
                                     />
                                     {errors.email && touched.email && <p className='text-red-500'>{errors.email}</p>}
                                 </div>

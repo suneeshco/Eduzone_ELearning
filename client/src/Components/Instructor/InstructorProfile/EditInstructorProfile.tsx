@@ -7,10 +7,10 @@ import { useFormik } from 'formik';
 import { updateProfileSchema } from '../../../Schemas/instructorValidation'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import { instructorProfileUpdate } from '../../../api/axiosPut'
 import { useDispatch } from 'react-redux';
 import { setInstructorCredentials } from '../../../Redux/Slices/InstructorAuth';
 import { instructorApiRequest } from '../../../api/axios';
+import { Link } from 'react-router-dom';
 
 const EditInstructorProfile = () => {
 
@@ -75,8 +75,17 @@ const EditInstructorProfile = () => {
     </div>
     <h2 className="text-lg font-semibold text-center mt-4">{instructorInfo?.firstname}</h2>
     <div className="mt-8">
-      <button className="block w-full bg-sky-900 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">Profile</button>
-      <button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">Photo</button>
+    <Link to={'/instructor/profile'}>
+                  {' '}
+                  <button className='block w-full bg-sky-900 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600'>
+                    Profile
+                  </button>
+                </Link>
+                <Link to={'/instructor/profileImage'}>
+                  <button className='block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600'>
+                    Photo
+                  </button>
+                </Link>
       <button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">My Courses</button>
       <button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">Revenue</button>
       <button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 hover:bg-blue-600">Logout</button>

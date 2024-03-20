@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { editCourse } from "../../../api/axiosPut";
-import { getInstructorCategories,getSingleCourse } from "../../../api/axiosGet";
 import { RootState } from "../../../Redux/RootState/RootState";
 import { useSelector } from "react-redux";
 import { instructorApiRequest } from "../../../api/axios";

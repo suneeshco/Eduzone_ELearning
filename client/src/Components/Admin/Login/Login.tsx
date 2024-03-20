@@ -1,6 +1,5 @@
 
 import LoginImage from '../../../assets/images/Logos/Login.png';
-import { adminLogin } from '../../../api/axiosPost'; 
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { adminLoginSchema } from '../../../Schemas/adminValidation';

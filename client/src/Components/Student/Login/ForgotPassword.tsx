@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { studentForgot } from '../../../api/axiosPost';
 import { apiRequest } from '../../../api/axios';
 
 const ForgotPassword = () => {

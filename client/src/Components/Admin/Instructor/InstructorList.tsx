@@ -1,8 +1,6 @@
 import React , {useEffect, useState} from 'react'
 import {  InstructorData } from '../../../utils/apiTypes/ApiTypes'
-import { getInstructorList } from '../../../api/axiosGet'
 import Swal from 'sweetalert2'
-import { changeInstructorStatus } from '../../../api/axiosPatch'
 import { adminApiRequest } from '../../../api/axios'
 
 const InstructorList = () => {

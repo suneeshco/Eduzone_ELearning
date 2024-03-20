@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { addCourse } from "../../../api/axiosPost";
-import { getInstructorCategories } from "../../../api/axiosGet";
 import { RootState } from "../../../Redux/RootState/RootState";
 import { useSelector } from "react-redux";
 import { instructorApiRequest } from "../../../api/axios";

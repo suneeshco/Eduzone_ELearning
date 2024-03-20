@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
-import { getSingleCourse, getLessons } from '../../../api/axiosGet';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 import { instructorApiRequest } from '../../../api/axios';
 
@@ -195,19 +195,33 @@ const EditLesson = () => {
 
 
     const deleteLesson = async ()=>{
-        try {
-            const response = await instructorApiRequest({
-                method: 'delete',
-                url: `/deleteLesson/${lessonId}`
-            });
-            console.log("response", response);
-            if(response){
-                toast.success("lesson deleted")
-                navigate(`/instructor/courseView/${lessonDetails?.courseId}`)
+
+        const confirmation = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to delete the lesson!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Delete!'
+          });
+          if (confirmation.isConfirmed) {
+            try {
+                const response = await instructorApiRequest({
+                    method: 'delete',
+                    url: `/deleteLesson/${lessonId}`
+                });
+                console.log("response", response);
+                if(response){
+                    toast.success("lesson deleted")
+                    navigate(`/instructor/courseView/${lessonDetails?.courseId}`)
+                }
+            } catch (error) {
+                console.log(error);
+                
             }
-        } catch (error) {
-            
-        }
+          }
+       
     }
 
 

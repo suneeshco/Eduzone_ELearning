@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getAllCoursess } from '../../services/course.service';
-import { updateProfiles , getStudentDetailss} from '../../services/student.services';
+import { updateProfiles , getStudentDetailss , studentChangeImages} from '../../services/student.services';
 
 export const getAllCourses = async (req : Request,res : Response) : Promise<void> => {
     try {
@@ -40,4 +40,16 @@ export const getStudentDetails = async (req : Request,res : Response) : Promise<
         console.error(error); 
         res.status(500).send({ message: "Error adding course" });
     }
+}
+
+
+export const studentChangeImage = async (req : Request,res : Response) : Promise<void> => {
+    try {
+        const { photo , userId } = req.body;
+        const user = await studentChangeImages(photo , userId);
+        res.send({user})
+      } catch (error) {
+        console.log("error",error);
+        res.status(500).send({ message: 'Server Error' });
+      }
 }

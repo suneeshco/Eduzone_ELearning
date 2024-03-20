@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { RootState } from "../../../Redux/RootState/RootState";
 import { useSelector } from "react-redux";
 
-import { getCourses } from '../../../api/axiosGet';
 import { instructorApiRequest } from '../../../api/axios';
 
 interface Course {

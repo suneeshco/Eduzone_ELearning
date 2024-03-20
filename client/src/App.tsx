@@ -15,6 +15,7 @@ import PasswordResetPage from './Pages/Student/PasswordResetPage';
 import StudentProfilePage from './Pages/Student/StudentProfilePage';
 import StudentEditProfilePage from './Pages/Student/studentEditProfilePage';
 import StudentCourseListPAge from './Pages/Student/CourseListingPage'
+import StudentProfileImagePage from './Pages/Student/ProfileImagePage';
 
 
 import InstructorHomePage from './Pages/Instructor/HomePage'
@@ -25,6 +26,7 @@ import InstructorMyCoursesPage from './Pages/Instructor/InstructorMyCoursesPage'
 import InstructorCourseViewPage from './Pages/Instructor/CourseViewPage';
 import InstructorEditCoursePage from './Pages/Instructor/EditCoursePage';
 import InstructorEditLessonPage from './Pages/Instructor/EditLessonPage'
+import InstructorProfileImagePage from './Pages/Instructor/ProfilePhotoPage';
 
 
 import AdminHomePage from './Pages/Admin/HomePage'
@@ -57,6 +59,7 @@ const App: React.FC = () => {
         <Route path='' element={<StudentPrivateRoute/>}>
           <Route path='/student/profile' element={<StudentProfilePage/>} />
           <Route path='/student/editProfile' element={<StudentEditProfilePage/>} />
+          <Route path='/student/profileImage' element={<StudentProfileImagePage/>} />
           
         </Route>
         <Route path='' element={<StudentNotPrivateRoute/>}>
@@ -87,6 +90,7 @@ const App: React.FC = () => {
           <Route path='/instructor/profile' element={<InstructorProfilePage/>} />
           <Route path='/instructor/editProfile' element={<EditInstructorProfilePage/>} />
           <Route path='/instructor/editLesson/:lessonId' element={<InstructorEditLessonPage/>} />
+          <Route path='/instructor/profileImage' element={<InstructorProfileImagePage/>} />
         </Route>
 
 

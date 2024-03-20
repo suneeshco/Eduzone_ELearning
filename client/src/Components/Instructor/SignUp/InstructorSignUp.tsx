@@ -1,7 +1,6 @@
 
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { instructorSignUp } from '../../../api/axiosPost';
 import { Link } from 'react-router-dom';
 import LoginImage from '../../../assets/images/Logos/Login.png';
 import { instructorSignUpSchema } from '../../../Schemas/instructorValidation';

@@ -1,7 +1,6 @@
 
 import { Link } from 'react-router-dom';
 import LoginImage from '../../../assets/images/Logos/Login.png';
-import { studentLogin } from '../../../api/axiosPost'; 
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { studentLoginSchema } from '../../../Schemas/studentLogin';

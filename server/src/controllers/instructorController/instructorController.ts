@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getActiveCategory } from '../../services/category.service';
-import { addCourses ,getCoursess , getSingleCoursess , addLessons , getLessonss , editCourses, updateProfiles , getInstructorDetailss , getLessonDetail , editLessons , deleteLessonById} from '../../services/instructor.service';
+import { addCourses ,getCoursess , getSingleCoursess , addLessons , getLessonss , editCourses, updateProfiles , getInstructorDetailss , getLessonDetail , editLessons , deleteLessonById , instructorChangeImages} from '../../services/instructor.service';
 
 
 
@@ -177,4 +177,16 @@ export const deleteLesson = async (req : Request,res : Response) : Promise<void>
         console.error("Error deleting lesson:", error);
         res.status(500).json({ message: "Error deleting lesson" });
     }
+}
+
+
+export const instructorChangeImage = async (req : Request,res : Response) : Promise<void> => {
+    try {
+        const { photo , userId } = req.body;
+        const user = await instructorChangeImages(photo , userId);
+        res.send({user})
+      } catch (error) {
+        console.log("error",error);
+        res.status(500).send({ message: 'Server Error' });
+      }
 }

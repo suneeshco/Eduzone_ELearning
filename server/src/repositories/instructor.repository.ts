@@ -171,3 +171,15 @@ export const deleteLessonByIds = async (id: string) => {
      throw error; 
   }
  };
+
+
+ export const updatePhoto = async (photo : string , userId:string) => {
+  try {
+    const updatedProfile = await Instructor.findByIdAndUpdate(userId, {
+      photo : photo
+    }, { new: true });
+    return updatedProfile
+  } catch (error) {
+    throw error;
+  }
+};

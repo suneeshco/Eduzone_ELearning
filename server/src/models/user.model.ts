@@ -9,6 +9,7 @@ export interface User {
   mobile: string;
   password: string;
   status: boolean;
+  photo: string;
 }
 
 export interface UserDocument extends User, Document {}
@@ -19,7 +20,8 @@ const UserSchema: Schema = new Schema({
   email: { type: String, required: true },
   mobile: {type: String},
   password: { type: String, required: true },
-  status: {type:Boolean, default:true}
+  status: {type:Boolean, default:true},
+  photo: {type:String}
 });
 
 export default mongoose.model<UserDocument>('User', UserSchema);

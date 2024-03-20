@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { resetPassword } from '../../../api/axiosPatch';
 import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';

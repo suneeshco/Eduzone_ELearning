@@ -1,4 +1,4 @@
-import { addCourse , getCourse , getSingleCourse , addLesson , getLesson, editCourse , findInstructorById , updateProfile , getLessonDetails , editLesson , deleteLessonByIds} from "../repositories/instructor.repository";
+import { addCourse , getCourse , getSingleCourse , addLesson , getLesson, editCourse , findInstructorById , updateProfile , getLessonDetails , editLesson , deleteLessonByIds , updatePhoto} from "../repositories/instructor.repository";
 
 export const addCourses = async (data:any)=>{
     try {
@@ -143,3 +143,19 @@ export const deleteLessonById = async (id:any)=>{
         
     }
 }
+
+
+
+export const instructorChangeImages = async (photo : string , userId : string)=> {
+    try {
+      const user = await findInstructorById(userId);
+      if (!user) {
+        throw new Error('User not exists');
+      }
+  
+     const updatedUser = updatePhoto(photo , userId)
+      return updatedUser;
+    } catch (error) {
+      throw error;
+    }
+  };

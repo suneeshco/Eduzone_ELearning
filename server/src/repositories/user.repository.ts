@@ -43,6 +43,18 @@ export const updateProfile = async (firstname:any,lastname:any,email:any,mobile 
 };
 
 
+export const updatePhoto = async (photo : string , userId:string) => {
+  try {
+    const updatedProfile = await User.findByIdAndUpdate(userId, {
+      photo : photo
+    }, { new: true });
+    return updatedProfile
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 
 export const getStudentList = async () =>{
   try {
