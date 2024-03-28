@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/getAllCourses',getAllCourses);
 router.put('/updateProfile',studentAuth,updateProfile)
-router.get('/getStudentDetails/:id',studentAuth,getStudentDetails)
+router.get('/getStudentDetails/:id',getStudentDetails)
 router.patch('/studentChangeImage',studentAuth,studentChangeImage)
 
 export default router;

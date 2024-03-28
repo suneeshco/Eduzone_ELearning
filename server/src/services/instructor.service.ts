@@ -1,4 +1,5 @@
-import { addCourse , getCourse , getSingleCourse , addLesson , getLesson, editCourse , findInstructorById , updateProfile , getLessonDetails , editLesson , deleteLessonByIds , updatePhoto} from "../repositories/instructor.repository";
+import { addCourse , getCourse , getSingleCourse , addLesson , getLesson, editCourse  , updateProfile , getLessonDetails , editLesson , deleteLessonByIds } from "../repositories/instructor.repository";
+import { findUserById , findInstructorById, instructorUpdateProfile, instructorUpdatePhoto} from "../repositories/user.repository";
 
 export const addCourses = async (data:any)=>{
     try {
@@ -73,12 +74,12 @@ export const editCourses = async (data:any)=>{
 
 export const updateProfiles = async (firstname: string,lastname:string, email: string, mobile:string, id: string)=> {
     try {
-      const user = await findInstructorById(id);
+      const user = await findUserById(id);
       if (!user) {
         throw new Error('User not exists');
       }
   
-     const updatedUser = updateProfile(firstname,lastname,email,mobile,id)
+     const updatedUser = instructorUpdateProfile(firstname,lastname,email,mobile,id)
       return updatedUser;
     } catch (error) {
       throw error;
@@ -89,11 +90,12 @@ export const updateProfiles = async (firstname: string,lastname:string, email: s
 
   export const getInstructorDetailss = async ( id: string)=> {
     try {
-      const user = await findInstructorById(id);
+      const user = await findUserById(id);
       if (!user) {
         throw new Error('User not exists');
       }
   
+    
     
       return user;
     } catch (error) {
@@ -148,12 +150,12 @@ export const deleteLessonById = async (id:any)=>{
 
 export const instructorChangeImages = async (photo : string , userId : string)=> {
     try {
-      const user = await findInstructorById(userId);
+      const user = await findUserById(userId);
       if (!user) {
         throw new Error('User not exists');
       }
   
-     const updatedUser = updatePhoto(photo , userId)
+     const updatedUser = instructorUpdatePhoto(photo , userId)
       return updatedUser;
     } catch (error) {
       throw error;

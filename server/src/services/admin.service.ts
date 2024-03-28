@@ -1,5 +1,6 @@
 import { getStudentList , changeStudentStatus } from "../repositories/user.repository"
-import { getInstructorList , changeInstructorStatus } from "../repositories/instructor.repository"
+import {   changeInstructorStatus } from "../repositories/instructor.repository"
+import { getInstructorList } from "../repositories/user.repository"
 
 
 export const getStudentLists = async ()=>{

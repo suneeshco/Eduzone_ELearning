@@ -38,6 +38,8 @@ const AdminLogin = () => {
             localStorage.setItem("adminToken", response.token);
             dispatch(setAdminCredentials(response.admin))
             navigate("/admin") 
+          }else if(response.error){
+            toast.error(response.error)
           }
         } catch (err) {
           toast.error("Invalid Login Credentials");

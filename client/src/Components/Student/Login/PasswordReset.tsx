@@ -25,17 +25,25 @@ const PasswordReset: React.FC = () => {
 
   const handleReset = async () => {
 
-    const response = await apiRequest({
-      method: 'patch',
-      url: '/studentResetPassword',
-      data: {
-          userId: userId,
-          token: token,
-          password: newPassword
-      }
-  });
-    toast.success("Password Changed Successfully. Please Login !")
-    navigate('/student/login')
+    if(newPassword !== confirmPassword){
+      toast.error("Both passwords should be same")
+    }else{
+      const response = await apiRequest({
+        method: 'patch',
+        url: '/studentResetPassword',
+        data: {
+            userId: userId,
+            token: token,
+            password: newPassword
+        }
+    });
+    console.log("ddd",response.message);
+    
+      toast.success("Password Changed Successfully. Please Login !")
+      navigate('/student/login')
+    }
+
+    
   };
 
   return (

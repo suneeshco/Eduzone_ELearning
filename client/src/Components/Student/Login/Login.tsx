@@ -9,6 +9,7 @@ import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth';
 import toast from 'react-hot-toast';
 import { apiRequest } from '../../../api/axios';
 import {GoogleLogin , GoogleOAuthProvider} from '@react-oauth/google';
+import { setInstructorCredentials } from '../../../Redux/Slices/InstructorAuth';
 
 const client_id = import.meta.env.VITE_CLIENT_ID || '';
 
@@ -20,7 +21,8 @@ const Login = () => {
   const {values , errors , touched , handleBlur, handleChange , handleSubmit } = useFormik({
     initialValues : {
       email : "",
-      password : ""
+      password : "",
+     
     },
     validationSchema : studentLoginSchema,
     onSubmit : async (values) => {
@@ -31,15 +33,24 @@ const Login = () => {
           url: '/login',
           data: {
               email: values.email,
-              password: values.password
+              password: values.password,
+              
           }
       });
       
       if(response?.user && response?.token){
-        console.log(response.user);
+        console.log("hello",response.user);
+        if(response.user.role === 'student'){
         localStorage.setItem("studentToken", response.token);
         dispatch(setStudentCredentials(response.user))
-        navigate("/") 
+        navigate('/')
+        }else if(response.user.role === 'instructor'){
+          localStorage.setItem("studentToken", response.token);
+          dispatch(setStudentCredentials(response.user))
+          navigate('/instructor')
+        }
+        
+         
       }else if (response?.error) {
         switch (response.error) {
           case 'User Blocked':
@@ -73,7 +84,7 @@ const Login = () => {
           <img src={LoginImage} alt="Your Image" className=" w-full object-cover-full" />
         </div>
         <div className="sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 shadow-xl border">
             <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-6">Sign in to your account</h2>
             <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
@@ -90,7 +101,7 @@ const Login = () => {
                   autoComplete="email"
                   onBlur={handleBlur}
                   required
-                  className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email && touched.email ? 'border-red-500' : ''}`}
+                  className={`appearance-none block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email && touched.email ? 'border-red-500' : ''}`}
                 />
               </div>
               {errors.email && touched.email && <p className='text-red-500'>{errors.email}</p>}
@@ -110,9 +121,11 @@ const Login = () => {
                   autoComplete="current-password"
                   onBlur={handleBlur}
                   required
-                  className="appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="appearance-none block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
+
+              
               <div className='text-right'>
               <Link to={'/student/forgotPassword'}>
                 <h3>Forgot Password</h3>

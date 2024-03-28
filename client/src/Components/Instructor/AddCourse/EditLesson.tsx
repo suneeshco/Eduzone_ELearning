@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
+import { Cloudinary } from "@cloudinary/url-gen";
 
 import { instructorApiRequest } from '../../../api/axios';
 
@@ -26,6 +28,7 @@ interface Lesson {
     courseId: string;
 }
 
+
 const EditLesson = () => {
     const { lessonId } = useParams<{ lessonId: string }>();
     const [courseDetails, setCourseDetails] = useState<Course | null>(null);
@@ -39,6 +42,29 @@ const EditLesson = () => {
     const [description, setDescription] = useState<string | undefined>("")
     const [video, setVideo] = useState<File | null>(null);
     const [cloudanaryURL, setCloudanaryURL] = useState<string | undefined>("");
+
+
+    const [publicId, setPublicId] = useState("");
+  const [cloudName] = useState("dwuy04s3s");
+  const [uploadPreset] = useState("videos_preset");
+
+  console.log("secureurl", publicId);
+
+
+  const [uwConfig] = useState({
+    cloudName,
+    uploadPreset,
+    multiple: true,
+    clientAllowedFormats: ["MP4"],
+  });
+
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName
+    }
+  });
+
+  const myImage = cld.image(publicId);
 
 
 
@@ -99,56 +125,57 @@ const EditLesson = () => {
 
 
 
-    const submitVideo = async () => {
-        try {
-            if (video) {
-                const data = new FormData();
-                data.append("file", video);
-                data.append("upload_preset", "videos_preset");
-                data.append("cloud_name", "dwuy04s3s");
-                console.log(video);
-                const response = await axios.post(
-                    "https://api.cloudinary.com/v1_1/dwuy04s3s/video/upload",
-                    data
-                )
-                console.log(response, "Video Uploaded ");
-                if (response.data && response.data.url) {
-                    console.log("Video uploaded successfully. URL:", response.data.url);
-                    setCloudanaryURL(response.data.url);
-                    console.log(response.data.url, "url of video")
-                    return response.data.url
-                } else {
-                    console.error("Invalid response from Cloudinary", response.data);
-                    toast.error(
-                        "Error uploading image: Invalid response from Cloudinary"
-                    );
-                }
-            } else {
-                toast.error("No video selected");
-            }
-        } catch (error) {
-            console.error("Error while Uploading Video:", error);
-            toast.error("Error uploading video: Please try again later");
-        }
-    }
+    // const submitVideo = async () => {
+    //     try {
+    //         if (video) {
+    //             const data = new FormData();
+    //             data.append("file", video);
+    //             data.append("upload_preset", "videos_preset");
+    //             data.append("cloud_name", "dwuy04s3s");
+    //             console.log(video);
+    //             const response = await axios.post(
+    //                 "https://api.cloudinary.com/v1_1/dwuy04s3s/video/upload",
+    //                 data
+    //             )
+    //             console.log(response, "Video Uploaded ");
+    //             if (response.data && response.data.url) {
+    //                 console.log("Video uploaded successfully. URL:", response.data.url);
+    //                 setCloudanaryURL(response.data.url);
+    //                 console.log(response.data.url, "url of video")
+    //                 return response.data.url
+    //             } else {
+    //                 console.error("Invalid response from Cloudinary", response.data);
+    //                 toast.error(
+    //                     "Error uploading image: Invalid response from Cloudinary"
+    //                 );
+    //             }
+    //         } else {
+    //             toast.error("No video selected");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error while Uploading Video:", error);
+    //         toast.error("Error uploading video: Please try again later");
+    //     }
+    // }
 
 
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-
-        if (!title || !description) {
-            toast.error("Please fill in all fields.");
-            return;
+        if(!title){
+            return toast.error("Title is mandatory");
+        }
+        if(!description){
+            return toast.error("Description is mandatory");
         }
 
 
         let url
-        if (video) {
+        if (publicId.trim().length>0) {
             setLoading(true);
-            url = await submitVideo();
-            console.log("my url", url);
+            url = publicId;
+            // console.log("my url", url);
         } else {
             url = cloudanaryURL
         }
@@ -237,7 +264,11 @@ const EditLesson = () => {
 
                 <div className="p-4">
                     <div className='flex justify-end items-center'>
-                        <div className='bg-slate-300 ' onClick={deleteLesson}>Delete Lesson</div>
+                    <button onClick={deleteLesson} className="cursor-pointer inline-flex items-center rounded-full px-9 py-3 text-xl font-mono font-semibold text-rose-600 hover:text-white border-2 border-rose-600
+hover:bg-rose-600 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-75 hover:bg-rose-600 duration-300  focus:bg-transparent">
+  Delete Lesson
+</button>
+
                     </div>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="bg-white shadow rounded-lg p-4">
@@ -269,23 +300,23 @@ const EditLesson = () => {
                                     rows={3}
                                 />
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="video" className="block text-sm font-medium text-gray-700">
-                                    Lesson Video
+                            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                                    Add Lesson Video
                                 </label>
-                                <input
-                                    type="file"
-                                    name="video"
-                                    id="video"
-                                    accept="video/*"
-                                    onChange={handleSubmitChange}
-                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                                />
 
-                                {video ? (
+                                <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
+                                <br />
+                           
+                            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                                {loading ? "Editing Lesson..." : "Edit Lesson"}
+                            </button>
+                        </div>
+                    </form>
+                    
+                    {publicId.trim().length>0 ? (
                                     <video
                                         controls
-                                        src={URL.createObjectURL(video)}
+                                        src={publicId}
                                         style={{ width: "100%" }}
                                     />
                                 ) : cloudanaryURL && (
@@ -295,14 +326,6 @@ const EditLesson = () => {
                                         style={{ width: "100%" }}
                                     />
                                 )}
-
-
-                            </div>
-                            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                                {loading ? "Adding Lesson..." : "Add Lesson"}
-                            </button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </>

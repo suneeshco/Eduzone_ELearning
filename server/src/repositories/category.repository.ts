@@ -19,7 +19,7 @@ export const findCategoryByName = async (categoryName : string) : Promise<Catego
 
 export const getCategories = async () =>{
   try {
-    const categories = await Category.find({})
+    const categories = await Category.find({}).sort({ _id: -1 });
     return categories
   } catch (error) {
     throw error

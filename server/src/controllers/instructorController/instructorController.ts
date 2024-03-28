@@ -71,15 +71,16 @@ export const addLesson = async (req : Request,res : Response) : Promise<void> =>
 
 export const getLessons = async (req : Request,res : Response) : Promise<void> => {
     try {
-       
+        
         const id = req.params.id;
-        console.log(id);
         
         const lessons = await getLessonss(id);
+        
+        
         res.send(lessons);
     } catch (error) {
         console.error(error); 
-        res.status(500).send({ message: "Error adding course" });
+        res.status(500).send({ message: "Error " });
     }
 }
 
@@ -132,7 +133,7 @@ export const getInstructorDetails = async (req : Request,res : Response) : Promi
         res.send(details);
     } catch (error) {
         console.error(error); 
-        res.status(500).send({ message: "Error adding course" });
+        res.status(500).send({ message: "Error " });
     }
 }
 
@@ -141,9 +142,10 @@ export const getLessonDetails = async (req : Request,res : Response) : Promise<v
     try {
        
         const id = req.params.id;
-        console.log(id);
+       
         
         const lesson = await getLessonDetail(id);
+       
         res.send(lesson);
     } catch (error) {
         console.error(error); 

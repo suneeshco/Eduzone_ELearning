@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfileImage from '../../../assets/images/DefaultImages/profileDefault.png'
+import ProfileImage from '../../../assets/images/DefaultImages/Profile.png'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Redux/RootState/RootState'
@@ -12,12 +12,12 @@ const StudentProfile = () => {
 
 
     <div className='p-12 bg-gray-200'>
-      <div className="container-fluid m-12 px-4 bg-orange-200 border-orange-500">
+      <div className="container-fluid m-12 px-4 ">
         <div className="flex">
           <div className="w-1/4 p-5 ">
-            <div className="bg-green-100 rounded-lg shadow-md p-4">
+            <div className="bg-slate-50 rounded-lg shadow-md p-4">
               <div className="flex justify-center">
-                <img src={ProfileImage} alt="Profile" className="w-24 h-24 rounded-full" />
+                <img src={ userInfo?.photo || ProfileImage} alt="Profile" className="w-24 h-24 rounded-full" />
               </div>
               <h2 className="text-lg font-semibold text-center mt-4">{userInfo?.firstname}</h2>
               <div className="mt-8">
@@ -33,7 +33,7 @@ const StudentProfile = () => {
 
 
           <div className="w-3/4 p-5 ">
-            <div className="bg-sky-100 rounded-lg shadow-md p-4 item-center">
+            <div className="bg-slate-50 rounded-lg shadow-md p-4 item-center">
 
 
 
@@ -43,14 +43,14 @@ const StudentProfile = () => {
 
               <div className="mb-4 ">
                 <label className="block text-gray-700 font-bold mb-2">First Name:</label>
-                <div className="bg-white rounded-md px-2 py-1 w-1/2">
+                <div className="bg-white rounded-md px-2 py-1 w-1/2 border border-gray-700">
                   <p className="text-gray-800">{userInfo?.firstname}</p>
                 </div>
               </div>
               {userInfo?.lastname ? (
                 <div className="mb-4 ">
                 <label className="block text-gray-700 font-bold mb-2">Last Name:</label>
-                <div className="bg-white rounded-md px-2 py-1 w-1/2">
+                <div className="bg-white rounded-md px-2 py-1 w-1/2 border border-gray-700">
                   <p className="text-gray-800">{userInfo?.lastname}</p>
                 </div>
               </div>
@@ -59,7 +59,7 @@ const StudentProfile = () => {
 
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Email:</label>
-                <div className="bg-white rounded-md px-2 py-1 w-1/2">
+                <div className="bg-white rounded-md px-2 py-1 w-1/2 border border-gray-700">
                   <p className="text-gray-800">{userInfo?.email}</p>
                 </div>
               </div>
@@ -68,7 +68,7 @@ const StudentProfile = () => {
               {userInfo?.mobile ? (
                 <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Mobile Number:</label>
-                <div className="bg-white rounded-md px-2 py-1 w-1/2">
+                <div className="bg-white rounded-md px-2 py-1 w-1/2 border border-gray-700">
                   <p className="text-gray-800">{userInfo?.mobile}</p>
                 </div>
               </div>

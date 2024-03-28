@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector , useDispatch } from 'react-redux';
 import { RootState } from '../../../Redux/RootState/RootState';
-import ProfileImage from '../../../assets/images/DefaultImages/profileDefault.png';
+import ProfileImage from '../../../assets/images/DefaultImages/Profile.png';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { studentApiRequest } from '../../../api/axios';

@@ -7,7 +7,6 @@ export const getAllCourses = async (req : Request,res : Response) : Promise<void
         let search = req.query.search
         let sort =req.query.sort
         let categories = req.query.categories
-        console.log(sort);
         
         
         const courses = await getAllCoursess(search,sort,categories);

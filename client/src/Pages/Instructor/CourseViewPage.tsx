@@ -10,7 +10,10 @@ const CourseViewPage = () => {
     <div className="flex bg-gray-100 min-h-screen">
       
       <InstructorSidebar/>
+      
+      
       <CourseView/>
+      
     </div>
     </div>
   )

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { apiRequest } from '../../../api/axios';
+import toast from 'react-hot-toast';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -14,12 +15,19 @@ const ForgotPassword = () => {
             email: email
         }
     });
-      console.log(response.data);
+    
+      if(response.message.success){
+        toast.success("Email Sent !")
+        setEmail("")
+      }
+      if(response.message.error){
+        toast.error(response.message.error)
+      }
       
-      setMessage('mail sent');
+      
     } catch (err) {
       console.error(err);
-      setMessage('Failed to send reset email');
+      
     }
   };
 

@@ -16,6 +16,7 @@ import StudentProfilePage from './Pages/Student/StudentProfilePage';
 import StudentEditProfilePage from './Pages/Student/studentEditProfilePage';
 import StudentCourseListPAge from './Pages/Student/CourseListingPage'
 import StudentProfileImagePage from './Pages/Student/ProfileImagePage';
+import StudentOtpPage from './Pages/Student/OtpPage'
 
 
 import InstructorHomePage from './Pages/Instructor/HomePage'
@@ -67,6 +68,7 @@ const App: React.FC = () => {
           <Route path='/student/signup' element={<SignUpPage/>}/>
           <Route path='/student/forgotPassword' element={<ForgotPasswordPage/>}/>
           <Route path='/student/password-reset/:userId/:token' element={<PasswordResetPage/>}/>
+          <Route path='/student/otp' element={<StudentOtpPage/>}/>
         </Route>
 
 
@@ -74,11 +76,11 @@ const App: React.FC = () => {
 
         
 
-        <Route path='' element={<NotPrivateRoute/>}>
+        {/* <Route path='' element={<NotPrivateRoute/>}>
           <Route path='/instructor/login' element={<InstructorLoginPage/>}/>
           <Route path='/instructor/signup' element={<InstructorSignUpPage/>}/>
           <Route path='/instructor/forgotPassword' element={<InstructorForgotPasswordPage/>}/>
-        </Route>
+        </Route> */}
 
 
         <Route path='' element={<PrivateRoute/>}>

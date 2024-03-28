@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto'
 import { createUser, findUserByEmail, findUserById } from '../repositories/user.repository';
-import {createInstructor,findInstructorByEmail} from '../repositories/instructor.repository';
+// import {findInstructorByEmail} from '../repositories/instructor.repository';
 import { findAdminByEmail } from '../repositories/admin.repository';
 import { UserDocument } from '../models/user.model';
 import { InstructorDocument } from '../models/instructor.model';
@@ -26,17 +26,28 @@ const randomToken = () => {
   return crypto.randomBytes(48).toString('hex');
  }
 
-export const signup = async (firstname: string,lastname:string, email: string, mobile:string, password: string): Promise<UserDocument | string> => {
+
+
+ function generateRandomPassword(length:number) {
+  const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
+  }
+  return password;
+}
+
+
+
+export const signup = async (firstname: string,lastname:string, email: string, mobile:string, password: string , role : string): Promise<UserDocument | string> => {
   try {
-    const existingUser = await findUserByEmail(email);
-    if (existingUser) {
-      throw new Error('User already exists');
-    }
+    
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = await createUser({ firstname, lastname, email, mobile, password: hashedPassword });
+    const newUser = await createUser({ firstname, lastname, email, mobile, password: hashedPassword , role });
 
     const token = jwt.sign({ _id: newUser._id }, process.env.TOKEN_SECRET!);
     return newUser;
@@ -71,7 +82,7 @@ export const login = async (email:string , password : string): Promise<LoginResp
         }
 
        
-        const token = jwt.sign({ _id: existingUser._id }, process.env.TOKEN_SECRET!);
+        const token = jwt.sign({ _id: existingUser._id , role: existingUser.role }, process.env.TOKEN_SECRET!);
         
         return {user:existingUser,token:token};
       } catch (error) {
@@ -84,69 +95,71 @@ export const login = async (email:string , password : string): Promise<LoginResp
 
 
 
-export const instructorSignup = async (firstname: string,lastname:string, email: string, mobile:number, password: string): Promise<InstructorDocument | string> => {
-  try {
-    const existingUser = await findInstructorByEmail(email);
-    if (existingUser) {
-      throw new Error('Instructor already exists');
-    }
+// export const instructorSignup = async (firstname: string,lastname:string, email: string, mobile:string, password: string , role : string): Promise<InstructorDocument | string> => {
+//   try {
+//     const existingUser = await findInstructorByEmail(email);
+//     if (existingUser) {
+//       throw new Error('Instructor already exists');
+//     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+//     const salt = await bcrypt.genSalt(10);
+//     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = await createInstructor({ firstname, lastname, email, mobile, password: hashedPassword });
+//     const newUser = await createInstructor({ firstname, lastname, email, mobile, password: hashedPassword , role});
     
     
 
-    const token = jwt.sign({ _id: newUser._id }, process.env.INSTRUCTOR_SECRET!);
-    return newUser;
-  } catch (error) {
-    throw error;
-  }
-};
+//     const token = jwt.sign({ _id: newUser._id }, process.env.INSTRUCTOR_SECRET!);
+//     return newUser;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
 
-export const instructorLogin = async (email:string , password : string): Promise<LoginResponse | ErrorResponse> =>{
-    try {
-        const existingUser = await findInstructorByEmail(email);
-        if (!existingUser) {
-          return { error: 'Instructor Not Exists' };
-        }
+// export const instructorLogin = async (email:string , password : string): Promise<LoginResponse | ErrorResponse> =>{
+//     try {
+      
+      
+//         const existingUser = await findInstructorByEmail(email);
+//         if (!existingUser) {
+//           return { error: 'Instructor Not Exists' };
+//         }
     
-        const passwordMatch = await bcrypt.compare( password, existingUser.password);
+//         const passwordMatch = await bcrypt.compare( password, existingUser.password);
 
-        if (!passwordMatch) {
-          return { error: 'Incorrect Password' };
-        }
+//         if (!passwordMatch) {
+//           return { error: 'Incorrect Password' };
+//         }
 
-        if(!existingUser?.status){
-          console.log(existingUser?.status);
+//         if(!existingUser?.status){
+//           console.log(existingUser?.status);
           
-          return { error: 'Instructor Blocked' };
-        }
+//           return { error: 'Instructor Blocked' };
+//         }
 
        
-        const token = jwt.sign({ _id: existingUser._id }, process.env.INSTRUCTOR_SECRET!);
-        return {user:existingUser,token:token};
-      } catch (error) {
-        throw error;
-      }
-}
+//         const token = jwt.sign({ _id: existingUser._id , role : existingUser.role}, process.env.TOKEN_SECRET!);
+//         return {user:existingUser,token:token};
+//       } catch (error) {
+//         throw error;
+//       }
+// }
 
 
 
-export const adminLogin = async (email:string , password : string): Promise< LoginResponse> =>{
+export const adminLogin = async (email:string , password : string): Promise< LoginResponse | ErrorResponse > =>{
   try {
       const existingUser = await findAdminByEmail(email);
       
       if (!existingUser) {
-        throw new Error('Admin not exists'); 
+        return { error: 'Incorrect Username' }; 
       }
   
       const passwordMatch = await bcrypt.compare( password, existingUser.password);
 
       if (!passwordMatch) {
-      throw new Error('Incorrect password');
+        return { error: 'Incorrect Password' };
       }
 
      
@@ -164,7 +177,7 @@ export const sendForgotRequest = async (email:string) =>{
       const user = await findUserByEmail(email);
       
       if (!user) {
-        throw new Error('User not found'); 
+        return { error: 'User Not Found' }; 
       }
 
       const randToken = randomToken()
@@ -191,15 +204,11 @@ export const sendForgotRequest = async (email:string) =>{
         subject: "Reset Password",
         text: `We have recieved your request for reset password. Click ${link} to reset your password.`
     };
-    transporter.sendMail(mailOptions, function (err, info) {
-        if (err) {
-            console.error("Error sending email: ", err);
-            throw new Error('Error sending mail')
-        } else {
-            console.log("Email sent: " + info.response);
-            return "Reset link is sent to your email";
-        }
-      })
+    const info = await transporter.sendMail(mailOptions);
+
+    console.log("Email sent: " + info.response);
+    
+    return { success: "Email sent successfully" };
 
     } catch (error) {
       throw error;
@@ -215,13 +224,13 @@ export const studentResetPass = async (userId:string , token : string , password
       const user = await findUserById(userId);
       
       if (!user) {
-        throw new Error('User not found'); 
+        return { error: 'User Not Found' }; 
       }
 
       const getToken = await findToken(userId,token)
 
       if (!token) {
-        throw new Error('User not found'); 
+        return { error: 'User Not Found' }; 
       }
 
       const salt = await bcrypt.genSalt(10);
@@ -233,7 +242,7 @@ export const studentResetPass = async (userId:string , token : string , password
         await getToken?.deleteOne();
       }
 
-      return user
+      return {user:user}
 
     } catch (error) {
       throw error;
@@ -243,20 +252,53 @@ export const studentResetPass = async (userId:string , token : string , password
 
 
 
-export const googleSignup=async(email:string ,password:string, name:string): Promise<object> => {
+export const googleSignup=async(email:string ,password:string, name:string , role : string): Promise<object> => {
   try {
     
     
     const existingUser = await findUserByEmail(email);
     console.log(existingUser);
     if (existingUser) {
-      throw new Error('User already exists');
+      return { error: 'User Already Exists' };
     }
+
+
+    let newPassword = generateRandomPassword(12)
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+
     const isActive:boolean = true;
-    const newUser = await createUser({ firstname :name, lastname:"", email:email, mobile:"", password: password });
+    const newUser = await createUser({ firstname :name, lastname:"", email:email, mobile:"", password: hashedPassword , role : role});
 
    
     const token = jwt.sign({ _id: newUser._id }, process.env.TOKEN_SECRET!);
+    if(newUser){
+      
+        console.log(newPassword);
+        
+
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false,
+            requireTLS: true,
+            auth: {
+                user: process.env.USER_NAME,
+                pass: process.env.USER_PASSWORD
+            }
+        });
+        const mailOptions = {
+            from: process.env.USER_NAME,
+            to: newUser.email,
+            subject: "Verification Code",
+            text: `Thank you for creating account. Your Password Is ${newPassword}`
+        };
+        const info = await transporter.sendMail(mailOptions);
+        console.log("Email sent: " + info.response);
+        
+    
+    }
     return {token:token,user:newUser};
   } catch (error) {
     throw error;

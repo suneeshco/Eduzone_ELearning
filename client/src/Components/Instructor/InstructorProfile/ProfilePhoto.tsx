@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../Redux/RootState/RootState';
-import ProfileImage from '../../../assets/images/DefaultImages/profileDefault.png';
+import ProfileImage from '../../../assets/images/DefaultImages/Profile.png';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { instructorApiRequest } from '../../../api/axios'; // Import API request function for instructor
-import { setInstructorCredentials } from '../../../Redux/Slices/InstructorAuth'; // Import action for setting instructor credentials
+import { instructorApiRequest } from '../../../api/axios';
+import { setInstructorCredentials } from '../../../Redux/Slices/InstructorAuth'; 
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth';
 
 const ProfilePhoto = () => {
-  const { instructorInfo } = useSelector((state: RootState) => state.instructorAuth); // Use instructorAuth slice
+  const { userInfo } = useSelector((state: RootState) => state.studentAuth); 
   const [image, setImage] = useState<File | null>(null);
   const [cloudinaryURL, setCloudinaryURL] = useState<string | null>(null);
   const dispatch = useDispatch();
@@ -78,12 +79,12 @@ const ProfilePhoto = () => {
           url: '/instructorChangeImage',
           data: {
             photo: uploadedUrl,
-            userId: instructorInfo?._id
+            userId: userInfo?._id
           }
         });
         if (resp?.user) {
           console.log(resp.user);
-          dispatch(setInstructorCredentials(resp.user));
+          dispatch(setStudentCredentials(resp.user));
           toast.success('Image Updated Successfully');
           navigate('/instructor/profileImage');
           console.log('Image uploaded successfully:', uploadedUrl);
@@ -109,11 +110,11 @@ const ProfilePhoto = () => {
           url: '/instructorChangeImage',
           data: {
             photo: '',
-            userId: instructorInfo?._id
+            userId: userInfo?._id
           }
         });
         if (resp?.user) {
-          dispatch(setInstructorCredentials(resp.user));
+          dispatch(setStudentCredentials(resp.user));
           toast.success('Profile Photo Deleted Successfully');
           setCloudinaryURL(null);
           console.log('Profile photo deleted successfully');
@@ -127,19 +128,19 @@ const ProfilePhoto = () => {
 
   return (
     <div className='p-12 bg-gray-200'>
-      <div className='container-fluid m-12 px-4 bg-orange-200 border-orange-500'>
+      <div className='container-fluid m-12 px-4 '>
         <div className='flex'>
           <div className='w-1/4 p-5'>
-            <div className='bg-green-100 rounded-lg shadow-md p-4'>
+            <div className='bg-slate-50 rounded-lg shadow-md p-4'>
               <div className='flex justify-center'>
                 <img
-                  src={cloudinaryURL || instructorInfo?.photo || ProfileImage}
+                  src={cloudinaryURL || userInfo?.photo || ProfileImage}
                   alt='Profile'
                   className='w-24 h-24 rounded-full'
                 />
               </div>
               <h2 className='text-lg font-semibold text-center mt-4'>
-                {instructorInfo?.firstname}
+                {userInfo?.firstname}
               </h2>
               <div className='mt-8'>
                 <Link to={'/instructor/profile'}>
@@ -167,7 +168,7 @@ const ProfilePhoto = () => {
           </div>
 
           <div className='w-3/4 p-5'>
-            <div className='bg-sky-100 rounded-lg shadow-md p-4 item-center'>
+            <div className='bg-slate-50 rounded-lg shadow-md p-4 item-center'>
               <div>
                 <h2 className='text-xl font-bold mb-4 text-center'>
                   Profile Photo
@@ -184,7 +185,7 @@ const ProfilePhoto = () => {
 
               <div>
                 <img
-                  src={cloudinaryURL || instructorInfo?.photo || ProfileImage}
+                  src={cloudinaryURL || userInfo?.photo || ProfileImage}
                   alt='Student Photo'
                   className='w-48 h-48 mx-auto mb-4 rounded-full'
                 />

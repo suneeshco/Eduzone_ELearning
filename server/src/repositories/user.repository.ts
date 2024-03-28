@@ -43,6 +43,21 @@ export const updateProfile = async (firstname:any,lastname:any,email:any,mobile 
 };
 
 
+export const instructorUpdateProfile = async (firstname:any,lastname:any,email:any,mobile :any,id: string) => {
+  try {
+    const updatedProfile = await User.findByIdAndUpdate(id, {
+      firstname,
+      lastname,
+      email,
+      mobile
+    }, { new: true });
+    return updatedProfile
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 export const updatePhoto = async (photo : string , userId:string) => {
   try {
     const updatedProfile = await User.findByIdAndUpdate(userId, {
@@ -58,12 +73,32 @@ export const updatePhoto = async (photo : string , userId:string) => {
 
 export const getStudentList = async () =>{
   try {
-    const students = await User.find({})
+    const students = await User.find({role:'student'})
     return students
   } catch (error) {
     throw error
   }
 }
+
+
+export const getInstructorList = async () =>{
+  try {
+    const students = await User.find({role:'instructor'})
+    return students
+  } catch (error) {
+    throw error
+  }
+}
+
+
+
+export const findInstructorById = async (id: string): Promise<UserDocument | null> => {
+  try {
+    return await User.findOne({ _id : id });
+  } catch (error) {
+    throw error;
+  }
+};
 
 
 export const changeStudentStatus = async (id: string) => {
@@ -79,6 +114,19 @@ export const changeStudentStatus = async (id: string) => {
      throw error; 
   }
  };
+
+
+
+ export const instructorUpdatePhoto = async (photo : string , userId:string) => {
+  try {
+    const updatedProfile = await User.findByIdAndUpdate(userId, {
+      photo : photo
+    }, { new: true });
+    return updatedProfile
+  } catch (error) {
+    throw error;
+  }
+};
 
 
 

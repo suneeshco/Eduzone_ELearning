@@ -7,15 +7,25 @@ import adminRoutes from './routes/admin.routes';
 import instructorRoutes from './routes/instructor.routes';
 import studentRoutes from './routes/student.routes'
 import cors from 'cors';
+import session from 'express-session';
 require('dotenv').config();
 
 
 const app = express();
 
 // Middleware
+app.use(session({
+  secret: 'your_secret_key', 
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } 
+}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+  origin:"http://localhost:5173",
+  credentials:true
+}));
 
 
 

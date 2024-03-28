@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import ProfileImage from '../../../assets/images/DefaultImages/profileDefault.png'
+import ProfileImage from '../../../assets/images/DefaultImages/Profile.png'
 import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Redux/RootState/RootState'
@@ -21,7 +21,6 @@ const StudentEditProfile = () => {
         initialValues: {
           firstname: userInfo?.firstname || '',
           lastname: userInfo?.lastname || '',
-          email: userInfo?.email || '',
           mobile: userInfo?.mobile || '',
         },
         validationSchema : updateProfileSchema, 
@@ -45,7 +44,6 @@ const StudentEditProfile = () => {
               data: {
                   firstname: values.firstname,
                   lastname: values.lastname,
-                  email: values.email,
                   mobile: values.mobile,
                   id: userInfo?._id
               }
@@ -67,12 +65,12 @@ const StudentEditProfile = () => {
 
     
     <div className='p-12 bg-gray-200'>
-      <div className="container-fluid m-12 px-4 bg-orange-200 border-orange-500">
+      <div className="container-fluid m-12 px-4 ">
       <div className="flex">
         <div className="w-1/4 p-5 ">
-          <div className="bg-green-100 rounded-lg shadow-md p-4">
+          <div className="bg-slate-50 rounded-lg shadow-md p-4">
           <div className="flex justify-center">
-      <img src={ProfileImage} alt="Profile" className="w-24 h-24 rounded-full" />
+      <img src={ userInfo?.photo || ProfileImage} alt="Profile" className="w-24 h-24 rounded-full" />
     </div>
     <h2 className="text-lg font-semibold text-center mt-4">{userInfo?.firstname}</h2>
     <div className="mt-8">
@@ -89,13 +87,13 @@ const StudentEditProfile = () => {
         
         <div className="w-3/4 p-5">
                         <form onSubmit={handleSubmit}>
-                            <div className="bg-sky-100 rounded-lg shadow-md p-4">
+                            <div className="bg-slate-50 rounded-lg shadow-md p-4">
                                 <h2 className="text-xl font-bold mb-4 text-center">Edit Profile</h2>
                                 <div className="mb-4">
                                     <label className="block text-gray-700 font-bold mb-2">First Name:</label>
                                     <input
                                         type="text"
-                                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.firstname && touched.firstname ? 'border-red-500' : ''}`}
+                                        className={`appearance-none block w-full px-3 py-2 border border-gray-700  rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.firstname && touched.firstname ? 'border-red-500' : ''}`}
                                         name="firstname"
                                         value={values.firstname}
                                         onChange={handleChange}
@@ -107,7 +105,7 @@ const StudentEditProfile = () => {
                                     <label className="block text-gray-700 font-bold mb-2">Last Name:</label>
                                     <input
                                         type="text"
-                                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.lastname && touched.lastname ? 'border-red-500' : ''}`}
+                                        className={`appearance-none block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.lastname && touched.lastname ? 'border-red-500' : ''}`}
                                         name="lastname"
                                         value={values.lastname}
                                         onChange={handleChange}
@@ -116,23 +114,10 @@ const StudentEditProfile = () => {
                                     {errors.lastname && touched.lastname && <p className='text-red-500'>{errors.lastname}</p>}
                                 </div>
                                 <div className="mb-4">
-                                    <label className="block text-gray-700 font-bold mb-2">Email:</label>
-                                    <input
-                                        type="email"
-                                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email && touched.email ? 'border-red-500' : ''}`}
-                                        name="email"
-                                        value={values.email}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        readOnly 
-                                    />
-                                    {errors.email && touched.email && <p className='text-red-500'>{errors.email}</p>}
-                                </div>
-                                <div className="mb-4">
                                     <label className="block text-gray-700 font-bold mb-2">Mobile Number:</label>
                                     <input
                                         type="text"
-                                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.mobile && touched.mobile ? 'border-red-500' : ''}`}
+                                        className={`appearance-none block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.mobile && touched.mobile ? 'border-red-500' : ''}`}
                                         name="mobile"
                                         value={values.mobile}
                                         onChange={handleChange}

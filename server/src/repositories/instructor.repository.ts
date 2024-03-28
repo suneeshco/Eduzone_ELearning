@@ -1,22 +1,23 @@
 import Instructor, { InstructorDocument } from '../models/instructor.model';
 import Course , {CourseDocument}  from '../models/course.model';
 import Lesson , {LessonDocument} from '../models/lesson.model';
+import User from '../models/user.model'
 
-export const createInstructor = async (instructorData: Partial<InstructorDocument>): Promise<InstructorDocument> => {
-  try {
-    return await Instructor.create(instructorData);
-  } catch (error) {
-    throw error;
-  }
-};
+// export const createInstructor = async (instructorData: Partial<InstructorDocument>): Promise<InstructorDocument> => {
+//   try {
+//     return await Instructor.create(instructorData);
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
-export const findInstructorByEmail = async (email: string): Promise<InstructorDocument | null> => {
-  try {
-    return await Instructor.findOne({ email });
-  } catch (error) {
-    throw error;
-  }
-};
+// export const findInstructorByEmail = async (email: string): Promise<InstructorDocument | null> => {
+//   try {
+//     return await User.findOne({ email });
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
 
 export const addCourse = async (course: Partial<CourseDocument>): Promise<CourseDocument> => {
@@ -84,18 +85,12 @@ export const editCourse = async ({ courseId, courseName, courseDuration, courseF
 }
 
 
-export const findInstructorById = async (id: string): Promise<InstructorDocument | null> => {
-  try {
-    return await Instructor.findOne({ _id : id });
-  } catch (error) {
-    throw error;
-  }
-};
+
 
 
 export const updateProfile = async (firstname:any,lastname:any,email:any,mobile :any,id: string) => {
   try {
-    const updatedProfile = await Instructor.findByIdAndUpdate(id, {
+    const updatedProfile = await User.findByIdAndUpdate(id, {
       firstname,
       lastname,
       email,
@@ -111,7 +106,7 @@ export const updateProfile = async (firstname:any,lastname:any,email:any,mobile 
 
 export const getInstructorList = async () =>{
   try {
-    const instructors = await Instructor.find({})
+    const instructors = await User.find({})
     return instructors
   } catch (error) {
     throw error
@@ -121,7 +116,7 @@ export const getInstructorList = async () =>{
 
 export const changeInstructorStatus = async (id: string) => {
   try {
-     const instructor = await Instructor.findOne({ _id: id });
+     const instructor = await User.findOne({ _id: id });
      if (!instructor) {
        throw new Error('Student not found'); 
      }
@@ -173,13 +168,3 @@ export const deleteLessonByIds = async (id: string) => {
  };
 
 
- export const updatePhoto = async (photo : string , userId:string) => {
-  try {
-    const updatedProfile = await Instructor.findByIdAndUpdate(userId, {
-      photo : photo
-    }, { new: true });
-    return updatedProfile
-  } catch (error) {
-    throw error;
-  }
-};

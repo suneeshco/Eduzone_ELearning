@@ -14,7 +14,7 @@ function EditCourse() {
   }
 
   const { courseId } = useParams();
-  const { instructorInfo } = useSelector((state: RootState) => state.instructorAuth);
+  const { userInfo } = useSelector((state: RootState) => state.studentAuth);
   const navigate = useNavigate();
   const [categories, setCategories] = useState<Category[]>([]);
   const [courseName, setCourseName] = useState<string>("");
@@ -24,6 +24,7 @@ function EditCourse() {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
   const [cloudinaryURL, setCloudinaryURL] = useState("");
+  const [loading,setLoading] = useState(false)
 
   const fetchCategories = async () => {
     try {
@@ -64,18 +65,29 @@ function EditCourse() {
 
   const handleSubmitChange = (e: React.FormEvent<HTMLInputElement>) => {
     try {
-      const inputElement = e.target as HTMLInputElement;
-      const files = inputElement.files;
-      if (files && files.length > 0) {
-        const file = files[0];
-        setImage(file);
-      } else {
-        setImage(null);
-      }
+       const inputElement = e.target as HTMLInputElement;
+       const files = inputElement.files;
+       if (files && files.length > 0) {
+         const file = files[0];
+         const fileExtension = file.name.split(".").pop();
+         if (!fileExtension) {
+           window.alert("Invalid file name. Please ensure the file has an extension.");
+           return;
+         }
+         const allowedFileTypes = ["png", "jpg", "jpeg"];
+         if (!allowedFileTypes.includes(fileExtension.toLowerCase())) {
+           window.alert(`File does not support. Files type must be ${allowedFileTypes.join(", ")}`);
+           return;
+         }
+         setImage(file);
+       } else {
+         setImage(null);
+       }
     } catch (error) {
-      console.log(error);
+       console.log(error);
     }
-  };
+   };
+   
 
   const submitImage = async () => {
     try {
@@ -113,16 +125,29 @@ function EditCourse() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+   
 
-    if (!courseName.trim() || !courseDuration.trim() || !courseFee || !courseDescription.trim() || !selectedCategory) {
-      return toast.error("All fields are required");
-      }
+   
+
+    if(!courseName.trim()){
+      return toast.error("Course name is mandatory");
+    }
+    if(!courseFee){
+      return toast.error("Course fee is mandatory");
+    }
     if(parseInt(courseFee)<=0){
-      return toast.error("All fields are required");
+      return toast.error("Enter a valid course fee");
+    }
+    if(!courseDescription.trim()){
+      return toast.error("Course description is mandatory");
+    }
+    if(!selectedCategory){
+      return toast.error("Select the category");
     }
   
+  
+    setLoading(true)
     let imUrl = image ? await submitImage() : cloudinaryURL
   
     if (!imUrl) {
@@ -131,7 +156,7 @@ function EditCourse() {
     }
     
   const datas = {
-  courseName,courseDuration,courseFee,courseDescription,category :selectedCategory,imageUrl:imUrl, courseId
+  courseName,courseFee,courseDescription,category :selectedCategory,imageUrl:imUrl, courseId
   }
   
   const res = await instructorApiRequest({
@@ -142,132 +167,150 @@ function EditCourse() {
   
   
   if(res){
+    setLoading(false)
     toast.success("Course Updated Successfully")
     navigate("/instructor/myCourses")
   }
   };
 
   return (
-    <div className="flex items-center justify-center w-full">
-      <div className="w-full max-w-md">
-        <div className="bg-white shadow-md rounded-lg p-8 border border-gray-400 items-center flex flex-col">
-          <h2 className="text-2xl font-bold mb-4 text-center">Edit Course</h2>
-          <form onSubmit={handleSubmit} className="w-full">
-           
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-semibold mb-2">Course Name</label>
-              <input
-                className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
-                type="text"
-                value={courseName}
-                onChange={(e) => setCourseName(e.target.value)}
-                placeholder="Enter Course Name"
-              />
-            </div>
-
-
-            <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-semibold mb-2">
-            Course Duration
-          </label>
-          <input
-            className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
-            type="text"
-            value={courseDuration}
-            onChange={(e) => setCourseDuration(e.target.value)}
-            placeholder="Enter Duration"
-          />
-        </div>
-
-       
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-semibold mb-2">
-            Course Price
-          </label>
-          <input
-            className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
-            type="number"
-            value={courseFee}
-            onChange={(e) => setCourseFee(e.target.value)}
-            placeholder="Enter Price"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-semibold mb-2">
-            Description
-          </label>
-          <textarea
-            className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
-            placeholder="Enter Description"
-            value={courseDescription}
-            onChange={(e) => setCourseDescription(e.target.value)}
-          />
-        </div>
-
+    <>
+    <div className="flex w-full bg-white rounded border m-16">
       
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-semibold mb-2">
-            Category
-          </label>
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
-          >
-            <option>Select Category</option>
-            {categories?.map((category: any) => (
-              <option key={category?._id} value={category?._id}>
-                {category?.categoryName}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div className="w-1/2 m-10 pe-10">
 
-       
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-semibold mb-2">
-            Image
-          </label>
-          <input
-            className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border rounded"
-            type="file"
-            onChange={handleSubmitChange}
-          />
-          {image && (
-            <img
-              src={URL.createObjectURL(image)}
-              alt="Course"
-              className="mt-2 h-16 w-16 object-cover rounded"
+        <h1 className="font-bold text-xl">Customize Your Course</h1>
+        <div className="mb-4 mt-5 bg-slate-300 rounded-lg">
+          <div className="p-3 ">
+            <label htmlFor="courseName" className="block text-md  font-medium text-gray-700">
+              Course Name
+            </label>
+            <input
+              type="text"
+              name="courseName"
+              id="courseName"
+              value={courseName}
+              onChange={(e) => setCourseName(e.target.value)}
+              className="mt-1 block w-full p-2 border border-gray-600 rounded-md"
+              placeholder="Enter Course Name"
             />
-          )}
+          </div>
+
         </div>
 
-        <label className="block text-gray-700 text-sm font-semibold mb-2">
-            Current Image
-          </label>
-        <div className="mb-4">
-              {cloudinaryURL && (
-                <img
-                  src={cloudinaryURL}
-                  alt="Course"
-                  className="mt-2 h-16 w-16 object-cover rounded"
-                />
-              )}
-            </div>
-            
-            <div className="flex items-center justify-center">
-              <button
-                className="w-full py-2 px-4 text-white font-semibold bg-blue-500 rounded-full focus:outline-none focus:shadow-outline hover:bg-blue-700"
-                type="submit"
-              >
-                Update Course
-              </button>
-            </div>
-          </form>
+
+
+
+        <div className="mb-4 mt-5 bg-slate-300 rounded-lg">
+          <div className="p-3 ">
+            <label className="block text-gray-700 text-sm font-semibold mb-2">
+              Description
+            </label>
+            <textarea
+              className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border border-gray-600 rounded"
+              placeholder="Enter Description"
+              value={courseDescription}
+              onChange={(e) => setCourseDescription(e.target.value)}
+            />
+
+          </div>
+
         </div>
+
+
+
+        <div className="mb-4 mt-5 bg-slate-300 rounded-lg">
+          <div className="p-3 ">
+            <label className="block text-gray-700 text-sm font-semibold mb-2">
+              Category
+            </label>
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border border-gray-600 rounded"
+            >
+              <option>Select Category</option>
+              {categories?.map((category: any) => (
+                <option key={category?._id} value={category?._id}>
+                  {category?.categoryName}
+                </option>
+              ))}
+            </select>
+
+          </div>
+
+        </div>
+
+
+
+        
+
+
+
+
+      </div>
+
+      <div className="w-1/2 m-10 pe-10">
+
+
+      <h1 className="font-bold text-xl">Sell Your Course</h1>
+
+
+<div className="mb-4 mt-5 bg-slate-300 rounded-lg">
+  <div className="p-3 ">
+    <label className="block text-gray-700 text-sm font-semibold mb-2">
+      Course Price
+    </label>
+    <input
+      className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border border-gray-600 rounded"
+      type="number"
+      value={courseFee}
+      onChange={(e) => setCourseFee(e.target.value)}
+      placeholder="Enter Price"
+    />
+
+  </div>
+
+</div>
+        <h1 className="font-bold text-xl">Thumbnail Image</h1>
+
+
+        <div className="mb-4 mt-5 bg-slate-300 rounded-lg">
+          <div className="p-3 ">
+            <label className="block text-gray-700 text-sm font-semibold mb-2">
+              Image
+            </label>
+            <input
+              className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border border-gray-600 rounded"
+              type="file"
+              accept="image/png, image/jpeg"
+              onChange={handleSubmitChange}
+            />
+            {image && (
+              <img
+                src={URL.createObjectURL(image)}
+                alt="Course"
+                className="mt-2 h-16 w-16 object-cover rounded"
+              />
+            )}
+
+          </div>
+
+        </div>
+
+
+        <div className="">
+<button onClick={handleSubmit} className="px-4 py-2 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+              {loading ? "Editing Course..." : "Edit Course"}
+ </button>
+</div>
+
+
+
+        
       </div>
     </div>
+    </>
   );
 }
 

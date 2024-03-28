@@ -1,9 +1,13 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { config } from '../config';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const api = axios.create({
  baseURL: config.authBaseURL,
+ withCredentials:true
 });
 
 
@@ -39,7 +43,7 @@ studentApi.interceptors.response.use(
           if (error.response && error.response.data) {
               console.log(error.response, "error")
               const errorMessage = error.response.data.error || 'An error occurred';
-              toast.error(errorMessage, { duration: 2000, style: { color: '#fff', background: 'black' } });
+              return Promise.reject(errorMessage);
           } else {
               console.error('Axios error:', error);
           }
@@ -79,7 +83,7 @@ adminApi.interceptors.request.use((config) => {
 
 
 instructorApi.interceptors.request.use((config) => {
-   const instructorToken = localStorage.getItem('instructorToken');
+   const instructorToken = localStorage.getItem('studentToken');
    if (instructorToken !== null) {
    config.headers.authorization = `Bearer ${instructorToken}`;
    }

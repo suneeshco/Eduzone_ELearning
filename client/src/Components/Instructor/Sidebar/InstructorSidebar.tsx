@@ -1,31 +1,73 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  Card,
+  Typography,
+  List,
+  ListItem,
+  ListItemPrefix,
+  ListItemSuffix,
+  Chip,
+} from "@material-tailwind/react";
+import {
+  PresentationChartBarIcon,
+  ShoppingBagIcon,
+  UserCircleIcon,
+  Cog6ToothIcon,
+  InboxIcon,
+  PowerIcon,
+} from "@heroicons/react/24/solid";
 
 export const InstructorSidebar = () => {
  return (
-    <div className="w-64 bg-gray-800 text-white h-screen">
-      <div className="p-6">
-        <h2 className="text-2xl mb-4">Instructor Dashboard</h2>
-        {/* Links */}
-        <ul>
-          <li className="mb-3 bg-gray-700 rounded-lg p-2 mx-2">
-            <Link to="/instructor" className="flex items-center space-x-2">
-              <span>Dashboard</span>
-            </Link>
-          </li>
-          <li className="mb-3 bg-gray-700 rounded-lg p-2 mx-2">
-            <Link to="/instructor/myCourses" className="flex items-center space-x-2">
-              <span>My Courses</span>
-            </Link>
-          </li>
-          <li className="mb-3 bg-gray-700 rounded-lg p-2 mx-2">
-            <Link to="/instructor/addCourse" className="flex items-center space-x-2">
-              <span>Add New Course</span>
-            </Link>
-          </li>
+    <>
+<Card className=" h-[calc(100vh-2rem)] w-full max-w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5  "  placeholder={undefined}>
+      
+      <List  placeholder={undefined}>
+        <Link to={'/instructor'}> <ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <PresentationChartBarIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Dashboard
+        </ListItem>
+        </Link>
+        <Link to={'/instructor/myCourses'}><ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <ShoppingBagIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          My Courses
+        </ListItem>
+        </Link>
+        <Link to={'/instructor/addCourse'}>
+        <ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <InboxIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Add New Course
           
-        </ul>
-      </div>
-    </div>
+        </ListItem>
+        </Link>
+        <ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <UserCircleIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Profile
+        </ListItem>
+        <ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <Cog6ToothIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Settings
+        </ListItem>
+        <ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <PowerIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Log Out
+        </ListItem>
+      </List>
+    </Card>
+</>
+
  );
 };
