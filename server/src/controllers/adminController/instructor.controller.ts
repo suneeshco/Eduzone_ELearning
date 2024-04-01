@@ -5,7 +5,8 @@ import { changeInstructorStatuss } from '../../services/admin.service';
 
 export const getInstructorList = async(req : Request,res : Response) :  Promise<void> => {
     try {
-        const instructors = await getInstructorLists() 
+        let search = req.query.search
+        const instructors = await getInstructorLists(search) 
         res.send(instructors)
         
     } catch (error) {

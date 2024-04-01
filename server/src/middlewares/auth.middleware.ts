@@ -22,23 +22,18 @@ export const studentAuth = async (req:Request,res:Response,next:NextFunction) =>
         }
 
         const decoded : any = jwt.verify(token,process.env.TOKEN_SECRET as Secret)
-        const user = await findUserById(decoded._id)
-        
-        if(!user){
-            return res.status(401).json({ error: 'User not found' });
-        }
-
-        if(!user.status){
-            return res.status(401).json({ error: 'Account is blocked' });
-        }
-
-        if(decoded.role === 'student'){
-            next()
-        }else{
+        if (decoded.role === 'student') {
+            const user = await findUserById(decoded._id);
+            if (!user) {
+                return res.status(401).json({ error: 'User not found' });
+            }
+            if (!user.status) {
+                return res.status(401).json({ error: 'Account is blocked' });
+            }
+            next();
+        } else {
             return res.status(401).json({ error: 'Unauthorized' });
         }
-        
-        
 
     } catch (error) {
         console.log(error);
@@ -59,16 +54,16 @@ export const instructorAuth = async (req:Request,res:Response,next:NextFunction)
         }
 
         const decoded : any = jwt.verify(token,process.env.TOKEN_SECRET as Secret)
-        const user =await findUserById(decoded._id)
-        if(!user){
-            return res.status(401).json({ error: 'Instructor not found' });
-        }
-        if(!user.status){
-            return res.status(401).json({ error: 'Account is blocked' });
-        }
-        if(decoded.role === 'instructor'){
-            next()
-        }else{
+         if (decoded.role === 'instructor') {
+            const user = await findUserById(decoded._id);
+            if (!user) {
+                return res.status(401).json({ error: 'Instructor not found' });
+            }
+            if (!user.status) {
+                return res.status(401).json({ error: 'Account is blocked' });
+            }
+            next();
+        } else {
             return res.status(401).json({ error: 'Unauthorized' });
         }
         
@@ -91,12 +86,16 @@ export const adminAuth = async (req:Request,res:Response,next:NextFunction) => {
             return res.status(401).json({ error: 'No token found' });
         }
         
-        const decoded : any = jwt.verify(token,process.env.ADMIN_SECRET as Secret)
-        const user =await findAdminById(decoded._id)
-        if(!user){
-            return res.status(401).json({ error: 'Admin Details Not Found' });
+        const decoded : any = jwt.verify(token,process.env.TOKEN_SECRET as Secret)
+        // const user =await findUserById(decoded._id)
+        // if(!user){
+        //     return res.status(401).json({ error: 'Admin Details Not Found' });
+        // }
+        if(decoded.role === 'admin'){
+            next()
+        }else{
+            return res.status(401).json({ error: 'Unauthorized' });
         }
-        next()
     } catch (error) {
         console.log(error); 
     }

@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -8,6 +8,8 @@ import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 import { Cloudinary } from "@cloudinary/url-gen";
 
 import { instructorApiRequest } from '../../../api/axios';
+import { PresentationChartBarIcon, ShoppingBagIcon, InboxIcon, UserCircleIcon, Cog6ToothIcon, PowerIcon } from '@heroicons/react/24/solid';
+import { Card, List, ListItem, ListItemPrefix } from '@material-tailwind/react';
 
 interface Course {
     _id: string;
@@ -29,7 +31,7 @@ interface Lesson {
 }
 
 
-const EditLesson = () => {
+const EditLesson: React.FC = () => {
     const { lessonId } = useParams<{ lessonId: string }>();
     const [courseDetails, setCourseDetails] = useState<Course | null>(null);
     const [lessonDetails, setLessonDetails] = useState<Lesson | null>(null)
@@ -256,78 +258,111 @@ const EditLesson = () => {
     return (
         <>
 
-            <div className="mx-auto px-4 py-8">
-                <div className="bg-blue-200 h-32 flex items-center justify-center">
-                    <h1 className="text-3xl font-bold">Edit Lesson </h1>
+<div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
+  <Card className=" fixed top-20 h-auto md:h-screen md:max-h-[calc(100vh-2rem)] md:w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5"  placeholder={undefined}>
+  <List  placeholder={undefined}>
+        <Link to={'/instructor'}> <ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <PresentationChartBarIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Dashboard
+        </ListItem>
+        </Link>
+        <Link to={'/instructor/myCourses'}><ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <ShoppingBagIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          My Courses
+        </ListItem>
+        </Link>
+        <Link to={'/instructor/addCourse'}>
+        <ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <InboxIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Add New Course
+          
+        </ListItem>
+        </Link>
+        <Link to={'/instructor/profile'}>
+        <ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <UserCircleIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Profile
+        </ListItem>
+        </Link>
+      </List>
+  </Card>
+
+  <div className=" ml-60 pl-5 w-full mx-auto px-4 py-8">
+    <div className="bg-blue-200 h-32 flex items-center justify-center">
+        <h1 className="text-3xl font-bold">Edit Lesson </h1>
+    </div>
+
+    <div className="p-4">
+        <div className="flex justify-end items-center">
+            <button onClick={deleteLesson} className="cursor-pointer inline-flex items-center rounded-full px-4 md:px-9 py-2 md:py-3 text-base md:text-xl font-mono font-semibold text-rose-600 hover:text-white border-2 border-rose-600 hover:bg-rose-600 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-75 hover:bg-rose-600 duration-300 focus:bg-transparent">
+                Delete Lesson
+            </button>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="bg-white shadow rounded-lg p-4">
+                <div className="mb-4">
+                    <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                        Lesson Title
+                    </label>
+                    <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        value={title}
+                        onChange={(e) => { setTitle(e.target.value) }}
+                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                    />
                 </div>
-
-
-                <div className="p-4">
-                    <div className='flex justify-end items-center'>
-                    <button onClick={deleteLesson} className="cursor-pointer inline-flex items-center rounded-full px-9 py-3 text-xl font-mono font-semibold text-rose-600 hover:text-white border-2 border-rose-600
-hover:bg-rose-600 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-75 hover:bg-rose-600 duration-300  focus:bg-transparent">
-  Delete Lesson
-</button>
-
-                    </div>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="bg-white shadow rounded-lg p-4">
-
-
-                            <div className="mb-4">
-                                <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                                    Lesson Title
-                                </label>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    id="title"
-                                    value={title}
-                                    onChange={(e) => { setTitle(e.target.value) }}
-                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                                    Lesson Description
-                                </label>
-                                <textarea
-                                    name="description"
-                                    id="description"
-                                    value={description}
-                                    onChange={(e) => { setDescription(e.target.value) }}
-                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                                    rows={3}
-                                />
-                            </div>
-                            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                                    Add Lesson Video
-                                </label>
-
-                                <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
-                                <br />
-                           
-                            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                                {loading ? "Editing Lesson..." : "Edit Lesson"}
-                            </button>
-                        </div>
-                    </form>
-                    
-                    {publicId.trim().length>0 ? (
-                                    <video
-                                        controls
-                                        src={publicId}
-                                        style={{ width: "100%" }}
-                                    />
-                                ) : cloudanaryURL && (
-                                    <video
-                                        controls
-                                        src={cloudanaryURL}
-                                        style={{ width: "100%" }}
-                                    />
-                                )}
+                <div className="mb-4">
+                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                        Lesson Description
+                    </label>
+                    <textarea
+                        name="description"
+                        id="description"
+                        value={description}
+                        onChange={(e) => { setDescription(e.target.value) }}
+                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                        rows={3}
+                    />
                 </div>
+                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                    Add Lesson Video
+                </label>
+                <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
+                <br />
+                <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                    {loading ? "Editing Lesson..." : "Edit Lesson"}
+                </button>
             </div>
+        </form>
+
+        {publicId.trim().length > 0 ? (
+            <video
+                controls
+                src={publicId}
+                className="w-full"
+            />
+        ) : cloudanaryURL && (
+            <video
+                controls
+                src={cloudanaryURL}
+                className="w-full"
+            />
+        )}
+    </div>
+</div>
+
+
+</div>
         </>
     );
 };

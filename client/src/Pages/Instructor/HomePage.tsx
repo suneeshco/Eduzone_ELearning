@@ -9,11 +9,9 @@ const HomePage = () => {
   return (
     <div>
       <Navbar/>
-    <div className="flex bg-gray-100 min-h-screen">
-      
-      <InstructorSidebar/>
+    
       <HomeComponent/>
-    </div>
+    
     </div>
   )
 }

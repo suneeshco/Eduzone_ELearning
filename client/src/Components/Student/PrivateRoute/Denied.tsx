@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Denied = () => {
+const Denied: React.FC = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-gray-200 p-8 rounded-lg shadow-md">

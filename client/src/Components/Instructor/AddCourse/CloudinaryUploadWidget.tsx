@@ -90,7 +90,7 @@ const CloudinaryUploadWidget: React.FC<CloudinaryUploadWidgetProps> = ({ uwConfi
 
   return (
     <CloudinaryScriptContext.Provider value={{ loaded }}>
-      <button id="upload_widget" onClick={initializeCloudinaryWidget}
+      <span id="upload_widget" onClick={initializeCloudinaryWidget}
   className="rounded-lg relative w-36 h-10 cursor-pointer flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
 >
   <span
@@ -115,7 +115,7 @@ const CloudinaryUploadWidget: React.FC<CloudinaryUploadWidgetProps> = ({ uwConfi
       <line x1="5" x2="19" y1="12" y2="12"></line>
     </svg>
   </span>
-</button>
+</span>
 
 
 

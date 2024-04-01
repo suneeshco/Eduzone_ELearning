@@ -1,4 +1,4 @@
-import { createCategory,findCategoryByName, getCategories, findCategoryById , getActiveCategories ,findCategoryByIdAndUpdate } from "../repositories/category.repository";
+import { createCategory,findCategoryByName, getCategories, findCategoryById , getActiveCategories ,findCategoryByIdAndUpdate, findCategoryByNameUpdate } from "../repositories/category.repository";
 
 
 
@@ -19,9 +19,9 @@ export const addCategory = async(categoryName : string)=>{
 }
 
 
-export const getCategory = async ()=>{
+export const getCategory = async (search:any)=>{
     try {
-        let categories = await getCategories()
+        let categories = await getCategories(search)
         return categories
     } catch (error) {
         throw error
@@ -53,7 +53,7 @@ export const getActiveCategory = async ()=>{
 
 export const updateCategory = async (value:string,id:string)=>{
     try {
-        let existCategory = await findCategoryByName(value);
+        let existCategory = await findCategoryByNameUpdate(value,id);
         if(existCategory){
             return "Category exists"
         }

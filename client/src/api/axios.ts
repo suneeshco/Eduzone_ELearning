@@ -55,7 +55,7 @@ studentApi.interceptors.response.use(
 
 
 adminApi.interceptors.request.use((config) => {
-   const adminToken = localStorage.getItem('adminToken');
+   const adminToken = localStorage.getItem('studentToken');
    
    if (adminToken !== null) {
    config.headers.authorization = `Bearer ${adminToken}`;
@@ -114,6 +114,8 @@ interface ApiRequestConfig extends AxiosRequestConfig {
  params?: any;
 }
 
+const requestTimeout = 5000;
+
 export const apiRequest = async (config: ApiRequestConfig) => {
  try {
     const response = await api(config);
@@ -126,10 +128,20 @@ export const apiRequest = async (config: ApiRequestConfig) => {
 
 export const adminApiRequest = async (config: ApiRequestConfig) => {
     try {
+        const abortController = new AbortController();
+        const timeoutId = setTimeout(() => {
+            abortController.abort();
+          }, requestTimeout);
+        config.signal = abortController.signal;
        const response = await adminApi(config);
+       clearTimeout(timeoutId);
        return response.data;
     } catch (error) {
-       throw error;
+        if (axios.isCancel(error)) {
+            console.error('Request canceled:', error.message);
+          } else {
+            throw error;
+          }
     }
 };
 
@@ -137,10 +149,20 @@ export const adminApiRequest = async (config: ApiRequestConfig) => {
 
 export const studentApiRequest = async (config: ApiRequestConfig) => {
     try {
+        const abortController = new AbortController();
+        const timeoutId = setTimeout(() => {
+            abortController.abort();
+          }, requestTimeout);
+        config.signal = abortController.signal;
        const response = await studentApi(config);
+       clearTimeout(timeoutId);
        return response.data;
     } catch (error) {
-       throw error;
+        if (axios.isCancel(error)) {
+            console.error('Request canceled:', error.message);
+          } else {
+            throw error;
+          };
     }
 };
 
@@ -152,9 +174,19 @@ export const studentApiRequest = async (config: ApiRequestConfig) => {
 
 export const instructorApiRequest = async (config: ApiRequestConfig) => {
     try {
+        const abortController = new AbortController();
+        const timeoutId = setTimeout(() => {
+            abortController.abort();
+          }, requestTimeout);
+        config.signal = abortController.signal;
        const response = await instructorApi(config);
+       clearTimeout(timeoutId);
        return response.data;
     } catch (error) {
-       throw error;
+        if (axios.isCancel(error)) {
+            console.error('Request canceled:', error.message);
+          } else {
+            throw error;
+          }
     }
 };

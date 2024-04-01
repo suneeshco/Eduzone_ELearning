@@ -9,7 +9,7 @@ import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
-const ProfilePhoto = () => {
+const ProfilePhoto: React.FC = () => {
   const { userInfo } = useSelector((state: RootState) => state.studentAuth);
   const [image, setImage] = useState<File | null>(null);
   const [cloudinaryURL, setCloudinaryURL] = useState<string | null>(null);
@@ -22,6 +22,16 @@ const ProfilePhoto = () => {
       const files = inputElement.files;
       if (files && files.length > 0) {
         const file = files[0];
+        const fileExtension = file.name.split(".").pop();
+        if (!fileExtension) {
+          window.alert("Invalid file name. Please ensure the file has an extension.");
+          return;
+        }
+        const allowedFileTypes = ["png", "jpg", "jpeg"];
+        if (!allowedFileTypes.includes(fileExtension.toLowerCase())) {
+          window.alert(`File does not support. Files type must be ${allowedFileTypes.join(", ")}`);
+          return;
+        }
         setImage(file);
       } else {
         setImage(null);
@@ -133,11 +143,11 @@ const ProfilePhoto = () => {
   };
 
   return (
-    <div className='p-12 bg-gray-200'>
-      <div className='container-fluid m-12 px-4 bg-orange-200 border-orange-500'>
-        <div className='flex'>
-          <div className='w-1/4 p-5'>
-            <div className='bg-green-100 rounded-lg shadow-md p-4'>
+    <div className='p-4 md:p-12 bg-gray-200'>
+      <div className='container mx-auto px-4'>
+        <div className='flex flex-col md:flex-row'>
+          <div className='w-full md:w-1/4 p-5'>
+            <div className='bg-slate-50 rounded-lg shadow-2xl p-4'>
               <div className='flex justify-center'>
                 <img
                   src={cloudinaryURL || userInfo?.photo || ProfileImage}
@@ -174,7 +184,7 @@ const ProfilePhoto = () => {
           </div>
 
           <div className='w-3/4 p-5'>
-            <div className='bg-sky-100 rounded-lg shadow-md p-4 item-center'>
+            <div className='bg-slate-50 rounded-lg shadow-2xl p-4 item-center'>
               <div>
                 <h2 className='text-xl font-bold mb-4 text-center'>
                   Profile Photo
@@ -198,7 +208,7 @@ const ProfilePhoto = () => {
                 <div>
                   <input
                     type='file'
-                    accept='image/*'
+                    accept="image/png, image/jpeg"
                     onChange={handleSubmitChange}
                     className='mb-4'
                   />
@@ -214,11 +224,11 @@ const ProfilePhoto = () => {
                   </button>
                 </div>
               </div>
-            </div>
-          </div>
+              </div>
+              </div>
+              </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };

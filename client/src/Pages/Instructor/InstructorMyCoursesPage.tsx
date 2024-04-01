@@ -6,12 +6,13 @@ import MyCourses from '../../Components/Instructor/AddCourse/MyCourses';
 const InstructorMyCoursesPage = () => {
   return (
     <div>
-      <Navbar/>
-      <div className="flex bg-gray-100 min-h-screen">
-      
-      <InstructorSidebar/>
+      <div className='fixed top-0 left-0 w-full'>
+        <Navbar />
+      </div>
+      <div className="mt-20">
       <MyCourses/>
-    </div>
+      </div>
+    
     </div>
   )
 }

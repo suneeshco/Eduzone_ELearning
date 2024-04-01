@@ -8,7 +8,7 @@ import { studentApiRequest } from "../../../api/axios";
 import toast from "react-hot-toast";
 import { setStudentCredentials, studentLogout } from "../../../Redux/Slices/StudentAuth";
 
-export const StudentPrivateRoute = () => {
+export const StudentPrivateRoute: React.FC = () => {
   const navigate = useNavigate()
   const { userInfo } = useSelector((state: RootState) => state.studentAuth);
   const [isBlocked, setIsBlocked] = useState(false);
@@ -40,10 +40,10 @@ export const StudentPrivateRoute = () => {
 };
 
 
-export const  StudentNotPrivateRoute = () => {
+export const  StudentNotPrivateRoute : React.FC= () => {
 
     const {userInfo} = useSelector((state:RootState)=>state.studentAuth)
-    return userInfo?.role==='student' ? <Navigate to='/' replace /> : userInfo?.role==='instructor' ? <Navigate to='/instructor' replace /> : <Outlet/> 
+    return userInfo?.role==='student' ? <Navigate to='/' replace /> : userInfo?.role==='instructor' ? <Navigate to='/instructor' replace /> : userInfo?.role==='admin' ? <Navigate to='/admin' replace /> : <Outlet/> 
 }
 
 

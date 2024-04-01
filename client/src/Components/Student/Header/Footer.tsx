@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Footer = () => {
+const Footer: React.FC  = () => {
   return (
     <div>
-      <footer className="bg-slate-700 dark:bg-gray-900">
+      <footer className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
     <div className="mx-auto w-full max-w-screen-xl">
       <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
         <div>

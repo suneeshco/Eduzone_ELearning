@@ -1,33 +1,38 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginImage from '../../../assets/images/Logos/Login.png';
-import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { studentLoginSchema } from '../../../Schemas/studentLogin';
 import { useDispatch } from 'react-redux';
 import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth';
 import toast from 'react-hot-toast';
 import { apiRequest } from '../../../api/axios';
-import {GoogleLogin , GoogleOAuthProvider} from '@react-oauth/google';
-import { setInstructorCredentials } from '../../../Redux/Slices/InstructorAuth';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import { useState } from 'react';
+import Loader from '../Header/Loader/Loader';
 
 const client_id = import.meta.env.VITE_CLIENT_ID || '';
 
-const Login = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  
+interface LoginFormValues {
+ email: string;
+ password: string;
+}
 
-  const {values , errors , touched , handleBlur, handleChange , handleSubmit } = useFormik({
-    initialValues : {
-      email : "",
-      password : "",
-     
+const Login: React.FC = () => {
+ const navigate = useNavigate();
+ const dispatch = useDispatch();
+ const [loading, setLoading] = useState<boolean>(false);
+
+ const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik<LoginFormValues>({
+    initialValues: {
+      email: "",
+      password: "",
     },
-    validationSchema : studentLoginSchema,
+    validationSchema: studentLoginSchema,
     onSubmit : async (values) => {
-      console.log(values.email);
+      
       try {
+        setLoading(true)
         const response = await apiRequest({
           method: 'post',
           url: '/login',
@@ -37,36 +42,50 @@ const Login = () => {
               
           }
       });
+
       
       if(response?.user && response?.token){
-        console.log("hello",response.user);
-        if(response.user.role === 'student'){
-        localStorage.setItem("studentToken", response.token);
-        dispatch(setStudentCredentials(response.user))
-        navigate('/')
-        }else if(response.user.role === 'instructor'){
+        
+        setTimeout(() => {
+          setLoading(false)
+          console.log("hello",response.user);
+          if(response.user.role === 'student'){
           localStorage.setItem("studentToken", response.token);
           dispatch(setStudentCredentials(response.user))
-          navigate('/instructor')
-        }
+          navigate('/')
+          }else if(response.user.role === 'instructor'){
+            localStorage.setItem("studentToken", response.token);
+            dispatch(setStudentCredentials(response.user))
+            navigate('/instructor')
+          }else if(response.user.role === 'admin'){
+            localStorage.setItem("studentToken", response.token);
+            dispatch(setStudentCredentials(response.user))
+            navigate('/admin')
+          }
+        }, 3000);
+       
         
          
       }else if (response?.error) {
-        switch (response.error) {
-          case 'User Blocked':
-            toast.error("Your account has been blocked.");
-            break;
-          case 'User Not Exists':
-            toast.error("User does not exist.");
-            break;
-          case 'Incorrect Password':
-            toast.error("Incorrect password.");
-            break;
-          default:
-            toast.error("An error occurred.");
-        }
+          setLoading(false)
+          switch (response.error) {
+            case 'User Blocked':
+              toast.error("Your account has been blocked.");
+              break;
+            case 'User Not Exists':
+              toast.error("User does not exist.");
+              break;
+            case 'Incorrect Password':
+              toast.error("Incorrect password.");
+              break;
+            default:
+              toast.error("An error occurred.");
+          }
+        
+        
       }
       } catch (error) {
+        setLoading(false)
         toast.error("Invalid Login Credentials");
       }
       
@@ -77,7 +96,9 @@ const Login = () => {
   
 
   return (
-    <GoogleOAuthProvider clientId={client_id}>
+    <div>
+      {loading ? < Loader/>:(
+        <GoogleOAuthProvider clientId={client_id}>
     <div className="  flex flex-col justify-center py-14 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-4xl sm:flex">
         <div className="sm:w-1/2">
@@ -100,7 +121,6 @@ const Login = () => {
                   type="email"
                   autoComplete="email"
                   onBlur={handleBlur}
-                  required
                   className={`appearance-none block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email && touched.email ? 'border-red-500' : ''}`}
                 />
               </div>
@@ -120,7 +140,6 @@ const Login = () => {
                   type="password"
                   autoComplete="current-password"
                   onBlur={handleBlur}
-                  required
                   className="appearance-none block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
@@ -187,6 +206,12 @@ const Login = () => {
       </div>
     </div>
     </GoogleOAuthProvider>
+      )}
+
+    
+    
+    
+    </div>
   );
 };
 

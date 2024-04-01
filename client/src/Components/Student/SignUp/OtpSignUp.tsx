@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { Input, Button } from "@material-tailwind/react";
 
-const OtpSignUp = () => {
+const OtpSignUp : React.FC = () => {
     const navigate = useNavigate()
   const [otp, setOtp] = useState('');
   const [message, setMessage] = useState('');

@@ -25,6 +25,12 @@ const PasswordReset: React.FC = () => {
 
   const handleReset = async () => {
 
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    if (!passwordRegex.test(newPassword)) {
+      toast.error('Password must contain at least 8 characters, including uppercase and lowercase letters, and numbers');
+      return;
+    }
+
     if(newPassword !== confirmPassword){
       toast.error("Both passwords should be same")
     }else{

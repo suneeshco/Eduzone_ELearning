@@ -17,7 +17,11 @@ import {
   Button,
   Tooltip,
   IconButton,
+  List,
+  ListItem,
+  ListItemPrefix,
 } from "@material-tailwind/react";
+import { PresentationChartBarIcon, ShoppingBagIcon, InboxIcon, UserCircleIcon, Cog6ToothIcon, PowerIcon } from '@heroicons/react/24/solid';
 
 interface Course {
   _id: string;
@@ -30,7 +34,7 @@ interface Course {
   updatedAt: string;
 }
 
-const MyCourses = () => {
+const MyCourses: React.FC = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
@@ -80,53 +84,79 @@ const MyCourses = () => {
   return (
     <>
     
-    <div className="w-full bg-gradient-to-b from-blue-10 to-white mt-5 rounded-lg">
-    <div
-      className="h-20  shadow-xl flex justify-center items-center"
-      
-    >
-      <h1 className="font-bold text-black text-4xl text-center">My Courses</h1>
-    </div>
-        <div className="min-h-screen p-4 mt-10"> 
-             
-                
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4" style={{ maxWidth: '1100px', margin: '0 auto' }}>
-            {currentItems.map((course) => (
-              <div key={course._id} className="bg-white border border-gray-200 shadow-xl overflow-hidden">
-              <Link to={`/instructor/courseView/${course._id}`}>
-                <img className="w-full h-48 object-cover" src={course?.imageUrl} alt="Course Thumbnail" />
-              </Link>
-              <div className="p-4">
-                <h4 className="text-lg font-bold text-gray-900">  
-                  {course.courseName}
-                </h4>
-                <p className="mt-1 text-gray-800">
-                  {course.courseDescription}
-                </p>
-                <div className="flex mt-1 text-yellow-400">
-                  {[...Array(5)].map((_, index) => (
-                    <span key={index}>
-                      {index < 4 ? <FaStar /> : <FaRegStar />}
-                    </span>
-                  ))}
-                </div>
-                <p className="mt-1 text-gray-800">
-                  ₹{course.courseFee}
-                </p>
-                
-              </div>
+    <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen ">
+  <Card className="fixed top-20 h-auto md:h-screen md:max-h-[calc(100vh-2rem)] md:w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5"  placeholder={undefined}>
+  <List  placeholder={undefined}>
+        <Link to={'/instructor'}> <ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <PresentationChartBarIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Dashboard
+        </ListItem>
+        </Link>
+        <Link to={'/instructor/myCourses'}><ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <ShoppingBagIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          My Courses
+        </ListItem>
+        </Link>
+        <Link to={'/instructor/addCourse'}>
+        <ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <InboxIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Add New Course
+          
+        </ListItem>
+        </Link>
+        <Link to={'/instructor/profile'}>
+        <ListItem  placeholder={undefined} className='text-black'>
+          <ListItemPrefix  placeholder={undefined}>
+            <UserCircleIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Profile
+        </ListItem>
+        </Link>
+      </List>
+  </Card>
+
+  <div className="ml-60 pl-5 w-full bg-gradient-to-b from-blue-100 to-white mt-5 rounded-lg">
+  <div className="h-20 shadow-xl flex justify-center items-center">
+    <h1 className="font-bold text-black text-4xl text-center">My Courses</h1>
+  </div>
+  <div className="p-4 mt-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto max-w-7xl">
+      {currentItems.map((course) => (
+        <div key={course._id} className="bg-white border border-gray-200 shadow-xl overflow-hidden">
+          <Link to={`/instructor/courseView/${course._id}`}>
+            <img className="w-full h-48 object-cover" src={course?.imageUrl} alt="Course Thumbnail" />
+          </Link>
+          <div className="p-4">
+            <h4 className="text-lg font-bold text-gray-900">{course.courseName}</h4>
+            <p className="mt-1 text-gray-800">{course.courseDescription}</p>
+            <div className="flex mt-1 text-yellow-400">
+              {[...Array(5)].map((_, index) => (
+                <span key={index}>{index < 4 ? <FaStar /> : <FaRegStar />}</span>
+              ))}
             </div>
-            ))}
+            <p className="mt-1 text-gray-800">₹{course.courseFee}</p>
           </div>
-          <div className="flex  mt-4 ml-10">
+        </div>
+      ))}
+    </div>
+    <div className="flex justify-center mt-4">
       {pageNumbers.map((number) => (
         <button key={number} onClick={() => paginate(number)} className="rounded-md bg-green-400 text-white m-2 px-4 py-2 hover:bg-green-600">
           {number}
         </button>
       ))}
     </div>
-        </div>
-      </div>
+  </div>
+</div>
+
+
+</div>
     </>
   )
 }

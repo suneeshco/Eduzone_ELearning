@@ -17,11 +17,10 @@ import StudentEditProfilePage from './Pages/Student/studentEditProfilePage';
 import StudentCourseListPAge from './Pages/Student/CourseListingPage'
 import StudentProfileImagePage from './Pages/Student/ProfileImagePage';
 import StudentOtpPage from './Pages/Student/OtpPage'
+import StudentSingleCourseView from './Pages/Student/ViewSingleCourse';
 
 
 import InstructorHomePage from './Pages/Instructor/HomePage'
-import InstructorLoginPage from './Pages/Instructor/LoginPage';
-import InstructorSignUpPage from './Pages/Instructor/SignUpPage';
 import InstructorAddCoursePage from './Pages/Instructor/AddCoursePage';
 import InstructorMyCoursesPage from './Pages/Instructor/InstructorMyCoursesPage';
 import InstructorCourseViewPage from './Pages/Instructor/CourseViewPage';
@@ -31,7 +30,6 @@ import InstructorProfileImagePage from './Pages/Instructor/ProfilePhotoPage';
 
 
 import AdminHomePage from './Pages/Admin/HomePage'
-import AdminLoginPage from './Pages/Admin/LoginPage';
 import CategoryPage from './Pages/Admin/CategoryPage';
 
 
@@ -40,9 +38,9 @@ import InstructorProfilePage from './Pages/Instructor/InstructorProfilePage';
 import EditInstructorProfilePage from './Pages/Instructor/EditInstructorProfilePage';
 import StudentListPage from './Pages/Admin/StudentListPage';
 import InstructorListPage from './Pages/Admin/InstructorListPage';
-import InstructorForgotPasswordPage from './Pages/Instructor/InstructorForgotPasswordPage';
 import CourseListPage from './Pages/Admin/CourseListPage';
 import AdminCourseViewPage from './Pages/Admin/CourseViewPage'
+import NotFound from './Components/CommonComponents/PageNotFound/NotFound';
 
 
 
@@ -56,6 +54,7 @@ const App: React.FC = () => {
         {/* student route */}
         <Route path='/' element={<HomePage/>} />
         <Route path='/courses?s' element={<StudentCourseListPAge/>} />
+        <Route path='/courseDetail/:id' element={<StudentSingleCourseView/>} />
         
         <Route path='' element={<StudentPrivateRoute/>}>
           <Route path='/student/profile' element={<StudentProfilePage/>} />
@@ -75,14 +74,6 @@ const App: React.FC = () => {
         {/* Tutor route */}
 
         
-
-        {/* <Route path='' element={<NotPrivateRoute/>}>
-          <Route path='/instructor/login' element={<InstructorLoginPage/>}/>
-          <Route path='/instructor/signup' element={<InstructorSignUpPage/>}/>
-          <Route path='/instructor/forgotPassword' element={<InstructorForgotPasswordPage/>}/>
-        </Route> */}
-
-
         <Route path='' element={<PrivateRoute/>}>
           <Route path='/instructor' element={<InstructorHomePage/>} />
           <Route path='/instructor/addCourse' element={<InstructorAddCoursePage/>}/>
@@ -98,9 +89,6 @@ const App: React.FC = () => {
 
         {/* Admin route */}
 
-        <Route path='' element={<AdminNotPrivateRoute/>}>
-          <Route path='/admin/login' element={<AdminLoginPage/>}/>
-        </Route>
         <Route path='' element={<AdminPrivateRoute/>}>
           <Route path='/admin' element={<AdminHomePage/>} />
           <Route path='/admin/category' element={<CategoryPage/>}/>
@@ -110,6 +98,8 @@ const App: React.FC = () => {
           <Route path='/admin/courseView/:id' element={<AdminCourseViewPage/>}/>
         </Route>
 
+
+        <Route path='*' element={<NotFound/>}/>
 
       </Routes>
     </Router>

@@ -1,66 +1,65 @@
-import React, { useEffect, useState } from 'react'
-import { UserData } from '../../../utils/apiTypes/ApiTypes'
-import profileImage from '../../../assets/images/DefaultImages/Profile.png'
-import Swal from 'sweetalert2'
-import { adminApiRequest } from '../../../api/axios'
-import { studentLogout, setStudentCredentials } from '../../../Redux/Slices/StudentAuth'
-import { useDispatch } from 'react-redux'
-import { MagnifyingGlassIcon, PowerIcon, PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import React, { useEffect, useState } from 'react';
+import { UserData } from '../../../utils/apiTypes/ApiTypes';
+import profileImage from '../../../assets/images/DefaultImages/Profile.png';
+import Swal from 'sweetalert2';
+import { adminApiRequest } from '../../../api/axios';
+import { studentLogout, setStudentCredentials } from '../../../Redux/Slices/StudentAuth';
+import { useDispatch } from 'react-redux';
+import { MagnifyingGlassIcon, PowerIcon, PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import {
-  Card,
-  CardHeader,
-  Input,
-  Typography,
-  Button,
-  CardBody,
-  Chip,
-  CardFooter,
-  Tabs,
-  TabsHeader,
-  Tab,
-  Avatar,
-  IconButton,
-  Tooltip,
-  List,
-  ListItem,
-  ListItemPrefix,
+ Card,
+ CardHeader,
+ Input,
+ Typography,
+ Button,
+ CardBody,
+ Chip,
+ CardFooter,
+ Tabs,
+ TabsHeader,
+ Tab,
+ Avatar,
+ IconButton,
+ Tooltip,
+ List,
+ ListItem,
+ ListItemPrefix,
 } from "@material-tailwind/react";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-const StudentList = () => {
+const StudentList: React.FC = () => {
+ const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
+ const TABLE_HEAD = ["Member", "Courses Purchased", "Status", "Action",];
 
-  const TABLE_HEAD = ["Member", "Courses Purchased", "Status", "Action",];
+ const [search, setSearch] = useState<string>('');
 
-  const [studentDetails, setStudentDetails] = useState<UserData[]>([])
+ const [studentDetails, setStudentDetails] = useState<UserData[]>([]);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10);
+ const [currentPage, setCurrentPage] = useState<number>(1);
+ const [itemsPerPage] = useState<number>(10);
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = studentDetails.slice(indexOfFirstItem, indexOfLastItem);
+ const indexOfLastItem = currentPage * itemsPerPage;
+ const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+ const currentItems = studentDetails.slice(indexOfFirstItem, indexOfLastItem);
 
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+ const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(studentDetails.length / itemsPerPage); i++) {
+ const pageNumbers = [];
+ for (let i = 1; i <= Math.ceil(studentDetails.length / itemsPerPage); i++) {
     pageNumbers.push(i);
-  }
+ }
 
-
-  const fetchStudents = async () => {
+ const fetchStudents = async () => {
     const response = await adminApiRequest({
       method: 'get',
       url: '/getStudentList',
+      params: { search: search }
     });
-    setStudentDetails(response)
-  }
+    setStudentDetails(response);
+ };
 
-
-  const toggleStatus = async (id: string) => {
-
+ const toggleStatus = async (id: string) => {
     const confirmation = await Swal.fire({
       title: 'Are you sure?',
       text: 'You are about to change the status of this category!',
@@ -84,14 +83,11 @@ const StudentList = () => {
         'success'
       );
     }
+ };
 
-
-
-  };
-
-  useEffect(() => {
-    fetchStudents()
-  }, [studentDetails])
+ useEffect(() => {
+    fetchStudents();
+ }, [studentDetails]);
 
 
   return (
@@ -142,12 +138,6 @@ const StudentList = () => {
           Course List
         </ListItem>
       </Link>
-      <ListItem className='text-black'  placeholder={undefined}>
-        <ListItemPrefix  placeholder={undefined}>
-          <PowerIcon className="h-5 w-5" />
-        </ListItemPrefix>
-        Log Out
-      </ListItem>
     </List>
   </Card>
 
@@ -155,7 +145,7 @@ const StudentList = () => {
     <CardHeader floated={false} shadow={false} className="rounded-none"  placeholder={undefined}>
       <div className="mb-4 md:mb-8 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
         <div className="md:w-2/3">
-          <Typography variant="h5" color="blue-gray"  placeholder={undefined}>
+          <Typography variant="h5" color="blue-gray" className='font-bold'  placeholder={undefined}>
             Students list
           </Typography>
           <Typography color="gray" className="mt-1 font-normal"  placeholder={undefined}>
@@ -164,8 +154,8 @@ const StudentList = () => {
         </div>
         <div className="w-full md:w-auto">
           <Input
-            placeholder='Search...'
-            label="Search"
+            placeholder='Search...' className='border border-black'
+            value={search} onChange={(e)=>{setSearch(e.target.value)}}
             crossOrigin={undefined}
           />
         </div>

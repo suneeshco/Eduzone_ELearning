@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Testimonial = () => {
+const Testimonial: React.FC = () => {
   return (
     <div>
       <section className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -10,8 +10,7 @@ const Testimonial = () => {
                 <h4 className="text-center text-3xl font-semibold leading-8 text-gray-800 sm:text-4xl sm:leading-10 mb-10">Testimonials</h4>
                 <blockquote className="text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9">
                     <p>
-                        “Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa sapiente alias
-                        molestiae. Numquam corrupti in laborum sed rerum et corporis.”
+                    This testimonial emphasizes the flexibility, quality of content, and support provided by the e-learning platform, which are key factors that users often appreciate. It also highlights the user's personal experience, including the completion of a certification, which adds a personal touch and credibility to the testimonial.
                     </p>
                 </blockquote>
                 <figcaption className="mt-10">

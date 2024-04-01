@@ -6,12 +6,13 @@ import EditCourse from '../../Components/Instructor/AddCourse/EditCourse';
 const AddCoursePage = () => {
   return (
     <div>
-      <Navbar/>
-    <div className="flex bg-gray-100 min-h-screen">
-      
-      <InstructorSidebar/>
+      <div className='fixed top-0 left-0 w-full'>
+        <Navbar />
+      </div>
+      <div className="mt-20">
       <EditCourse/>
-    </div>
+      </div>
+    
     </div>
   )
 }

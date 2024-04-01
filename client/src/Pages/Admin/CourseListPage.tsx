@@ -6,10 +6,9 @@ const CourseListPage = () => {
     return (
       <div>
         <Navbar/>
-        <div className="flex bg-gray-100 min-h-screen">
-        <AdminSidebar/>
+       
         <CourseList/>
-        </div>
+     
       </div>
     )
   }

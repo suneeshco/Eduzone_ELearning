@@ -11,13 +11,13 @@ import { useNavigate } from "react-router-dom";
 import { studentLogout } from "../../../Redux/Slices/StudentAuth";
 
 
-export const  PrivateRoute = () => {
+export const  PrivateRoute: React.FC = () => {
 
 
   const navigate = useNavigate()
     const {userInfo} = useSelector((state:RootState)=>state.studentAuth)
 
-    const [isBlocked, setIsBlocked] = useState(false);
+    const [isBlocked, setIsBlocked] = useState<boolean>(false);
     const dispatch = useDispatch()
   
     useEffect(() => {

@@ -5,11 +5,8 @@ import { AdminSidebar } from "../../Components/Admin/Sidebar/AdminSidebar";
 const InstructorListPage = () => {
     return (
       <div>
-        <Navbar/>
-        <div className="flex bg-gray-100 min-h-screen">
-        <AdminSidebar/>
+        <Navbar/> 
         <InstructorList/>
-        </div>
       </div>
     )
   }

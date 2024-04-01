@@ -6,15 +6,16 @@ import CourseView from '../../Components/Instructor/AddCourse/CourseView';
 const CourseViewPage = () => {
   return (
     <div>
-      <Navbar/>
-    <div className="flex bg-gray-100 min-h-screen">
+      <div className='fixed top-0 left-0 w-full'>
+        <Navbar />
+      </div>
+    
       
-      <InstructorSidebar/>
-      
-      
+      <div className="mt-20">
       <CourseView/>
+      </div>
       
-    </div>
+    
     </div>
   )
 }

@@ -17,9 +17,28 @@ export const findCategoryByName = async (categoryName : string) : Promise<Catego
   }
 }
 
-export const getCategories = async () =>{
+
+export const findCategoryByNameUpdate = async (categoryName: string, id: string): Promise<CategoryDocument | null> => {
   try {
-    const categories = await Category.find({}).sort({ _id: -1 });
+    const category = await Category.findOne({ 
+      _id: { $ne: id }, 
+      categoryName: { $regex: new RegExp('^' + categoryName + '$', 'i') } 
+    });
+    return category || null;
+  } catch (error) {
+    throw error
+  }
+}
+
+
+export const getCategories = async (search:string) =>{
+  try {
+    let query: any = {};
+    if (search && search.trim() !== '') {
+      const searchRegex = new RegExp(search.trim(), 'i');
+      query = { ...query, categoryName: searchRegex };
+    }
+    const categories = await Category.find(query).sort({ _id: -1 });
     return categories
   } catch (error) {
     throw error

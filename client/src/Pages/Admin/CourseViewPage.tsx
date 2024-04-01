@@ -7,10 +7,9 @@ const CourseViewPage = () => {
     return (
       <div>
         <Navbar/>
-        <div className="flex bg-gray-100 min-h-screen">
-        <AdminSidebar/>
+        
         <CourseView/>
-        </div>
+        
       </div>
     )
   }

@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth';
 
-const ProfilePhoto = () => {
+const ProfilePhoto : React.FC = () => {
   const { userInfo } = useSelector((state: RootState) => state.studentAuth); 
   const [image, setImage] = useState<File | null>(null);
   const [cloudinaryURL, setCloudinaryURL] = useState<string | null>(null);
@@ -23,6 +23,16 @@ const ProfilePhoto = () => {
       const files = inputElement.files;
       if (files && files.length > 0) {
         const file = files[0];
+        const fileExtension = file.name.split(".").pop();
+        if (!fileExtension) {
+          window.alert("Invalid file name. Please ensure the file has an extension.");
+          return;
+        }
+        const allowedFileTypes = ["png", "jpg", "jpeg"];
+        if (!allowedFileTypes.includes(fileExtension.toLowerCase())) {
+          window.alert(`File does not support. Files type must be ${allowedFileTypes.join(", ")}`);
+          return;
+        }
         setImage(file);
       } else {
         setImage(null);
@@ -127,11 +137,11 @@ const ProfilePhoto = () => {
   };
 
   return (
-    <div className='p-12 bg-gray-200'>
-      <div className='container-fluid m-12 px-4 '>
-        <div className='flex'>
-          <div className='w-1/4 p-5'>
-            <div className='bg-slate-50 rounded-lg shadow-md p-4'>
+    <div className='p-4 md:p-12 bg-gray-200'>
+      <div className='container mx-auto px-4'>
+        <div className='flex flex-col md:flex-row'>
+          <div className='w-full md:w-1/4 p-5'>
+            <div className='bg-white rounded-lg shadow-md p-4'>
               <div className='flex justify-center'>
                 <img
                   src={cloudinaryURL || userInfo?.photo || ProfileImage}
@@ -154,15 +164,15 @@ const ProfilePhoto = () => {
                     Photo
                   </button>
                 </Link>
-                <button className='block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600'>
-                  My Courses
+                <Link to={'/instructor/myCourses'}>
+            <button className="block bg-sky-600 w-full text-white rounded-md py-2 px-4 hover:bg-blue-600">My Courses</button>
+            </Link>
+            <Link to={''}>
+                <button className='block w-full bg-sky-600 text-white rounded-md mt-2 py-2 px-4 mb-2 hover:bg-blue-600'>
+                  Revenue
                 </button>
-                <button className='block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600'>
-                  Certificates
-                </button>
-                <button className='block w-full bg-sky-600 text-white rounded-md py-2 px-4 hover:bg-blue-600'>
-                  Logout
-                </button>
+                </Link>
+                
               </div>
             </div>
           </div>
@@ -192,7 +202,7 @@ const ProfilePhoto = () => {
                 <div>
                   <input
                     type='file'
-                    accept='image/*'
+                    accept="image/png, image/jpeg"
                     onChange={handleSubmitChange}
                     className='mb-4'
                   />
@@ -210,9 +220,9 @@ const ProfilePhoto = () => {
               </div>
             </div>
           </div>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };

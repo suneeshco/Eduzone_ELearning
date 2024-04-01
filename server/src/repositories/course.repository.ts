@@ -1,4 +1,5 @@
 import Course, { CourseDocument } from '../models/course.model';
+import  Category  from '../models/category.model';
 
 export const getAllCourse = async (search: any, sort: any, categories: any): Promise<CourseDocument[]> => {
   try {
@@ -15,9 +16,14 @@ export const getAllCourse = async (search: any, sort: any, categories: any): Pro
       sortCriteria = { ...sortCriteria, courseFee: -1 };
     }
 
+    let activeCategories = await Category.find({ status: true }).distinct('_id');
+
     if (categories && categories.length > 0) {
       let categ = categories.split(',')
-      query = { ...query, category: { $in: categ } }; // Filter courses by categories
+      query = { ...query, category: { $in: categ } }; 
+    }else{
+      let cate = activeCategories
+      query = { ...query, category: { $in: cate } };
     }
 
     return await Course.find(query).populate('instructorId').sort(sortCriteria);

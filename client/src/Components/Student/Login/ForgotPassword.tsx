@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { apiRequest } from '../../../api/axios';
 import toast from 'react-hot-toast';
 
-const ForgotPassword = () => {
+const ForgotPassword : React.FC= () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 

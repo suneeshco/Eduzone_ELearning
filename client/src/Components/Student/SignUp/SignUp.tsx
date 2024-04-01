@@ -9,7 +9,7 @@ import { apiRequest, studentApiRequest } from '../../../api/axios';
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 
-const SignUp = () => {
+const SignUp: React.FC = () => {
 
   const client_id = import.meta.env.VITE_CLIENT_ID || '';
 
@@ -62,7 +62,7 @@ const SignUp = () => {
   return (
     <>
       <GoogleOAuthProvider clientId={client_id}>
-        <div className="  flex flex-col justify-center py-14 sm:px-6 lg:px-8">
+        <div className="  flex flex-col justify-center py-14 sm:px-6 lg:px-8 ">
           <div className="sm:mx-auto sm:w-full sm:max-w-4xl sm:flex">
 
             <div className="sm:w-1/2">
@@ -72,8 +72,8 @@ const SignUp = () => {
 
             <div className="sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
               <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 shadow-xl border">
-                <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-6">Sign in to your account</h2>
-                <form className="space-y-6" onSubmit={handleSubmit}>
+                <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-4">Sign in to your account</h2>
+                <form className="space-y-1" onSubmit={handleSubmit}>
                   <div>
                     <label htmlFor="firstname" className="block text-sm font-medium text-gray-700">
                       First Name
@@ -86,7 +86,7 @@ const SignUp = () => {
                         value={values.firstname}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.firstname && touched.firstname ? 'border-red-500' : ''}`}
+                        className={`appearance-none block w-full px-3 py-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.firstname && touched.firstname ? 'border-red-500' : ''}`}
                       />
                     </div>
                     {errors.firstname && touched.firstname && <p className='text-red-500'>{errors.firstname}</p>}
@@ -104,7 +104,7 @@ const SignUp = () => {
                         value={values.lastname}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.lastname && touched.lastname ? 'border-red-500' : ''}`}
+                        className={`appearance-none block w-full px-3 py-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.lastname && touched.lastname ? 'border-red-500' : ''}`}
                       />
                     </div>
                     {errors.lastname && touched.lastname && <p className='text-red-500'>{errors.lastname}</p>}
@@ -123,7 +123,7 @@ const SignUp = () => {
                         type="email"
                         autoComplete="email"
                         onBlur={handleBlur}
-                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email && touched.email ? 'border-red-500' : ''}`}
+                        className={`appearance-none block w-full px-3 py-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email && touched.email ? 'border-red-500' : ''}`}
                       />
                     </div>
                     {errors.email && touched.email && <p className='text-red-500'>{errors.email}</p>}
@@ -142,7 +142,7 @@ const SignUp = () => {
                         name="mobile"
                         type="string"
                         onBlur={handleBlur}
-                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.mobile && touched.mobile ? 'border-red-500' : ''}`}
+                        className={`appearance-none block w-full px-3 py-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.mobile && touched.mobile ? 'border-red-500' : ''}`}
                       />
                     </div>
                     {errors.mobile && touched.mobile && <p className='text-red-500'>{errors.mobile}</p>}
@@ -162,7 +162,7 @@ const SignUp = () => {
                         value={values.password}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.password && touched.password ? 'border-red-500' : ''}`}
+                        className={`appearance-none block w-full px-3 py-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.password && touched.password ? 'border-red-500' : ''}`}
                       />
                     </div>
                     {errors.password && touched.password && <p className='text-red-500'>{errors.password}</p>}
@@ -180,7 +180,7 @@ const SignUp = () => {
                         value={values.confirmPassword}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.confirmPassword && touched.confirmPassword ? 'border-red-500' : ''}`}
+                        className={`appearance-none block w-full px-3 py-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.confirmPassword && touched.confirmPassword ? 'border-red-500' : ''}`}
                       />
                     </div>
                     {errors.confirmPassword && touched.confirmPassword && <p className='text-red-500'>{errors.confirmPassword}</p>}

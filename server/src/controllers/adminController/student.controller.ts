@@ -4,7 +4,8 @@ import { getStudentLists , changeStudentStatuss } from '../../services/admin.ser
 
 export const getStudentList = async(req : Request,res : Response) :  Promise<void> => {
     try {
-        const students = await getStudentLists() 
+        let search = req.query.search
+        const students = await getStudentLists(search) 
         res.send(students)
         
     } catch (error) {

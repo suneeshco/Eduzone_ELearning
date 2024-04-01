@@ -3,9 +3,9 @@ import {   changeInstructorStatus } from "../repositories/instructor.repository"
 import { getInstructorList } from "../repositories/user.repository"
 
 
-export const getStudentLists = async ()=>{
+export const getStudentLists = async (search:any)=>{
     try {
-        let students = await getStudentList()
+        let students = await getStudentList(search)
         return students
     } catch (error) {
         throw error
@@ -23,9 +23,9 @@ export const changeStudentStatuss = async (id:string)=>{
     }
 }
 
-export const getInstructorLists = async ()=>{
+export const getInstructorLists = async (search:any)=>{
     try {
-        let instructors = await getInstructorList()
+        let instructors = await getInstructorList(search)
         return instructors
     } catch (error) {
         throw error

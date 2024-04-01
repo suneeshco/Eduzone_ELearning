@@ -26,7 +26,7 @@ export const instructorSignUpSchema = yup.object().shape({
 export const updateProfileSchema = yup.object().shape({
     firstname: yup.string().required('First name is required'),
     lastname: yup.string().required('Last name is required'),
-    email: yup.string().matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email').required('Email is required'),
+    
 
     mobile: yup.string()
         .matches(/^[1-9][0-9]{9}$/, 'Mobile number must be 10 digits and should not start with 0')

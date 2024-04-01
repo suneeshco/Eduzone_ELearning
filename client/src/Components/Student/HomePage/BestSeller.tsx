@@ -3,10 +3,14 @@ import { studentApiRequest } from '../../../api/axios';
 import { Course } from '../../../utils/apiTypes/ApiTypes';
 import { Link } from 'react-router-dom';
 import { FaStar, FaRegStar } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 
-const BestSeller = () => {
+const BestSeller: React.FC = () => {
 
+
+
+  const navigate = useNavigate()
 
     const [courseDetails, setCourseDetails] = useState<Course[]>([])
     const fetchCourses = async () => {
@@ -49,7 +53,7 @@ const BestSeller = () => {
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
     {courseDetails.map((course) => (
       <div key={course._id} className="bg-white border border-gray-200 shadow-xl overflow-hidden">
-        <Link to={`/coursedetail/${course?._id}`}>
+        <Link to={`/courseDetail/${course?._id}`}>
           <img className="w-full h-48 object-cover" src={course?.imageUrl} alt="Course Thumbnail" />
         </Link>
         <div className="p-4">

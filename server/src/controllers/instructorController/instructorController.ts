@@ -116,8 +116,8 @@ export const editCourse = async (req : Request,res : Response) : Promise<void> =
 
 export const updateProfile = async (req : Request,res : Response) : Promise<void> => {
     try {
-        const { firstname, lastname, email, mobile ,id } = req.body;
-        const instructor = await updateProfiles(firstname, lastname, email, mobile, id);
+        const { firstname, lastname, mobile ,id } = req.body;
+        const instructor = await updateProfiles(firstname, lastname, mobile, id);
         res.send({instructor})
       } catch (error) {
         console.log("error",error);

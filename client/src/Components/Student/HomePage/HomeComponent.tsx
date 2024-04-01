@@ -3,7 +3,7 @@ import landImage from '../../../assets/images/HomePage/Home1.jpg';
 import { Link, useNavigate } from 'react-router-dom';
 import { Avatar } from "@material-tailwind/react";
 
-const HomeComponent = () => {
+const HomeComponent: React.FC = () => {
 
   const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState("");

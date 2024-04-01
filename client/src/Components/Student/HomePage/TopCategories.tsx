@@ -1,7 +1,7 @@
 import React , {useEffect,useState} from 'react'
 import { adminApiRequest } from '../../../api/axios';
 
-const TopCategories = () => {
+const TopCategories: React.FC = () => {
 
     interface Category {
         _id: string;

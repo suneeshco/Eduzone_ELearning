@@ -72,14 +72,14 @@ export const editCourses = async (data:any)=>{
 }
 
 
-export const updateProfiles = async (firstname: string,lastname:string, email: string, mobile:string, id: string)=> {
+export const updateProfiles = async (firstname: string,lastname:string,  mobile:string, id: string)=> {
     try {
       const user = await findUserById(id);
       if (!user) {
         throw new Error('User not exists');
       }
   
-     const updatedUser = instructorUpdateProfile(firstname,lastname,email,mobile,id)
+     const updatedUser = instructorUpdateProfile(firstname,lastname,mobile,id)
       return updatedUser;
     } catch (error) {
       throw error;

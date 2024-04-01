@@ -12,7 +12,7 @@ import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth'
 import { studentApiRequest } from '../../../api/axios';
 import { Link } from 'react-router-dom';
 
-const StudentEditProfile = () => {
+const StudentEditProfile: React.FC = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -64,76 +64,101 @@ const StudentEditProfile = () => {
   return (
 
     
-    <div className='p-12 bg-gray-200'>
-      <div className="container-fluid m-12 px-4 ">
-      <div className="flex">
-        <div className="w-1/4 p-5 ">
-          <div className="bg-slate-50 rounded-lg shadow-md p-4">
-          <div className="flex justify-center">
-      <img src={ userInfo?.photo || ProfileImage} alt="Profile" className="w-24 h-24 rounded-full" />
-    </div>
-    <h2 className="text-lg font-semibold text-center mt-4">{userInfo?.firstname}</h2>
-    <div className="mt-8">
-    <Link to={'/student/profile'}> <button className="block w-full bg-sky-900 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">Profile</button></Link>
-      <Link to={'/student/profileImage'}><button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">Photo</button></Link>
-      <button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">My Courses</button>
-      <button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600">Certificates</button>
-      <button className="block w-full bg-sky-600 text-white rounded-md py-2 px-4 hover:bg-blue-600">Logout</button>
-    </div>
-           
+    <div className='p-4 md:p-12 bg-gray-200'>
+    <div className='container mx-auto px-4'>
+      <div className='flex flex-col md:flex-row'>
+        <div className='w-full md:w-1/4 p-5'>
+          <div className='bg-white rounded-lg shadow-md p-4'>
+            <div className='flex justify-center'>
+              <img
+                src={userInfo?.photo || ProfileImage}
+                alt='Profile'
+                className='w-24 h-24 rounded-full'
+              />
+            </div>
+            <h2 className='text-lg font-semibold text-center mt-4'>
+              {userInfo?.firstname}
+            </h2>
+            <div className='mt-8'>
+              <Link to={'/student/profile'}>
+                {' '}
+                <button className='block w-full bg-sky-900 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600'>
+                  Profile
+                </button>
+              </Link>
+              <Link to={'/student/profileImage'}>
+                <button className='block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600'>
+                  Photo
+                </button>
+              </Link>
+              <button className='block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600'>
+                My Courses
+              </button>
+              <button className='block w-full bg-sky-600 text-white rounded-md py-2 px-4 mb-2 hover:bg-blue-600'>
+                Certificates
+              </button>
+              <button className='block w-full bg-sky-600 text-white rounded-md py-2 px-4 hover:bg-blue-600'>
+                Logout
+              </button>
+            </div>
           </div>
         </div>
 
-        
-        <div className="w-3/4 p-5">
-                        <form onSubmit={handleSubmit}>
-                            <div className="bg-slate-50 rounded-lg shadow-md p-4">
-                                <h2 className="text-xl font-bold mb-4 text-center">Edit Profile</h2>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 font-bold mb-2">First Name:</label>
-                                    <input
-                                        type="text"
-                                        className={`appearance-none block w-full px-3 py-2 border border-gray-700  rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.firstname && touched.firstname ? 'border-red-500' : ''}`}
-                                        name="firstname"
-                                        value={values.firstname}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    />
-                                    {errors.firstname && touched.firstname && <p className='text-red-500'>{errors.firstname}</p>}
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 font-bold mb-2">Last Name:</label>
-                                    <input
-                                        type="text"
-                                        className={`appearance-none block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.lastname && touched.lastname ? 'border-red-500' : ''}`}
-                                        name="lastname"
-                                        value={values.lastname}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    />
-                                    {errors.lastname && touched.lastname && <p className='text-red-500'>{errors.lastname}</p>}
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 font-bold mb-2">Mobile Number:</label>
-                                    <input
-                                        type="text"
-                                        className={`appearance-none block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.mobile && touched.mobile ? 'border-red-500' : ''}`}
-                                        name="mobile"
-                                        value={values.mobile}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    />
-                                    {errors.mobile && touched.mobile && <p className='text-red-500'>{errors.mobile}</p>}
-                                </div>
-                                <button type="submit" className="bg-sky-600 text-white rounded-md py-2 px-4 hover:bg-blue-600">Update Profile</button>
-                            </div>
-                        </form>
-                    </div>
-    
-
-  </div>
-</div>
+        <div className='w-full md:w-3/4 p-5'>
+          <div className='bg-white rounded-lg shadow-md p-4 mr-20'>
+            <h2 className='text-xl font-bold mb-4 text-center'>Edit Profile</h2>
+            <form onSubmit={handleSubmit} className='space-y-4'>
+              <div className='mb-4'>
+                <label className='block text-gray-700 font-bold mb-2'>
+                  First Name:
+                </label>
+                <input
+                  type='text'
+                  className={`appearance-none block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.firstname && touched.firstname ? 'border-red-500' : ''}`}
+                  name='firstname'
+                  value={values.firstname}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.firstname && touched.firstname && <p className='text-red-500'>{errors.firstname}</p>}
+              </div>
+              <div className='mb-4'>
+                <label className='block text-gray-700 font-bold mb-2'>
+                  Last Name:
+                </label>
+                <input
+                  type='text'
+                  className={`appearance-none block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.lastname && touched.lastname ? 'border-red-500' : ''}`}
+                  name='lastname'
+                  value={values.lastname}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.lastname && touched.lastname && <p className='text-red-500'>{errors.lastname}</p>}
+              </div>
+              <div className='mb-4'>
+                <label className='block text-gray-700 font-bold mb-2'>
+                  Mobile Number:
+                </label>
+                <input
+                  type='text'
+                  className={`appearance-none block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.mobile && touched.mobile ? 'border-red-500' : ''}`}
+                  name='mobile'
+                  value={values.mobile}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.mobile && touched.mobile && <p className='text-red-500'>{errors.mobile}</p>}
+              </div>
+              <button type='submit' className='bg-sky-600 text-white rounded-md py-2 px-4 hover:bg-blue-600 '>
+                Update Profile
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
    
    
   )

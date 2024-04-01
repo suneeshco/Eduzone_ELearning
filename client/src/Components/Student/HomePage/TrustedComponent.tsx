@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TrustedComponent = () => {
+const TrustedComponent : React.FC= () => {
   return (
     <div>
        <div className="mx-4 sm:mx-10 md:mx-20 mt-10 sm:mt-20 border-b pb-10">

@@ -43,12 +43,11 @@ export const updateProfile = async (firstname:any,lastname:any,email:any,mobile 
 };
 
 
-export const instructorUpdateProfile = async (firstname:any,lastname:any,email:any,mobile :any,id: string) => {
+export const instructorUpdateProfile = async (firstname:any,lastname:any,mobile :any,id: string) => {
   try {
     const updatedProfile = await User.findByIdAndUpdate(id, {
       firstname,
       lastname,
-      email,
       mobile
     }, { new: true });
     return updatedProfile
@@ -71,9 +70,14 @@ export const updatePhoto = async (photo : string , userId:string) => {
 
 
 
-export const getStudentList = async () =>{
+export const getStudentList = async (search:any) =>{
   try {
-    const students = await User.find({role:'student'})
+    let query :any = { role: 'student' }
+    if (search && search.trim() !== '') {
+      const searchRegex = new RegExp(search.trim(), 'i');
+      query = { ...query, firstname : searchRegex };
+    }
+    const students = await User.find(query).sort({_id:-1})
     return students
   } catch (error) {
     throw error
@@ -81,9 +85,14 @@ export const getStudentList = async () =>{
 }
 
 
-export const getInstructorList = async () =>{
+export const getInstructorList = async (search:any) =>{
   try {
-    const students = await User.find({role:'instructor'})
+    let query :any = { role: 'instructor' }
+    if (search && search.trim() !== '') {
+      const searchRegex = new RegExp(search.trim(), 'i');
+      query = { ...query, firstname : searchRegex };
+    }
+    const students = await User.find(query).sort({_id:-1})
     return students
   } catch (error) {
     throw error

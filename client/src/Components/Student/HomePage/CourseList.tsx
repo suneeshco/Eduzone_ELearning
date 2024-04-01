@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Category } from '../../../utils/apiTypes/ApiTypes';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   Card,
   CardHeader,
@@ -17,11 +18,12 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { FaStar, FaRegStar } from 'react-icons/fa';
+import NoProducts from '../../CommonComponents/NoProducts';
 
-const CourseList = () => {
+const CourseList: React.FC = () => {
 
 
-  const [showFilter, setShowFilter] = useState(false);
+  const [showFilter, setShowFilter] = useState<boolean>(false);
 
   const toggleFilter = () => {
     setShowFilter(!showFilter); 
@@ -54,6 +56,10 @@ const CourseList = () => {
   const searchParam = QueryParams.get('s')
   const sortParam = QueryParams.get('sort')
   console.log("search", searchParam);
+
+  // if(searchParam) {
+  //   setSearchQuery(searchParam)
+  // }
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSort = parseInt(e.target.value);
@@ -128,11 +134,10 @@ const CourseList = () => {
 
   return (
     <>
-   <div className="mx-4 md:mx-1 my-8 md:my-8 border-b pb-8 md:pb-16">
-  <div className="h-36 md:h-44 bg-indigo-300 shadow-xl flex justify-center items-center mb-8">
-    <h1 className="font-bold text-black text-4xl md:text-5xl text-center">Courses</h1>
+   <div className="mx-4 md:mx-1 my-4 md:my-4 border-b pb-2 md:pb-16">
+   <div className="h-20 shadow-2xl flex justify-center items-center">
+    <h1 className="font-bold text-black text-4xl text-center">Courses</h1>
   </div>
-
   <div className="container bg-gray-200">
     <div className="flex flex-col md:flex-row items-center p-5">
       <div className="flex items-center md:ml-auto mb-4 md:mb-0">
@@ -185,45 +190,49 @@ const CourseList = () => {
         )}
       </div>
 
-      <div className="w-full md:w-5/6 bg-gradient-to-b from-blue-100 to-white p-4 rounded-lg">
-        <div className="min-h-screen">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">What to learn next</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            {currentItems.map((course) => (
-              <div key={course._id} className="bg-white border border-gray-200 shadow-xl overflow-hidden">
-                <Link to={`/coursedetail/${course?._id}`}>
-                  <img className="w-full h-48 object-cover" src={course?.imageUrl} alt="Course Thumbnail" />
-                </Link>
-                <div className="p-4">
-                  <h4 className="text-lg font-bold text-gray-900">
-                    {course.courseName}
-                  </h4>
-                  <p className="mt-1 text-gray-800">
-                    {course.courseDescription}
-                  </p>
-                  <div className="flex mt-1 text-yellow-400">
-                    {[...Array(5)].map((_, index) => (
-                      <span key={index}>
-                        {index < 4 ? <FaStar /> : <FaRegStar />}
-                      </span>
-                    ))}
-                  </div>
-                  <p className="mt-1 text-gray-800">
-                    ₹{course.courseFee}
-                  </p>
-                </div>
-              </div>
+      {currentItems.length<1 ? ( <NoProducts/>) : (
+<div className="w-full md:w-5/6 bg-gradient-to-b from-blue-100 to-white p-4 rounded-lg">
+<div className="min-h-screen">
+  <h2 className="text-2xl md:text-3xl font-bold mb-4">What to learn next</h2>
+  <div className="grid grid-cols-1 md:grid-cols-4 gap-4" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+    {currentItems.map((course) => (
+      <div key={course._id} className="bg-white border border-gray-200 shadow-xl overflow-hidden">
+        <Link to={`/courseDetail/${course?._id}`}>
+          <img className="w-full h-48 object-cover" src={course?.imageUrl} alt="Course Thumbnail" />
+        </Link>
+        <div className="p-4">
+          <h4 className="text-lg font-bold text-gray-900">
+            {course.courseName}
+          </h4>
+          <p className="mt-1 text-gray-800">
+            {course.courseDescription}
+          </p>
+          <div className="flex mt-1 text-yellow-400">
+            {[...Array(5)].map((_, index) => (
+              <span key={index}>
+                {index < 4 ? <FaStar /> : <FaRegStar />}
+              </span>
             ))}
           </div>
-          <div className="flex justify-center mt-4">
-            {pageNumbers.map((number) => (
-              <button key={number} onClick={() => paginate(number)} className="rounded-md bg-green-400 text-white m-2 px-4 py-2 hover:bg-green-600">
-                {number}
-              </button>
-            ))}
-          </div>
+          <p className="mt-1 text-gray-800">
+            ₹{course.courseFee}
+          </p>
         </div>
       </div>
+    ))}
+  </div>
+  <div className="flex justify-center mt-4">
+    {pageNumbers.map((number) => (
+      <button key={number} onClick={() => paginate(number)} className="rounded-md bg-green-400 text-white m-2 px-4 py-2 hover:bg-green-600">
+        {number}
+      </button>
+    ))}
+  </div>
+</div>
+</div>
+      )}
+
+      
     </div>
   </div>
 </div>
