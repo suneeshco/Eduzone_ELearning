@@ -8,10 +8,18 @@ import { InstructorSidebar } from "../../Components/Instructor/Sidebar/Instructo
 const HomePage = () => {
   return (
     <div>
-      <Navbar/>
-    
-      <HomeComponent/>
-    
+      <div className='fixed z-50 top-0 left-0 w-full'>
+        <Navbar />
+      </div>
+      <div className="flex flex-col md:flex-row bg-gray-100 ">
+        <div className="md:w-1/6">
+          <InstructorSidebar />
+        </div>
+
+        <div className="md:w-5/6 h-full ">
+          <HomeComponent />
+        </div>
+      </div>
     </div>
   )
 }

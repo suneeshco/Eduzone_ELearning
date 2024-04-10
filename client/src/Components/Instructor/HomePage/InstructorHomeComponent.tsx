@@ -12,7 +12,7 @@ import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
  
 
 const chartConfig = {
-  type: "bar",
+  type:"bar",
   height: 240,
   series: [
     {
@@ -101,42 +101,8 @@ const chartConfig = {
 
 const HomeComponent: React.FC = () => {
   return (
-    <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-  <Card className="h-auto md:h-screen md:max-h-[calc(100vh-2rem)] md:w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5"  placeholder={undefined}>
-  <List  placeholder={undefined}>
-        <Link to={'/instructor'}> <ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <PresentationChartBarIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Dashboard
-        </ListItem>
-        </Link>
-        <Link to={'/instructor/myCourses'}><ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <ShoppingBagIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          My Courses
-        </ListItem>
-        </Link>
-        <Link to={'/instructor/addCourse'}>
-        <ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <InboxIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Add New Course
-          
-        </ListItem>
-        </Link>
-        <Link to={'/instructor/profile'}>
-        <ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <UserCircleIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Profile
-        </ListItem>
-        </Link>
-      </List>
-  </Card>
+    <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen w-full pt-20">
+  
 
   
   <div className=" w-7/12">

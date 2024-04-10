@@ -8,7 +8,7 @@ export interface UserState{
 
 const initialState: UserState = {
     userInfo: localStorage.getItem('userInfo')  
-      ? JSON.parse(localStorage.getItem('userInfo')!) // Using the non-null assertion operator (!)
+      ? JSON.parse(localStorage.getItem('userInfo')!) 
       : null,
   };
   

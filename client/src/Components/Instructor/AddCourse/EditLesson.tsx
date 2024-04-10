@@ -259,43 +259,9 @@ const EditLesson: React.FC = () => {
         <>
 
 <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-  <Card className=" fixed top-20 h-auto md:h-screen md:max-h-[calc(100vh-2rem)] md:w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5"  placeholder={undefined}>
-  <List  placeholder={undefined}>
-        <Link to={'/instructor'}> <ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <PresentationChartBarIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Dashboard
-        </ListItem>
-        </Link>
-        <Link to={'/instructor/myCourses'}><ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <ShoppingBagIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          My Courses
-        </ListItem>
-        </Link>
-        <Link to={'/instructor/addCourse'}>
-        <ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <InboxIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Add New Course
-          
-        </ListItem>
-        </Link>
-        <Link to={'/instructor/profile'}>
-        <ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <UserCircleIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Profile
-        </ListItem>
-        </Link>
-      </List>
-  </Card>
+  
 
-  <div className=" ml-60 pl-5 w-full mx-auto px-4 py-8">
+  <div className=" pt-20 pl-5 w-full mx-auto px-4 py-8">
     <div className="bg-blue-200 h-32 flex items-center justify-center">
         <h1 className="text-3xl font-bold">Edit Lesson </h1>
     </div>

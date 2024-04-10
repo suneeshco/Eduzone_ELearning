@@ -324,7 +324,7 @@ export const googleLogin = async (email:string , password : string): Promise<Log
       }
 
      
-      const token = jwt.sign({ _id: existingUser._id }, process.env.TOKEN_SECRET!);
+      const token = jwt.sign({ _id: existingUser._id,role:existingUser.role }, process.env.TOKEN_SECRET!);
       
       return {user:existingUser,token:token};
     } catch (error) {

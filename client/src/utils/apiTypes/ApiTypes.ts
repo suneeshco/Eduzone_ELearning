@@ -47,5 +47,6 @@ export interface Course {
     imageUrl : string;
     instructorId : any;
     createdAt:Date;
+    rating: number;
   }
    

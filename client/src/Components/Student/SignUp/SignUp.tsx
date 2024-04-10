@@ -62,7 +62,7 @@ const SignUp: React.FC = () => {
   return (
     <>
       <GoogleOAuthProvider clientId={client_id}>
-        <div className="  flex flex-col justify-center py-14 sm:px-6 lg:px-8 ">
+        <div className="  flex flex-col justify-center py-14 sm:px-6 lg:px-8  mt-20">
           <div className="sm:mx-auto sm:w-full sm:max-w-4xl sm:flex">
 
             <div className="sm:w-1/2">

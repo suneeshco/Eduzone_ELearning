@@ -172,43 +172,9 @@ const CourseView: React.FC = () => {
     <>
 
 <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-  <Card className="fixed top-20 h-auto md:h-screen md:max-h-[calc(100vh-2rem)] md:w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5"  placeholder={undefined}>
-  <List  placeholder={undefined}>
-        <Link to={'/instructor'}> <ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <PresentationChartBarIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Dashboard
-        </ListItem>
-        </Link>
-        <Link to={'/instructor/myCourses'}><ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <ShoppingBagIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          My Courses
-        </ListItem>
-        </Link>
-        <Link to={'/instructor/addCourse'}>
-        <ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <InboxIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Add New Course
-          
-        </ListItem>
-        </Link>
-        <Link to={'/instructor/profile'}>
-        <ListItem  placeholder={undefined} className='text-black'>
-          <ListItemPrefix  placeholder={undefined}>
-            <UserCircleIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Profile
-        </ListItem>
-        </Link>
-      </List>
-  </Card>
+  
 
-  <div className="ml-60 pl-5 mx-auto w-full px-4 py-8">
+  <div className=" pl-5 pt-20 mx-auto w-full px-4 py-8">
 
   <div className='flex flex-col md:flex-row shadow-2xl'>
     <div className='w-full md:w-3/5 m-4 md:m-8'>
@@ -228,7 +194,7 @@ const CourseView: React.FC = () => {
         <span className='text-black'>Total Students : 7410</span>
       </div>
 
-      <div className="bg-white shadow-md rounded-lg p-6 mt-16">
+      <div className=" rounded-lg p-6 mt-16">
         <h2 className="text-2xl font-bold mb-4">Lesson List</h2>
         {lessonDetails.map((lesson) => (
           <div className="flex items-center justify-between bg-violet-300 rounded p-2 mb-2" key={lesson._id}>
@@ -252,8 +218,8 @@ const CourseView: React.FC = () => {
       </div>
     </div>
 
-    <div className='w-full md:w-2/5 m-4 md:m-8 shadow-2xl'>
-      <div className='bg-slate-50 mx-8 border-b border-black shadow-2xl pb-4'>
+    <div className='w-full md:w-2/5 m-4 md:m-8 shadow-2xl bg-slate-50'>
+      <div className=' mx-8  shadow-2xl pb-4'>
         <div>
           <img className="w-full h-auto mb-4 object-cover" src={courseDetails?.imageUrl} alt="Course Thumbnail" />
         </div>

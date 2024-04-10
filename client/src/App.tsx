@@ -18,6 +18,7 @@ import StudentCourseListPAge from './Pages/Student/CourseListingPage'
 import StudentProfileImagePage from './Pages/Student/ProfileImagePage';
 import StudentOtpPage from './Pages/Student/OtpPage'
 import StudentSingleCourseView from './Pages/Student/ViewSingleCourse';
+import StudentChatPage from './Pages/Student/ChatPageStudent'
 
 
 import InstructorHomePage from './Pages/Instructor/HomePage'
@@ -27,6 +28,8 @@ import InstructorCourseViewPage from './Pages/Instructor/CourseViewPage';
 import InstructorEditCoursePage from './Pages/Instructor/EditCoursePage';
 import InstructorEditLessonPage from './Pages/Instructor/EditLessonPage'
 import InstructorProfileImagePage from './Pages/Instructor/ProfilePhotoPage';
+import InstructorPurchaseHistoryPage from './Pages/Instructor/PurchaseHistoryPage';
+import InstructorChatPage from './Pages/Instructor/ChatPage'
 
 
 import AdminHomePage from './Pages/Admin/HomePage'
@@ -41,6 +44,8 @@ import InstructorListPage from './Pages/Admin/InstructorListPage';
 import CourseListPage from './Pages/Admin/CourseListPage';
 import AdminCourseViewPage from './Pages/Admin/CourseViewPage'
 import NotFound from './Components/CommonComponents/PageNotFound/NotFound';
+import CheckoutSuccessPage from './Pages/Student/CheckoutSuccessPage';
+import EnrolledCoursesPage from './Pages/Student/EnrolledCoursesPage';
 
 
 
@@ -60,7 +65,9 @@ const App: React.FC = () => {
           <Route path='/student/profile' element={<StudentProfilePage/>} />
           <Route path='/student/editProfile' element={<StudentEditProfilePage/>} />
           <Route path='/student/profileImage' element={<StudentProfileImagePage/>} />
-          
+          <Route path='/paymentSuccess' element={<CheckoutSuccessPage/>} />
+          <Route path='/enrolledCourses' element={<EnrolledCoursesPage/>} />
+          {/* <Route path='/student/chat' element={<StudentChatPage/>} /> */}
         </Route>
         <Route path='' element={<StudentNotPrivateRoute/>}>
           <Route path='/student/login' element={<LoginPage/>}/>
@@ -84,6 +91,8 @@ const App: React.FC = () => {
           <Route path='/instructor/editProfile' element={<EditInstructorProfilePage/>} />
           <Route path='/instructor/editLesson/:lessonId' element={<InstructorEditLessonPage/>} />
           <Route path='/instructor/profileImage' element={<InstructorProfileImagePage/>} />
+          <Route path='/instructor/purchaseHistory' element={<InstructorPurchaseHistoryPage/>} />
+          <Route path='/instructor/chat' element={<InstructorChatPage/>} />
         </Route>
 
 

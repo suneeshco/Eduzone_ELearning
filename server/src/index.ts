@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.routes';
 import adminRoutes from './routes/admin.routes';
 import instructorRoutes from './routes/instructor.routes';
 import studentRoutes from './routes/student.routes'
+import chatRoutes from './routes/chat.routes'
 import cors from 'cors';
 import session from 'express-session';
 require('dotenv').config();
@@ -34,6 +35,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/instructor',instructorRoutes);
 app.use('/api/student',studentRoutes);
+app.use('/api/chat',chatRoutes)
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/eduz').then(() => {

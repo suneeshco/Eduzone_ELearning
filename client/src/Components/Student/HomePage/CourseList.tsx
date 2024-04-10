@@ -134,103 +134,118 @@ const CourseList: React.FC = () => {
 
   return (
     <>
-   <div className="mx-4 md:mx-1 my-4 md:my-4 border-b pb-2 md:pb-16">
-   <div className="h-20 shadow-2xl flex justify-center items-center">
+   <div className="mx-4 pt-20 md:mx-1 my-4 md:my-2 border-b pb-2 md:pb-16 ">
+   <div className="h-20 shadow-2xl flex justify-center items-center bg-indigo-400">
     <h1 className="font-bold text-black text-4xl text-center">Courses</h1>
   </div>
-  <div className="container bg-gray-200">
-    <div className="flex flex-col md:flex-row items-center p-5">
-      <div className="flex items-center md:ml-auto mb-4 md:mb-0">
-        <label htmlFor="sort" className="block text-sm font-medium text-gray-700 mr-2">Sort By</label>
-        <select
-          id="sort"
-          value={sort}
-          onChange={handleSortChange}
-          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400"
-        >
-          <option value='1'>Price low to high</option>
-          <option value='-1'>Price high to low</option>
-        </select>
+  <div className="container bg-white">
+  <div className="h-20 shadow-2xl flex justify-between items-center px-4 md:px-8">
+    <div className="flex space-between">
+        <div className="relative mr-4">
+            <button
+                onClick={toggleFilter}
+                className="select-none rounded-lg bg-gray-900 py-3 px-6 text-center align-middle font-sans text-xs md:text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            >
+                Categories
+            </button>
+            {showFilter && (
+                <ul
+                    role="menu"
+                    className="absolute z-10 w-40 md:w-auto max-h-[200px] overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-xs md:text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none right-0 mt-10"
+                >
+                    {category.map((categ) => (
+                        <li
+                            key={categ._id}
+                            role="menuitem"
+                            className="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                        >
+                            <label className="inline-flex items-center cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    className="form-checkbox h-5 w-5 text-gray-600"
+                                    value={categ._id}
+                                    onChange={handleCategoryChange}
+                                />
+                                <span className="ml-2 text-black font-bold">{categ.categoryName}</span>
+                            </label>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+        <div className="relative">
+            <select
+                id="sort"
+                value={sort}
+                onChange={handleSortChange}
+                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400"
+            >
+                <option value='1'>Price low to high</option>
+                <option value='-1'>Price high to low</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+    <div className="flex flex-col md:flex-row mx-5 bg-white">
+      
+
+    {currentItems.length < 1 ? (<NoProducts/>) : (
+  <div className="w-full md:w-full p-4 rounded-lg ">
+    <div className="min-h-screen ">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4">What to learn next</h2>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        {currentItems.map((course) => (
+          <div key={course._id} className="bg-white border border-gray-200 shadow-xl overflow-hidden">
+            <Link to={`/courseDetail/${course?._id}`}>
+              <img className="w-full h-48 object-cover" src={course?.imageUrl} alt="Course Thumbnail" />
+            </Link>
+            <div className="p-4">
+              <h4 className="text-lg font-bold text-gray-900">
+                {course.courseName}
+              </h4>
+              <p className="mt-1 text-gray-800">
+                {course.courseDescription.length > 100 ? course.courseDescription.substring(0, 100) + "..." : course.courseDescription}
+              </p>
+              <div className="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
+                {[...Array(5)].map((_, index) => (
+                  <svg
+                    key={index}
+                    className={`w-4 h-4 ${
+                      index < course.rating ? 'text-yellow-300' : 'text-gray-300 dark:text-gray-500'
+                    }`}
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 22 20"
+                  >
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                  </svg>
+                ))}
+              </div>
+              <p className="mt-1 text-gray-800">
+                ₹{course.courseFee}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-center mt-4">
+        {pageNumbers.map((number) => (
+          <button key={number} onClick={() => paginate(number)} className="rounded-md bg-green-400 text-white m-2 px-4 py-2 hover:bg-green-600">
+            {number}
+          </button>
+        ))}
       </div>
     </div>
-
-    <div className="flex flex-col md:flex-row mx-5">
-      <div className="w-full md:w-1/6 md:ml-4 border-r border-gray-400 pr-10 mb-4 md:mb-0">
-        <h1 className="text-black text-xl md:text-3xl font-bold ml-2 mb-4">Filters</h1>
-
-        <button
-          onClick={toggleFilter}
-          className="select-none rounded-lg bg-gray-900 py-3 px-6 text-center align-middle font-sans text-xs md:text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-        >
-          Categories
-        </button>
-        {showFilter && (
-          <ul
-            role="menu"
-            className="absolute z-10 w-40 md:w-auto min-w-[180px] overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-xs md:text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
-          >
-            {category.map((categ) => (
-              <li
-                key={categ._id}
-                role="menuitem"
-                className="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
-              >
-                <label className="inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="form-checkbox h-5 w-5 text-gray-600"
-                    value={categ._id}
-                    onChange={handleCategoryChange}
-                  />
-                  <span className="ml-2 text-black font-bold">{categ.categoryName}</span>
-                </label>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      {currentItems.length<1 ? ( <NoProducts/>) : (
-<div className="w-full md:w-5/6 bg-gradient-to-b from-blue-100 to-white p-4 rounded-lg">
-<div className="min-h-screen">
-  <h2 className="text-2xl md:text-3xl font-bold mb-4">What to learn next</h2>
-  <div className="grid grid-cols-1 md:grid-cols-4 gap-4" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-    {currentItems.map((course) => (
-      <div key={course._id} className="bg-white border border-gray-200 shadow-xl overflow-hidden">
-        <Link to={`/courseDetail/${course?._id}`}>
-          <img className="w-full h-48 object-cover" src={course?.imageUrl} alt="Course Thumbnail" />
-        </Link>
-        <div className="p-4">
-          <h4 className="text-lg font-bold text-gray-900">
-            {course.courseName}
-          </h4>
-          <p className="mt-1 text-gray-800">
-            {course.courseDescription}
-          </p>
-          <div className="flex mt-1 text-yellow-400">
-            {[...Array(5)].map((_, index) => (
-              <span key={index}>
-                {index < 4 ? <FaStar /> : <FaRegStar />}
-              </span>
-            ))}
-          </div>
-          <p className="mt-1 text-gray-800">
-            ₹{course.courseFee}
-          </p>
-        </div>
-      </div>
-    ))}
   </div>
-  <div className="flex justify-center mt-4">
-    {pageNumbers.map((number) => (
-      <button key={number} onClick={() => paginate(number)} className="rounded-md bg-green-400 text-white m-2 px-4 py-2 hover:bg-green-600">
-        {number}
-      </button>
-    ))}
-  </div>
-</div>
-</div>
-      )}
+)}
+
 
       
     </div>

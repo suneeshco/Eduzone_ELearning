@@ -1,5 +1,9 @@
+import { RatingDocument } from '../models/ratings.model';
 import User,{ UserDocument } from '../models/user.model';
+import { updateCourseRating } from '../repositories/course.repository';
+import { courseRating , getMyRating , getAllRating ,calculateOverallRating} from '../repositories/rating.repository';
 import { findUserById ,updateProfile , updatePhoto} from '../repositories/user.repository';
+
 
 
 
@@ -44,6 +48,51 @@ export const updateProfiles = async (firstname: string,lastname:string, email: s
   
      const updatedUser = updatePhoto(photo , userId)
       return updatedUser;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+
+
+  export const courseRatings = async ( data : Partial<RatingDocument> )=> {
+    try {
+      const rating = await courseRating(data);
+      
+      return rating;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const updateOverallRating = async ( courseId:string )=> {
+    try {
+      const overallRating = await calculateOverallRating(courseId);  
+      const updated = await updateCourseRating(courseId,overallRating);    
+      return updated;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+
+
+  export const getMyRatings = async ( courseId:any, studentId:any )=> {
+    try {
+      
+      const rating = await getMyRating(courseId,studentId);
+      return rating;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+
+  export const getAllRatings = async ( courseId:any )=> {
+    try {
+      
+      const rating = await getAllRating(courseId);
+      return rating;
     } catch (error) {
       throw error;
     }

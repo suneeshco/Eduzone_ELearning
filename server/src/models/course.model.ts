@@ -9,7 +9,8 @@ export interface Course {
   imageUrl : string;
   instructorId : string;
   createdAt:Date;
-
+  students : string[];
+  rating : number;
 }
 
 export interface CourseDocument extends Course, Document {}
@@ -21,7 +22,9 @@ const CourseSchema: Schema = new Schema({
   courseDescription: { type: String, required: true },
   category: { type: String, required: true },
   imageUrl: { type: String },
+  students:[{type: String}],
   instructorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  rating : {type: Number , default:0},
   createdAt: { type: Date, default: Date.now }
 });
 

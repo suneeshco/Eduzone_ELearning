@@ -191,45 +191,11 @@ function Addcourse() {
 
   return (
 
-    <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-      <Card className="h-auto md:h-screen md:max-h-[calc(100vh-2rem)] md:w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5 fixed top-20 left-0 w-full" placeholder={undefined}>
-        <List placeholder={undefined}>
-          <Link to={'/instructor'}> <ListItem placeholder={undefined} className='text-black'>
-            <ListItemPrefix placeholder={undefined}>
-              <PresentationChartBarIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Dashboard
-          </ListItem>
-          </Link>
-          <Link to={'/instructor/myCourses'}><ListItem placeholder={undefined} className='text-black'>
-            <ListItemPrefix placeholder={undefined}>
-              <ShoppingBagIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            My Courses
-          </ListItem>
-          </Link>
-          <Link to={'/instructor/addCourse'}>
-            <ListItem placeholder={undefined} className='text-black'>
-              <ListItemPrefix placeholder={undefined}>
-                <InboxIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Add New Course
+    <div className="flex flex-col md:flex-row  h-[750px]">
+      
 
-            </ListItem>
-          </Link>
-          <Link to={'/instructor/profile'}>
-          <ListItem placeholder={undefined} className='text-black'>
-            <ListItemPrefix placeholder={undefined}>
-              <UserCircleIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Profile
-          </ListItem>
-          </Link>
-        </List>
-      </Card>
-
-      <div className=" flex flex-col sm:flex-row w-full bg-slate-100 rounded border shadow-2xl  sm:m-10">
-        <div className=" w-full sm:w-1/2 m-5 sm:mt-10 sm:me-10 sm:mb-10 sm:ml-80 pe-5 pl-5  sm:pe-10">
+      <div className=" flex flex-col sm:flex-row w-full  rounded border-l  pt-10  sm:m-10">
+        <div className=" w-full sm:w-1/2 m-5 sm:mt-10 sm:me-10 sm:mb-10  pe-5 pl-5  sm:pe-10">
           <h1 className="font-bold text-4xl">Add New Course</h1><br /><br />
           <h1 className="font-bold text-xl">Customize Your Course</h1>
           <div className="mb-4 mt-5 bg-slate-300 rounded-lg">

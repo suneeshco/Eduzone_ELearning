@@ -42,7 +42,7 @@ const BestSeller: React.FC = () => {
     <div>
       <div className="mx-4 sm:mx-10 md:mx-20 pt-8 pb-16 mt-10 sm:mt-20 border-b">
   <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
-    <h2 className="text-4xl font-bold text-white mb-4 sm:mb-0">Best Seller Courses</h2>
+    <h2 className="text-4xl font-bold text-white mb-4 sm:mb-0">Top Rated Courses</h2>
     <Link to={'/courses'}>
       <button className="text-lg font-semibold text-white border border-gray-800 rounded-lg px-6 py-3 transition duration-300 hover:bg-orange-500 hover:text-white bg-orange-700">
         Explore Courses
@@ -61,7 +61,7 @@ const BestSeller: React.FC = () => {
             {course.courseName}
           </h4>
           <p className="mt-1 text-gray-800">
-            {course.courseDescription}
+          {course.courseDescription.length > 100 ? course.courseDescription.substring(0, 100) + "..." : course.courseDescription}
           </p>
           <div className="flex mt-1 text-yellow-400">
             {[...Array(5)].map((_, index) => (

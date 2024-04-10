@@ -178,49 +178,15 @@ const EditCourse: React.FC = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-        <Card className=" fixed top-20 h-auto md:h-screen md:max-h-[calc(100vh-2rem)] md:w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5" placeholder={undefined}>
-          <List placeholder={undefined}>
-            <Link to={'/instructor'}> <ListItem placeholder={undefined} className='text-black'>
-              <ListItemPrefix placeholder={undefined}>
-                <PresentationChartBarIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Dashboard
-            </ListItem>
-            </Link>
-            <Link to={'/instructor/myCourses'}><ListItem placeholder={undefined} className='text-black'>
-              <ListItemPrefix placeholder={undefined}>
-                <ShoppingBagIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              My Courses
-            </ListItem>
-            </Link>
-            <Link to={'/instructor/addCourse'}>
-              <ListItem placeholder={undefined} className='text-black'>
-                <ListItemPrefix placeholder={undefined}>
-                  <InboxIcon className="h-5 w-5" />
-                </ListItemPrefix>
-                Add New Course
+        
 
-              </ListItem>
-            </Link>
-            <Link to={'/instructor/profile'}>
-              <ListItem placeholder={undefined} className='text-black'>
-                <ListItemPrefix placeholder={undefined}>
-                  <UserCircleIcon className="h-5 w-5" />
-                </ListItemPrefix>
-                Profile
-              </ListItem>
-            </Link>
-          </List>
-        </Card>
-
-        <div className="ml-60 pl-5 mx-auto w-full px-4 py-8 ">
+        <div className="pt-20 pl-5 mx-auto w-full px-4 py-8 ">
 
           <div className="flex flex-col md:flex-row shadow-2xl">
             <div className="w-full md:w-1/2 m-4 md:m-10 md:pe-10">
               <h1 className="font-bold text-4xl">Edit Course</h1><br /><br />
               <h1 className="font-bold text-xl">Customize Your Course</h1>
-              <div className="mb-4 mt-5 bg-slate-300 rounded-lg">
+              <div className="mb-4 mt-7 bg-slate-300 rounded-lg">
                 <div className="p-3">
                   <label htmlFor="courseName" className="block text-md font-medium text-gray-700">
                     Course Name
@@ -237,7 +203,7 @@ const EditCourse: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mb-4 mt-5 bg-slate-300 rounded-lg">
+              <div className="mb-4 mt-7 bg-slate-300 rounded-lg">
                 <div className="p-3">
                   <label className="block text-gray-700 text-sm font-semibold mb-2">
                     Description
@@ -245,13 +211,14 @@ const EditCourse: React.FC = () => {
                   <textarea
                     className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border border-gray-600 rounded"
                     placeholder="Enter Description"
+                    rows={5}
                     value={courseDescription}
                     onChange={(e) => setCourseDescription(e.target.value)}
                   />
                 </div>
               </div>
 
-              <div className="mb-4 mt-5 bg-slate-300 rounded-lg">
+              <div className="mb-4 mt-7 bg-slate-300 rounded-lg">
                 <div className="p-3">
                   <label className="block text-gray-700 text-sm font-semibold mb-2">
                     Category

@@ -53,7 +53,7 @@ const PasswordReset: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto m-4 bg-white p-8 border border-gray-300 rounded-md shadow-md">
+    <div className="max-w-md mx-auto m-4 mt-20 bg-white p-8 border border-gray-300 rounded-md shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Reset Password</h2>
       <div className="mb-4">
         <label htmlFor="newPassword" className="block font-medium text-gray-700 mb-2">New Password</label>

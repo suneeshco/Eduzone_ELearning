@@ -96,7 +96,7 @@ const Login: React.FC = () => {
   
 
   return (
-    <div>
+    <div className='mt-20'>
       {loading ? < Loader/>:(
         <GoogleOAuthProvider clientId={client_id}>
     <div className="  flex flex-col justify-center py-14 sm:px-6 lg:px-8">

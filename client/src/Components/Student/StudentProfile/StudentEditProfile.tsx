@@ -64,7 +64,7 @@ const StudentEditProfile: React.FC = () => {
   return (
 
     
-    <div className='p-4 md:p-12 bg-gray-200'>
+    <div className='p-4 md:p-12 mt-20 bg-gray-200'>
     <div className='container mx-auto px-4'>
       <div className='flex flex-col md:flex-row'>
         <div className='w-full md:w-1/4 p-5'>

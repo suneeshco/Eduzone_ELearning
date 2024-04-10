@@ -89,7 +89,7 @@ const OtpSignUp : React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto m-4 bg-white p-8 border border-gray-300 rounded-md shadow-md">
+    <div className="max-w-md mx-auto m-4 mt-40 bg-white p-8 border border-gray-300 rounded-md shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Verify Otp</h2>
       <div className="relative flex w-full max-w-[24rem]">
       <Input

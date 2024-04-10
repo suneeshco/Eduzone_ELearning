@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
 
  return (
     <>
-    <nav className="shadow-md bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  w-full">
+    <nav className="fixed top-0 z-50  shadow-md bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  w-full">
   <div className="max-w-7.5xl mx-auto px-2 py-2 sm:px-6 lg:px-8">
     <div className="flex items-center justify-between h-16">
       <div className="flex-shrink-0">
@@ -89,10 +89,10 @@ const Navbar: React.FC = () => {
     placeholder="What do you want to learn..."
     value={searchQuery}
     onChange={(e) => setSearchQuery(e.target.value)}
-    className="flex-grow px-4 py-2 border border-gray-800 rounded-md focus:outline-none focus:border-blue-400"
+    className="flex-grow px-4 py-2 border-l border-t border-b border-gray-800  focus:outline-none focus:border-blue-400"
   />
   {searchQuery && (
-   <button className="ml-2 bg-yellow-900 hover:bg-yellow-200 text-white hover:text-black px-3 py-2 rounded-md" onClick={clearSearch}>
+   <button className=" bg-white  text-black hover:text-black px-3 py-2 border-t border-e border-b border-blue-400   focus:outline-none" onClick={clearSearch}>
    &times;
  </button>
     

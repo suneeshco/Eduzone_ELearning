@@ -31,3 +31,28 @@ export const getAllCourse = async (search: any, sort: any, categories: any): Pro
     throw error;
   }
 };
+
+
+
+export const getEnrolledCourses = async (studentId: string): Promise<CourseDocument[]> => {
+  try {
+    return await Course.find({ students: { $in: [studentId] } });
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+export const updateCourseRating = async (courseId: string, rating : number): Promise<CourseDocument | null> => {
+  try {
+    const updatedCourse = await Course.findByIdAndUpdate(courseId, { rating: rating });
+    if (updatedCourse) {
+      return updatedCourse; 
+    } else {
+      throw new Error(`Course with ID ${courseId} not found`);
+    }
+  } catch (error) {
+    throw error;
+  }
+};

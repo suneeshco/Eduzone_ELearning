@@ -11,6 +11,7 @@ interface CustomRequest extends Request {
 
 export const studentAuth = async (req:Request,res:Response,next:NextFunction) => {
     try {
+        
         const authHeader = req.headers.authorization
 
         if(!authHeader || !authHeader.startsWith('Bearer')){
@@ -20,8 +21,9 @@ export const studentAuth = async (req:Request,res:Response,next:NextFunction) =>
         if (!token) {
             return res.status(401).json({ error: 'No token found' });
         }
-
+        
         const decoded : any = jwt.verify(token,process.env.TOKEN_SECRET as Secret)
+        
         if (decoded.role === 'student') {
             const user = await findUserById(decoded._id);
             if (!user) {

@@ -18,12 +18,27 @@ const adminApi = axios.create({
 
 const studentApi = axios.create({
     baseURL: config.studentBaseURL,
+    withCredentials:true
 });
 
 
 const instructorApi = axios.create({
     baseURL: config.instructorBaseURL,
 });
+
+const chatApi = axios.create({
+    baseURL: config.chatBaseUrl,
+});
+
+chatApi.interceptors.request.use((config) => {
+    const studentToken = localStorage.getItem('studentToken');
+    if (studentToken !== null) {
+    config.headers.authorization = `Bearer ${studentToken}`;
+    }
+    return config;
+    })
+
+
 
 
 
@@ -155,6 +170,29 @@ export const studentApiRequest = async (config: ApiRequestConfig) => {
           }, requestTimeout);
         config.signal = abortController.signal;
        const response = await studentApi(config);
+       clearTimeout(timeoutId);
+       return response.data;
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            console.error('Request canceled:', error.message);
+          } else {
+            throw error;
+          };
+    }
+};
+
+
+
+
+
+export const chatApiRequest = async (config: ApiRequestConfig) => {
+    try {
+        const abortController = new AbortController();
+        const timeoutId = setTimeout(() => {
+            abortController.abort();
+          }, requestTimeout);
+        config.signal = abortController.signal;
+       const response = await chatApi(config);
        clearTimeout(timeoutId);
        return response.data;
     } catch (error) {

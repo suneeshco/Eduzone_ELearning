@@ -57,7 +57,6 @@ export const addLesson = async (req : Request,res : Response) : Promise<void> =>
     try {
       
         const lessonData = req.body;
-        console.log("req",req.body);
         
         const lesson = await addLessons(lessonData);
         res.send(lesson);
@@ -192,3 +191,8 @@ export const instructorChangeImage = async (req : Request,res : Response) : Prom
         res.status(500).send({ message: 'Server Error' });
       }
 }
+
+
+
+
+

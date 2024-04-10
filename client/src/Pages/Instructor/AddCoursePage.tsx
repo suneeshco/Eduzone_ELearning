@@ -5,15 +5,19 @@ import AddCourse from '../../Components/Instructor/AddCourse/AddCourse';
 
 const AddCoursePage = () => {
   return (
-    <div  >
-       <div className='fixed top-0 left-0 w-full'>
+    <div>
+      <div className='fixed z-50 top-0 left-0 w-full'>
         <Navbar />
       </div>
-     
-      <div className="mt-20"> 
-        <AddCourse />
+      <div className="flex flex-col md:flex-row  ">
+        <div className="md:w-1/6">
+          <InstructorSidebar />
+        </div>
+
+         <div className="md:w-5/6 h-full ">
+          <AddCourse />
+        </div>
       </div>
-      
     </div>
   )
 }
