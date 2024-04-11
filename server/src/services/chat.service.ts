@@ -27,7 +27,7 @@ export const createMessages = async (chatId: string, senderId: string, text: str
 };
 
 
-export const getConversationss = async (userId: string) => {
+export const getConversationss = async (userId: string ) => {
   try {
     const conversations = await getConversations(userId)
     const updatedConversations = await Promise.all(conversations.map(async(con)=>{

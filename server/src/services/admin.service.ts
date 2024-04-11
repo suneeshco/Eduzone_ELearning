@@ -1,6 +1,7 @@
 import { getStudentList , changeStudentStatus } from "../repositories/user.repository"
 import {   changeInstructorStatus } from "../repositories/instructor.repository"
 import { getInstructorList } from "../repositories/user.repository"
+import { changeCourseStatus } from "../repositories/course.repository"
 
 
 export const getStudentLists = async (search:any)=>{
@@ -16,6 +17,18 @@ export const getStudentLists = async (search:any)=>{
 export const changeStudentStatuss = async (id:string)=>{
     try {
         let data:any = await changeStudentStatus(id);
+        
+        return data
+    } catch (error) {
+        throw error
+    }
+}
+
+
+
+export const changeCourseStatuss = async (id:string)=>{
+    try {
+        let data:any = await changeCourseStatus(id);
         
         return data
     } catch (error) {

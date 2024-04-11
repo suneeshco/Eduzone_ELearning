@@ -11,6 +11,7 @@ export const createOrders = async (data: Partial<OrderDocument>) => {
             instructorId : data.instructorId,
             courseId : data.courseId,
             amount : data.amount,
+            orderId : data.orderId
           });
           await order.save();
 
@@ -39,6 +40,20 @@ export const createOrders = async (data: Partial<OrderDocument>) => {
         const orders = await Order.find(query).populate('studentId').populate('courseId').sort({ createdAt: -1 });
         return orders;
       }
+    } catch (error) {
+      throw error;
+    }
+  };
+
+
+
+  export const getStudentOrderDetails = async (studentId : any) => {
+    try {
+      let query = { studentId: studentId };
+      
+        const orders = await Order.find(query).populate('studentId').populate('courseId').populate('instructorId').sort({ createdAt: -1 });
+        return orders;
+      
     } catch (error) {
       throw error;
     }

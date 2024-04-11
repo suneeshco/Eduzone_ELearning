@@ -129,6 +129,15 @@ const toggleStatus = async (id:string) => {
       url: '/deleteCategory',
       data: { id },
     });
+
+    setCategories(prevCategories => {
+      return prevCategories.map(category => {
+        if (category._id === id) {
+          return { ...category, status: !category.status };
+        }
+        return category;
+      });
+    });
     Swal.fire(
       'Changed!',
       'Category status has been updated.',
@@ -144,62 +153,22 @@ const toggleStatus = async (id:string) => {
 
     fetchCategories();
 
- }, [categories]);
+ }, [search]);
 
 
 
 
  return (
   <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-  <Card className="h-auto md:h-screen md:max-h-[calc(100vh-2rem)] md:w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5"  placeholder={undefined}>
-    <List  placeholder={undefined}>
-      <Link to={'/admin'}>
-        <ListItem className='text-black'  placeholder={undefined}>
-          <ListItemPrefix  placeholder={undefined}>
-            <PresentationChartBarIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Dashboard
-        </ListItem>
-      </Link>
-      <Link to={'/admin/category'}>
-        <ListItem className='text-black'  placeholder={undefined}>
-          <ListItemPrefix  placeholder={undefined}>
-            <ShoppingBagIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Categories
-        </ListItem>
-      </Link>
-      <Link to={'/admin/studentList'}>
-        <ListItem className='text-black'  placeholder={undefined}>
-          <ListItemPrefix  placeholder={undefined}>
-            <UserCircleIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Student List
-        </ListItem>
-      </Link>
-      <Link to={'/admin/instructorList'}>
-        <ListItem className='text-black'  placeholder={undefined}>
-          <ListItemPrefix  placeholder={undefined}>
-            <UserCircleIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Instructor List
-        </ListItem>
-      </Link>
-      <Link to={'/admin/courseList'}>
-        <ListItem className='text-black'  placeholder={undefined}>
-          <ListItemPrefix  placeholder={undefined}>
-            <ShoppingBagIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Course List
-        </ListItem>
-      </Link>
-    </List>
-  </Card>
+        
+
+        <div className="pt-20   w-full  py-8 ">
+  
 
   
   <div className="flex-1">
-    <div className="w-full p-5 sm:p-10 space-y-5 sm:space-y-10 bg-gray-100 rounded shadow">
-     <Card className="h-full w-full m-3 px-5 sm:px-10 py-5 sm:py-10" placeholder={undefined} >
+    <div className="w-full   space-y-5 sm:space-y-10 bg-gray-100 rounded shadow">
+     <Card className="h-full w-full  px-5 sm:px-10 py-5 sm:py-10" placeholder={undefined} >
         <h2 className="text-2xl font-bold">{editMode.active ? "Update" : "Add New Category"}</h2>
         <div className="bg-white shadow rounded-lg p-2 w-full sm:w-1/2">
           <div className="flex justify-between items-center">
@@ -302,6 +271,7 @@ const toggleStatus = async (id:string) => {
     </div>
   </div>
   
+</div>
 </div>
 
   

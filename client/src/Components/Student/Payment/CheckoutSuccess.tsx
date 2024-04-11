@@ -22,7 +22,6 @@ const CheckoutSuccess = () => {
       <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-3xl font-semibold text-green-600 mb-4">Payment Success!</h1>
-        <h1 className="text-lg font-semibold text-amber-900 mb-4">Reference Number : </h1>
         <p className="text-lg text-gray-700 mb-6">Thank you for your payment. Your order has been successfully processed.</p>
         <div className="flex justify-center space-x-4">
           <Link

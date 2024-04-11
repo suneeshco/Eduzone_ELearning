@@ -3,7 +3,7 @@ import  Category  from '../models/category.model';
 
 export const getAllCourse = async (search: any, sort: any, categories: any): Promise<CourseDocument[]> => {
   try {
-    let query: any = {};
+    let query: any = {isApproved: true};
     if (search && search.trim() !== '') {
       const searchRegex = new RegExp(search.trim(), 'i');
       query = { ...query, courseName: searchRegex };
@@ -34,13 +34,7 @@ export const getAllCourse = async (search: any, sort: any, categories: any): Pro
 
 
 
-export const getEnrolledCourses = async (studentId: string): Promise<CourseDocument[]> => {
-  try {
-    return await Course.find({ students: { $in: [studentId] } });
-  } catch (error) {
-    throw error;
-  }
-};
+
 
 
 
@@ -56,3 +50,33 @@ export const updateCourseRating = async (courseId: string, rating : number): Pro
     throw error;
   }
 };
+
+
+
+export const getAllCourseAd = async (search: any): Promise<CourseDocument[]> => {
+  try {
+    let query: any = {};
+    if (search && search.trim() !== '') {
+      const searchRegex = new RegExp(search.trim(), 'i');
+      query = { ...query, courseName: searchRegex };
+    }
+    return await Course.find(query).populate('instructorId').sort({createdAt:-1});
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+export const changeCourseStatus = async (id: string) => {
+  try {
+     const course = await Course.findOne({ _id: id });
+     if (!course) {
+       throw new Error('Course not found'); 
+     }
+     course.isApproved = !course.isApproved
+     await course.save();
+     return course;
+  } catch (error) {
+     throw error; 
+  }
+ };

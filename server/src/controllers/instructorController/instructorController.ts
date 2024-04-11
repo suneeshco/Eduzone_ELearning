@@ -116,8 +116,8 @@ export const editCourse = async (req : Request,res : Response) : Promise<void> =
 export const updateProfile = async (req : Request,res : Response) : Promise<void> => {
     try {
         const { firstname, lastname, mobile ,id } = req.body;
-        const instructor = await updateProfiles(firstname, lastname, mobile, id);
-        res.send({instructor})
+        const user = await updateProfiles(firstname, lastname, mobile, id);
+        res.send({user})
       } catch (error) {
         console.log("error",error);
         res.status(500).send({ message: 'Server Error' });

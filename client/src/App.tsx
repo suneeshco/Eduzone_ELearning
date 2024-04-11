@@ -19,6 +19,7 @@ import StudentProfileImagePage from './Pages/Student/ProfileImagePage';
 import StudentOtpPage from './Pages/Student/OtpPage'
 import StudentSingleCourseView from './Pages/Student/ViewSingleCourse';
 import StudentChatPage from './Pages/Student/ChatPageStudent'
+import StudentPurchaseHistoryPage from './Pages/Student/PurchaseHistoryPage'
 
 
 import InstructorHomePage from './Pages/Instructor/HomePage'
@@ -63,11 +64,12 @@ const App: React.FC = () => {
         
         <Route path='' element={<StudentPrivateRoute/>}>
           <Route path='/student/profile' element={<StudentProfilePage/>} />
-          <Route path='/student/editProfile' element={<StudentEditProfilePage/>} />
-          <Route path='/student/profileImage' element={<StudentProfileImagePage/>} />
+          {/* <Route path='/student/editProfile' element={<StudentEditProfilePage/>} />
+          <Route path='/student/profileImage' element={<StudentProfileImagePage/>} /> */}
           <Route path='/paymentSuccess' element={<CheckoutSuccessPage/>} />
           <Route path='/enrolledCourses' element={<EnrolledCoursesPage/>} />
           {/* <Route path='/student/chat' element={<StudentChatPage/>} /> */}
+          <Route path='/myPurchaseHistory'  element={<StudentPurchaseHistoryPage/>}/>
         </Route>
         <Route path='' element={<StudentNotPrivateRoute/>}>
           <Route path='/student/login' element={<LoginPage/>}/>
@@ -88,9 +90,9 @@ const App: React.FC = () => {
           <Route path='/instructor/courseView/:id' element={<InstructorCourseViewPage/>}/>
           <Route path='/instructor/editCourse/:courseId' element={<InstructorEditCoursePage/>}/>
           <Route path='/instructor/profile' element={<InstructorProfilePage/>} />
-          <Route path='/instructor/editProfile' element={<EditInstructorProfilePage/>} />
+          {/* <Route path='/instructor/editProfile' element={<EditInstructorProfilePage/>} /> */}
           <Route path='/instructor/editLesson/:lessonId' element={<InstructorEditLessonPage/>} />
-          <Route path='/instructor/profileImage' element={<InstructorProfileImagePage/>} />
+          {/* <Route path='/instructor/profileImage' element={<InstructorProfileImagePage/>} /> */}
           <Route path='/instructor/purchaseHistory' element={<InstructorPurchaseHistoryPage/>} />
           <Route path='/instructor/chat' element={<InstructorChatPage/>} />
         </Route>

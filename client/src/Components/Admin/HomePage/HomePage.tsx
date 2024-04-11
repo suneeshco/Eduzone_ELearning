@@ -101,51 +101,11 @@ const chartConfig = {
 
 const HomeComponent: React.FC = () => {
  return (
-    <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-      <Card className="h-auto md:h-screen md:max-h-[calc(100vh-2rem)] md:w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5" placeholder={undefined}>
-        <List placeholder={undefined}>
-          <Link to={'/admin'}>
-            <ListItem className='text-black' placeholder={undefined}>
-              <ListItemPrefix placeholder={undefined}>
-                <PresentationChartBarIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Dashboard
-            </ListItem>
-          </Link>
-          <Link to={'/admin/category'}>
-            <ListItem className='text-black' placeholder={undefined}>
-              <ListItemPrefix placeholder={undefined}>
-                <ShoppingBagIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Categories
-            </ListItem>
-          </Link>
-          <Link to={'/admin/studentList'}>
-            <ListItem className='text-black' placeholder={undefined}>
-              <ListItemPrefix placeholder={undefined}>
-                <UserCircleIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Student List
-            </ListItem>
-          </Link>
-          <Link to={'/admin/instructorList'}>
-            <ListItem className='text-black' placeholder={undefined}>
-              <ListItemPrefix placeholder={undefined}>
-                <UserCircleIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Instructor List
-            </ListItem>
-          </Link>
-          <Link to={'/admin/courseList'}>
-            <ListItem className='text-black' placeholder={undefined}>
-              <ListItemPrefix placeholder={undefined}>
-                <ShoppingBagIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Course List
-            </ListItem>
-          </Link>
-        </List>
-      </Card>
+  <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
+        
+
+  <div className="pt-20   w-full  py-8 ">
+      
 
       <div className="flex-1 ">
       <Card  placeholder={undefined} className='mx-40 mt-20'>
@@ -169,6 +129,7 @@ const HomeComponent: React.FC = () => {
       </CardBody>
     </Card>
       </div>
+    </div>
     </div>
  );
 };

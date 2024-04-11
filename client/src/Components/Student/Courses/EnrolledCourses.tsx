@@ -8,11 +8,19 @@ import { FaStar, FaRegStar } from 'react-icons/fa';
 import NoProducts from '../../CommonComponents/NoProducts';
 import NoCourse from '../../../assets/images/DefaultImages/noCourses.jpg'
 
-
+interface OrderData {
+  _id:string;
+  instructorId : any;
+  studentId : any;
+  courseId : any;
+  createdAt : Date;
+  amount : number;
+  orderId : string;
+}
 
 
 const EnrolledCourses = () => {
-  const [courseDetails, setCourseDetails] = useState<Course[]>([])
+  const [courseDetails, setCourseDetails] = useState<OrderData[]>([])
 
 
   const { userInfo } = useSelector((state: RootState) => state.studentAuth)
@@ -39,7 +47,8 @@ const EnrolledCourses = () => {
             url: `/getEnrolledCourses/${userInfo?._id}`,
           });
 
-
+          console.log("courses",response);
+          
           setCourseDetails(response);
         } catch (error) {
           console.error("Failed to fetch courses:", error);
@@ -66,18 +75,18 @@ const EnrolledCourses = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto max-w-7xl">
                 {currentItems.map((course) => (
                   <div key={course._id} className="bg-white border border-gray-200 shadow-xl overflow-hidden">
-                    <Link to={`/courseDetail/${course._id}`}>
-                      <img className="w-full h-48 object-cover" src={course?.imageUrl} alt="Course Thumbnail" />
+                    <Link to={`/courseDetail/${course.courseId._id}`}>
+                      <img className="w-full h-48 object-cover" src={course?.courseId.imageUrl} alt="Course Thumbnail" />
                     </Link>
                     <div className="p-4">
-                      <h4 className="text-lg font-bold text-gray-900">{course.courseName}</h4>
-                      <p className="mt-1 text-gray-800">{course.courseDescription.length > 100 ? course.courseDescription.substring(0, 100) + "..." : course.courseDescription}</p>
+                      <h4 className="text-lg font-bold text-gray-900">{course.courseId.courseName}</h4>
+                      <p className="mt-1 text-gray-800">{course.courseId.courseDescription.length > 100 ? course.courseId.courseDescription.substring(0, 100) + "..." : course.courseId.courseDescription}</p>
                       <div className="flex mt-1 text-yellow-400">
                         {[...Array(5)].map((_, index) => (
                           <span key={index}>{index < 4 ? <FaStar /> : <FaRegStar />}</span>
                         ))}
                       </div>
-                      <p className="mt-1 text-gray-800">₹{course.courseFee}</p>
+                      <p className="mt-1 text-gray-800">₹{course.courseId.courseFee}</p>
                     </div>
                   </div>
                 ))}

@@ -6,6 +6,7 @@ export interface Order {
   courseId : any;
   amount : number;
   createdAt:Date;
+  orderId:string;
 }
 
 export interface OrderDocument extends Order, Document {}
@@ -15,7 +16,8 @@ const OrderSchema: Schema = new Schema({
     studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: true },
     amount : { type: Number, required: true },
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    orderId:{type: String}
 });
 
 

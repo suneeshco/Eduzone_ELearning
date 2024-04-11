@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Course } from '../../../utils/apiTypes/ApiTypes';
-import { studentApiRequest } from '../../../api/axios';
+import { adminApiRequest, studentApiRequest } from '../../../api/axios';
 import {
  Card,
  CardHeader,
@@ -22,10 +22,11 @@ import {
  ListItemPrefix,
 } from "@material-tailwind/react";
 import { PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, PowerIcon } from '@heroicons/react/24/solid';
+import Swal from 'sweetalert2';
 
 
 const CourseList: React.FC = () => {
- const TABLE_HEAD = ["Course Name", "Course Fee", "Instructor", "Action",];
+ const TABLE_HEAD = ["Course Name", "Course Fee", "Instructor", "Action", "Status"];
 
  const [courseDetails, setCourseDetails] = useState<Course[]>([]);
  const [search, setSearch] = useState<string>('');
@@ -42,7 +43,7 @@ const CourseList: React.FC = () => {
  }
 
  const fetchCourses = async () => {
-    const response = await studentApiRequest({
+    const response = await adminApiRequest({
       method: 'get',
       url: '/getAllCourses',
       params: { search: search }
@@ -50,60 +51,52 @@ const CourseList: React.FC = () => {
     setCourseDetails(response);
  };
 
+ const toggleStatus = async (id: string) => {
+  const confirmation = await Swal.fire({
+    title: 'Are you sure?',
+    text: 'You are about to change the status of the course!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, Approve!'
+  });
+
+  if (confirmation.isConfirmed) {
+    const response = await adminApiRequest({
+      method: 'patch',
+      url: '/changeCourseStatus',
+      data: { id },
+    });
+    setCourseDetails(prevCourseDetails => {
+      return prevCourseDetails.map(course => {
+        if (course._id === id) {
+          return { ...course, isApproved: !course.isApproved };
+        }
+        return course;
+      });
+    });
+    Swal.fire(
+      'Changed!',
+      'Course status has been updated.',
+      'success'
+    );
+  }
+};
+
  useEffect(() => {
     fetchCourses();
- }, [courseDetails]);
+ }, [search]);
 
 
   return (
     <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-    <Card className="h-auto md:h-screen md:max-h-[calc(100vh-2rem)] md:w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5"  placeholder={undefined}>
-      <List  placeholder={undefined}>
-        <Link to={'/admin'}>
-          <ListItem className='text-black'  placeholder={undefined}>
-            <ListItemPrefix  placeholder={undefined}>
-              <PresentationChartBarIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Dashboard
-          </ListItem>
-        </Link>
-        <Link to={'/admin/category'}>
-          <ListItem className='text-black'  placeholder={undefined}>
-            <ListItemPrefix  placeholder={undefined}>
-              <ShoppingBagIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Categories
-          </ListItem>
-        </Link>
-        <Link to={'/admin/studentList'}>
-          <ListItem className='text-black'  placeholder={undefined}>
-            <ListItemPrefix  placeholder={undefined}>
-              <UserCircleIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Student List
-          </ListItem>
-        </Link>
-        <Link to={'/admin/instructorList'}>
-          <ListItem className='text-black'  placeholder={undefined}>
-            <ListItemPrefix  placeholder={undefined}>
-              <UserCircleIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Instructor List
-          </ListItem>
-        </Link>
-        <Link to={'/admin/courseList'}>
-          <ListItem className='text-black'  placeholder={undefined}>
-            <ListItemPrefix  placeholder={undefined}>
-              <ShoppingBagIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Course List
-          </ListItem>
-        </Link>
         
-      </List>
-    </Card>
+
+        <div className="pt-20  me-5 w-full  py-8 ">
+    
   
-    <Card className="h-full w-full m-5 sm:m-10 px-5 sm:px-10"  placeholder={undefined}>
+    <Card className="h-full w-full pt-10 me-10  sm:px-10"  placeholder={undefined}>
   <CardHeader floated={false} shadow={false} className="rounded-none"  placeholder={undefined}>
     <div className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-8">
       <div>
@@ -167,6 +160,16 @@ const CourseList: React.FC = () => {
                 <button className="bg-green-500 text-white p-2 rounded mr-2 hover:bg-green-600">View</button>
               </Link>
             </td>
+            <td className="p-4">
+              {course.isApproved ? (
+                <p className='text-green-900' onClick={() => toggleStatus(course._id)}>Approved</p>
+              ):(
+                <button onClick={() => toggleStatus(course._id)} className="bg-orange-500 text-white p-2 rounded mr-2 hover:bg-orange-600">Approve</button>
+
+              )}
+              
+              
+            </td>
           </tr>
         ))}
       </tbody>
@@ -184,7 +187,7 @@ const CourseList: React.FC = () => {
 </Card>
 
   </div>
-
+</div>
 
     
   )

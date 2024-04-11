@@ -48,5 +48,6 @@ export interface Course {
     instructorId : any;
     createdAt:Date;
     rating: number;
+    isApproved:boolean; 
   }
    

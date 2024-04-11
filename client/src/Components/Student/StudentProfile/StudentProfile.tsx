@@ -311,6 +311,9 @@ const StudentProfile: React.FC = () => {
           <Link to={'/enrolledCourses'}><a href="#" className="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full">
             My Courses
           </a></Link>
+          <Link to={'/myPurchaseHistory'}><a href="#" className="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full">
+            Purchase History
+          </a></Link>
           <a href="#" className="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full">
             Logout
           </a>

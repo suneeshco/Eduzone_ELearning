@@ -25,8 +25,8 @@ const Message: React.FC<MessageProps> = ({message, own ,sender}) => {
         <div className='flex flex-col-reverse mr-5'> 
         <div className='text-xs mt-3 text-right'>{format(message.createdAt)}</div>
             <div className='flex'>
-                <p className="p-2 rounded-2xl text-white bg-pink-500">{message.text} </p>
-                <img src={sender?.photo || profilePhoto} alt='Photo' className="w-8 h-8 rounded-full object-cover-full mr-5"/>
+                <p className="p-2 rounded-2xl text-white bg-pink-500 px-6">{message.text} </p>
+                <img src={sender?.photo || profilePhoto} alt='Photo' className="w-8 h-8 rounded-full object-cover-full mr-5 ml-5"/>
             </div>
         </div>
     </div>  
@@ -36,7 +36,7 @@ const Message: React.FC<MessageProps> = ({message, own ,sender}) => {
         <div className='w-9/12'>
             <div className='flex'>
                 <img src='https://ashisheditz.com/wp-content/uploads/2023/09/profile-picture-cute-whatsapp.jpg' alt='' className="w-8 h-8 rounded-full object-cover-full mr-5" />
-                <p className="p-2 rounded-2xl text-white bg-indigo-500">{message.text} </p>
+                <p className="p-2 rounded-2xl text-white bg-indigo-500 px-6">{message.text} </p>
             </div>
             <div className='text-xs mt-3 text-left'>{format(message.createdAt)}</div>
         </div>  

@@ -48,6 +48,7 @@ export const findChat = async (senderId :string, receiverId : string) => {
 
   export const getConversations = async (userId :string) => {
     try {
+      
         return await Chat.find({ members: { $in: [userId] } });
       } catch (error) {
         throw error;

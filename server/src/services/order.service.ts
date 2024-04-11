@@ -4,7 +4,10 @@ import { createOrders, getOrderDetails } from "../repositories/order.repository"
 
 export const createOrder = async ( data : Partial<OrderDocument> )=> {
     try {
-      const order = await createOrders(data);
+      const timestamp = Date.now(); 
+      const orderId = `ORD-${timestamp}`;
+    const orderDataWithId = { ...data, orderId }; 
+      const order = await createOrders(orderDataWithId);
       return order;
     } catch (error) {
       throw error;

@@ -11,6 +11,7 @@ export interface Course {
   createdAt:Date;
   students : string[];
   rating : number;
+  isApproved : boolean;
 }
 
 export interface CourseDocument extends Course, Document {}
@@ -25,7 +26,8 @@ const CourseSchema: Schema = new Schema({
   students:[{type: String}],
   instructorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   rating : {type: Number , default:0},
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  isApproved:{type: Boolean , default : false}
 });
 
 

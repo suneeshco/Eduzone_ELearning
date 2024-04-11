@@ -1,23 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import landImage from '../../../assets/images/HomePage/Course1.jpg'
 import { Course } from '../../../utils/apiTypes/ApiTypes';
 import { adminApiRequest, studentApiRequest } from '../../../api/axios';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Category } from '../../../utils/apiTypes/ApiTypes';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-  Tooltip,
-  IconButton,
-} from "@material-tailwind/react";
-import { FaStar, FaRegStar } from 'react-icons/fa';
+
 import NoProducts from '../../CommonComponents/NoProducts';
 
 const CourseList: React.FC = () => {
@@ -134,12 +122,12 @@ const CourseList: React.FC = () => {
 
   return (
     <>
-   <div className="mx-4 pt-20 md:mx-1 my-4 md:my-2 border-b pb-2 md:pb-16 ">
-   <div className="h-20 shadow-2xl flex justify-center items-center bg-indigo-400">
+   <div className=" pt-16 md:mx-1 my-4 md:my-2 border-b pb-2 md:pb-16 ">
+   <div className="h-20 shadow-2xl flex justify-center items-center bg-slate-200">
     <h1 className="font-bold text-black text-4xl text-center">Courses</h1>
   </div>
-  <div className="container bg-white">
-  <div className="h-20 shadow-2xl flex justify-between items-center px-4 md:px-8">
+  <div className="container bg-white px-12">
+  <div className="h-20  flex justify-between items-center px-4 md:px-8">
     <div className="flex space-between">
         <div className="relative mr-4">
             <button
@@ -192,58 +180,59 @@ const CourseList: React.FC = () => {
 
 
 
-    <div className="flex flex-col md:flex-row mx-5 bg-white">
+    <div className="flex flex-col md:flex-row px-8 bg-white">
       
 
     {currentItems.length < 1 ? (<NoProducts/>) : (
-  <div className="w-full md:w-full p-4 rounded-lg ">
-    <div className="min-h-screen ">
-      <h2 className="text-2xl md:text-3xl font-bold mb-4">What to learn next</h2>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {currentItems.map((course) => (
-          <div key={course._id} className="bg-white border border-gray-200 shadow-xl overflow-hidden">
-            <Link to={`/courseDetail/${course?._id}`}>
-              <img className="w-full h-48 object-cover" src={course?.imageUrl} alt="Course Thumbnail" />
-            </Link>
-            <div className="p-4">
-              <h4 className="text-lg font-bold text-gray-900">
-                {course.courseName}
-              </h4>
-              <p className="mt-1 text-gray-800">
-                {course.courseDescription.length > 100 ? course.courseDescription.substring(0, 100) + "..." : course.courseDescription}
-              </p>
-              <div className="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
-                {[...Array(5)].map((_, index) => (
-                  <svg
-                    key={index}
-                    className={`w-4 h-4 ${
-                      index < course.rating ? 'text-yellow-300' : 'text-gray-300 dark:text-gray-500'
-                    }`}
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 22 20"
-                  >
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                  </svg>
-                ))}
-              </div>
-              <p className="mt-1 text-gray-800">
-                ₹{course.courseFee}
-              </p>
+  <div className="w-full md:w-full p-2 rounded-lg ">
+  <div className="min-h-screen">
+    <h2 className="text-lg md:text-xl font-semibold mb-2">What to learn next</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4" style={{ maxWidth: '1400px', margin: '0 auto' }}>
+      {currentItems.map((course) => (
+        <div key={course._id} className="bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden">
+          <Link to={`/courseDetail/${course?._id}`}>
+            <img className="w-full h-40 object-cover" src={course?.imageUrl} alt="Course Thumbnail" />
+          </Link>
+          <div className="p-3">
+            <h4 className="text-base md:text-lg font-semibold text-gray-800">
+              {course.courseName}
+            </h4>
+            <p className="mt-1 text-sm md:text-base text-gray-600">
+              {course.courseDescription.length > 80 ? course.courseDescription.substring(0, 80) + "..." : course.courseDescription}
+            </p>
+            <div className="flex items-center mt-2 space-x-1">
+              {[...Array(5)].map((_, index) => (
+                <svg
+                  key={index}
+                  className={`w-3 h-3 md:w-4 md:h-4 ${
+                    index < course.rating ? 'text-yellow-300' : 'text-gray-300 dark:text-gray-500'
+                  }`}
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 20"
+                >
+                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                </svg>
+              ))}
             </div>
+            <p className="mt-1 text-base font-semibold text-gray-700">
+              ₹{course.courseFee}
+            </p>
           </div>
-        ))}
-      </div>
-      <div className="flex justify-center mt-4">
-        {pageNumbers.map((number) => (
-          <button key={number} onClick={() => paginate(number)} className="rounded-md bg-green-400 text-white m-2 px-4 py-2 hover:bg-green-600">
-            {number}
-          </button>
-        ))}
-      </div>
+        </div>
+      ))}
+    </div>
+    <div className="flex justify-center mt-3">
+      {pageNumbers.map((number) => (
+        <button key={number} onClick={() => paginate(number)} className="rounded-md bg-green-400 text-white m-1 px-3 py-1 hover:bg-green-600 text-sm">
+          {number}
+        </button>
+      ))}
     </div>
   </div>
+</div>
+
 )}
 
 

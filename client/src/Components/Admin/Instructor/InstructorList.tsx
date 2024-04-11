@@ -70,6 +70,14 @@ const InstructorList: React.FC = () => {
         url: '/changeInstructorStatus',
         data: { id },
       });
+      setInstructorDetails(prevInstructorDetails => {
+        return prevInstructorDetails.map(instructor => {
+          if (instructor._id === id) {
+            return { ...instructor, status: !instructor.status };
+          }
+          return instructor;
+        });
+      });
       Swal.fire(
         'Changed!',
         'Instructor status has been updated.',
@@ -80,7 +88,7 @@ const InstructorList: React.FC = () => {
 
  useEffect(() => {
     fetchStudents();
- }, [InstructorDetails]);
+ }, [search]);
 
 
   return (  
@@ -91,53 +99,12 @@ const InstructorList: React.FC = () => {
 
 
     <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
-    <Card className="h-auto md:h-screen md:max-h-[calc(100vh-2rem)] md:w-[16rem] p-4 shadow-xl shadow-blue-gray-900/5"  placeholder={undefined}>
-      <List  placeholder={undefined}>
-        <Link to={'/admin'}>
-          <ListItem className='text-black'  placeholder={undefined}>
-            <ListItemPrefix  placeholder={undefined}>
-              <PresentationChartBarIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Dashboard
-          </ListItem>
-        </Link>
-        <Link to={'/admin/category'}>
-          <ListItem className='text-black'  placeholder={undefined}>
-            <ListItemPrefix  placeholder={undefined}>
-              <ShoppingBagIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Categories
-          </ListItem>
-        </Link>
-        <Link to={'/admin/studentList'}>
-          <ListItem className='text-black'  placeholder={undefined}>
-            <ListItemPrefix  placeholder={undefined}>
-              <UserCircleIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Student List
-          </ListItem>
-        </Link>
-        <Link to={'/admin/instructorList'}>
-          <ListItem className='text-black'  placeholder={undefined}>
-            <ListItemPrefix  placeholder={undefined}>
-              <UserCircleIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Instructor List
-          </ListItem>
-        </Link>
-        <Link to={'/admin/courseList'}>
-          <ListItem className='text-black'  placeholder={undefined}>
-            <ListItemPrefix  placeholder={undefined}>
-              <ShoppingBagIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Course List
-          </ListItem>
-        </Link>
         
-      </List>
-    </Card>
+
+        <div className="pt-20   w-full ">
+    
   
-    <Card className="h-full w-full m-10 px-10"  placeholder={undefined}>
+    <Card className="h-full w-full pt-10 px-10"  placeholder={undefined}>
       <CardHeader floated={false} shadow={false} className="rounded-none"  placeholder={undefined}>
         <div className="mb-8 flex items-center justify-between gap-8">
           <div>
@@ -250,7 +217,7 @@ const InstructorList: React.FC = () => {
       </CardFooter>
     </Card>
   </div>
-
+</div>
 
     
   )

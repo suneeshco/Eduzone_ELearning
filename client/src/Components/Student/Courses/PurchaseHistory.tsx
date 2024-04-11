@@ -3,7 +3,7 @@ import { PresentationChartBarIcon, ShoppingBagIcon, InboxIcon, UserCircleIcon } 
 import { Avatar, Card, CardBody, CardFooter, CardHeader, Chip, Input, List, ListItem, ListItemPrefix, Tooltip, Typography } from '@material-tailwind/react'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { instructorApiRequest } from '../../../api/axios'
+import { instructorApiRequest, studentApiRequest } from '../../../api/axios'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Redux/RootState/RootState'
 
@@ -17,11 +17,11 @@ interface OrderData {
     orderId:string;
 }
 
-const PurchaseList = () => {
+const PurchaseHistory = () => {
     const { userInfo } = useSelector((state: RootState) => state.studentAuth);
 
     
-    const TABLE_HEAD = ["Course", "Student", "Amount", "Enrolled Date",];
+    const TABLE_HEAD = ["OrderId","Course", "Instructor", "Amount", "Purchase Date",];
     const [orderDetails, setOrderDetails] = useState<OrderData[]>([]);
     const [search,setSearch] =useState<string>('')
 
@@ -41,12 +41,14 @@ const PurchaseList = () => {
  }
 
     const fetchOrders = async () => {
-        const response = await instructorApiRequest({
-          method: 'get',
-          url: '/getOrderDetails',
-          params: {  instructorId : userInfo?._id , search :search}
-        });
-        setOrderDetails(response);
+        const response = await studentApiRequest({
+            method: 'get',
+            url: `/getEnrolledCourses/${userInfo?._id}`,
+          });
+
+          console.log("courses",response);
+          
+          setOrderDetails(response);
      };
 
 
@@ -60,7 +62,7 @@ const PurchaseList = () => {
     
       
 
-      <Card className="h-screen w-full mt-20  px-4 pt-14 "  placeholder={undefined}>
+      <Card className=" h-screen w-full mt-20  px-20 pt-14   "  placeholder={undefined}>
     <CardHeader floated={false} shadow={false} className="rounded-none"  placeholder={undefined}>
       <div className="mb-4 md:mb-8 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
         <div className="md:w-2/3">
@@ -72,11 +74,11 @@ const PurchaseList = () => {
           </Typography>
         </div>
         <div className="w-full md:w-auto">
-          <Input
+          {/* <Input
             placeholder='Search...' className='border border-black'
             value={search} onChange={(e)=>{setSearch(e.target.value)}}
             crossOrigin={undefined}
-          />
+          /> */}
         </div>
       </div>
     </CardHeader>
@@ -102,6 +104,16 @@ const PurchaseList = () => {
         <tbody>
           {currentItems.map((order) => (
             <tr key={order._id}>
+                <td className='p-2 md:p-4'>
+                <div className="w-max">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"  placeholder={undefined}                  >
+                    {order.orderId}
+                  </Typography>
+                </div>
+              </td>
               <td className='p-2 md:p-4'>
                 <div className="flex items-center gap-3">
                   <Avatar src={order.courseId.imageUrl} alt="avatar" placeholder={undefined} />
@@ -121,7 +133,7 @@ const PurchaseList = () => {
                     variant="small"
                     color="blue-gray"
                     className="font-normal"  placeholder={undefined}                  >
-                    {order.studentId.firstname}
+                    {order.instructorId.firstname}
                   </Typography>
                 </div>
               </td>
@@ -165,4 +177,4 @@ const PurchaseList = () => {
   )
 }
 
-export default PurchaseList
+export default PurchaseHistory
