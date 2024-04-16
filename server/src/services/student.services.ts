@@ -2,7 +2,7 @@ import { RatingDocument } from '../models/ratings.model';
 import User,{ UserDocument } from '../models/user.model';
 import { updateCourseRating } from '../repositories/course.repository';
 import { courseRating , getMyRating , getAllRating ,calculateOverallRating} from '../repositories/rating.repository';
-import { findUserById ,updateProfile , updatePhoto} from '../repositories/user.repository';
+import { findUserById ,updateProfile , updatePhoto, getAllInstructorList} from '../repositories/user.repository';
 
 
 
@@ -93,6 +93,18 @@ export const updateProfiles = async (firstname: string,lastname:string, email: s
       
       const rating = await getAllRating(courseId);
       return rating;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+
+
+  export const getInstructors = async (  )=> {
+    try {
+      
+      const instructors = await getAllInstructorList();
+      return instructors;
     } catch (error) {
       throw error;
     }

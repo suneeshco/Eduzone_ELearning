@@ -191,7 +191,7 @@ const CourseList: React.FC = () => {
       {currentItems.map((course) => (
         <div key={course._id} className="bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden">
           <Link to={`/courseDetail/${course?._id}`}>
-            <img className="w-full h-40 object-cover" src={course?.imageUrl} alt="Course Thumbnail" />
+            <img className="w-full h-40 object-cover-full" src={course?.imageUrl} alt="Course Thumbnail" />
           </Link>
           <div className="p-3">
             <h4 className="text-base md:text-lg font-semibold text-gray-800">

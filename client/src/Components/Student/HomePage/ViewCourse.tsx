@@ -12,6 +12,7 @@ import StarRating from '../Courses/StarRating';
 import toast from 'react-hot-toast';
 import ChatPageStudent from '../../../Pages/Student/ChatPageStudent';
 import chatIcon from '../../../assets/images/DefaultImages/chat.jpg'
+import VideoPlayer from './VideoPlayer';
 
 
 interface Course {
@@ -56,6 +57,9 @@ const ViewCourse: React.FC = () => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
   const [chatWindow,setChatWindow] = useState<boolean>(false)
+  const [publicId,setPublicId] = useState('')
+  const [isClick,setIsClick] = useState(false)
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
 
 
@@ -142,9 +146,7 @@ const ViewCourse: React.FC = () => {
 
 
 
-  const handleLessonClick = (lessonVideo: string) => {
-    window.open(lessonVideo);
-  };
+  
 
 
 
@@ -186,7 +188,15 @@ const ViewCourse: React.FC = () => {
   }
 
 
+  const handleLessonClick = (lessonVideo: string) => {
+    setPublicId(lessonVideo);
+    setIsVideoOpen(true);
+};
 
+const handleCloseVideo = () => {
+    setIsVideoOpen(false);
+    setPublicId('');
+};
 
   return (
     // <div>
@@ -250,7 +260,14 @@ const ViewCourse: React.FC = () => {
     //   </div>
     //   <BestSeller />
     // </div>
-
+<>
+{isVideoOpen && (
+                <VideoPlayer
+                    publicId={publicId}
+                    courseId={courseDetails?._id}
+                    onClose={handleCloseVideo} // Pass onClose function
+                />
+            )}
 
 
 <div>
@@ -400,7 +417,7 @@ const ViewCourse: React.FC = () => {
 </div>
 </div>
 
-
+</>
   )
 }
 

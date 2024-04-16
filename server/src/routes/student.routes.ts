@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { getAllCourses ,updateProfile , getStudentDetails , studentChangeImage , stripePayment ,createOrders, getEnrolledCourses , courseRating ,getMyRating , getAllRating} from '../controllers/studentController/studentController';
-import { studentAuth } from '../middlewares/auth.middleware';
+import { getAllCourses ,updateProfile , getStudentDetails , studentChangeImage , stripePayment ,createOrders, getEnrolledCourses , courseRating ,getMyRating , getAllRating , getInstructorList , videoPlay} from '../controllers/studentController/studentController';
+import { authenticateUser, studentAuth } from '../middlewares/auth.middleware';
 import { getLessons, getSingleCourse } from '../controllers/instructorController/instructorController';
 
 
@@ -18,5 +18,7 @@ router.post('/courseRating',studentAuth,courseRating)
 router.get('/getMyRating',studentAuth,getMyRating)
 router.get('/getAllRating',getAllRating)
 router.post('/createOrder',studentAuth,createOrders)
+router.get('/getInstructorList',getInstructorList)
+router.get('/video', authenticateUser )
 
 export default router;

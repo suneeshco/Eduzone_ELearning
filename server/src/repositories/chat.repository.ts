@@ -27,13 +27,15 @@ export const findChat = async (senderId :string, receiverId : string) => {
 
 
 
-  export const createMessage = async (chatId:string,senderId :string,  text:string) => {
+  export const createMessage = async (chatId:string,senderId :string,  text:string , mediaUrl: string , mediaType:string) => {
     try {
         
       const message = await Message.create({
         chatId:chatId,
         senderId:senderId,
-        text:text
+        text:text,
+        mediaUrl : mediaUrl,
+        mediaType:mediaType
       });
       await message.save();
 

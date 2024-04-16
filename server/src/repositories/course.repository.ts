@@ -14,6 +14,8 @@ export const getAllCourse = async (search: any, sort: any, categories: any): Pro
       sortCriteria = { ...sortCriteria, courseFee: 1 };
     } else if (sort === '-1') {
       sortCriteria = { ...sortCriteria, courseFee: -1 };
+    }else if (sort === 'rating') {
+      sortCriteria = { ...sortCriteria, rating:-1 };
     }
 
     let activeCategories = await Category.find({ status: true }).distinct('_id');

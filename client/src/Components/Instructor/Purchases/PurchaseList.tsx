@@ -21,7 +21,7 @@ const PurchaseList = () => {
     const { userInfo } = useSelector((state: RootState) => state.studentAuth);
 
     
-    const TABLE_HEAD = ["Course", "Student", "Amount", "Enrolled Date",];
+    const TABLE_HEAD = ["Course","Order Id", "Student", "Amount", "Enrolled Date",];
     const [orderDetails, setOrderDetails] = useState<OrderData[]>([]);
     const [search,setSearch] =useState<string>('')
 
@@ -113,6 +113,16 @@ const PurchaseList = () => {
                       {order.courseId.courseName}
                     </Typography>
                   </div>
+                </div>
+              </td>
+              <td className='p-2 md:p-4'>
+                <div className="w-max">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"  placeholder={undefined}                  >
+                    {order.orderId}
+                  </Typography>
                 </div>
               </td>
               <td className='p-2 md:p-4'>

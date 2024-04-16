@@ -273,32 +273,32 @@ export const googleSignup=async(email:string ,password:string, name:string , rol
 
    
     const token = jwt.sign({ _id: newUser._id }, process.env.TOKEN_SECRET!);
-    if(newUser){
+    // if(newUser){
       
-        console.log(newPassword);
+    //     console.log(newPassword);
         
 
-        const transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false,
-            requireTLS: true,
-            auth: {
-                user: process.env.USER_NAME,
-                pass: process.env.USER_PASSWORD
-            }
-        });
-        const mailOptions = {
-            from: process.env.USER_NAME,
-            to: newUser.email,
-            subject: "Verification Code",
-            text: `Thank you for creating account. Your Password Is ${newPassword}`
-        };
-        const info = await transporter.sendMail(mailOptions);
-        console.log("Email sent: " + info.response);
+    //     const transporter = nodemailer.createTransport({
+    //         host: "smtp.gmail.com",
+    //         port: 587,
+    //         secure: false,
+    //         requireTLS: true,
+    //         auth: {
+    //             user: process.env.USER_NAME,
+    //             pass: process.env.USER_PASSWORD
+    //         }
+    //     });
+    //     const mailOptions = {
+    //         from: process.env.USER_NAME,
+    //         to: newUser.email,
+    //         subject: "Verification Code",
+    //         text: `Thank you for creating account. Your Password Is ${newPassword}`
+    //     };
+    //     const info = await transporter.sendMail(mailOptions);
+    //     console.log("Email sent: " + info.response);
         
     
-    }
+    // }
     return {token:token,user:newUser};
   } catch (error) {
     throw error;

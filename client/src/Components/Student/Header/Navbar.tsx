@@ -77,7 +77,7 @@ const Navbar: React.FC = () => {
         <div className="flex space-x-16">
           <Link to="/" className="text-black hover:bg-violet-600 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Home</Link>
           <Link to="/courses" className="text-black hover:bg-violet-600 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Courses</Link>
-          <Link to="" className="text-black hover:bg-violet-600 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Tutors</Link>
+          <Link to="/instructorsList" className="text-black hover:bg-violet-600 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Tutors</Link>
           <Link to="" className="text-black hover:bg-violet-600 hover:text-slate-50 px-5 py-2 rounded-md font-bold">About</Link>
         </div>
       </div>

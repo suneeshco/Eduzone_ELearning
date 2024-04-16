@@ -17,9 +17,9 @@ export const createChats = async (senderId: string, receiverId: string) => {
 };
 
 
-export const createMessages = async (chatId: string, senderId: string, text: string) => {
+export const createMessages = async (chatId: string, senderId: string, text: string, mediaUrl : string , mediaType:string) => {
   try {
-      const chat = await createMessage(chatId , senderId ,text)
+      const chat = await createMessage(chatId , senderId ,text,mediaUrl,mediaType)
       return chat;
   } catch (error) {
     throw error;

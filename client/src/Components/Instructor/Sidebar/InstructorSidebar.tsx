@@ -72,6 +72,14 @@ export const InstructorSidebar: React.FC = () => {
                 <span>New Course</span>
               </a>
             </li></Link>
+            <Link to={'/instructor/videoCall'}><li>
+              <a rel="noopener noreferrer" href="#" className={`flex w-[95%] items-center px-3 py-2.5 font-bold ${location.pathname === '/instructor/addCourse' ? 'bg-indigo-300 border-2 border-black' : 'bg-white'}  border rounded-full`}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 fill-current dark:text-gray-600">
+                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm5 11h-4v4c0 .6-.4 1-1 1s-1-.4-1-1v-4H7c-.6 0-1-.4-1-1s.4-1 1-1h4V7c0-.6.4-1 1-1s1 .4 1 1v4h4c.6 0 1 .4 1 1s-.4 1-1 1z" />
+                </svg>
+                <span>Video Call</span>
+              </a>
+            </li></Link>
           </ul>
           <ul className="pt-4 pb-2 space-y-1 text-sm">
             

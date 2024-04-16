@@ -139,3 +139,15 @@ export const changeStudentStatus = async (id: string) => {
 
 
 
+export const getAllInstructorList = async () =>{
+  try {
+    let query :any = { role: 'instructor',status:true }
+    
+    const instructors = await User.find(query).sort({_id:-1})
+    return instructors
+  } catch (error) {
+    throw error
+  }
+}
+
+

@@ -16,7 +16,7 @@ const adminApi = axios.create({
 });
 
 
-const studentApi = axios.create({
+export const studentApi = axios.create({
     baseURL: config.studentBaseURL,
     withCredentials:true
 });
@@ -129,7 +129,7 @@ interface ApiRequestConfig extends AxiosRequestConfig {
  params?: any;
 }
 
-const requestTimeout = 5000;
+const requestTimeout = 2000;
 
 export const apiRequest = async (config: ApiRequestConfig) => {
  try {

@@ -1,4 +1,5 @@
-import express from 'express';
+import express, { NextFunction } from 'express';
+import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -36,6 +37,11 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/instructor',instructorRoutes);
 app.use('/api/student',studentRoutes);
 app.use('/api/chat',chatRoutes)
+app.use((err:any, req:Request, res:Response, next:NextFunction) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+});
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/eduz').then(() => {

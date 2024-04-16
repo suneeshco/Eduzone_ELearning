@@ -3,6 +3,7 @@ import jwt , { JwtPayload, Secret } from 'jsonwebtoken';
 import { findUserById } from '../repositories/user.repository';
 import { findAdminById } from '../repositories/admin.repository';
 import session, { Session } from 'express-session';
+import { getSingleCoursess } from '../services/instructor.service';
 
 interface CustomRequest extends Request {
     session: Session & { studentDetail?: any }; 
@@ -42,6 +43,67 @@ export const studentAuth = async (req:Request,res:Response,next:NextFunction) =>
     }
 }
 
+
+
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: 'dwuy04s3s',
+  api_key: '856663183499572',
+  api_secret: '5zjwqxUUN6HNugD2jQjDFurytf0',
+});
+
+export const authenticateUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer')) {
+      return res.status(401).json({ error: 'No token found' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    if (!token) {
+      return res.status(401).json({ error: 'No token found' });
+    }
+
+    const decoded: any = jwt.verify(token, process.env.TOKEN_SECRET as Secret);
+    if (decoded.role === 'student') {
+      const user = await findUserById(decoded._id);
+      if (!user) {
+        return res.status(401).json({ error: 'User not found' });
+      }
+      if (!user.status) {
+        return res.status(401).json({ error: 'Account is blocked' });
+      }
+
+      const courseId = req.query.courseId;
+      const course = await getSingleCoursess(courseId);
+      if (!course) {
+        return res.status(404).json({ error: 'Course not found' });
+      }
+      if (!course.students.includes(decoded._id)) {
+        return res.status(403).json({ error: 'Unauthorized: Student not enrolled in the course' });
+      }
+
+      // Generate the signed Cloudinary URL
+      const publicId = req.query.publicId;
+      const signedUrl = cloudinary.url(publicId, {
+        resource_type: 'video',
+        sign_url: true,
+        transformation: [
+          { width: 640, height: 480, crop: 'fill' },
+        ],
+      });
+
+      res.json({ signedUrl });
+    next()
+    } else {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 export const instructorAuth = async (req:Request,res:Response,next:NextFunction) => {
     try {

@@ -18,6 +18,7 @@ const BestSeller: React.FC = () => {
           const response = await studentApiRequest({
             method: 'get',
             url: '/getAllCourses',
+            params:{sort:'rating'}
           });
           let courses = response.slice(0,4)
           setCourseDetails(courses);

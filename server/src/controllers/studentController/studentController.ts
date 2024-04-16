@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getAllCoursess , getEnrolledCoursess } from '../../services/course.service';
-import { updateProfiles , getStudentDetailss , studentChangeImages , courseRatings , updateOverallRating , getMyRatings , getAllRatings} from '../../services/student.services';
+import { updateProfiles , getStudentDetailss , studentChangeImages , courseRatings , updateOverallRating , getMyRatings , getAllRatings ,getInstructors} from '../../services/student.services';
 import Stripe from "stripe";
 import { createOrder } from '../../services/order.service';
 
@@ -335,5 +335,147 @@ export const getAllRating = async (req : Request,res : Response) : Promise<void>
       res.status(500).send({ message: "Error adding lesson" });
   }
 }
+
+
+
+export const getInstructorList = async (req : Request,res : Response) : Promise<void> => {
+  try {
+      
+      const instructors = await getInstructors();
+      res.send(instructors);
+  } catch (error) {
+      console.error(error); 
+      res.status(500).send({ message: "Error adding course" });
+  }
+}
+
+// const cloudinary = require('cloudinary').v2;
+// cloudinary.config({
+//   cloud_name: 'dwuy04s3s',
+//   api_key: '856663183499572',
+//   api_secret: '5zjwqxUUN6HNugD2jQjDFurytf0'
+// });
+
+// export const videoPlay = async (req: Request, res: Response): Promise<void> => {
+//   const publicId = req.query.publicId;
+//   const userId = req.query.userId
+//   const expirationTimestamp = Math.round(Date.now() / 1000) + 60 * 60; 
+//   const options = {
+//       resource_type: 'video',
+//       type: 'authenticated', 
+//       expires_at: expirationTimestamp
+//   };
+
+//   const signedUrl = cloudinary.utils.private_download_url(publicId,userId, options);
+//   res.json({ signedUrl });
+// };
+
+
+
+// const cloudinary = require('cloudinary').v2;
+
+// cloudinary.config({
+//  cloud_name: 'your_cloud_name',
+//  api_key: 'your_api_key',
+//  api_secret: 'your_api_secret'
+// });
+
+// export const videoPlay = async (req: Request, res: Response): Promise<void> => {
+
+// // // Function to generate a signed URL for a video
+// // const publicId = req.query.publicId;
+// // function generateSignedUrl(publicId:any, options:any) {
+// //  return cloudinary.url(publicId, {
+// //     resource_type: 'video',
+// //     sign_url: true,
+// //     ...options
+// //  });
+// // }
+
+// // // Example usage
+// // const videoPublicId = publicId;
+// // const signedUrl = generateSignedUrl(videoPublicId, {
+// //  transformation: [
+// //     { width: 640, height: 480, crop: 'fill' }
+// //  ]
+// // });
+
+// // res.json( {publicId} );
+
+
+
+// try {
+//   const publicId = req.query.publicId;
+  
+
+//   // Stream the video content to the client
+//   const videoStream = await cloudinary.v2.video(publicId).createReadStream();
+//   videoStream.pipe(res);
+// } catch (error) {
+//   console.error('Error streaming video:', error);
+//   res.status(500).json({ error: 'Internal server error' });
+// }
+// }
+
+
+
+
+import cloudinary from 'cloudinary';
+import request from 'request';
+
+cloudinary.v2.config({
+    cloud_name: 'dwuy04s3s',
+    api_key: '856663183499572',
+    api_secret: '5zjwqxUUN6HNugD2jQjDFurytf0'
+});
+
+export const videoPlay = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const cloudinaryUrl = req.query.publicId as string; // Get the Cloudinary URL
+        if (!cloudinaryUrl) {
+            res.status(400).json({ error: 'Cloudinary URL is required' });
+            return;
+        }
+        console.log(cloudinaryUrl);
+
+        // Extract public ID from the Cloudinary URL
+        const publicId = extractPublicId(cloudinaryUrl);
+        if (!publicId) {
+            res.status(400).json({ error: 'Invalid Cloudinary URL' });
+            return;
+        }
+
+        // Fetch the video resource from Cloudinary
+        const { resource_type, secure_url } = await cloudinary.v2.api.resource(publicId);
+
+        // Check if the resource type is video
+        if (resource_type !== 'video') {
+            res.status(400).json({ error: 'Invalid resource type. Must be a video.' });
+            return;
+        }
+
+        // Stream the video content directly to the response
+        request(secure_url).pipe(res);
+    } catch (error) {
+        console.error('Error streaming video:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
+// Helper function to extract public ID from Cloudinary URL
+const extractPublicId = (cloudinaryUrl: string): string | null => {
+    const parts = cloudinaryUrl.split('/');
+    const publicIdIndex = parts.indexOf('upload') + 1;
+    if (publicIdIndex > 0 && publicIdIndex < parts.length) {
+        return parts[publicIdIndex];
+    }
+    return null;
+}
+
+
+
+
+
 
 

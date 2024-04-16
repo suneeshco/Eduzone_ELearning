@@ -21,7 +21,9 @@ export const createChat = async(req: Request, res: Response)=>{
       const chatId = req.body.chatId
       const senderId = req.body.senderId
       const text = req.body.text
-      const message = await createMessages(chatId,senderId,text)
+      const mediaUrl= req.body.mediaUrl
+      const mediaType= req.body.mediaType
+      const message = await createMessages(chatId,senderId,text,mediaUrl,mediaType)
       res.send({message})
     } catch (error) {
       console.log(error)

@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 
-// Create a context to manage the script loading state
+
 interface CloudinaryWidgetConfig {
   cloudName: string;
   uploadPreset: string;
@@ -11,9 +11,9 @@ interface CloudinaryWidgetResult {
   info: {
     public_id: string;
     secure_url: string
-    // Add other properties if needed
+    
   };
-  // Add other properties if needed
+ 
 }
 
 declare global {
@@ -23,7 +23,7 @@ declare global {
         options: CloudinaryWidgetConfig,
         callback: (error: any, result: CloudinaryWidgetResult) => void
       ) => any;
-      // Define other properties/methods of cloudinary object if needed
+     
     };
   }
 }
@@ -41,11 +41,11 @@ const CloudinaryUploadWidget: React.FC<CloudinaryUploadWidgetProps> = ({ uwConfi
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // Check if the script is already loaded
+    
     if (!loaded) {
       const uwScript = document.getElementById("uw");
       if (!uwScript) {
-        // If not loaded, create and load the script
+        
         const script = document.createElement("script");
         script.setAttribute("async", "");
         script.setAttribute("id", "uw");
@@ -53,14 +53,14 @@ const CloudinaryUploadWidget: React.FC<CloudinaryUploadWidgetProps> = ({ uwConfi
         script.addEventListener("load", () => setLoaded(true));
         document.body.appendChild(script);
       } else {
-        // If already loaded, update the state
+        
         setLoaded(true);
       }
     }
   }, [loaded]);
 
   useEffect(() => {
-    // Initialize Cloudinary widget once loaded
+    
     if (loaded) {
       initializeCloudinaryWidget();
     }
