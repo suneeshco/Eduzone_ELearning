@@ -1,6 +1,7 @@
 import { RatingDocument } from '../models/ratings.model';
 import User,{ UserDocument } from '../models/user.model';
-import { updateCourseRating } from '../repositories/course.repository';
+import { updateCourseRating , findProgress, createProgress , getProgress } from '../repositories/course.repository';
+import { getLesson } from '../repositories/instructor.repository';
 import { courseRating , getMyRating , getAllRating ,calculateOverallRating} from '../repositories/rating.repository';
 import { findUserById ,updateProfile , updatePhoto, getAllInstructorList} from '../repositories/user.repository';
 
@@ -105,6 +106,40 @@ export const updateProfiles = async (firstname: string,lastname:string, email: s
       
       const instructors = await getAllInstructorList();
       return instructors;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const updateProgressLesson = async (studentId:string, courseId:string, lessonId:string)=> {
+    try {
+      const progress = await findProgress(studentId, courseId, lessonId);
+      console.log("progressDoc",progress);
+      
+let newProgress
+      if(progress){
+        return progress
+      }else{
+         newProgress = await createProgress(studentId, courseId, lessonId)
+      }
+      
+      
+     
+      return newProgress;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const getProgresses = async ( courseId:any , studentId : any)=> {
+    try {
+      let progressCount=0;
+      const {count,progress} = await getProgress(courseId,studentId);
+      const totalLesson = await getLesson(courseId)
+      if(count>0){
+        progressCount = (count/totalLesson.length)*100
+      }
+      return {progressCount,progress};
     } catch (error) {
       throw error;
     }

@@ -191,10 +191,10 @@ function Addcourse() {
 
   return (
 
-    <div className="flex flex-col md:flex-row  h-[750px]">
+    <div className="flex flex-col md:flex-row  h-full pt-10 bg-gray-200">
       
 
-      <div className=" flex flex-col sm:flex-row w-full  rounded border-l  pt-10  sm:m-10">
+      <div className=" flex flex-col sm:flex-row w-full  rounded border-2 border-black bg-white  pt-5  sm:m-10 mt-40">
         <div className=" w-full sm:w-1/2 m-5 sm:mt-10 sm:me-10 sm:mb-10  pe-5 pl-5  sm:pe-10">
           <h1 className="font-bold text-4xl">Add New Course</h1><br /><br />
           <h1 className="font-bold text-xl">Customize Your Course</h1>

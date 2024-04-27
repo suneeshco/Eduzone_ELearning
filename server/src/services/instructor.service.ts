@@ -1,9 +1,13 @@
 import { addCourse , getCourse , getSingleCourse , addLesson , getLesson, editCourse  , updateProfile , getLessonDetails , editLesson , deleteLessonByIds } from "../repositories/instructor.repository";
+import { addNotification } from "../repositories/notification.repository";
 import { findUserById , findInstructorById, instructorUpdateProfile, instructorUpdatePhoto} from "../repositories/user.repository";
 
 export const addCourses = async (data:any)=>{
     try {
         let courseData = await addCourse(data)
+        if(courseData){
+            let  res = await addNotification(data.instructorId, '65dc7fc13cf5dc2e16a28402' , 'New Course Added ! Verify It.','CourseAdded' )
+        }
         return courseData
     } catch (error) {
         console.log(error);

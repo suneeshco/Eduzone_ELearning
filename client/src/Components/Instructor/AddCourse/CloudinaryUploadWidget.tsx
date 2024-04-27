@@ -116,11 +116,7 @@ const CloudinaryUploadWidget: React.FC<CloudinaryUploadWidgetProps> = ({ uwConfi
     </svg>
   </span>
 </span>
-
-
-
-      
-      
+ 
     </CloudinaryScriptContext.Provider>
   );
 };

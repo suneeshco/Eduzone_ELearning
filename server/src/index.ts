@@ -10,6 +10,7 @@ import studentRoutes from './routes/student.routes'
 import chatRoutes from './routes/chat.routes'
 import cors from 'cors';
 import session from 'express-session';
+import path from 'path'
 require('dotenv').config();
 
 
@@ -28,6 +29,7 @@ app.use(cors({
   origin:"http://localhost:5173",
   credentials:true
 }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 

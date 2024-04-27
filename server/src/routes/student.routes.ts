@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllCourses ,updateProfile , getStudentDetails , studentChangeImage , stripePayment ,createOrders, getEnrolledCourses , courseRating ,getMyRating , getAllRating , getInstructorList , videoPlay} from '../controllers/studentController/studentController';
+import { getAllCourses ,updateProfile , getStudentDetails , studentChangeImage , stripePayment ,createOrders, getEnrolledCourses , courseRating ,getMyRating , getAllRating , getInstructorList , videoPlay , updateProgress , getProgress , generateCertificates , getOverview} from '../controllers/studentController/studentController';
 import { authenticateUser, studentAuth } from '../middlewares/auth.middleware';
 import { getLessons, getSingleCourse } from '../controllers/instructorController/instructorController';
 
@@ -19,6 +19,11 @@ router.get('/getMyRating',studentAuth,getMyRating)
 router.get('/getAllRating',getAllRating)
 router.post('/createOrder',studentAuth,createOrders)
 router.get('/getInstructorList',getInstructorList)
-router.get('/video', authenticateUser )
+// router.get('/video', authenticateUser )
+router.post('/updateProgress',studentAuth,updateProgress)
+router.get('/getProgress',studentAuth,getProgress)
+router.get('/video',authenticateUser,videoPlay)
+router.post('/generateCertificate',studentAuth,generateCertificates)
+router.get('/getOverview',getOverview)
 
 export default router;

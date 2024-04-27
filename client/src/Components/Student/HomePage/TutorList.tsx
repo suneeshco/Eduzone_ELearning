@@ -1,61 +1,52 @@
 import React, { useEffect, useState } from 'react'
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Typography,
-    Tooltip,
-} from "@material-tailwind/react";
+
 
 import ProfileImage from '../../../assets/images/DefaultImages/Profile.png'
 import { studentApiRequest } from '../../../api/axios';
 import { InstructorData } from '../../../utils/apiTypes/ApiTypes';
 
-const TutorList:React.FC = () => {
+const TutorList: React.FC = () => {
 
-    const [instructorDetails,setInstructorDetails] = useState<InstructorData[]>([])
+    const [instructorDetails, setInstructorDetails] = useState<InstructorData[]>([])
 
 
     const fetchInstructors = async () => {
         const response = await studentApiRequest({
-          method: 'get',
-          url: '/getInstructorList',
+            method: 'get',
+            url: '/getInstructorList',
         });
         console.log(response);
-        
-        setInstructorDetails(response);
-     };
 
-     useEffect(()=>{
+        setInstructorDetails(response);
+    };
+
+    useEffect(() => {
         fetchInstructors()
-     },[])
+    }, [])
     return (
-        <div className='mt-20 p-10'>
-            <h1 className='font-bold text-xl'>Our Expert Tutors</h1>
-        <div className='p-10 h-screen grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6'>
-           {instructorDetails.map((instructor)=>(
-            <div>
-            <Card className="w-full border" placeholder={undefined}>
-                <CardHeader floated={false} className="h-48" placeholder={undefined}>
-                    <img src={instructor.photo || ProfileImage} alt="profile-picture" className='object-cover-full'  />
-                </CardHeader>
-                <CardBody className="text-center" placeholder={undefined}>
-                    <Typography variant="h4" color="blue-gray" className="mb-2" placeholder={undefined}>
-                        {instructor.firstname}
-                    </Typography>
-                    <Typography color="blue-gray" className="font-medium" textGradient placeholder={undefined}>
-                        {instructor.email}
-                    </Typography>
-                </CardBody>
-                
-            </Card>
+        <div className="bg-gray-100 py-12 mt-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-screen" >
+                <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-8">Our Expert Tutors</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {instructorDetails.map((instructor, index) => (
+                        <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div className="relative pb-48 overflow-hidden">
+                                <img
+                                    className="absolute inset-0 h-full w-full object-cover-full"
+                                    src={instructor.photo || ProfileImage}
+                                    alt={`${instructor.firstname} ${instructor.lastname}`}
+                                />
+                            </div>
+                            <div className="p-6">
+                                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                                    {instructor.firstname} {instructor.lastname}
+                                </h3>
+                                <p className="text-gray-500">{instructor.email}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-           ))} 
-            
-            
-            
-        </div>
         </div>
     )
 }

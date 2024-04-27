@@ -11,10 +11,12 @@ const HomeComponent: React.FC = () => {
     navigate(`/courses?s=${searchQuery}`);
  };
 
+ 
+
   return (
     <>
    
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center pt-24 md:pt-24 px-4 md:px-24 mt-20  ">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center pt-24 md:pt-24 px-4 md:px-24 mt-14  ">
         <div>
           <div className="font-bold text-3xl md:text-5xl text-white mb-8">Welcome to Our E-Learning Platform</div>
           <p className="text-white text-base md:text-xl mb-8">

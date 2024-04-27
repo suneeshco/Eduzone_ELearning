@@ -38,6 +38,7 @@ import StudentListPage from '../Pages/Admin/StudentListPage';
 import InstructorListPage from '../Pages/Admin/InstructorListPage';
 import CourseListPage from '../Pages/Admin/CourseListPage';
 import AdminCourseViewPage from '../Pages/Admin/CourseViewPage';
+import AdminNotificationPage from '../Pages/Admin/NotificationPage';
 import { AdminPrivateRoute } from '../Components/Admin/PrivateRoute/PrivateRoute';
 import NotFound from '../Components/CommonComponents/PageNotFound/NotFound';
 
@@ -51,6 +52,7 @@ const AdminRoutes: React.FC = () => {
         <Route path="/instructorList" element={<InstructorListPage />} />
         <Route path="/courseList" element={<CourseListPage />} />
         <Route path="/courseView/:id" element={<AdminCourseViewPage />} />
+        <Route path="/notifications" element={<AdminNotificationPage/>}/>
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

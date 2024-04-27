@@ -68,6 +68,7 @@ import StudentPurchaseHistoryPage from '../Pages/Student/PurchaseHistoryPage';
 import InstructorVideoRoomPage from '../Pages/Instructor/VideoRoomPage'
 import { StudentPrivateRoute, StudentNotPrivateRoute } from '../Components/Student/PrivateRoute/PrivateRoute';
 import NotFound from '../Components/CommonComponents/PageNotFound/NotFound';
+import AboutUsPage from '../Pages/Student/AboutUsPage';
 
 const StudentRoutes: React.FC = () => {
   return (
@@ -78,6 +79,7 @@ const StudentRoutes: React.FC = () => {
       <Route path="/courses?s" element={<StudentCourseListPAge />} />
       <Route path="/courseDetail/:id" element={<StudentSingleCourseView />} />
       <Route path="/instructorsList" element={<TutorListPage />} />
+      <Route path="/aboutUs" element={<AboutUsPage />} />
       <Route path="" element={<StudentPrivateRoute />}>
         <Route path="/student/profile" element={<StudentProfilePage />} />
         <Route path="/paymentSuccess" element={<CheckoutSuccessPage />} />

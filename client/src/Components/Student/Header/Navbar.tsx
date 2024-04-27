@@ -65,9 +65,9 @@ const Navbar: React.FC = () => {
 
  return (
     <>
-    <nav className="fixed top-0 z-50  shadow-md bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  w-full">
+    <nav className="fixed top-0 z-50  shadow-md bg-teal-700  w-full">
   <div className="max-w-7.5xl mx-auto px-2 py-2 sm:px-6 lg:px-8">
-    <div className="flex items-center justify-between h-16">
+    <div className="flex items-center justify-between h-12">
       <div className="flex-shrink-0">
         <Link to="/" className="flex items-center">
           <h1 className='text-white text-xl font-bold'>EDUZONE</h1>
@@ -75,10 +75,10 @@ const Navbar: React.FC = () => {
       </div>
       <div className="hidden sm:block">
         <div className="flex space-x-16">
-          <Link to="/" className="text-black hover:bg-violet-600 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Home</Link>
-          <Link to="/courses" className="text-black hover:bg-violet-600 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Courses</Link>
-          <Link to="/instructorsList" className="text-black hover:bg-violet-600 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Tutors</Link>
-          <Link to="" className="text-black hover:bg-violet-600 hover:text-slate-50 px-5 py-2 rounded-md font-bold">About</Link>
+          <Link to="/" className="text-black hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Home</Link>
+          <Link to="/courses" className="text-black hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Courses</Link>
+          <Link to="/instructorsList" className="text-black hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Tutors</Link>
+          <Link to="/aboutUs" className="text-black hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">About</Link>
         </div>
       </div>
             
@@ -111,7 +111,7 @@ const Navbar: React.FC = () => {
         )}
         <div>
           {userInfo?.role === 'student' ? (
-            <button onClick={handleLogout} className="text-black-300 bg-red-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Logout</button>
+            <button onClick={handleLogout} className="text-black-300 bg-red-600 hover:bg-red-900 px-3 py-2 rounded-md font-medium">Logout</button>
           ) : (
             <Link to="/student/login" className="text-black-300 bg-green-300 hover:bg-green-500 px-3 py-2 rounded-md font-medium">Login</Link>
           )}

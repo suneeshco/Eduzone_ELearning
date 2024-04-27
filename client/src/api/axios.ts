@@ -129,7 +129,7 @@ interface ApiRequestConfig extends AxiosRequestConfig {
  params?: any;
 }
 
-const requestTimeout = 2000;
+const requestTimeout = 5000;
 
 export const apiRequest = async (config: ApiRequestConfig) => {
  try {

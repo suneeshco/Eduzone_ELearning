@@ -88,3 +88,16 @@ export const courseRating = async (data: Partial<RatingDocument>) => {
       throw error;
     }
   };
+
+
+
+
+  export const getAllRatingCount = async () => {
+    try {
+        
+        let ratingCount = await Rating.countDocuments({});
+        return ratingCount
+      } catch (error) {
+        throw error;
+      }
+  }

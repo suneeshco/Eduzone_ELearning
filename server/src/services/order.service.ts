@@ -1,6 +1,11 @@
+import fs from 'fs'
+import PDFDocument from 'pdfkit'
 import { Course } from "../models/course.model";
 import { OrderDocument } from "../models/order.model";
-import { createOrders, getOrderDetails } from "../repositories/order.repository";
+import { getAllCourse, getAllCourseAd } from "../repositories/course.repository";
+import { getCourse } from "../repositories/instructor.repository";
+import { createOrders, getOrderDetails , getSalesData, getTotalAmount , getTotalAmountInstructor, getTotalStudentInstructor , getCourseByRatingInstructor, getSalesDataForInstructor , getAllEnrolledStudents} from "../repositories/order.repository";
+import { getInstructorList, getStudentList } from "../repositories/user.repository";
 
 export const createOrder = async ( data : Partial<OrderDocument> )=> {
     try {
@@ -22,4 +27,44 @@ export const createOrder = async ( data : Partial<OrderDocument> )=> {
     } catch (error) {
         throw error
     }
+}
+
+
+export const getSalesDatas = async ()=>{
+  try {
+      let {salesData,ordersCount} = await getSalesData()
+      let totalAmount = await getTotalAmount()
+      let totalCourses = await getAllCourseAd('')
+      let totalStudents = await getStudentList('')
+      let topCourses = await getAllCourse('','rating','')
+      return { salesData, totalAmount, totalCourses, totalStudents, ordersCount,topCourses };
+  } catch (error) {
+      throw error
+  }
+}
+
+
+
+export const getSalesDatasInstructor = async (id:any)=>{
+  try {
+      let {salesData,ordersCount} = await getSalesDataForInstructor(id)
+      let totalAmount = await getTotalAmountInstructor(id)
+      let totalCourses = await getCourse(id)
+      let totalStudents = await getTotalStudentInstructor(id)
+      let topCourses = await getCourseByRatingInstructor(id)
+      return { salesData, totalAmount, totalCourses, totalStudents, ordersCount,topCourses };
+  } catch (error) {
+      throw error
+  }
+}
+
+
+
+export const getAllEnrolledStudentss = async (courseId:any)=>{
+  try {
+      let students = await getAllEnrolledStudents(courseId)
+      return students
+  } catch (error) {
+      throw error
+  }
 }

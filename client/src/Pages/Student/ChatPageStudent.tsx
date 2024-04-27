@@ -7,10 +7,11 @@ import Conversations from '../../Components/Instructor/ChatInstructor/Conversati
 import Message from '../../Components/Instructor/ChatInstructor/Message';
 import { io, Socket } from 'socket.io-client';
 import toast from 'react-hot-toast';
-import { FaCamera, FaVideo, FaFile } from 'react-icons/fa';
+import { FaCamera, FaVideo, FaFile, FaImage } from 'react-icons/fa';
 import axios from 'axios';
 import { ZIM } from "zego-zim-web";
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
+
 
 interface Messages {
     chatId?: string;
@@ -28,10 +29,11 @@ interface Chat {
 
 interface ChatPageStudentProps {
     instructorId: string;
+    closeFunction: Function;
 }
 
 
-const ChatPageStudent: React.FC<ChatPageStudentProps> = ({ instructorId }) => {
+const ChatPageStudent: React.FC<ChatPageStudentProps> = ({ instructorId, closeFunction }) => {
 
     const { userInfo } = useSelector((state: RootState) => state.studentAuth);
     const [conversations, setConversations] = useState([])
@@ -47,13 +49,13 @@ const ChatPageStudent: React.FC<ChatPageStudentProps> = ({ instructorId }) => {
 
 
     const userID = userInfo!._id.toString();
-const userName = "userName" + userID;
-const appID = 943120359;
-const serverSecret = "83c23c3e5c270270d243b8ddbb16b0bc";
-const TOKEN = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret,userInfo!._id, userID, userName);
+    const userName = "userName" + userID;
+    const appID = 943120359;
+    const serverSecret = "83c23c3e5c270270d243b8ddbb16b0bc";
+    const TOKEN = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, userInfo!._id, userID, userName);
 
-const zp = ZegoUIKitPrebuilt.create(TOKEN);
-zp.addPlugins({ ZIM });
+    const zp = ZegoUIKitPrebuilt.create(TOKEN);
+    zp.addPlugins({ ZIM });
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -216,93 +218,60 @@ zp.addPlugins({ ZIM });
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" })
     }, [message])
+
+
+    const handleClose = () => {
+        closeFunction()
+    }
     return (
-        //         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-        //     <div style={{ display: 'flex', justifyContent: 'space-between', flexGrow: 1 }}>
-        //         <Navbar />
-        //         <div className='w-full pt-20 '>
-        //             <div className='h-full bg-gray-200 p-5 '>
-        //                 <div className='w-full bg-white h-full flex'>
-        //                     <div className='w-4/12'>
-        //                         <div className="p-5">
-        //                             <input placeholder='Search for the students' className="w-full py-2 px-2 mb-4 border-b border-gray-400" />
-        //                             {conversations.map((c, index) => (
-        //                                 <div key={index} onClick={() => setCurrentChat(c)}>
-        //                                     <Conversations conversation={c} currentUser={userInfo} />
-        //                                 </div>
-        //                             ))}
-        //                         </div>
-        //                     </div>
-        //                     <div className='w-8/12 border-l'>
-        //                         <div className="p-5  "> 
-        //                             {currentChat ? (
-        //                                 <div className=''>
-        //                                     <div className="h-[500px] overflow-scroll ">
-        //                                         {message.map((m, index) => (
-        //                                             <div key={index} ref={index === message.length - 1 ? scrollRef : null}> {/* Only set ref to the last message */}
-        //                                                 <Message message={m} own={m.senderId === userInfo?._id} sender={userInfo} />
-        //                                             </div>
-        //                                         ))}
-        //                                     </div>
-        //                                     <div className='flex mt-5 pb-5 z-5 justify-between w-full'>
-        //                                         <textarea className='w-full border mx-4 p-1 rounded-xl' value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder='Message...'></textarea>
-        //                                         <button className="w-2/12  border-none rounded-xl cursor-pointer bg-green-400 text-white" onClick={handleSubmit}>Send</button>
-        //                                     </div>
-        //                                 </div>
-        //                             ) : (
-        //                                 <span>Please Open A Conversation to start</span>
-        //                             )}
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
 
+        <>
 
-
-
-
-
-        <div className=' h-full rounded-3xl shadow-2xl border-4 '>
-            <div className="p-5">
-                <div className=''>
-                    <div className="h-[450px] overflow-scroll overflow-x-hidden ">
-                        {mediaPreview ? (
-                            <>
-                                <div className='cursor-pointer' onClick={() => { setMediaPreview(null); setMediaFile(null); }}>
-                                    close
-                                </div>
-                                <img src={mediaPreview} alt="Media Preview" className="w-[80%] h-[80%] mr-2" />
-                            </>
-
-                        ) : (
-                            <>
-                                {message.map((m, index) => (
-                                    <div key={index} ref={index === message.length - 1 ? scrollRef : null}>
-                                        <Message message={m} own={m.senderId === userInfo?._id} sender={userInfo} />
-                                    </div>
-                                ))}
-                            </>
-                        )}
+            <div id="chat-container" className="  bottom-16  w-full ">
+                <div className="bg-white shadow-md rounded-lg  w-full">
+                    <div className="p-4 border-b bg-teal-700 text-white rounded-t-lg flex justify-between items-center">
+                        <p className="text-lg font-semibold">Chat</p>
+                        <button onClick={handleClose} id="close-chat" className="text-gray-300 hover:text-gray-400 focus:outline-none focus:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
                     </div>
-                    <div className='flex mt-5 pb-5 z-5 justify-between w-full'>
-                        <div className="flex items-center">
-                            <label htmlFor="file-upload" className="cursor-pointer mx-2">
-                                <FaCamera size={20} />
-                                <input id="file-upload" type="file" onChange={handleFileChange} accept="image/*, video/*" style={{ display: 'none' }} />
-                            </label>
+                    <div id="chatbox" className="p-4 h-80 overflow-y-auto">
+
+                        <div className="h-[450px] overflow-scroll overflow-x-hidden ">
+                            {mediaPreview ? (
+                                <>
+                                    <div className='cursor-pointer' onClick={() => { setMediaPreview(null); setMediaFile(null); }}>
+                                        close
+                                    </div>
+                                    <img src={mediaPreview} alt="Media Preview" className="w-[80%] h-[80%] mr-2" />
+                                </>
+
+                            ) : (
+                                <>
+                                    {message.map((m, index) => (
+                                        <div key={index} ref={index === message.length - 1 ? scrollRef : null}>
+                                            <Message message={m} own={m.senderId === userInfo?._id} sender={userInfo} />
+                                        </div>
+                                    ))}
+                                </>
+                            )}
                         </div>
-                        <textarea className='w-full border mx-4 p-1 rounded-xl' value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder='Message...'></textarea>
-                        <button className="w-2/12  border-none rounded-xl cursor-pointer bg-green-400 text-white" onClick={handleSubmit}>Send</button>
+
+                    </div>
+                    <div className="p-4 border-t flex">
+                        <label htmlFor="file-upload" className="cursor-pointer mx-2 flex items-center">
+                            <FaImage size={25} />
+                            <input id="file-upload" type="file" onChange={handleFileChange} accept="image/*, video/*" style={{ display: 'none' }} />
+                        </label>
+                        <input id="user-input" type="text" placeholder="Type a message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} className="w-full px-3 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        <button id="send-button" className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600 transition duration-300" onClick={handleSubmit}>Send</button>
                     </div>
                 </div>
-
             </div>
-        </div>
 
-
+        </>
 
 
     )

@@ -10,7 +10,7 @@ import { io, Socket } from 'socket.io-client';
 import NoConversations from '../../assets/images/DefaultImages/noConversation.jpg'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { FaCamera } from 'react-icons/fa';
+import { FaCamera, FaImage } from 'react-icons/fa';
 import axios from 'axios';
 
 
@@ -168,7 +168,7 @@ const ChatPage: React.FC = () => {
       setMessage(response.messages)
     }
     getMessages()
-  }, [currentChat,mediaPreview])
+  }, [currentChat, mediaPreview])
 
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
@@ -252,17 +252,16 @@ const ChatPage: React.FC = () => {
         <Navbar />
       </div>
       <div className="flex flex-col md:flex-row bg-gray-100 ">
-        <div className="md:w-1/5">
+        <div className="md:w-1/5 ">
           <InstructorSidebar />
         </div>
 
         <div className="md:w-4/5 h-full">
-          <div className="w-full pt-20">
-            <div className="h-[650px] bg-gray-200 p-5 flex flex-col md:flex-row md:justify-center">
+          <div className="w-full pt-14 m-1 ">
+            {/* <div className="h-[650px] bg-gray-200 p-5 flex flex-col md:flex-row md:justify-center">
               <div className="w-full md:w-3/12 border-2 border-gray-800 rounded-3xl bg-white mb-5 md:mb-0">
 
                 <div className="p-5 h-full overflow-y-auto">
-                  {/* <input type="text" placeholder='Search...' value={search} onChange={(e)=>setSearch(e.target.value)} className='border-b border-gray-900 w-full  focus:outline-none mb-5 mt-3'/> */}
 
                   {conversations.map((c, index) => (
                     <div
@@ -302,11 +301,7 @@ const ChatPage: React.FC = () => {
                           </>
                         )}
 
-                        {/* {message.map((m, index) => (
-                <div key={index} ref={index === message.length - 1 ? scrollRef : null}>
-                  <Message message={m} own={m.senderId === userInfo?._id} sender={userInfo} />
-                </div>
-              ))} */}
+                        
                       </div>
                       <div className="flex mt-5 pb-5">
                         <div className="flex items-center">
@@ -337,7 +332,104 @@ const ChatPage: React.FC = () => {
 
                 </div>
               </div>
+            </div> */}
+
+
+            <div className="container mx-auto shadow-lg rounded-lg h-[600px]">
+
+              
+
+              <div className="px-5 py-5 flex justify-between items-center border-b-2 " >
+                <div className="font-semibold  text-2xl">Chat</div>
+              </div>
+
+              <div className="flex flex-row justify-between bg-white h-[550px]">
+
+                <div className="flex flex-col w-2/5 border-r-2 overflow-y-auto bg-gray-50" >
+
+
+                  {conversations.map((c, index) => (
+                    <div
+                      key={index}
+                      className={`flex flex-row py-4 px-2 justify-center cursor-pointer items-center border-b-2 ${currentChat?._id === c._id ? "border-l-4 border-teal-800" : ""}`}
+                      onClick={() => {
+                        setCurrentChat(c);
+                        changeIsRead(c._id);
+                      }}
+                    >
+                      <Conversations conversation={c} currentUser={userInfo} />
+                    </div>
+                  ))}
+
+
+
+
+                </div>
+
+                <div className="w-full px-5 flex flex-col justify-between">
+                  <div className="flex flex-col mt-5 overflow-y-auto">
+                  {currentChat ? (
+                    <>
+                      <div className="flex-grow overflow-y-auto px-16">
+                        {mediaPreview ? (
+                          <>
+                            <div className='cursor-pointer' onClick={() => { setMediaPreview(null); setMediaFile(null); }}>
+                              close
+                            </div>
+                            <img src={mediaPreview} alt="Media Preview" className="w-[80%] h-[80%] mr-2" />
+                          </>
+
+                        ) : (
+                          <>
+                            {message.map((m, index) => (
+                              <div key={index} ref={index === message.length - 1 ? scrollRef : null}>
+                                <Message message={m} own={m.senderId === userInfo?._id} sender={userInfo} />
+                              </div>
+                            ))}
+                          </>
+                        )}
+
+                        
+                      </div>
+                      <div className="flex mt-5 pb-5">
+                        <div className="flex items-center">
+                          <label htmlFor="file-upload" className="cursor-pointer mx-2">
+                            <FaImage size={30} />
+                            <input id="file-upload" type="file" onChange={handleFileChange} accept="image/*, video/*" style={{ display: 'none' }} />
+                          </label>
+                        </div>
+                        <input
+                        type='text'
+                          className="flex-grow border-2 border-black bg-gray-300 py-3 px-3 rounded-xl"
+                          value={newMessage}
+                          onChange={(e) => setNewMessage(e.target.value)}
+                          placeholder="Message..."
+                        ></input>
+                        <button
+                          className="w-1/3 md:w-2/12 mx-2 border-2 border-black  rounded-xl cursor-pointer bg-green-400 text-white"
+                          onClick={handleSubmit}
+                        >
+                          Send
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="flex-grow flex items-center justify-center">
+                      <img src={NoConversations} className='w-[90%] h-[90%] rounded-2xl' alt="Please select a conversation to start" />
+                    </div>
+                  )}
+                  </div>
+                  
+                </div>
+
+
+              </div>
             </div>
+
+
+
+
+
           </div>
         </div>
 

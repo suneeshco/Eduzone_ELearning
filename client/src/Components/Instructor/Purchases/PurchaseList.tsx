@@ -60,7 +60,7 @@ const PurchaseList = () => {
     
       
 
-      <Card className="h-screen w-full mt-20  px-4 pt-14 "  placeholder={undefined}>
+      <Card className=" w-full mt-14 h-[700px]  me-5 px-4 pt-10 p border-2 border-black "  placeholder={undefined}>
     <CardHeader floated={false} shadow={false} className="rounded-none"  placeholder={undefined}>
       <div className="mb-4 md:mb-8 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
         <div className="md:w-2/3">

@@ -167,4 +167,12 @@ export const deleteLessonByIds = async (id: string) => {
   }
  };
 
-
+ export const getCloudinaryUrl = async (publicId: string) => {
+  try {
+    const result = await Lesson.findOne({ _id: publicId });
+    
+     return result?.lessonVideo;
+  } catch (error) {
+     throw error; 
+  }
+ };

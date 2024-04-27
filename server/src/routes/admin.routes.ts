@@ -6,6 +6,9 @@ import { changeInstructorStatus } from '../controllers/adminController/instructo
 import { adminAuth, studentAuth } from '../middlewares/auth.middleware';
 import {  getLessons, getSingleCourse } from '../controllers/instructorController/instructorController';
 import { getAllCoursesAd , changeCourseStatus } from '../controllers/adminController/course.controller';
+import { getSalesData } from '../controllers/orderController/orderController';
+import { getNotificationsAdmin , changeIsRead} from '../controllers/notificationController/notificationController';
+import { videoPlay } from '../controllers/studentController/studentController';
 
 const router = Router();
 
@@ -22,7 +25,10 @@ router.patch('/changeInstructorStatus',adminAuth, changeInstructorStatus)
 router.get('/getLessons/:id', adminAuth , getLessons )
 router.get('/getSingleCourse/:id',adminAuth , getSingleCourse)
 router.get('/getAllCourses',getAllCoursesAd)
-
+router.get('/getSalesData',adminAuth,getSalesData)
+router.get('/getNotifications',adminAuth, getNotificationsAdmin)
+router.patch('/changeIsRead/:id',adminAuth,changeIsRead)
+router.get('/video',adminAuth,videoPlay)
 
 
 export default router;

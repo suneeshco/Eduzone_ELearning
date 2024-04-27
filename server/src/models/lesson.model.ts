@@ -6,7 +6,7 @@ export interface Lesson {
   lessonVideo : string;
   courseId : string;
   createdAt:Date;
-
+  
 }
 
 export interface LessonDocument extends Lesson, Document {}

@@ -57,21 +57,21 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-    <nav className="fixed top-0 w-full shadow-2xl  border-b bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    <nav className="fixed top-0 w-full shadow-2xl  border-b " style={{backgroundColor:'#008080'}}>
       <div className="max-w-7.5xl mx-auto px-2 py-2 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-10">
           <div className="flex-shrink-0">
             <Link to="/instructor" className="flex items-center">
-              <h1 className='text-black text-2xl font-bold'>EDUZONE</h1>
+              <h1 className='text-white text-2xl font-bold'>EDUZONE</h1>
             </Link>
           </div>
 
           <div className="hidden md:flex md:items-center space-x-16">
             {userInfo && (
               <>
-                <Link to="/instructor" className="text-black hover:bg-gray-700 px-3 py-2 rounded-md font-bold">Dashboard</Link>
-                <Link to="/instructor/myCourses" className="text-black hover:bg-gray-700 px-3 py-2 rounded-md font-bold">My Courses</Link>
-                <Link to="/instructor/addCourse" className="text-black hover:bg-gray-700 px-3 py-2 rounded-md font-bold">Add Course</Link>
+                <Link to="/instructor" className="text-white hover:bg-teal-800 px-3 py-2 rounded-md font-bold">Dashboard</Link>
+                <Link to="/instructor/myCourses" className="text-white hover:bg-teal-800 px-3 py-2 rounded-md font-bold">My Courses</Link>
+                <Link to="/instructor/addCourse" className="text-white hover:bg-teal-800 px-3 py-2 rounded-md font-bold">Add Course</Link>
               </>
             )}
 

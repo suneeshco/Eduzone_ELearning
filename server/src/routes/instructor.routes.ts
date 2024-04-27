@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { addCourse , getCourses , getSingleCourse ,addLesson , getLessons ,getActiveCategories , editCourse , updateProfile, getInstructorDetails , getLessonDetails , editLesson , deleteLesson , instructorChangeImage } from '../controllers/instructorController/instructorController';
-import { instructorAuth } from '../middlewares/auth.middleware';
-import { getOrderDetails } from '../controllers/orderController/orderController';
+import { authenticateInstructor, instructorAuth } from '../middlewares/auth.middleware';
+import { getOrderDetails, getSalesDataInstructor , getAllEnrolledStudents } from '../controllers/orderController/orderController';
+import { getAllRating, videoPlay } from '../controllers/studentController/studentController';
 
 const router = Router();
 
@@ -19,6 +20,9 @@ router.put('/editLesson',instructorAuth,editLesson)
 router.delete('/deleteLesson/:id', instructorAuth,deleteLesson)
 router.patch('/instructorChangeImage',instructorAuth,instructorChangeImage)
 router.get('/getOrderDetails',instructorAuth,getOrderDetails)
-
+router.get('/getSalesData/:id',instructorAuth,getSalesDataInstructor)
+router.get('/video',authenticateInstructor,videoPlay)
+router.get('/getAllRating',getAllRating)
+router.get('/getAllEnrolledStudents',instructorAuth, getAllEnrolledStudents)
 
 export default router

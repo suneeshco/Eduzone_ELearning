@@ -18,7 +18,6 @@ const HomePage = () => {
       <TrustedComponent/>
       <BestSeller/>
       <Testimonial/>
-      <TopCategories/>
       <Footer/>
       </div>
       

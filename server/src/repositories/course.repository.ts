@@ -1,4 +1,5 @@
 import Course, { CourseDocument } from '../models/course.model';
+import StudentProgress , { StudentProgressDocument } from '../models/studentProgress.model';
 import  Category  from '../models/category.model';
 
 export const getAllCourse = async (search: any, sort: any, categories: any): Promise<CourseDocument[]> => {
@@ -82,3 +83,51 @@ export const changeCourseStatus = async (id: string) => {
      throw error; 
   }
  };
+
+
+ export const findProgress = async (studentId:string, courseId:string, lessonId:string) => {
+  try {
+     const course = await StudentProgress.findOne({ studentId:studentId , courseId:courseId,lessonId :lessonId });
+     return course;
+  } catch (error) {
+     throw error; 
+  }
+ };
+
+ export const createProgress = async (studentId:string, courseId:string, lessonId:string) => {
+  try {
+     
+     const progress = await StudentProgress.create({
+      studentId ,
+      courseId,
+      lessonId ,
+      isCompleted : true
+    });
+    await progress.save();
+     return progress;
+  } catch (error) {
+     throw error; 
+  }
+ };
+
+
+ export const getProgress = async (courseId:string, studentId:string) => {
+  try {
+    const count = await StudentProgress.countDocuments({ courseId, studentId, isCompleted: true });
+    const progress = await StudentProgress.find({ courseId, studentId, isCompleted: true });
+    return {count,progress};
+  } catch (error) {
+     throw error; 
+  }
+ };
+
+
+ export const getValidCourses = async () => {
+  try {
+    const approvedCoursesCount = await Course.countDocuments({ isApproved: true });
+    return approvedCoursesCount
+  } catch (error) {
+    throw error;
+  }
+};
+

@@ -29,7 +29,7 @@ const Message: React.FC<MessageProps> = ({ message, own, sender }) => {
                                 {message.mediaUrl ? (
                                     <img src={message.mediaUrl} alt="Media" className="w-[50%] h-[60%] ml-auto" />
                                 ) : (
-                                    <p className="p-2 rounded-2xl text-white bg-pink-500 px-6">{message.text}</p>
+                                    <p className="bg-blue-500 text-white rounded-lg py-2 px-4 inline-block">{message.text}</p>
                                 )}
                                 <img src={sender?.photo || profilePhoto} alt='Photo' className="w-8 h-8 rounded-full object-cover-full mr-5 ml-5" />
                             </div>
@@ -45,7 +45,7 @@ const Message: React.FC<MessageProps> = ({ message, own, sender }) => {
 
                             {message.mediaUrl ? (
                                 <img src={message.mediaUrl} alt="Media" className="w-[50%] h-[60%] mr-auto" />
-                            ) : (<p className="p-2 rounded-2xl text-white bg-indigo-500 px-6">{message.text} </p>)}
+                            ) : (<p className="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">{message.text} </p>)}
                         </div>
                         <div className='text-xs mt-3 text-left'>{format(message.createdAt)}</div>
                     </div>
