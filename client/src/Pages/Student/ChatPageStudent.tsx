@@ -109,7 +109,7 @@ const ChatPageStudent: React.FC<ChatPageStudentProps> = ({ instructorId, closeFu
     };
 
     useEffect(() => {
-        socket.current = io("ws://localhost:8900")
+        socket.current = io("http://localhost:3000")
         socket.current?.on("getMessageStudent", data => {
             setArrivalMessage({
                 chatId: currentChat?._id,

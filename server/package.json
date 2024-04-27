@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "ts-node src/index.ts",
     "server": "nodemon src/index.ts"
@@ -29,6 +30,7 @@
     "nodemon": "^3.0.3",
     "pdfkit": "^0.15.0",
     "request": "^2.88.2",
+    "socket.io": "^4.7.5",
     "stripe": "^14.23.0"
   },
   "devDependencies": {

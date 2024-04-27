@@ -11,10 +11,16 @@ import chatRoutes from './routes/chat.routes'
 import cors from 'cors';
 import session from 'express-session';
 import path from 'path'
-require('dotenv').config();
+
+
+const { initializeSocket } = require('./socket.js');
+import {createServer} from 'http';
+import 'dotenv/config';
 
 
 const app = express();
+
+const server = createServer(app)
 
 // Middleware
 app.use(session({
@@ -46,14 +52,19 @@ app.use((err:any, req:Request, res:Response, next:NextFunction) => {
 });
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/eduz').then(() => {
+
+
+mongoose.connect('mongodb+srv://suneeshcotkm:rAa9dkCaaDMCwvnS@eduzone.d3zjqpx.mongodb.net/Eduzone?retryWrites=true&w=majority&appName=Eduzone').then(() => {
   console.log('Connected to MongoDB');
 }).catch(error => {
   console.error('MongoDB connection error:', error);
 });
 
+//socket server
+initializeSocket(server);
+
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

@@ -197,7 +197,7 @@ const SignUp: React.FC = () => {
                       value={values.role}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      style={{ width: '300px', border: '1px solid #ccc', borderRadius: '5px', padding: '8px' }} // Adjust the styles as needed
+                      style={{ width: '300px', border: '1px solid #ccc', borderRadius: '5px', padding: '8px' }} 
                     >
                       <option value="">Select</option>
                       <option value="student">Student</option>
