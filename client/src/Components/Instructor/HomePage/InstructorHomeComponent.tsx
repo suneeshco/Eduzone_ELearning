@@ -10,6 +10,12 @@ import { instructorApiRequest } from '../../../api/axios';
 import { Course } from '../../../utils/apiTypes/ApiTypes';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Redux/RootState/RootState';
+import { ApexOptions } from 'apexcharts';
+
+interface ExtendedApexOptions extends ApexOptions {
+  options: any; 
+}
+
 
 
 
@@ -23,7 +29,7 @@ const HomeComponent: React.FC = () => {
   const [studentCount, setStudentCount] = useState(0)
   const [orderCounts, setOrderCounts] = useState(0)
   const [currentItems, setCurrentItems] = useState<Course[]>([])
-  const [chartData, setChartData] = useState({
+  const [chartData, setChartData] = useState<ExtendedApexOptions>({
     series: [
       {
         name: "Courses Purchased",
@@ -124,7 +130,7 @@ const HomeComponent: React.FC = () => {
           ...prevState,
           series: [
             {
-              ...prevState.series[0],
+              
               data: salesData.salesData,
             },
           ],
@@ -223,7 +229,7 @@ const HomeComponent: React.FC = () => {
               </div>
 
               <div className="relative p-4 h-72">
-                <Chart  series={chartData.series} type="bar" height={240} />
+                <Chart options={chartData.options} series={chartData.series} type="bar" height={240} />
               </div>
             </div>
 
