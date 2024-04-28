@@ -38,6 +38,7 @@ app.use(cors({
   credentials:true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname,'../../client/dist')))
 
 
 
@@ -55,7 +56,7 @@ app.use((err:any, req:Request, res:Response, next:NextFunction) => {
 
 
 
-mongoose.connect('mongodb+srv://suneeshcotkm:rAa9dkCaaDMCwvnS@eduzone.d3zjqpx.mongodb.net/Eduzone?retryWrites=true&w=majority&appName=Eduzone').then(() => {
+mongoose.connect(`${url}`).then(() => {
   console.log('Connected to MongoDB');
 }).catch(error => {
   console.error('MongoDB connection error:', error);
@@ -63,6 +64,10 @@ mongoose.connect('mongodb+srv://suneeshcotkm:rAa9dkCaaDMCwvnS@eduzone.d3zjqpx.mo
 
 //socket server
 initializeSocket(server);
+
+app.get('*',(req:Request,res:Response) =>{
+  res.sendFile(path.join(__dirname,'../../client/dist/index.html'))
+})
 
 
 const PORT = process.env.PORT || 3000;
