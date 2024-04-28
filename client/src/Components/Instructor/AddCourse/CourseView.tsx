@@ -64,7 +64,7 @@ const CourseView: React.FC = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [video, setVideo] = useState<File | null>(null);
+  // const [video, setVideo] = useState<File | null>(null);
   const [cloudanaryURL, setCloudanaryURL] = useState("");
   const [lessonId, setLessonId] = useState("")
   const [isVideoOpen, setIsVideoOpen] = useState(false);

@@ -5,7 +5,7 @@ import React from 'react'
 import CourseList from "../../Components/Student/HomePage/CourseList";
 import Footer from "../../Components/Student/Header/Footer";
 
-const CourseListPage = () => {
+const CourseListPage:React.FC = () => {
   return (
     <div>
       <Navbar/>

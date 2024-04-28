@@ -223,7 +223,7 @@ const HomeComponent: React.FC = () => {
               </div>
 
               <div className="relative p-4 h-72">
-                <Chart options={chartData.options} series={chartData.series} type="bar" height={240} />
+                <Chart  series={chartData.series} type="bar" height={240} />
               </div>
             </div>
 
