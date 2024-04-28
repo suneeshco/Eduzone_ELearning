@@ -1,0 +1,27 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const studentController_1 = require("../controllers/studentController/studentController");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const instructorController_1 = require("../controllers/instructorController/instructorController");
+const router = (0, express_1.Router)();
+router.get('/getAllCourses', studentController_1.getAllCourses);
+router.get('/getSingleCourse/:id', instructorController_1.getSingleCourse);
+router.get('/getLessons/:id', instructorController_1.getLessons);
+router.put('/updateProfile', auth_middleware_1.studentAuth, studentController_1.updateProfile);
+router.get('/getStudentDetails/:id', studentController_1.getStudentDetails);
+router.patch('/studentChangeImage', auth_middleware_1.studentAuth, studentController_1.studentChangeImage);
+router.post('/stripe/create-checkout-session', auth_middleware_1.studentAuth, studentController_1.stripePayment);
+router.get('/getEnrolledCourses/:id', auth_middleware_1.studentAuth, studentController_1.getEnrolledCourses);
+router.post('/courseRating', auth_middleware_1.studentAuth, studentController_1.courseRating);
+router.get('/getMyRating', auth_middleware_1.studentAuth, studentController_1.getMyRating);
+router.get('/getAllRating', studentController_1.getAllRating);
+router.post('/createOrder', auth_middleware_1.studentAuth, studentController_1.createOrders);
+router.get('/getInstructorList', studentController_1.getInstructorList);
+// router.get('/video', authenticateUser )
+router.post('/updateProgress', auth_middleware_1.studentAuth, studentController_1.updateProgress);
+router.get('/getProgress', auth_middleware_1.studentAuth, studentController_1.getProgress);
+router.get('/video', auth_middleware_1.authenticateUser, studentController_1.videoPlay);
+router.post('/generateCertificate', auth_middleware_1.studentAuth, studentController_1.generateCertificates);
+router.get('/getOverview', studentController_1.getOverview);
+exports.default = router;

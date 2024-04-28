@@ -6,7 +6,9 @@
   "type": "commonjs",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "server": "nodemon src/index.ts"
+    "server": "nodemon src/index.ts",
+    "build": "tsc"
+
   },
   "keywords": [],
   "author": "",

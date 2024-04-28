@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_controller_1 = require("../controllers/authController/auth.controller");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const router = (0, express_1.Router)();
+router.post('/signup', auth_controller_1.authController.studentSignup);
+router.post('/login', auth_controller_1.authController.studentLogin);
+router.post('/studentForgot', auth_controller_1.authController.studentForgot);
+router.patch('/studentResetPassword', auth_controller_1.authController.studentResetPassword);
+router.post('/google/register', auth_controller_1.authController.googleRegister);
+router.post('/google/login', auth_controller_1.authController.googleLogin);
+router.post('/studentOtp', auth_middleware_1.userOtpExpiration, auth_controller_1.authController.verifyOtp);
+router.get('/studentResendOtp', auth_controller_1.authController.ResendOtp);
+// router.post('/instructorSignUp', authController.instructorSignup);
+// router.post('/instructorLogin',authController.instructorLogin);
+router.post('/adminLogin', auth_controller_1.authController.adminLogin);
+exports.default = router;
