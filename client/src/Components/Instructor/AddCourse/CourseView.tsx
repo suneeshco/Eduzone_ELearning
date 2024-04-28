@@ -2,16 +2,11 @@ import React, { useState, useEffect, FormEvent } from 'react';
 import toast from 'react-hot-toast';
 import profileImage from '../../../assets/images/DefaultImages/Profile.png'
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { instructorApiRequest } from '../../../api/axios';
 
 import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 import { Cloudinary } from "@cloudinary/url-gen";
-import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
-import { FaStar, FaRegStar } from 'react-icons/fa';
-import { PresentationChartBarIcon, ShoppingBagIcon, InboxIcon, UserCircleIcon, Cog6ToothIcon, PowerIcon } from '@heroicons/react/24/solid';
-import { Card, List, ListItem, ListItemPrefix } from '@material-tailwind/react';
 import VideoPlayer from './VideoPlayer';
 
 interface Course {
@@ -91,7 +86,7 @@ const CourseView: React.FC = () => {
     }
   });
 
-  const myImage = cld.image(publicId);
+   cld.image(publicId);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -130,20 +125,20 @@ const CourseView: React.FC = () => {
 
   }, [cloudanaryURL, title]);
 
-  const handleSubmitChange = (e: React.FormEvent<HTMLInputElement>) => {
-    try {
-      const inputElement = e.target as HTMLInputElement;
-      const files = inputElement.files;
-      if (files && files.length > 0) {
-        const file = files[0];
-        setVideo(file);
-      } else {
-        setVideo(null);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSubmitChange = (e: React.FormEvent<HTMLInputElement>) => {
+  //   try {
+  //     const inputElement = e.target as HTMLInputElement;
+  //     const files = inputElement.files;
+  //     if (files && files.length > 0) {
+  //       const file = files[0];
+  //       setVideo(file);
+  //     } else {
+  //       setVideo(null);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
 
 
@@ -430,7 +425,7 @@ const CourseView: React.FC = () => {
                         </label>
                         <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
                       </div>
-                      <button type="submit" className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                      <button type="submit" className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold  rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
                         {loading ? "Adding Lesson..." : "Add Lesson"}
                       </button>
                     </div>

@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, PowerIcon } from '@heroicons/react/24/solid';
-import { Card, List, ListItem, ListItemPrefix } from '@material-tailwind/react';
+import { Card} from '@material-tailwind/react';
 import {
   CardBody,
-  CardHeader,
   Typography,
 } from "@material-tailwind/react";
 import Chart from "react-apexcharts";
-import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
 import { adminApiRequest } from '../../../api/axios';
 import { Course } from '../../../utils/apiTypes/ApiTypes';
 
@@ -18,8 +15,7 @@ import { Course } from '../../../utils/apiTypes/ApiTypes';
 const HomeComponent: React.FC = () => {
   const TABLE_HEAD = ["Course Name", "Course Fee", "Instructor", "View"];
 
-  const [isBarChartOn, setIsBarChartOn] = useState(false);
-  const [isDoughnutChartOn, setIsDoughnutChartOn] = useState(false);
+  
   const [totalAmount, setTotalAmount] = useState(0)
   const [courseCounts, setCourseCounts] = useState(0)
   const [studentCount, setStudentCount] = useState(0)

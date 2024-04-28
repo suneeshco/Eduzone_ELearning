@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import LogoImage from '../../../assets/images/Logos/Eduzone_logo1.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../Redux/RootState/RootState';
-import { adminLogout } from '../../../Redux/Slices/AdminAuth';
+import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { studentLogout } from '../../../Redux/Slices/StudentAuth';
@@ -12,8 +9,6 @@ const Navbar: React.FC = () => {
  const navigate = useNavigate();
  const dispatch = useDispatch();
  const [showLogout, setShowLogout] = useState<boolean>(false);
-
- const { userInfo } = useSelector((state: RootState) => state.studentAuth);
 
  const handleLogout = () => {
     dispatch(studentLogout({}));

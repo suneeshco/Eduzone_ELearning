@@ -3,27 +3,18 @@ import { InstructorData } from '../../../utils/apiTypes/ApiTypes';
 import Swal from 'sweetalert2';
 import { adminApiRequest } from '../../../api/axios';
 import profileImage from '../../../assets/images/DefaultImages/Profile.png';
-import { MagnifyingGlassIcon, PowerIcon, PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import {
  Card,
  CardHeader,
  Input,
  Typography,
- Button,
  CardBody,
  Chip,
  CardFooter,
- Tabs,
- TabsHeader,
- Tab,
  Avatar,
- IconButton,
  Tooltip,
- List,
- ListItem,
- ListItemPrefix,
 } from "@material-tailwind/react";
-import { Link } from 'react-router-dom';
+
 
 const InstructorList: React.FC = () => {
  const TABLE_HEAD = ["Member", "Total Courses", "Status", "Action", ];
@@ -70,6 +61,8 @@ const InstructorList: React.FC = () => {
         url: '/changeInstructorStatus',
         data: { id },
       });
+      console.log(response);
+      
       setInstructorDetails(prevInstructorDetails => {
         return prevInstructorDetails.map(instructor => {
           if (instructor._id === id) {

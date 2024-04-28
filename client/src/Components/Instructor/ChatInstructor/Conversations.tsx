@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { chatApiRequest } from '../../../api/axios'
 import { UserData } from '../../../utils/apiTypes/ApiTypes';
 import profilePhoto from '../../../assets/images/DefaultImages/Profile.png'

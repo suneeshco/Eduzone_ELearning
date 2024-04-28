@@ -1,10 +1,9 @@
 import React from 'react'
 import Navbar from '../../Components/Instructor/Header/Navbar';
 import { InstructorSidebar } from '../../Components/Instructor/Sidebar/InstructorSidebar';
-import AddCourse from '../../Components/Instructor/AddCourse/AddCourse';
 import PurchaseList from '../../Components/Instructor/Purchases/PurchaseList';
 
-const PurchaseHistoryPage = () => {
+const PurchaseHistoryPage: React.FC = () => {
   return (
     <div>
       <div className='fixed z-50 top-0 left-0 w-full'>

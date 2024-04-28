@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 
 
-import { adminApiRequest, instructorApiRequest, studentApiRequest } from '../../../api/axios';
+import { adminApiRequest} from '../../../api/axios';
 interface VideoPlayerProps {
   publicId: string;
   courseId: any;
@@ -13,8 +12,6 @@ interface VideoPlayerProps {
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ publicId, courseId, onClose }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [signedUrl, setSignedUrl] = useState('');
-  const navigate = useNavigate()
-  const location = useLocation();
 
   useEffect(() => {
     const fetche = async () => {

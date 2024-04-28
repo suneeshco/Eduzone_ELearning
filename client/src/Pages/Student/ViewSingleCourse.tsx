@@ -5,7 +5,7 @@ import React from 'react'
 import Footer from "../../Components/Student/Header/Footer";
 import ViewCourse from "../../Components/Student/HomePage/ViewCourse";
 
-const ViewSingleCourse = () => {
+const ViewSingleCourse: React.FC = () => {
   return (
     <div>
       <Navbar/>

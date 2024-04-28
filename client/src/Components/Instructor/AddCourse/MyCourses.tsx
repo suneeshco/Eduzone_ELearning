@@ -6,22 +6,7 @@ import { useSelector } from "react-redux";
 
 import { instructorApiRequest } from '../../../api/axios';
 import { FaStar, FaRegStar } from 'react-icons/fa';
-import photo from '../../../assets/images/HomePage/homeImage.png'
 
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-  Tooltip,
-  IconButton,
-  List,
-  ListItem,
-  ListItemPrefix,
-} from "@material-tailwind/react";
-import { PresentationChartBarIcon, ShoppingBagIcon, InboxIcon, UserCircleIcon, Cog6ToothIcon, PowerIcon } from '@heroicons/react/24/solid';
 
 interface Course {
   _id: string;

@@ -5,7 +5,7 @@ import React from 'react'
 
 import OtpSignUp from "../../Components/Student/SignUp/OtpSignUp";
 
-const OtpPage = () => {
+const OtpPage: React.FC = () => {
   return (
     <div>
       <Navbar/>

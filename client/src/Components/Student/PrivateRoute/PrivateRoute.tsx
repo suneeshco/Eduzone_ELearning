@@ -6,7 +6,7 @@ import Denied from "./Denied";
 import React, { useEffect, useState } from 'react'
 import { studentApiRequest } from "../../../api/axios";
 import toast from "react-hot-toast";
-import { setStudentCredentials, studentLogout } from "../../../Redux/Slices/StudentAuth";
+import {  studentLogout } from "../../../Redux/Slices/StudentAuth";
 
 export const StudentPrivateRoute: React.FC = () => {
   const navigate = useNavigate()

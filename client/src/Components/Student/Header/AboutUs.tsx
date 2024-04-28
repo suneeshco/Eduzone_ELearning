@@ -1,4 +1,4 @@
-import React from 'react'
+
 import image from '../../../assets/images/HomePage/Land1.png'
 
 const AboutUs = () => {

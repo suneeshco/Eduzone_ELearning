@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { RootState } from "../../../Redux/RootState/RootState";
-import { useSelector } from "react-redux";
 import { instructorApiRequest } from "../../../api/axios";
-import { PresentationChartBarIcon, ShoppingBagIcon, InboxIcon, UserCircleIcon, Cog6ToothIcon, PowerIcon } from "@heroicons/react/24/solid";
-import { Card, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
 
 const EditCourse: React.FC = () => {
   interface Category {
@@ -16,7 +12,6 @@ const EditCourse: React.FC = () => {
   }
 
   const { courseId } = useParams();
-  const { userInfo } = useSelector((state: RootState) => state.studentAuth);
   const navigate = useNavigate();
   const [categories, setCategories] = useState<Category[]>([]);
   const [courseName, setCourseName] = useState<string>("");

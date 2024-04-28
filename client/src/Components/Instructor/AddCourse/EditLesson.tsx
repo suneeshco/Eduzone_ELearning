@@ -1,15 +1,12 @@
 import React,{ useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 import { Cloudinary } from "@cloudinary/url-gen";
 
 import { instructorApiRequest } from '../../../api/axios';
-import { PresentationChartBarIcon, ShoppingBagIcon, InboxIcon, UserCircleIcon, Cog6ToothIcon, PowerIcon } from '@heroicons/react/24/solid';
-import { Card, List, ListItem, ListItemPrefix } from '@material-tailwind/react';
 
 interface Course {
     _id: string;
@@ -33,7 +30,6 @@ interface Lesson {
 
 const EditLesson: React.FC = () => {
     const { lessonId } = useParams<{ lessonId: string }>();
-    const [courseDetails, setCourseDetails] = useState<Course | null>(null);
     const [lessonDetails, setLessonDetails] = useState<Lesson | null>(null)
 
     const [loading, setLoading] = useState(false);

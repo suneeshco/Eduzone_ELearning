@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { RootState } from "../../../Redux/RootState/RootState";
 import { useSelector } from "react-redux";
-import { instructorApiRequest, studentApiRequest } from '../../../api/axios';
-import { Course } from '../../../utils/apiTypes/ApiTypes';
+import {  studentApiRequest } from '../../../api/axios';
 import { Link } from 'react-router-dom';
 import { FaStar, FaRegStar } from 'react-icons/fa';
-import NoProducts from '../../CommonComponents/NoProducts';
 import NoCourse from '../../../assets/images/DefaultImages/noCourses.jpg'
 
 interface OrderData {

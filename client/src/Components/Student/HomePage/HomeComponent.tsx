@@ -1,6 +1,6 @@
 import React, {  useState } from 'react';
 import landImage from '../../../assets/images/HomePage/Home1.jpg';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { Avatar } from "@material-tailwind/react";
 
 const HomeComponent: React.FC = () => {

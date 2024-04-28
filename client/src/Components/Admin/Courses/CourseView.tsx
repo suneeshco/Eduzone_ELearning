@@ -1,13 +1,6 @@
 import { useState, useEffect } from 'react';
-import toast from 'react-hot-toast';
-import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { adminApiRequest, instructorApiRequest } from '../../../api/axios';
-import { log } from 'console';
-import { FaStar, FaRegStar } from 'react-icons/fa';
-import { PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, PowerIcon } from '@heroicons/react/24/solid';
-import { Card, List, ListItem, ListItemPrefix } from '@material-tailwind/react';
+import { useParams } from 'react-router-dom';
+import { adminApiRequest } from '../../../api/axios';
 import VideoPlayer from './VideoPlayer';
 
 interface Course {

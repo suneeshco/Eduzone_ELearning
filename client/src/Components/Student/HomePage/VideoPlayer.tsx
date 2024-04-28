@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 
 
@@ -16,8 +15,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ publicId, courseId, onClose }
   const { userInfo } = useSelector((state: RootState) => state.studentAuth)
   const videoRef = useRef<HTMLVideoElement>(null);
   const [signedUrl, setSignedUrl] = useState('');
-  const navigate = useNavigate()
-  const location = useLocation();
 
   useEffect(() => {
     const fetche = async () => {

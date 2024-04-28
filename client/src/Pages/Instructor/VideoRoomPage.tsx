@@ -1,12 +1,8 @@
 import React from 'react'
-import { InstructorSidebar } from '../../Components/Instructor/Sidebar/InstructorSidebar'
-import Navbar from '../../Components/Instructor/Header/Navbar'
 import { useParams } from 'react-router-dom'
 import {ZegoUIKitPrebuilt} from '@zegocloud/zego-uikit-prebuilt'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../Redux/RootState/RootState'
 
-const VideoRoomPage = () => {
+const VideoRoomPage : React.FC= () => {
     const {roomId} = useParams();
 
     const myMeeting = async (element:any) =>{

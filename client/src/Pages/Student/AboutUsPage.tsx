@@ -3,7 +3,7 @@ import Navbar from "../../Components/Student/Header/Navbar";
 import Footer from "../../Components/Student/Header/Footer";
 import AboutUs from '../../Components/Student/Header/AboutUs';
 
-const AboutUsPage = () => {
+const AboutUsPage: React.FC = () => {
   return (
     <div>
       <Navbar/>

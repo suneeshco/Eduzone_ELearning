@@ -1,8 +1,6 @@
-import { image } from '@cloudinary/url-gen/qualifiers/source'
-import { PresentationChartBarIcon, ShoppingBagIcon, InboxIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-import { Avatar, Card, CardBody, CardFooter, CardHeader, Chip, Input, List, ListItem, ListItemPrefix, Tooltip, Typography } from '@material-tailwind/react'
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+
+import { Avatar, Card, CardBody, CardFooter, CardHeader, Input, Typography } from '@material-tailwind/react'
+import  { useEffect, useState } from 'react'
 import { instructorApiRequest } from '../../../api/axios'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../Redux/RootState/RootState'

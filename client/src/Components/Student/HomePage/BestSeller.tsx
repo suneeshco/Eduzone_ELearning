@@ -3,14 +3,12 @@ import { studentApiRequest } from '../../../api/axios';
 import { Course } from '../../../utils/apiTypes/ApiTypes';
 import { Link } from 'react-router-dom';
 import { FaStar, FaRegStar } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 
 
 const BestSeller: React.FC = () => {
 
 
 
-  const navigate = useNavigate()
 
     const [courseDetails, setCourseDetails] = useState<Course[]>([])
     const fetchCourses = async () => {

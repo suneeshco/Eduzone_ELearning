@@ -3,32 +3,21 @@ import { UserData } from '../../../utils/apiTypes/ApiTypes';
 import profileImage from '../../../assets/images/DefaultImages/Profile.png';
 import Swal from 'sweetalert2';
 import { adminApiRequest } from '../../../api/axios';
-import { studentLogout, setStudentCredentials } from '../../../Redux/Slices/StudentAuth';
 import { useDispatch } from 'react-redux';
-import { MagnifyingGlassIcon, PowerIcon, PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
   Input,
   Typography,
-  Button,
   CardBody,
   Chip,
   CardFooter,
-  Tabs,
-  TabsHeader,
-  Tab,
   Avatar,
-  IconButton,
   Tooltip,
-  List,
-  ListItem,
-  ListItemPrefix,
 } from "@material-tailwind/react";
-import { Link } from 'react-router-dom';
 
 const StudentList: React.FC = () => {
-  const dispatch = useDispatch();
+  
 
   const TABLE_HEAD = ["Member", "Courses Purchased", "Status", "Action",];
 

@@ -279,7 +279,7 @@ function Addcourse() {
                 <img
                   src={URL.createObjectURL(image)}
                   alt="Course"
-                  className="mt-2 h-16 w-16 object-cover-full rounded w-full h-full"
+                  className="mt-2 h-full w-full object-cover-full rounded "
                 />
               )}
             </div>

@@ -1,13 +1,11 @@
 import React, { useEffect , useState } from 'react';
 import { Link } from 'react-router-dom';
-import LogoImage from '../../../assets/images/Logos/Eduzone_logo1.png';
 import { useDispatch , useSelector } from 'react-redux';
 import { RootState } from '../../../Redux/RootState/RootState';
-import { instructorLogout } from '../../../Redux/Slices/InstructorAuth';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import ProfilePhoto from '../../../assets/images/DefaultImages/Profile.png'
-import { instructorApiRequest, studentApiRequest } from '../../../api/axios';
+import {  studentApiRequest } from '../../../api/axios';
 import { studentLogout } from '../../../Redux/Slices/StudentAuth';
 
 const Navbar: React.FC = () => {
@@ -15,16 +13,16 @@ const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  // const toggleDropdown = () => {
+  //   setIsDropdownOpen(!isDropdownOpen);
+  // };
 
   let {userInfo} = useSelector((state:RootState)=>state.studentAuth)
 

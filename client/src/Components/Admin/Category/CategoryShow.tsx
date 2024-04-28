@@ -3,28 +3,18 @@ import { useState, useEffect } from 'react';
 import { Category } from '../../../utils/apiTypes/ApiTypes';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
-import { apiRequest, adminApiRequest } from '../../../api/axios';
+import { adminApiRequest } from '../../../api/axios';
 import {
  Card,
  CardHeader,
  Input,
  Typography,
- Button,
  CardBody,
  Chip,
  CardFooter,
- Tabs,
- TabsHeader,
- Tab,
- Avatar,
- IconButton,
  Tooltip,
- List,
- ListItem,
- ListItemPrefix,
 } from "@material-tailwind/react";
-import { PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, PowerIcon } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
+
 
 interface EditMode {
  active: boolean;

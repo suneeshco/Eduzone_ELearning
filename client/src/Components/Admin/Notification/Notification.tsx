@@ -13,7 +13,7 @@ interface Notification {
     category: string;
 }
 
-const Notification = () => {
+const Notification: React.FC = () => {
     const [notifications, setNotifications] = useState<Notification[]>([])
     const changeStatus = async (id: any) => {
         try {

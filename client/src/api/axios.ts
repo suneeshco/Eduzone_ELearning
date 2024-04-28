@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { config } from '../config';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 
 
 

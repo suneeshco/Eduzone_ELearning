@@ -4,7 +4,7 @@ import Navbar from "../../Components/Student/Header/Navbar";
 import React from 'react'
 import StudentEditProfile from "../../Components/Student/StudentProfile/StudentEditProfile";
 
-const StudentEditProfilePage = () => {
+const StudentEditProfilePage: React.FC = () => {
   return (
     <div>
       <Navbar/>

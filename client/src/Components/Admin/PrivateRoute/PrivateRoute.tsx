@@ -2,7 +2,6 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../Redux/RootState/RootState";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import Denied from "../../Student/PrivateRoute/Denied";
 import React, { useEffect } from 'react';
 import { studentApiRequest } from "../../../api/axios";
@@ -11,7 +10,6 @@ import { studentLogout } from "../../../Redux/Slices/StudentAuth";
 export const AdminPrivateRoute: React.FC = () => {
  const navigate = useNavigate();
  const { userInfo } = useSelector((state: RootState) => state.studentAuth);
- const dispatch = useDispatch();
 
  useEffect(() => {
     const checkUserStatus = async () => {

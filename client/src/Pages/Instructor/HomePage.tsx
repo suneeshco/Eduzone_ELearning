@@ -5,7 +5,7 @@ import React from 'react'
 import HomeComponent from "../../Components/Instructor/HomePage/InstructorHomeComponent";
 import { InstructorSidebar } from "../../Components/Instructor/Sidebar/InstructorSidebar";
 
-const HomePage = () => {
+const HomePage : React.FC= () => {
   return (
     <div>
       <div className='fixed z-50 top-0 left-0 w-full'>

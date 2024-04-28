@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation} from 'react-router-dom';
-import LogoImage from '../../../assets/images/Logos/Eduzone_logo1.png';
 import ProfileImage from '../../../assets/images/DefaultImages/Profile.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../Redux/RootState/RootState';
@@ -12,7 +11,6 @@ const Navbar: React.FC = () => {
  const navigate = useNavigate();
  const location = useLocation();
  let { userInfo } = useSelector((state: RootState) => state.studentAuth);
- const [isBlocked, setIsBlocked] = useState(false);
  const [searchQuery, setSearchQuery] = useState("");
  const [isMenuOpen, setIsMenuOpen] = useState(false); 
  const dispatch = useDispatch();

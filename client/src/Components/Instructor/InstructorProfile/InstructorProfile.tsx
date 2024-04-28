@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import ProfileImage from '../../../assets/images/DefaultImages/Profile.png'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../Redux/RootState/RootState'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Swal from 'sweetalert2'
 import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth'
-import { instructorApiRequest, studentApiRequest } from '../../../api/axios'
+import { instructorApiRequest } from '../../../api/axios'
 import { useFormik } from 'formik'
 import { updateProfileSchema } from '../../../Schemas/instructorValidation'
 
@@ -16,7 +16,6 @@ const InstructorProfile : React.FC = () => {
   const [image, setImage] = useState<File | null>(null);
   const [cloudinaryURL, setCloudinaryURL] = useState<string | null>(null);
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({

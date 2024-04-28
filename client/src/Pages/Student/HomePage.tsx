@@ -6,10 +6,10 @@ import HomeComponent from "../../Components/Student/HomePage/HomeComponent";
 import TrustedComponent from "../../Components/Student/HomePage/TrustedComponent";
 import BestSeller from "../../Components/Student/HomePage/BestSeller";
 import Testimonial from "../../Components/Student/HomePage/Testimonial";
-import TopCategories from "../../Components/Student/HomePage/TopCategories";
+// import TopCategories from "../../Components/Student/HomePage/TopCategories";
 import Footer from "../../Components/Student/Header/Footer";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <div >
       <Navbar/>

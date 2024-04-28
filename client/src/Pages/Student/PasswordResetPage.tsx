@@ -5,7 +5,7 @@ import React from 'react'
 
 import PasswordReset from "../../Components/Student/Login/PasswordReset";
 
-const PasswordResetPage = () => {
+const PasswordResetPage: React.FC = () => {
   return (
     <div>
       <Navbar/>

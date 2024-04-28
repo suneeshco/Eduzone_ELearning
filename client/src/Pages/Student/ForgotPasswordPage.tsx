@@ -5,7 +5,7 @@ import React from 'react'
 
 import ForgotPassword from "../../Components/Student/Login/ForgotPassword";
 
-const ForgotPasswordPage = () => {
+const ForgotPasswordPage: React.FC = () => {
   return (
     <div>
       <Navbar/>

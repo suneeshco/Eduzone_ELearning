@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Course } from '../../../utils/apiTypes/ApiTypes';
 import { adminApiRequest, studentApiRequest } from '../../../api/axios';
 import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Category } from '../../../utils/apiTypes/ApiTypes';
 import { Link } from 'react-router-dom';
 
@@ -18,12 +18,12 @@ const CourseList: React.FC = () => {
   };
 
   const location = useLocation()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [courseDetails, setCourseDetails] = useState<Course[]>([])
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
 
-  const [searchQuery, setSearchQuery] = useState("")
+  // const [searchQuery, setSearchQuery] = useState("")
   const [sort, setSort] = useState(1)
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [category, setCategory] = useState<Category[]>([])
@@ -42,7 +42,7 @@ const CourseList: React.FC = () => {
 
   const QueryParams = new URLSearchParams(location.search)
   const searchParam = QueryParams.get('s')
-  const sortParam = QueryParams.get('sort')
+  // const sortParam = QueryParams.get('sort')
   console.log("search", searchParam);
 
   // if(searchParam) {
@@ -116,9 +116,9 @@ const CourseList: React.FC = () => {
   }, []);
 
 
-  const submitSearch = () => {
-    navigate(`/courses?s=${searchQuery}`);
-  };
+  // const submitSearch = () => {
+  //   navigate(`/courses?s=${searchQuery}`);
+  // };
 
   return (
     <>

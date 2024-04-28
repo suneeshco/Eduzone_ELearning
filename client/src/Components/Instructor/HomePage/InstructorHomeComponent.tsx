@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, PowerIcon } from '@heroicons/react/24/solid';
-import { Card, List, ListItem, ListItemPrefix } from '@material-tailwind/react';
+import { Card} from '@material-tailwind/react';
 import {
   CardBody,
-  CardHeader,
   Typography,
 } from "@material-tailwind/react";
 import Chart from "react-apexcharts";
-import { adminApiRequest, instructorApiRequest } from '../../../api/axios';
+import { instructorApiRequest } from '../../../api/axios';
 import { Course } from '../../../utils/apiTypes/ApiTypes';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Redux/RootState/RootState';

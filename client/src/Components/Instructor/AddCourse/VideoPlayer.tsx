@@ -13,8 +13,6 @@ interface VideoPlayerProps {
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ publicId, courseId, onClose }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [signedUrl, setSignedUrl] = useState('');
-  const navigate = useNavigate()
-  const location = useLocation();
 
   useEffect(() => {
     const fetche = async () => {

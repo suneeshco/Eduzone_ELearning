@@ -2,7 +2,7 @@ import React, { useState , useEffect } from 'react';
 import { apiRequest } from '../../../api/axios';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { Input, Button } from "@material-tailwind/react";
+import { Input } from "@material-tailwind/react";
 
 const OtpSignUp : React.FC = () => {
     const navigate = useNavigate()

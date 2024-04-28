@@ -5,7 +5,6 @@ import ProfileImage from '../../../assets/images/DefaultImages/Profile.png';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { instructorApiRequest } from '../../../api/axios';
-import { setInstructorCredentials } from '../../../Redux/Slices/InstructorAuth'; 
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth';

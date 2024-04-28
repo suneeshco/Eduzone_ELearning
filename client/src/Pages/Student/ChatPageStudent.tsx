@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Navbar from "../../Components/Student/Header/Navbar";
+// import Navbar from "../../Components/Student/Header/Navbar";
 import { useSelector } from 'react-redux';
 import { RootState } from '../../Redux/RootState/RootState';
 import { chatApiRequest } from '../../api/axios';
-import Conversations from '../../Components/Instructor/ChatInstructor/Conversations';
+// import Conversations from '../../Components/Instructor/ChatInstructor/Conversations';
 import Message from '../../Components/Instructor/ChatInstructor/Message';
 import { io, Socket } from 'socket.io-client';
 import toast from 'react-hot-toast';
-import { FaCamera, FaVideo, FaFile, FaImage } from 'react-icons/fa';
+import {  FaImage } from 'react-icons/fa';
 import axios from 'axios';
 import { ZIM } from "zego-zim-web";
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
@@ -36,7 +36,7 @@ interface ChatPageStudentProps {
 const ChatPageStudent: React.FC<ChatPageStudentProps> = ({ instructorId, closeFunction }) => {
 
     const { userInfo } = useSelector((state: RootState) => state.studentAuth);
-    const [conversations, setConversations] = useState([])
+    // const [conversations, setConversations] = useState([])
     const [currentChat, setCurrentChat] = useState<Chat | null>(null)
     const [message, setMessage] = useState<Messages[]>([])
     const [newMessage, setNewMessage] = useState("")

@@ -105,7 +105,7 @@ const Login: React.FC = () => {
           <img src={LoginImage} alt="Your Image" className=" w-full object-cover-full" />
         </div>
         <div className="sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 shadow-xl border">
+          <div className="bg-white py-8 px-4  sm:rounded-lg sm:px-10 shadow-xl border">
             <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-6">Sign in to your account</h2>
             <form className="space-y-6" onSubmit={handleSubmit}>
             <div>

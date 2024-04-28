@@ -1,27 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Course } from '../../../utils/apiTypes/ApiTypes';
-import { adminApiRequest, studentApiRequest } from '../../../api/axios';
+import { adminApiRequest} from '../../../api/axios';
 import {
  Card,
  CardHeader,
  Input,
  Typography,
- Button,
  CardBody,
- Chip,
- CardFooter,
- Tabs,
- TabsHeader,
- Tab,
- Avatar,
- IconButton,
- Tooltip,
- List,
- ListItem,
- ListItemPrefix,
+ CardFooter
 } from "@material-tailwind/react";
-import { PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, PowerIcon } from '@heroicons/react/24/solid';
 import Swal from 'sweetalert2';
 
 
@@ -68,6 +56,8 @@ const CourseList: React.FC = () => {
       url: '/changeCourseStatus',
       data: { id },
     });
+    console.log(response);
+    
     setCourseDetails(prevCourseDetails => {
       return prevCourseDetails.map(course => {
         if (course._id === id) {

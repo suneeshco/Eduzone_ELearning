@@ -4,7 +4,7 @@ import Navbar from "../../Components/Instructor/Header/Navbar";
 import React from 'react'
 import InstructorProfile from "../../Components/Instructor/InstructorProfile/InstructorProfile";
 
-const InstructorProfilePage = () => {
+const InstructorProfilePage : React.FC= () => {
   return (
     <div>
       <Navbar/>

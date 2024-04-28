@@ -2,7 +2,7 @@ import React,{useState,useCallback} from 'react'
 import Navbar from '../../Components/Instructor/Header/Navbar';
 import { InstructorSidebar } from '../../Components/Instructor/Sidebar/InstructorSidebar';
 import {useNavigate} from 'react-router-dom'
-const VideoCallPage = () => {
+const VideoCallPage : React.FC= () => {
     const [value,setValue] = useState<string>("")
     const navigate = useNavigate()
     const handleJoinRoom = useCallback(()=>{

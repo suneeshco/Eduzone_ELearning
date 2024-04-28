@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import LoginImage from '../../../assets/images/Logos/Login.png';
 import { studentSignUpSchema } from '../../../Schemas/studentLogin';
 import toast from 'react-hot-toast';
-import { apiRequest, studentApiRequest } from '../../../api/axios';
+import { apiRequest } from '../../../api/axios';
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 
@@ -71,7 +71,7 @@ const SignUp: React.FC = () => {
             </div>
 
             <div className="sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
-              <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 shadow-xl border">
+              <div className="bg-white py-8 px-4  sm:rounded-lg sm:px-10 shadow-xl border">
                 <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-4">Sign in to your account</h2>
                 <form className="space-y-1" onSubmit={handleSubmit}>
                   <div>

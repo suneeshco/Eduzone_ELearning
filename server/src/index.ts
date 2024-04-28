@@ -13,12 +13,14 @@ import session from 'express-session';
 import path from 'path'
 
 
+
 const { initializeSocket } = require('./socket.js');
 import {createServer} from 'http';
 import 'dotenv/config';
 
 
 const app = express();
+const url = process.env.MONGO_URL;
 
 const server = createServer(app)
 
@@ -50,7 +52,6 @@ app.use((err:any, req:Request, res:Response, next:NextFunction) => {
     res.status(401).json({ error: 'Unauthorized' });
   }
 });
-
 
 
 

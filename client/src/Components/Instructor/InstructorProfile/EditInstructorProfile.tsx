@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ProfileImage from '../../../assets/images/DefaultImages/Profile.png'
 import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux'
@@ -8,7 +8,6 @@ import { updateProfileSchema } from '../../../Schemas/instructorValidation'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux';
-import { setInstructorCredentials } from '../../../Redux/Slices/InstructorAuth';
 import { instructorApiRequest } from '../../../api/axios';
 import { Link } from 'react-router-dom';
 import { setStudentCredentials } from '../../../Redux/Slices/StudentAuth';

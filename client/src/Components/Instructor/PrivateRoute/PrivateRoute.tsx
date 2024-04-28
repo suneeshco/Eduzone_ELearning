@@ -4,9 +4,8 @@ import { RootState } from "../../../Redux/RootState/RootState";
 import Denied from "../../Student/PrivateRoute/Denied";
 
 import React, { useEffect, useState } from 'react'
-import { adminApiRequest, instructorApiRequest, studentApiRequest } from "../../../api/axios";
+import { studentApiRequest } from "../../../api/axios";
 import toast from "react-hot-toast";
-import { instructorLogout } from "../../../Redux/Slices/InstructorAuth";
 import { useNavigate } from "react-router-dom";
 import { studentLogout } from "../../../Redux/Slices/StudentAuth";
 

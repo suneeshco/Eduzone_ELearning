@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ProfileImage from '../../../assets/images/DefaultImages/Profile.png'
 import { Link,useLocation } from 'react-router-dom';
 
@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../Redux/RootState/RootState';
 
 export const InstructorSidebar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
   let { userInfo } = useSelector((state: RootState) => state.studentAuth)
   const location = useLocation()
 
