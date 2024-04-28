@@ -174,7 +174,7 @@ const CourseView: React.FC = () => {
         toast.success("Lesson added");
         setTitle("");
         setDescription("");
-        setVideo(null);
+        // setVideo(null);
         setCloudanaryURL("");
         setPublicId("");
       } else {
@@ -224,7 +224,7 @@ const CourseView: React.FC = () => {
         toast.success("Lesson added");
         setTitle("");
         setDescription("");
-        setVideo(null);
+        // setVideo(null);
         setCloudanaryURL("");
         setPublicId("");
       } else {
@@ -327,7 +327,7 @@ const CourseView: React.FC = () => {
               </div>
 
               <div className="pt-2">
-                <span className="text-white">Total Students: 7410</span>
+                <span className="text-white">Total Students: {enrolledStudents.length || 0}</span>
               </div>
 
 
@@ -466,7 +466,7 @@ const CourseView: React.FC = () => {
                         </p>
                       </div>
                       <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $320
+                       
                       </div>
                     </div>
                   </li>

@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
 
         if (!response.status) {
           toast.error('Your Account Has Been Blocked');
-          dispatch(studentLogout({}));
+          dispatch(studentLogout());
           userInfo = null;
         }
       }
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
  }, [userInfo, studentLogout]);
 
  const handleLogout = () => {
-    dispatch(studentLogout({}));
+    dispatch(studentLogout());
     toast.success('Logged Out Successfully');
     navigate("/student/login");
  };

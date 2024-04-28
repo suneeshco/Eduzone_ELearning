@@ -22,7 +22,7 @@ const instructorAuthSlice= createSlice({
             state.instructorInfo=action.payload;
             localStorage.setItem('instructorInfo',JSON.stringify(action.payload))
         },
-        instructorLogout: (state,action)=>{
+        instructorLogout: (state)=>{
             state.instructorInfo=null;
             localStorage.removeItem('instructorInfo')
             localStorage.removeItem('instructorToken')

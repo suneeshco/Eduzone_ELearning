@@ -9,8 +9,8 @@ import { chatApiRequest } from '../../api/axios';
 import { io, Socket } from 'socket.io-client';
 import NoConversations from '../../assets/images/DefaultImages/noConversation.jpg'
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-import { FaCamera, FaImage } from 'react-icons/fa';
+// import { useNavigate } from 'react-router-dom';
+import {  FaImage } from 'react-icons/fa';
 import axios from 'axios';
 
 
@@ -45,7 +45,7 @@ const ChatPage: React.FC = () => {
   const [newMessage, setNewMessage] = useState("")
   const [arrivalMessage, setArrivalMessage] = useState<Messages | null>(null)
   const socket = useRef<Socket | undefined>();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
 

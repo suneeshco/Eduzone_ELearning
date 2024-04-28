@@ -22,7 +22,7 @@ const PurchaseHistory = () => {
     
     const TABLE_HEAD = ["OrderId","Course", "Instructor", "Amount", "Purchase Date",];
     const [orderDetails, setOrderDetails] = useState<OrderData[]>([]);
-    const [search,setSearch] =useState<string>('')
+    // const [search,setSearch] =useState<string>('')
 
 
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -53,7 +53,7 @@ const PurchaseHistory = () => {
 
      useEffect(() => {
         fetchOrders();
-     }, [search]);
+     }, []);
 
      console.log("details ",orderDetails);
      

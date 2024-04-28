@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { RootState } from "../../../Redux/RootState/RootState";
@@ -8,8 +8,6 @@ import { useSelector } from "react-redux";
 import { instructorApiRequest } from "../../../api/axios";
 import { studentLogout } from "../../../Redux/Slices/StudentAuth";
 import { useDispatch } from "react-redux";
-import { PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, PowerIcon, Cog6ToothIcon, InboxIcon } from "@heroicons/react/24/solid";
-import { Card, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
 
 interface Category {
   _id: string;
@@ -27,12 +25,12 @@ function Addcourse() {
   const [loading, setLoading] = useState(false);
 
   const [courseName, setCourseName] = useState<string>("");
-  const [courseDuration, setCourseDuration] = useState<string>("");
+  // const [courseDuration, setCourseDuration] = useState<string>("");
   const [courseFee, setCourseFee] = useState<string>('');
   const [courseDescription, setCourseDescription] = useState<string>("");
   const [selectCategory, setSelectCategory] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const [cloudanaryURL, setCloudanaryURL] = useState("");
+  // const [cloudanaryURL, setCloudanaryURL] = useState("");
 
   const fetchCategories = async () => {
     try {
@@ -90,7 +88,7 @@ function Addcourse() {
         console.log("response", response)
         if (response.data && response.data.url) {
           console.log("Image uploaded successfully. URL:", response.data.url);
-          setCloudanaryURL(response.data.url);
+          // setCloudanaryURL(response.data.url);
           console.log(response.data.url, "url")
           return response.data.url
         } else {
@@ -164,7 +162,7 @@ function Addcourse() {
     } catch (error: any) {
       if (error.response.data.error === 'Account is blocked') {
 
-        dispatch(studentLogout({}))
+        dispatch(studentLogout())
         navigate('/student/login')
 
 

@@ -3,7 +3,6 @@ import { UserData } from '../../../utils/apiTypes/ApiTypes';
 import profileImage from '../../../assets/images/DefaultImages/Profile.png';
 import Swal from 'sweetalert2';
 import { adminApiRequest } from '../../../api/axios';
-import { useDispatch } from 'react-redux';
 import {
   Card,
   CardHeader,

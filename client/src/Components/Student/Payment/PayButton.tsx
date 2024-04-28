@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../Redux/RootState/RootState';
 import { studentApiRequest } from '../../../api/axios';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Course } from '../../../utils/apiTypes/ApiTypes';
 
 interface PayButtonProps {

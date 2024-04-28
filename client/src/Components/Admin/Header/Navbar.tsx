@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
  const [showLogout, setShowLogout] = useState<boolean>(false);
 
  const handleLogout = () => {
-    dispatch(studentLogout({}));
+    dispatch(studentLogout());
     toast.success('Logged Out Successfully');
     navigate("/student/login");
  };

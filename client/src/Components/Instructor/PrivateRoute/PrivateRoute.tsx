@@ -31,7 +31,7 @@ export const  PrivateRoute: React.FC = () => {
           if (!response.status) {
             toast.error('Your Account Has Been Blocked');
             setIsBlocked(true);
-            dispatch(studentLogout({}))
+            dispatch(studentLogout())
             navigate('/student/login')
           }
         }else{

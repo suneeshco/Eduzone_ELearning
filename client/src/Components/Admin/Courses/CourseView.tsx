@@ -29,7 +29,7 @@ const CourseView: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [courseDetails, setCourseDetails] = useState<Course | null>(null);
   const [lessonDetails, setLessonDetails] = useState<Lesson[]>([]);
-  const [cloudanaryURL, setCloudanaryURL] = useState<string>("");
+  // const [cloudanaryURL, setCloudanaryURL] = useState<string>("");
   const [lessonId,setLessonId] = useState("")
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
@@ -67,7 +67,7 @@ const CourseView: React.FC = () => {
 
   useEffect(() => {
     fetchLessons();
-  }, [cloudanaryURL]);
+  }, []);
 
   // const handleLessonClick = (lessonVideo: string) => {
   //   window.open(lessonVideo);

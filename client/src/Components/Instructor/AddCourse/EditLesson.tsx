@@ -8,15 +8,15 @@ import { Cloudinary } from "@cloudinary/url-gen";
 
 import { instructorApiRequest } from '../../../api/axios';
 
-interface Course {
-    _id: string;
-    courseName: string;
-    courseDuration: string;
-    courseDescription: string;
-    imageUrl: string;
-    courseFee: number;
-    createdAt: Date;
-}
+// interface Course {
+//     _id: string;
+//     courseName: string;
+//     courseDuration: string;
+//     courseDescription: string;
+//     imageUrl: string;
+//     courseFee: number;
+//     createdAt: Date;
+// }
 
 interface Lesson {
     _id: string;
@@ -38,7 +38,7 @@ const EditLesson: React.FC = () => {
     const navigate = useNavigate()
     const [title, setTitle] = useState<string | undefined>("")
     const [description, setDescription] = useState<string | undefined>("")
-    const [video, setVideo] = useState<File | null>(null);
+    // const [video, setVideo] = useState<File | null>(null);
     const [cloudanaryURL, setCloudanaryURL] = useState<string | undefined>("");
 
 
@@ -62,7 +62,7 @@ const EditLesson: React.FC = () => {
     }
   });
 
-  const myImage = cld.image(publicId);
+   cld.image(publicId);
 
 
 
@@ -101,22 +101,22 @@ const EditLesson: React.FC = () => {
 
 
 
-    const handleSubmitChange = (e: React.FormEvent<HTMLInputElement>) => {
-        try {
-            const inputElement = e.target as HTMLInputElement;
-            const files = inputElement.files;
-            if (files && files.length > 0) {
-                const file = files[0];
-                console.log(file)
-                setVideo(file)
-            } else {
-                setVideo(null)
-            }
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
+    // const handleSubmitChange = (e: React.FormEvent<HTMLInputElement>) => {
+    //     try {
+    //         const inputElement = e.target as HTMLInputElement;
+    //         const files = inputElement.files;
+    //         if (files && files.length > 0) {
+    //             const file = files[0];
+    //             console.log(file)
+    //             setVideo(file)
+    //         } else {
+    //             setVideo(null)
+    //         }
+    //     }
+    //     catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
 
 
@@ -264,7 +264,7 @@ const EditLesson: React.FC = () => {
 
     <div className="p-4">
         <div className="flex justify-end items-center">
-            <button onClick={deleteLesson} className="cursor-pointer inline-flex items-center rounded-full px-4 md:px-9 py-2 md:py-3 text-base md:text-xl font-mono font-semibold text-rose-600 hover:text-white border-2 border-rose-600 hover:bg-rose-600 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-75 hover:bg-rose-600 duration-300 focus:bg-transparent">
+            <button onClick={deleteLesson} className="cursor-pointer inline-flex items-center rounded-full px-4 md:px-9 py-2 md:py-3 text-base md:text-xl font-mono font-semibold text-rose-600 hover:text-white border-2 border-rose-600 hover:bg-rose-600 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-75  duration-300 focus:bg-transparent">
                 Delete Lesson
             </button>
         </div>

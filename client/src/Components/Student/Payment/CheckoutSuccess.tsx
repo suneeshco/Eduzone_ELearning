@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import  { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { studentApiRequest } from '../../../api/axios';
@@ -7,7 +7,7 @@ import { studentApiRequest } from '../../../api/axios';
 const CheckoutSuccess = () => {
   useEffect(()=>{
     const addPayment = async()=>{
-      const response = await studentApiRequest({
+       await studentApiRequest({
         method: 'post',
         url: '/createOrder',
         data: {}

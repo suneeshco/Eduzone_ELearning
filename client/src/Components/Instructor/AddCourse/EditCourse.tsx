@@ -15,7 +15,7 @@ const EditCourse: React.FC = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState<Category[]>([]);
   const [courseName, setCourseName] = useState<string>("");
-  const [courseDuration, setCourseDuration] = useState<string>("");
+  // const [courseDuration, setCourseDuration] = useState<string>("");
   const [courseFee, setCourseFee] = useState<string>("");
   const [courseDescription, setCourseDescription] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -44,7 +44,7 @@ const EditCourse: React.FC = () => {
       });
       console.log("Course details:", courseDetails);
       setCourseName(courseDetails.courseName);
-      setCourseDuration(courseDetails.courseDuration);
+      // setCourseDuration(courseDetails.courseDuration);
       setCourseFee(courseDetails.courseFee);
       setCourseDescription(courseDetails.courseDescription);
       setSelectedCategory(courseDetails.category);

@@ -22,7 +22,7 @@ const adminAuthSlice= createSlice({
             state.adminInfo=action.payload;
             localStorage.setItem('adminInfo',JSON.stringify(action.payload))
         },
-        adminLogout: (state,action)=>{
+        adminLogout: (state)=>{
             state.adminInfo=null;
             localStorage.removeItem('adminInfo')
             localStorage.removeItem('adminToken')

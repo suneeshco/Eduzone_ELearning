@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { FaStar, FaRegStar, FaStarHalfAlt, FaPlay, FaCheck } from 'react-icons/fa';
-import { Link, useParams } from 'react-router-dom';
+import {  FaPlay, FaCheck } from 'react-icons/fa';
+import {  useParams } from 'react-router-dom';
 import { studentApiRequest } from '../../../api/axios';
-import BestSeller from './BestSeller';
 import PayButton from '../Payment/PayButton';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Redux/RootState/RootState';
-import { StarIcon } from '@heroicons/react/24/solid';
-import { Rating } from "@material-tailwind/react";
 import StarRating from '../Courses/StarRating';
 import toast from 'react-hot-toast';
 import ChatPageStudent from '../../../Pages/Student/ChatPageStudent';
 import chatIcon from '../../../assets/images/DefaultImages/chat.jpg'
 import VideoPlayer from './VideoPlayer';
-import { Progress } from "@material-tailwind/react";
 
 
 interface Course {
@@ -67,7 +63,7 @@ const ViewCourse: React.FC = () => {
   const [review, setReview] = useState('');
   const [chatWindow, setChatWindow] = useState<boolean>(false)
   const [publicId, setPublicId] = useState('')
-  const [isClick, setIsClick] = useState(false)
+  // const [isClick, setIsClick] = useState(false)
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const [progressArray, setProgressArray] = useState<string[]>([]);
@@ -229,7 +225,7 @@ const ViewCourse: React.FC = () => {
   }
 
 
-  const handleLessonClick = async (lessonVideo: string, lessonId: string) => {
+  const handleLessonClick = async ( lessonId: string) => {
     setPublicId(lessonId);
     setIsVideoOpen(true);
     // let datas = {
@@ -371,7 +367,7 @@ const ViewCourse: React.FC = () => {
                         <>
                           {isLessonCompleted && <FaCheck className="mr-1 text-green-900" />}
                           <button
-                            onClick={() => handleLessonClick(lesson.lessonVideo, lesson._id)}
+                            onClick={() => handleLessonClick( lesson._id)}
                             className="bg-blue-500 text-white px-2 py-1 rounded-full w-7 h-7 hover:bg-blue-600 text-xs sm:text-sm flex items-center justify-center"
                           >
 

@@ -17,12 +17,12 @@ const Notification: React.FC = () => {
     const [notifications, setNotifications] = useState<Notification[]>([])
     const changeStatus = async (id: any) => {
         try {
-            const response = await adminApiRequest({
+             await adminApiRequest({
                 method: 'patch',
                 url: `/changeIsRead/${id}`
             });
 
-
+            fetchNotifications();
 
         } catch (error) {
             console.error("Error fetching sales data:", error);
@@ -30,20 +30,22 @@ const Notification: React.FC = () => {
 
     }
 
+    const fetchNotifications = async () => {
+        try {
+            const response = await adminApiRequest({
+                method: 'get',
+                url: `/getNotifications`
+            });
+
+            setNotifications(response.notification)
+
+        } catch (error) {
+            console.error("Error fetching sales data:", error);
+        }
+    };
+
     useEffect(() => {
-        const fetchNotifications = async () => {
-            try {
-                const response = await adminApiRequest({
-                    method: 'get',
-                    url: `/getNotifications`
-                });
-
-                setNotifications(response.notification)
-
-            } catch (error) {
-                console.error("Error fetching sales data:", error);
-            }
-        };
+        
 
         fetchNotifications();
     }, []);

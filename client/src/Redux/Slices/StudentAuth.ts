@@ -22,7 +22,7 @@ const authSlice= createSlice({
             state.userInfo=action.payload;
             localStorage.setItem('userInfo',JSON.stringify(action.payload))
         },
-        studentLogout: (state,action)=>{
+        studentLogout: (state)=>{
             state.userInfo=null;
             localStorage.removeItem('userInfo')
             localStorage.removeItem('studentToken')

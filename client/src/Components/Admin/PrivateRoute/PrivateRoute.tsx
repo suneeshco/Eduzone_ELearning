@@ -14,7 +14,7 @@ export const AdminPrivateRoute: React.FC = () => {
  useEffect(() => {
     const checkUserStatus = async () => {
       if (userInfo) {
-        const response = await studentApiRequest({
+         await studentApiRequest({
           method: 'get',
           url: `/getStudentDetails/${userInfo._id}`,
         });

@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 const ForgotPassword : React.FC= () => {
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
 
   const handleResetPassword = async () => {
     try {
@@ -49,7 +49,7 @@ const ForgotPassword : React.FC= () => {
       >
         Reset Password
       </button>
-      {message && <p className='text-sm mt-2'>{message}</p>}
+      {/* {message && <p className='text-sm mt-2'>{message}</p>} */}
     </div>
   );
 };
