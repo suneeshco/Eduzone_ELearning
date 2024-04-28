@@ -56,7 +56,7 @@ app.use((err:any, req:Request, res:Response, next:NextFunction) => {
 
 
 
-mongoose.connect(`${url}`).then(() => {
+mongoose.connect('mongodb+srv://suneeshcotkm:rAa9dkCaaDMCwvnS@eduzone.d3zjqpx.mongodb.net/Eduzone?retryWrites=true&w=majority&appName=Eduzone').then(() => {
   console.log('Connected to MongoDB');
 }).catch(error => {
   console.error('MongoDB connection error:', error);

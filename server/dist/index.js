@@ -19,7 +19,7 @@ const { initializeSocket } = require('./socket.js');
 const http_1 = require("http");
 require("dotenv/config");
 const app = (0, express_1.default)();
-const url = process.env.MONGO_URL1;
+const url = process.env.MONGO_URL;
 const server = (0, http_1.createServer)(app);
 // Middleware
 app.use((0, express_session_1.default)({
@@ -47,7 +47,7 @@ app.use((err, req, res, next) => {
         res.status(401).json({ error: 'Unauthorized' });
     }
 });
-mongoose_1.default.connect(`${url}`).then(() => {
+mongoose_1.default.connect('mongodb+srv://suneeshcotkm:rAa9dkCaaDMCwvnS@eduzone.d3zjqpx.mongodb.net/Eduzone?retryWrites=true&w=majority&appName=Eduzone').then(() => {
     console.log('Connected to MongoDB');
 }).catch(error => {
     console.error('MongoDB connection error:', error);
