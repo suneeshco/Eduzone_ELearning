@@ -12,6 +12,7 @@ import toast from 'react-hot-toast';
 // import { useNavigate } from 'react-router-dom';
 import {  FaImage } from 'react-icons/fa';
 import axios from 'axios';
+import { config } from '../../config';
 
 
 
@@ -108,7 +109,7 @@ const ChatPage: React.FC = () => {
 
 
   useEffect(() => {
-    socket.current = io("http://localhost:3000")
+    socket.current = io(config.BaseUrl)
     socket.current?.on("getMessageInstructor", data => {
       setArrivalMessage({
         chatId: currentChat?._id,

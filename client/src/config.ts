@@ -3,5 +3,6 @@ export const config = {
     adminBaseURL: 'https://eduzones.online/api/admin',
     studentBaseURL: 'https://eduzones.online/api/student',
     instructorBaseURL: 'https://eduzones.online/api/instructor',
-    chatBaseUrl:'https://eduzones.online/api/chat'
+    chatBaseUrl:'https://eduzones.online/api/chat',
+    BaseUrl: 'https://eduzones.online'
 };
