@@ -259,21 +259,28 @@ function generateCertificate(student, course, instructor) {
             doc.moveDown();
         }
     }
-    const backgroundPath = 'public/certificate.png';
-    doc.image(backgroundPath, 0, 0, {
-        width: doc.page.width,
-        height: doc.page.height,
-        align: 'center',
-        valign: 'center',
-    });
+    const borderPadding = 10;
+    const borderColor = '#000000';
+    const borderLineWidth = 2;
+    doc.lineWidth(borderLineWidth);
+    doc.strokeColor(borderColor);
+    doc.rect(borderPadding, borderPadding, doc.page.width - (2 * borderPadding), doc.page.height - (2 * borderPadding));
+    doc.stroke();
+    // const backgroundPath = 'public/certificate.png';
+    // doc.image(backgroundPath, 0, 0, {
+    //   width: doc.page.width,  
+    //   height: doc.page.height,  
+    //   align: 'center',  
+    //   valign: 'center',  
+    // });
     doc.fontSize(10);
     const distanceMargin = 18;
     const maxWidth = 140;
     const maxHeight = 70;
-    doc.image('public/Eduzone_logo1.png', doc.page.width / 2 - maxWidth / 2, 60, {
-        fit: [maxWidth, maxHeight],
-        align: 'center',
-    });
+    // doc.image('public/Eduzone_logo1.png', doc.page.width / 2 - maxWidth / 2, 60, {
+    //   fit: [maxWidth, maxHeight],
+    //   align: 'center',
+    // });
     jumpLine(doc, 5);
     doc
         .font('Helvetica-Bold')

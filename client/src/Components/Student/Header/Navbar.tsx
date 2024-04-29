@@ -73,10 +73,10 @@ const Navbar: React.FC = () => {
       </div>
       <div className="hidden sm:block">
         <div className="flex space-x-16">
-          <Link to="/" className="text-black hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Home</Link>
-          <Link to="/courses" className="text-black hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Courses</Link>
-          <Link to="/instructorsList" className="text-black hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Tutors</Link>
-          <Link to="/aboutUs" className="text-black hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">About</Link>
+        <Link to="/" className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Home</Link>
+          <Link to="/courses" className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Courses</Link>
+          <Link to="/instructorsList" className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">Tutors</Link>
+          <Link to="/aboutUs" className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold">About</Link>
         </div>
       </div>
             
@@ -109,7 +109,7 @@ const Navbar: React.FC = () => {
         )}
         <div>
           {userInfo?.role === 'student' ? (
-            <button onClick={handleLogout} className="text-black-300 bg-red-600 hover:bg-red-900 px-3 py-2 rounded-md font-medium">Logout</button>
+            <button onClick={handleLogout} className="text-white bg-slate-900 hover:bg-slate-800 px-3 py-2 rounded-md font-medium">Logout</button>
           ) : (
             <Link to="/student/login" className="text-black-300 bg-green-300 hover:bg-green-500 px-3 py-2 rounded-md font-medium">Login</Link>
           )}
