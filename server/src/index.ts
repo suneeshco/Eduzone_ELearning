@@ -34,7 +34,7 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({
-  origin:"http://localhost:5173",
+  origin:["http://localhost:5173","https://eduzones.online"],
   credentials:true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
