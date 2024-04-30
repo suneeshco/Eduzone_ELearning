@@ -100,21 +100,21 @@ const ChangePassword: React.FC = () => {
                       <label htmlFor="oldPassword" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Old Password</label>
                       <input type="text" id="oldPassword" value={values.oldPassword}
                         onChange={handleChange}
-                        onBlur={handleBlur} className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="Your first name" />
+                        onBlur={handleBlur} className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="Old Password" />
                       {errors.oldPassword && touched.oldPassword && <p className='text-red-500'>{errors.oldPassword}</p>}
                     </div>
                     <div className="mb-2 sm:mb-6">
                       <label htmlFor="password" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">New Password</label>
                       <input type="text" id="password" value={values.password}
                         onChange={handleChange}
-                        onBlur={handleBlur} className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="Your last name" />
+                        onBlur={handleBlur} className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="New Password" />
                       {errors.password && touched.password && <p className='text-red-500'>{errors.password}</p>}
                     </div>
                   <div className="mb-2 sm:mb-6">
                     <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Confirm Password</label>
                     <input type="text" id="confirmPassword" value={values.confirmPassword}
                       onChange={handleChange}
-                      onBlur={handleBlur} className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="your mobile" />
+                      onBlur={handleBlur} className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" placeholder="Confirm Password" />
                     {errors.confirmPassword && touched.confirmPassword && <p className='text-red-500'>{errors.confirmPassword}</p>}
                   </div>
 
