@@ -39,4 +39,20 @@ export const updateProfileSchema = yup.object().shape({
         .required('Mobile number is required'),
 });
 
+export const changePasswordSchema = yup.object().shape({
+    oldPassword: yup.string().trim().required('Enter Old Password'),
+    password: yup.string()
+        .trim()
+        .required('Password is required')
+        .min(8, 'Password must have at least 8 characters')
+        .matches(/[0-9]/, 'Password must contain at least one number')
+        .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
+        .matches(/[A-Z]/, 'Password must contain at least one uppercase letter'),
+    confirmPassword: yup.string()
+        .trim()
+        .required('Confirm password is required')
+        .oneOf([yup.ref('password')], 'Passwords must match'),
+});
+
+
 

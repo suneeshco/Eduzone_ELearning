@@ -146,6 +146,19 @@ exports.authController = {
             }
         });
     },
+    studentChangePassword(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { userId, oldPassword, password } = req.body;
+                const reset = yield (0, auth_service_1.changePasswords)(userId, oldPassword, password);
+                res.status(200).json({ message: reset });
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ message: "Server Error" });
+            }
+        });
+    },
     // async instructorSignup(req: Request, res: Response): Promise<void> {
     //   try {
     //     const { firstname, lastname, email, mobile, password } = req.body;

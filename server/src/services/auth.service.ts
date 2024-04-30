@@ -331,3 +331,34 @@ export const googleLogin = async (email:string , password : string): Promise<Log
       throw error;
     }
 }
+
+
+
+export const changePasswords = async (userId:string , oldPassword : string , password : string) =>{
+  try {
+      const user = await findUserById(userId);
+      
+      if (!user) {
+        return { error: 'User Not Found' }; 
+      }
+
+      const passwordMatch = await bcrypt.compare(oldPassword, user.password)
+
+      if(!passwordMatch){
+        return { error: 'Password Incorrect' }; 
+      }
+
+      const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+      if(user){
+        user.password=hashedPassword
+        await user.save();
+      }
+
+      return {user:user}
+
+    } catch (error) {
+      throw error;
+    }
+}

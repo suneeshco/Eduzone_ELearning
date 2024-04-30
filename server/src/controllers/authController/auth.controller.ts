@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { signup , login ,  adminLogin , sendForgotRequest , studentResetPass , googleSignup , googleLogin} from '../../services/auth.service';
+import { signup , login ,  adminLogin , sendForgotRequest , studentResetPass , googleSignup , googleLogin, changePasswords} from '../../services/auth.service';
 import nodemailer from 'nodemailer';
 import Jwt from "jsonwebtoken";
 import session from 'express-session';
@@ -173,6 +173,20 @@ export const authController = {
         const {userId , token , password } = req.body;
 
        const reset =await studentResetPass(userId,token,password)
+       res.status(200).json({ message: reset });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:"Server Error"})  
+    }
+  },
+
+
+
+  async studentChangePassword(req:Request , res: Response): Promise <void> {
+    try {
+        const {userId , oldPassword , password } = req.body;
+
+       const reset =await changePasswords(userId,oldPassword,password)
        res.status(200).json({ message: reset });
     } catch (error) {
         console.log(error);

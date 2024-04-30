@@ -4,6 +4,7 @@ const express_1 = require("express");
 const studentController_1 = require("../controllers/studentController/studentController");
 const auth_middleware_1 = require("../middlewares/auth.middleware");
 const instructorController_1 = require("../controllers/instructorController/instructorController");
+const auth_controller_1 = require("../controllers/authController/auth.controller");
 const router = (0, express_1.Router)();
 router.get('/getAllCourses', studentController_1.getAllCourses);
 router.get('/getSingleCourse/:id', instructorController_1.getSingleCourse);
@@ -24,4 +25,5 @@ router.get('/getProgress', auth_middleware_1.studentAuth, studentController_1.ge
 router.get('/video', auth_middleware_1.authenticateUser, studentController_1.videoPlay);
 router.post('/generateCertificate', auth_middleware_1.studentAuth, studentController_1.generateCertificates);
 router.get('/getOverview', studentController_1.getOverview);
+router.patch('/changePassword', auth_middleware_1.studentAuth, auth_controller_1.authController.studentChangePassword);
 exports.default = router;

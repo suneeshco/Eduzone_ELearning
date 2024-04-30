@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.googleLogin = exports.googleSignup = exports.studentResetPass = exports.sendForgotRequest = exports.adminLogin = exports.login = exports.signup = void 0;
+exports.changePasswords = exports.googleLogin = exports.googleSignup = exports.studentResetPass = exports.sendForgotRequest = exports.adminLogin = exports.login = exports.signup = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const crypto_1 = __importDefault(require("crypto"));
@@ -238,3 +238,26 @@ const googleLogin = (email, password) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.googleLogin = googleLogin;
+const changePasswords = (userId, oldPassword, password) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield (0, user_repository_1.findUserById)(userId);
+        if (!user) {
+            return { error: 'User Not Found' };
+        }
+        const passwordMatch = yield bcryptjs_1.default.compare(oldPassword, user.password);
+        if (!passwordMatch) {
+            return { error: 'Password Incorrect' };
+        }
+        const salt = yield bcryptjs_1.default.genSalt(10);
+        const hashedPassword = yield bcryptjs_1.default.hash(password, salt);
+        if (user) {
+            user.password = hashedPassword;
+            yield user.save();
+        }
+        return { user: user };
+    }
+    catch (error) {
+        throw error;
+    }
+});
+exports.changePasswords = changePasswords;

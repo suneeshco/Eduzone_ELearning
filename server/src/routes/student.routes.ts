@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { getAllCourses ,updateProfile , getStudentDetails , studentChangeImage , stripePayment ,createOrders, getEnrolledCourses , courseRating ,getMyRating , getAllRating , getInstructorList , videoPlay , updateProgress , getProgress , generateCertificates , getOverview} from '../controllers/studentController/studentController';
 import { authenticateUser, studentAuth } from '../middlewares/auth.middleware';
 import { getLessons, getSingleCourse } from '../controllers/instructorController/instructorController';
+import { authController } from '../controllers/authController/auth.controller';
 
 
 const router = Router();
@@ -25,5 +26,6 @@ router.get('/getProgress',studentAuth,getProgress)
 router.get('/video',authenticateUser,videoPlay)
 router.post('/generateCertificate',studentAuth,generateCertificates)
 router.get('/getOverview',getOverview)
+router.patch('/changePassword',studentAuth,authController.studentChangePassword)
 
 export default router;
