@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
 
  return (
     <>
-    <nav className="fixed top-0 z-50  shadow-md bg-teal-700  w-full">
+    {/* <nav className="fixed top-0 z-50  shadow-md bg-teal-700  w-full">
   <div className="max-w-7.5xl mx-auto px-2 py-2 sm:px-6 lg:px-8">
     <div className="flex items-center justify-between h-12">
       <div className="flex-shrink-0">
@@ -144,6 +144,180 @@ const Navbar: React.FC = () => {
             <button onClick={handleLogout} className="text-black-300 bg-red-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Logout</button>
           ) : (
             <Link to="/student/login" className="text-black-300 bg-green-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium">Login</Link>
+          )}
+        </div>
+      </div>
+    )}
+  </div>
+</nav> */}
+
+
+<nav className="fixed top-0 z-50 shadow-md bg-teal-700 w-full sm:w-full">
+  <div className="max-w-7.5xl mx-auto px-2 py-2 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-between h-12">
+      <div className="flex-shrink-0">
+        <Link to="/" className="flex items-center">
+          <h1 className="text-white text-xl font-bold">EDUZONE</h1>
+        </Link>
+      </div>
+      <div className="hidden md:flex large:items-center space-x-16">
+        <div className="flex space-x-16">
+          <Link
+            to="/"
+            className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold"
+          >
+            Home
+          </Link>
+          <Link
+            to="/courses"
+            className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold"
+          >
+            Courses
+          </Link>
+          <Link
+            to="/instructorsList"
+            className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold"
+          >
+            Tutors
+          </Link>
+          <Link
+            to="/aboutUs"
+            className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold"
+          >
+            About
+          </Link>
+        </div>
+      </div>
+
+      <div className="flex w-100 relative">
+        <input
+          type="text"
+          placeholder="What do you want to learn..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-[60%] px-4 py-2 border-l border-t border-b border-gray-800 focus:outline-none focus:border-blue-400"
+        />
+        {searchQuery && (
+          <button
+            className=" bg-white text-black hover:text-black px-3 py-2 border-t border-e border-b border-blue-400 focus:outline-none"
+            onClick={clearSearch}
+          >
+            &times;
+          </button>
+        )}
+        <button
+          className="ml-2 bg-slate-900 hover:bg-slate-200 text-white hover:text-black px-3 py-2 rounded-md"
+          onClick={submitSearch}
+        >
+          Search
+        </button>
+      </div>
+
+      <div className="hidden md:flex items-center space-x-2">
+        {userInfo?.role === 'student' && (
+          <div>
+            <Link to="/student/profile">
+              <img
+                src={userInfo?.photo || ProfileImage}
+                alt="Profile"
+                className="h-8 w-8 rounded-full"
+              />
+            </Link>
+          </div>
+        )}
+        <div>
+          {userInfo?.role === 'student' ? (
+            <button
+              onClick={handleLogout}
+              className="text-white bg-slate-900 hover:bg-slate-800 px-2 py-2 rounded-md font-medium"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/student/login"
+              className="text-black-300 bg-green-300 hover:bg-green-500 px-3 py-2 rounded-md font-medium"
+            >
+              Login
+            </Link>
+          )}
+        </div>
+      </div>
+
+      <div className="flex md:hidden">
+        <button
+          onClick={toggleMenu}
+          className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring"
+        >
+          <svg
+            className="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    {isMenuOpen && (
+      <div className="large:hidden">
+        <div className="px-2 pt-2 pb-3 space-y-1">
+          <Link
+            to="/"
+            className="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900"
+          >
+            Home
+          </Link>
+          <Link
+            to="/courses"
+            className="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900"
+          >
+            Courses
+          </Link>
+          <Link
+            to="/instructorsList"
+            className="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900"
+          >
+            Tutors
+          </Link>
+          <Link
+            to="/aboutUs"
+            className="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900"
+          >
+            About
+          </Link>
+          <br />
+          {userInfo?.role === 'student' && (
+            <div>
+              <Link
+                to="/student/profile"
+                className="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900"
+              >
+                Profile
+              </Link>
+            </div>
+          )}
+          {userInfo?.role === 'student' ? (
+            <button
+              onClick={handleLogout}
+              className="text-black-300 bg-red-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/student/login"
+              className="text-black-300 bg-green-300 hover:bg-gray-700 px-3 py-2 rounded-md font-medium"
+            >
+              Login
+            </Link>
           )}
         </div>
       </div>
