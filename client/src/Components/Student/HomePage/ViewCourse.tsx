@@ -299,7 +299,7 @@ const ViewCourse: React.FC = () => {
       )}
 
 
-      <div>
+      {/* <div>
         <div className='flex space-between pt-10 pb-10 mt-10 bg-gray-600'>
           <div className="w-full sm:w-3/5 m-2 sm:m-10 pt-10">
             <h1 className="text-2xl sm:text-4xl text-white font-bold mb-2 " style={{ fontFamily: 'Arial, sans-serif' }}>{courseDetails?.courseName}</h1>
@@ -413,6 +413,195 @@ const ViewCourse: React.FC = () => {
             )}
 
           </div>
+
+
+
+          {courseDetails?.students.includes(userInfo?._id) && (
+            <div className="flex justify-end rounded-3xl">
+              {chatWindow ? (
+                <div className='fixed bottom-10 right-8  bg-sky-100 md:w-[35%] z-50'>
+
+                  <ChatPageStudent instructorId={courseDetails.instructorId} closeFunction={() => setChatWindow(false)} />
+                </div>
+
+              ) : (
+                <img src={chatIcon} className='rounded-full fixed bottom-5 right-5 w-20 h-20 ring-2 ring-indigo-500 cursor-pointer' alt="chat" onClick={() => { setChatWindow(true) }} />
+
+              )}
+            </div>
+          )}
+        </div>
+
+        {userInfo && courseDetails?.students.includes(userInfo?._id) && (
+          <div className='border-t sm:mx-40 p-4  bg-white shadow-2xl'>
+            <h2 className="text-lg sm:text-3xl font-bold mb-2 text-center">Rate Your Course</h2>
+            <StarRating initialRating={rating} ratings={rating} onChange={handleRatingChange} />
+            <div className='flex justify-center items-center'>
+              <textarea
+                id="review"
+                name="review"
+                className="mt-2 p-2 mx-20 block w-full border border-black rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="Write your review here..."
+                value={review}
+                rows={4}
+                onChange={(e) => setReview(e.target.value)}
+              ></textarea>
+            </div>
+
+            <div className="flex justify-center items-center mt-2">
+              <button
+                onClick={submitReview}
+                className="w-1/3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-2 px-4 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 ease-in-out"
+              >
+                {rating ? 'Update Rating' : " Submit"}
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className='border-t sm:m-10 p-4'>
+          <h2 className="text-lg sm:text-3xl font-bold mb-2">Reviews And Ratings</h2>
+
+          {ratingDetails.map((ratings) => (
+            <article className='w-full bg-slate-50 p-4 border mb-4' >
+              <div className="flex items-center mb-2">
+                <img className="w-8 h-8 me-2 rounded-full" src={ratings.studentId.photo} alt="" />
+                <div className="font-medium dark:text-white">
+                  <p>{ratings.studentId.firstname} <time dateTime="2014-08-16 19:00" className="block text-xs sm:text-sm text-gray-500 dark:text-gray-400">Rated On {new Date(ratings.createdAt).toLocaleDateString()}</time></p>
+                </div>
+              </div>
+              <div className="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
+                {[...Array(5)].map((_, index) => (
+                  <svg
+                    key={index}
+                    className={`w-3 sm:w-4 h-3 sm:h-4 ${index < ratings.rating ? 'text-yellow-300' : 'text-gray-300 dark:text-gray-500'
+                      }`}
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 22 20"
+                  >
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="mb-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400">{ratings.review}</p>
+            </article>
+          ))}
+        </div>
+      </div> */}
+
+
+
+<div>
+        <div className='container mx-auto flex flex-col lg:flex-row lg:space-x-4 md:h-[500px] p-4 bg-gray-600 pt-20'>
+    <div className='w-full lg:w-3/5 p-4 bg-gray-600 pt-10'>
+        <h1 className='text-2xl sm:text-4xl text-white font-bold mb-2' style={{ fontFamily: 'Arial, sans-serif' }}>
+            {courseDetails?.courseName}
+        </h1>
+        <h1 className='text-sm sm:text-base text-white pt-1 mb-2'>
+            {courseDetails?.courseDescription}
+        </h1>
+
+        <div className='flex items-center mb-1 space-x-1 rtl:space-x-reverse'>
+            {[...Array(5)].map((_, index) => (
+                <svg
+                    key={index}
+                    className={`w-4 h-4 ${index < (courseDetails?.rating || 0) ? 'text-yellow-300' : 'text-gray-300'}`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 22 20"
+                    aria-hidden="true"
+                >
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                </svg>
+            ))}
+        </div>
+
+        {/* <div className='pt-2'>
+            <span className='text-white'>Total Students: {courseDetails?.studentsCount || 0}</span>
+        </div> */}
+
+        <div className='pt-3'>
+            <h1 className='text-lg sm:text-2xl text-white font-bold mb-2'>
+                Price: ₹ {courseDetails?.courseFee}
+            </h1>
+        </div>
+    </div>
+
+    <div className='w-full lg:w-2/5 p-4'>
+        <div className='bg-slate-50 border-b border-black shadow-lg'>
+            <img className='w-full h-auto object-cover' src={courseDetails?.imageUrl} alt='Course Thumbnail' />
+        </div>
+
+        {!courseDetails?.students.includes(userInfo?._id) && (
+            <div className='flex justify-center items-center mt-4'>
+                <PayButton courseDetails={courseDetails} />
+            </div>
+        )}
+    </div>
+</div>
+
+
+        <div className='container mx-auto p-4'>
+    <div className='flex flex-wrap'>
+        <div className="w-full md:w-1/2 bg-white rounded-lg p-4 mt-10 border-2">
+        <div className='p-4 border-b bg-gray-600 text-white rounded-t-lg flex justify-between items-center'>
+                <h2 className="text-lg sm:text-2xl font-bold mb-2 ">Topics That You Are Going To Learn</h2>
+              </div>
+
+              {lessonDetails.map((lesson, index) => {
+                const isLessonCompleted = progressArray.includes(lesson._id);
+                return (
+                  <div className={`md:w-full flex items-center justify-between border-2 rounded-full p-2 mt-2 mb-2 ${isLessonCompleted ? 'border-green-600':''}` } key={lesson._id}>
+
+                    <h2 className="flex-grow  text-sm sm:text-base">{index + 1 + ") " + lesson.lessonTitle}</h2>
+                    <div className="flex items-center space-x-2">
+
+                      {courseDetails?.students.includes(userInfo?._id) && (
+                        <>
+                          {isLessonCompleted && <FaCheck className="mr-1 text-green-900" />}
+                          <button
+                            onClick={() => handleLessonClick(lesson._id)}
+                            className="bg-blue-500 text-white px-2 py-1 rounded-full w-7 h-7 hover:bg-blue-600 text-xs sm:text-sm flex items-center justify-center"
+                          >
+
+                            <FaPlay />
+                          </button>
+                        </>
+                      )}
+                    </div>
+
+
+                  </div>
+                )
+
+
+              })}
+        </div>
+        {courseDetails?.students.includes(userInfo?._id) && (
+            <div className='w-full md:w-1/2 p-10 '>
+                <div className="flex justify-between mb-1">
+                  <span className="text-base font-medium text-blue-700 dark:text-white">Course Progress</span>
+                  <span className="text-sm font-medium text-blue-700 dark:text-white">{progress}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-5 dark:bg-gray-700">
+                  <div className="bg-blue-600 h-5 rounded-full" style={{ "width": `${progress}%` }}></div>
+                </div>
+                {(progress === 100) && (
+                  <div className='mt-10'>
+                    <h1 className='font-bold text-xl text-green-900 text-center'>Congratulations!!! You have completed the course</h1>
+                    <div className='flex justify-center pt-7'>
+                      <button onClick={handleGenerateCertificate} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                        <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
+                        <span>Generate Certificate</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+            </div>
+        )}
+    </div>
 
 
 
