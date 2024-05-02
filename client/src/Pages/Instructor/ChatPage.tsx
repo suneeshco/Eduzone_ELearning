@@ -371,7 +371,7 @@ const ChatPage: React.FC = () => {
                   <div className="flex flex-col mt-5 overflow-y-auto">
                   {currentChat ? (
                     <>
-                      <div className="flex-grow overflow-y-auto px-16">
+                      <div className="flex-grow h-screen overflow-y-auto px-16">
                         {mediaPreview ? (
                           <>
                             <div className='cursor-pointer' onClick={() => { setMediaPreview(null); setMediaFile(null); }}>

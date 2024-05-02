@@ -5,6 +5,7 @@ import profilePhoto from '../../../assets/images/DefaultImages/Profile.png'
 import { FaVideo } from 'react-icons/fa';
 import { ZIM } from "zego-zim-web";
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
+import {  parseISO } from 'date-fns';
 
 
 
@@ -69,6 +70,24 @@ const Conversations = ({ conversation, currentUser }: ConversationsProps) => {
     }
 
   }
+
+  const formatMessageTime = (createdAt: any) => {
+    const createdAtDate = parseISO(createdAt);
+    const now = new Date();
+    const differenceInDays = Math.floor((now.getTime() - createdAtDate.getTime()) / (1000 * 60 * 60 * 24));
+  
+    if (differenceInDays === 0) {
+      return new Date(createdAtDate).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      });
+    } else if (differenceInDays === 1) {
+      return "yesterday";
+    } else {
+      return new Date(createdAtDate).toLocaleDateString();
+    }
+  };
   return (
     //     <div className="flex items-center justify-between p-2 my-4 cursor-pointer relative" >
 
@@ -107,16 +126,22 @@ const Conversations = ({ conversation, currentUser }: ConversationsProps) => {
       </div>
       
       
-      <div className='flex '>
+      <div className='flex flex-col items-end'>
+      <div>
+      <p className='text-sm ' style={{ whiteSpace: 'nowrap' }}>{formatMessageTime(conversation.createdAtMessage)}</p>
+      </div>
       {(conversation.unReadCount !== undefined) && (conversation.unReadCount > 0) ? (
         <div className="mr-2  w-[26px] h-[26px] bg-green-500 rounded-full text-center">{conversation.unReadCount}</div>
       ) : (
         ""
       )}
-        <FaVideo onClick={(e) => {
+      <div>
+      <FaVideo onClick={(e) => {
           e.stopPropagation();
           invite()
         }} style={{ cursor: 'pointer' }} />
+      </div>
+        
       </div>
 
 
