@@ -20,7 +20,7 @@ import 'dotenv/config';
 
 
 const app = express();
-const url = process.env.MONGO_URL;
+const url = process.env.MONGO_URL1;
 
 const server = createServer(app)
 
@@ -56,7 +56,7 @@ app.use((err:any, req:Request, res:Response, next:NextFunction) => {
 
 
 
-mongoose.connect('mongodb+srv://suneeshcotkm:rAa9dkCaaDMCwvnS@eduzone.d3zjqpx.mongodb.net/Eduzone?retryWrites=true&w=majority&appName=Eduzone').then(() => {
+mongoose.connect(`${url}`).then(() => {
   console.log('Connected to MongoDB');
 }).catch(error => {
   console.error('MongoDB connection error:', error);
