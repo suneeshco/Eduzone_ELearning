@@ -161,28 +161,28 @@ const Navbar: React.FC = () => {
         </Link>
       </div>
       <div className="hidden md:flex large:items-center space-x-16">
-        <div className="flex space-x-16">
+      <div className="flex space-x-16">
           <Link
             to="/"
-            className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold"
+            className={`text-white hover:bg-teal-900  px-5 py-2 rounded-md font-bold ${location.pathname === '/' ? 'bg-teal-900  border-black font-bold text-white'  : ''}`}
           >
             Home
           </Link>
           <Link
             to="/courses"
-            className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold"
+            className={`text-white hover:bg-teal-900  px-5 py-2 rounded-md font-bold ${location.pathname === '/courses' ? 'bg-teal-900  border-black font-bold text-white'  : ''}`}
           >
             Courses
           </Link>
           <Link
             to="/instructorsList"
-            className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold"
+            className={`text-white hover:bg-teal-900  px-5 py-2 rounded-md font-bold ${location.pathname === '/instructorsList' ? 'bg-teal-900  border-black font-bold text-white'  : ''}`}
           >
             Tutors
           </Link>
           <Link
             to="/aboutUs"
-            className="text-white hover:bg-teal-900 hover:text-slate-50 px-5 py-2 rounded-md font-bold"
+            className={`text-white hover:bg-teal-900  px-5 py-2 rounded-md font-bold ${location.pathname === '/aboutUs' ? 'bg-teal-900  border-black font-bold text-white'  : ''}`}
           >
             About
           </Link>

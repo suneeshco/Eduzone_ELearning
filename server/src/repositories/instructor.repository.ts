@@ -31,7 +31,7 @@ export const addCourse = async (course: Partial<CourseDocument>): Promise<Course
 
 export const getCourse = async (id: Partial<CourseDocument>): Promise<CourseDocument[]> => {
   try {
-    return await Course.find({instructorId : id});
+    return await Course.find({ instructorId: id }).sort({ createdAt: -1 });
   } catch (error) {
     throw error;
   }

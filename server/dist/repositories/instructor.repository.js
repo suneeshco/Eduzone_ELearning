@@ -41,7 +41,7 @@ const addCourse = (course) => __awaiter(void 0, void 0, void 0, function* () {
 exports.addCourse = addCourse;
 const getCourse = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        return yield course_model_1.default.find({ instructorId: id });
+        return yield course_model_1.default.find({ instructorId: id }).sort({ createdAt: -1 });
     }
     catch (error) {
         throw error;
