@@ -8,7 +8,7 @@ const OtpSignUp : React.FC = () => {
     const navigate = useNavigate()
   const [otp, setOtp] = useState('');
   const [message, setMessage] = useState('');
-  const [timer, setTimer] = useState(60); 
+  const [timer, setTimer] = useState(90); 
   const [isTimerActive, setIsTimerActive] = useState(true);
 
 
@@ -35,7 +35,7 @@ const OtpSignUp : React.FC = () => {
   }, []);
 
   const startTimer = () => {
-    setTimer(10);
+    setTimer(90);
     setIsTimerActive(true);
   };
 

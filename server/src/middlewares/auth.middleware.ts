@@ -197,7 +197,7 @@ export const userOtpExpiration = (req: CustomRequest, res: Response, next: NextF
     if (req.session.studentDetail && req.session.studentDetail.otpCode && req.session.studentDetail.otpSetTimestamp) {
         if (typeof req.session.studentDetail.otpSetTimestamp === 'number') {
             const timeElapsed = now - req.session.studentDetail.otpSetTimestamp;
-            if (timeElapsed >= 60000) {
+            if (timeElapsed >= 90000) {
                 req.session.studentDetail.otpCode = undefined;
                 req.session.studentDetail.otpSetTimestamp = undefined;
                 console.log("Expired OTP code cleaned up");
