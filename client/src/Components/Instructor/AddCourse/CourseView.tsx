@@ -59,7 +59,7 @@ const CourseView: React.FC = () => {
   const [ratingDetails, setRatingDetails] = useState<RatingDocument[]>([])
   const [enrolledStudents, setEnrolledStudents] = useState<OrderData[]>([])
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const [title, setTitle] = useState<string>("");
@@ -156,7 +156,7 @@ const CourseView: React.FC = () => {
       return toast.error("Video is mandatory");
     }
 
-    setLoading(true);
+    // setLoading(true);
 
     const datas = {
       lessonTitle: title, lessonDescription: description, lessonVideo: publicId, courseId: courseDetails?._id
@@ -184,7 +184,7 @@ const CourseView: React.FC = () => {
       console.error("Error adding lesson:", error);
       toast.error("Error adding lesson: Please try again later");
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
@@ -421,13 +421,11 @@ const CourseView: React.FC = () => {
                       </div>
                       <div className="mb-4">
                         <label htmlFor="video" className="block text-sm font-medium text-gray-700">
-                          Lesson Video
+                          Proceed To Video
                         </label>
                         <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
                       </div>
-                      <button type="submit" className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold  rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
-                        {loading ? "Adding Lesson..." : "Add Lesson"}
-                      </button>
+                      
                     </div>
                   </form>
 
