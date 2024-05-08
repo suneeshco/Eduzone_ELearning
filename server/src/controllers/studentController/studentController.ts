@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getAllCoursess, getEnrolledCoursess , getOverviews} from '../../services/course.service';
 import { getCloudinaryUrl } from '../../repositories/instructor.repository';
-import { updateProfiles, getStudentDetailss, studentChangeImages, courseRatings, updateOverallRating, getMyRatings, getAllRatings, getInstructors, updateProgressLesson, getProgresses } from '../../services/student.services';
+import { updateProfiles, getStudentDetailss, studentChangeImages, courseRatings, updateOverallRating, getMyRatings, getAllRatings, getInstructors, getInstructorss ,updateProgressLesson, getProgresses } from '../../services/student.services';
 import Stripe from "stripe";
 import { createOrder } from '../../services/order.service';
 import axios from 'axios'
@@ -278,6 +278,18 @@ export const getInstructorList = async (req: Request, res: Response): Promise<vo
 }
 
 
+
+
+export const getInstructorListForStudent = async (req: Request, res: Response): Promise<void> => {
+  try {
+    let search = req.query.search
+    const instructors = await getInstructorss(search);
+    res.send(instructors);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Error adding course" });
+  }
+}
 
 
 

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOverview = exports.generateCertificates = exports.getProgress = exports.updateProgress = exports.videoPlay = exports.getInstructorList = exports.getAllRating = exports.getMyRating = exports.courseRating = exports.getEnrolledCourses = exports.createOrders = exports.stripePayment = exports.studentChangeImage = exports.getStudentDetails = exports.updateProfile = exports.getAllCourses = void 0;
+exports.getOverview = exports.generateCertificates = exports.getProgress = exports.updateProgress = exports.videoPlay = exports.getInstructorListForStudent = exports.getInstructorList = exports.getAllRating = exports.getMyRating = exports.courseRating = exports.getEnrolledCourses = exports.createOrders = exports.stripePayment = exports.studentChangeImage = exports.getStudentDetails = exports.updateProfile = exports.getAllCourses = void 0;
 const course_service_1 = require("../../services/course.service");
 const instructor_repository_1 = require("../../repositories/instructor.repository");
 const student_services_1 = require("../../services/student.services");
@@ -207,6 +207,18 @@ const getInstructorList = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.getInstructorList = getInstructorList;
+const getInstructorListForStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let search = req.query.search;
+        const instructors = yield (0, student_services_1.getInstructorss)(search);
+        res.send(instructors);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Error adding course" });
+    }
+});
+exports.getInstructorListForStudent = getInstructorListForStudent;
 const videoPlay = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const publicId = req.query.publicId;
     let cloudinaryUrl = yield (0, instructor_repository_1.getCloudinaryUrl)(publicId);

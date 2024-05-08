@@ -18,7 +18,7 @@ router.post('/courseRating', auth_middleware_1.studentAuth, studentController_1.
 router.get('/getMyRating', auth_middleware_1.studentAuth, studentController_1.getMyRating);
 router.get('/getAllRating', studentController_1.getAllRating);
 router.post('/createOrder', auth_middleware_1.studentAuth, studentController_1.createOrders);
-router.get('/getInstructorList', studentController_1.getInstructorList);
+router.get('/getInstructorList', studentController_1.getInstructorListForStudent);
 // router.get('/video', authenticateUser )
 router.post('/updateProgress', auth_middleware_1.studentAuth, studentController_1.updateProgress);
 router.get('/getProgress', auth_middleware_1.studentAuth, studentController_1.getProgress);

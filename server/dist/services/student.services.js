@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProgresses = exports.updateProgressLesson = exports.getInstructors = exports.getAllRatings = exports.getMyRatings = exports.updateOverallRating = exports.courseRatings = exports.studentChangeImages = exports.getStudentDetailss = exports.updateProfiles = void 0;
+exports.getProgresses = exports.updateProgressLesson = exports.getInstructorss = exports.getInstructors = exports.getAllRatings = exports.getMyRatings = exports.updateOverallRating = exports.courseRatings = exports.studentChangeImages = exports.getStudentDetailss = exports.updateProfiles = void 0;
 const course_repository_1 = require("../repositories/course.repository");
 const instructor_repository_1 = require("../repositories/instructor.repository");
 const rating_repository_1 = require("../repositories/rating.repository");
@@ -106,6 +106,16 @@ const getInstructors = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getInstructors = getInstructors;
+const getInstructorss = (search) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const instructors = yield (0, user_repository_1.getAllInstructorLists)(search);
+        return instructors;
+    }
+    catch (error) {
+        throw error;
+    }
+});
+exports.getInstructorss = getInstructorss;
 const updateProgressLesson = (studentId, courseId, lessonId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const progress = yield (0, course_repository_1.findProgress)(studentId, courseId, lessonId);

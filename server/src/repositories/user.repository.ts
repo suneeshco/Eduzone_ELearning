@@ -151,3 +151,26 @@ export const getAllInstructorList = async () =>{
 }
 
 
+
+export const getAllInstructorLists = async (search:any) => {
+  try {
+    
+      let query :any = { role: 'instructor', status: true };
+      if (search && search.trim() !== '') {
+        const searchRegex = new RegExp(search.trim(), 'i');
+        query = {
+          ...query,
+          $or: [
+              { firstname: searchRegex },
+              { lastname: searchRegex }
+          ]
+      };
+      }
+      const instructors = await User.find(query).sort({ _id: -1 });
+      
+      return instructors;
+  } catch (error) {
+      throw error;
+  }
+};
+

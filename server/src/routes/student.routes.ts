@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllCourses ,updateProfile , getStudentDetails , studentChangeImage , stripePayment ,createOrders, getEnrolledCourses , courseRating ,getMyRating , getAllRating , getInstructorList , videoPlay , updateProgress , getProgress , generateCertificates , getOverview} from '../controllers/studentController/studentController';
+import { getAllCourses ,updateProfile , getStudentDetails , studentChangeImage , stripePayment ,createOrders, getEnrolledCourses , courseRating ,getMyRating , getAllRating , getInstructorListForStudent, videoPlay , updateProgress , getProgress , generateCertificates , getOverview} from '../controllers/studentController/studentController';
 import { authenticateUser, studentAuth } from '../middlewares/auth.middleware';
 import { getLessons, getSingleCourse } from '../controllers/instructorController/instructorController';
 import { authController } from '../controllers/authController/auth.controller';
@@ -19,7 +19,7 @@ router.post('/courseRating',studentAuth,courseRating)
 router.get('/getMyRating',studentAuth,getMyRating)
 router.get('/getAllRating',getAllRating)
 router.post('/createOrder',studentAuth,createOrders)
-router.get('/getInstructorList',getInstructorList)
+router.get('/getInstructorList',getInstructorListForStudent)
 // router.get('/video', authenticateUser )
 router.post('/updateProgress',studentAuth,updateProgress)
 router.get('/getProgress',studentAuth,getProgress)

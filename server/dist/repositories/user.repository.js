@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllInstructorList = exports.instructorUpdatePhoto = exports.changeStudentStatus = exports.findInstructorById = exports.getInstructorList = exports.getStudentList = exports.updatePhoto = exports.instructorUpdateProfile = exports.updateProfile = exports.findUserById = exports.findUserByEmail = exports.createUser = void 0;
+exports.getAllInstructorLists = exports.getAllInstructorList = exports.instructorUpdatePhoto = exports.changeStudentStatus = exports.findInstructorById = exports.getInstructorList = exports.getStudentList = exports.updatePhoto = exports.instructorUpdateProfile = exports.updateProfile = exports.findUserById = exports.findUserByEmail = exports.createUser = void 0;
 const user_model_1 = __importDefault(require("../models/user.model"));
 const createUser = (userData) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -160,3 +160,21 @@ const getAllInstructorList = () => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getAllInstructorList = getAllInstructorList;
+const getAllInstructorLists = (search) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let query = { role: 'instructor', status: true };
+        if (search && search.trim() !== '') {
+            const searchRegex = new RegExp(search.trim(), 'i');
+            query = Object.assign(Object.assign({}, query), { $or: [
+                    { firstname: searchRegex },
+                    { lastname: searchRegex }
+                ] });
+        }
+        const instructors = yield user_model_1.default.find(query).sort({ _id: -1 });
+        return instructors;
+    }
+    catch (error) {
+        throw error;
+    }
+});
+exports.getAllInstructorLists = getAllInstructorLists;

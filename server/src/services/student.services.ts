@@ -3,7 +3,7 @@ import User,{ UserDocument } from '../models/user.model';
 import { updateCourseRating , findProgress, createProgress , getProgress } from '../repositories/course.repository';
 import { getLesson } from '../repositories/instructor.repository';
 import { courseRating , getMyRating , getAllRating ,calculateOverallRating} from '../repositories/rating.repository';
-import { findUserById ,updateProfile , updatePhoto, getAllInstructorList} from '../repositories/user.repository';
+import { findUserById ,updateProfile , updatePhoto, getAllInstructorList , getAllInstructorLists} from '../repositories/user.repository';
 
 
 
@@ -105,6 +105,17 @@ export const updateProfiles = async (firstname: string,lastname:string, email: s
     try {
       
       const instructors = await getAllInstructorList();
+      return instructors;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+
+  export const getInstructorss = async ( search:any )=> {
+    try {
+      
+      const instructors = await getAllInstructorLists(search);
       return instructors;
     } catch (error) {
       throw error;
