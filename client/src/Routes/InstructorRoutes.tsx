@@ -56,6 +56,7 @@ import InstructorProfilePage from '../Pages/Instructor/InstructorProfilePage';
 import InstructorVideoCall from '../Pages/Instructor/VideoCallPage'
 import { PrivateRoute } from '../Components/Instructor/PrivateRoute/PrivateRoute';
 import NotFound from '../Components/CommonComponents/PageNotFound/NotFound';
+import ChangePasswordInstructorPage from '../Pages/Instructor/ChangePasswordInstructorPage';
 
 const InstructorRoutes: React.FC = () => {
   return (
@@ -67,6 +68,7 @@ const InstructorRoutes: React.FC = () => {
         <Route path="/courseView/:id" element={<InstructorCourseViewPage />} />
         <Route path="/editCourse/:courseId" element={<InstructorEditCoursePage />} />
         <Route path="/profile" element={<InstructorProfilePage />} />
+        <Route path="/changePassword" element={<ChangePasswordInstructorPage />} />
         <Route path="/editLesson/:lessonId" element={<InstructorEditLessonPage />} />
         <Route path="/purchaseHistory" element={<InstructorPurchaseHistoryPage />} />
         <Route path="/chat" element={<InstructorChatPage />} />

@@ -5,6 +5,7 @@ const instructorController_1 = require("../controllers/instructorController/inst
 const auth_middleware_1 = require("../middlewares/auth.middleware");
 const orderController_1 = require("../controllers/orderController/orderController");
 const studentController_1 = require("../controllers/studentController/studentController");
+const auth_controller_1 = require("../controllers/authController/auth.controller");
 const router = (0, express_1.Router)();
 router.post('/addCourse', auth_middleware_1.instructorAuth, instructorController_1.addCourse);
 router.get('/getCourses/:id', auth_middleware_1.instructorAuth, instructorController_1.getCourses);
@@ -24,4 +25,5 @@ router.get('/getSalesData/:id', auth_middleware_1.instructorAuth, orderControlle
 router.get('/video', auth_middleware_1.authenticateInstructor, studentController_1.videoPlay);
 router.get('/getAllRating', studentController_1.getAllRating);
 router.get('/getAllEnrolledStudents', auth_middleware_1.instructorAuth, orderController_1.getAllEnrolledStudents);
+router.patch('/changePassword', auth_middleware_1.instructorAuth, auth_controller_1.authController.studentChangePassword);
 exports.default = router;

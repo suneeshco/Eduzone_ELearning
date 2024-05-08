@@ -3,6 +3,7 @@ import { addCourse , getCourses , getSingleCourse ,addLesson , getLessons ,getAc
 import { authenticateInstructor, instructorAuth } from '../middlewares/auth.middleware';
 import { getOrderDetails, getSalesDataInstructor , getAllEnrolledStudents } from '../controllers/orderController/orderController';
 import { getAllRating, videoPlay } from '../controllers/studentController/studentController';
+import { authController } from '../controllers/authController/auth.controller';
 
 const router = Router();
 
@@ -24,5 +25,6 @@ router.get('/getSalesData/:id',instructorAuth,getSalesDataInstructor)
 router.get('/video',authenticateInstructor,videoPlay)
 router.get('/getAllRating',getAllRating)
 router.get('/getAllEnrolledStudents',instructorAuth, getAllEnrolledStudents)
+router.patch('/changePassword',instructorAuth,authController.studentChangePassword)
 
 export default router

@@ -152,7 +152,7 @@ const CourseList: React.FC = () => {
             </td>
             <td className="p-4">
               {course.isApproved ? (
-                <p className='text-green-900' onClick={() => toggleStatus(course._id)}>Approved</p>
+                <button className='text-green-900 bg-blue-300 p-2 rounded mr-2' onClick={() => toggleStatus(course._id)}>Approved</button>
               ):(
                 <button onClick={() => toggleStatus(course._id)} className="bg-orange-500 text-white p-2 rounded mr-2 hover:bg-orange-600">Approve</button>
 
