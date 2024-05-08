@@ -198,15 +198,15 @@ const InstructorProfile : React.FC = () => {
       <aside className="py-4 md:w-1/3 lg:w-1/4 hidden md:block">
         <div className="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
           <h2 className="pl-3 mb-4 text-2xl font-semibold">Settings</h2>
-          <Link to={'/student/profile'}><a href="#" className="flex items-center px-3 py-2.5 font-bold bg-white text-indigo-900 border rounded-full">
+          <Link to={'/instructor/profile'}><a href="#" className="flex items-center px-3 py-2.5 font-bold bg-white text-indigo-900 border rounded-full">
             Public Profile
           </a></Link>
           <Link to={'/instructor/myCourses'}><a href="#" className="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full">
             My Courses
           </a></Link>
-          <a href="#" className="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full">
-            Logout
-          </a>
+          <Link to={'/instructor/changePassword'}><a href="#" className="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full">
+            Change Password
+          </a></Link>
 
         </div>
       </aside>
